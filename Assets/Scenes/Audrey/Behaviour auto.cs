@@ -5,14 +5,24 @@ using UnityEngine;
 public class Behaviourauto : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+
+    public void Accélerer()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Décélerer()
     {
-        
+
+    }
+
+    public void RotateGauche()
+    {
+
+    }
+
+    public void RotateDroit()
+    {
+
     }
 }
