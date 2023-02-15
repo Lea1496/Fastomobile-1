@@ -2,11 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(MeshRenderer))]
 public class ScriptSpline : MonoBehaviour
 {
-    public float largeurRoute = 7.5f;
-
-    Mesh CréerMeshRoute(List<Vector3> pointsSpline, bool estFermé) // prend vector3 pour faire route et s'assure de fermer la route
+    private float largeurRoute = 75f;
+    private List<Vector3> pointsSpline;
+    private Mesh maillage;
+    private void Start()
+    {
+        maillage = new Mesh();
+        pointsSpline = GetComponent<GestionnaireJeux>().Chemin;
+        Debug.Log(pointsSpline.Count + " nb points"); // pour vérifier que c'est pas 0
+        maillage = CréerMeshRoute(pointsSpline, true);
+        GetComponent<MeshFilter>().mesh = maillage;
+    }
+    private Mesh CréerMeshRoute(List<Vector3> pointsSpline, bool estFermé) // prend vector3 pour faire route et s'assure de fermer la route
     {
         Vector3[] sommets = new Vector3[pointsSpline.Count * 2];
         int nbTriangles = 2 * (pointsSpline.Count - 1) + ((estFermé) ? 2 : 0);

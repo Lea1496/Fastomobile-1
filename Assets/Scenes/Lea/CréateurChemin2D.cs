@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using Random = System.Random;
 
+public class MarchePas : Exception { }
 public class CréateurChemin2D : MonoBehaviour
 {
     int[] invalide = new int[4];
@@ -16,7 +17,7 @@ public class CréateurChemin2D : MonoBehaviour
     private Graph graph;
     private Random gen = new Random();
     private List<Vector3> listePos = new List<Vector3>();
-    
+    private int P1, P2, P3, P4;
    
     
     int pasU = 0, pasD = 0, pasL = 0, pasR = 0;
@@ -32,6 +33,10 @@ public class CréateurChemin2D : MonoBehaviour
     {
         largeur = Largeur;
         graph = Graph;
+        P1 = p1;
+        P2 = p2;
+        P3 = p3;
+        P4 = p4;
         AssemblerChemin(p1, p2 , p3, p4);
         /*DéterminerChemin2dAléatoire(0, p1);
         DéterminerChemin2dAléatoire(p1, p2);
@@ -88,6 +93,7 @@ public class CréateurChemin2D : MonoBehaviour
                 {
                     
                     Debug.Log(newPoint);
+                    throw new MarchePas();
                     déjàVisités.Clear();
                     List<int> reChemin = DéterminerChemin2dAléatoire(pointDébut, pointFin);
                 
@@ -99,13 +105,14 @@ public class CréateurChemin2D : MonoBehaviour
                 }
             } while (newPoint == -1 || (newPoint == 0 && pointFin != 0));
             Debug.Log(newPoint + " newPoint");
-            Debug.Log(graph.GetNeighbours(newPoint).Length + " length");
+//            Debug.Log(graph.GetNeighbours(newPoint).Length + " length");
             //if (VérifierCasesAutour(newPoint, déjàVisités) == graph.GetNeighbours(newPoint).Length && newPoint !=  0)
             if (VérifierCasesAutour(newPoint, déjàVisités) == 4 && newPoint % 8 != 0 )
             {
                 Debug.Log("MERDE");
                 déjàVisités.Clear();
                 Debug.Log(pointDébut + " MERDE");
+                throw new MarchePas();
                 List<int> reChemin = DéterminerChemin2dAléatoire(pointDébut, pointFin);
                 
                 for (int i = 0; i < reChemin.Count - 1; i++)

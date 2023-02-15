@@ -26,7 +26,7 @@ public class ScriptBézier : MonoBehaviour
         Vector3 p3;
         Vector3 p4;
         position = new Vector3(0, 0, 0); 
-        for (int j = 0; j < pointsSpline.Count - 2; j += 3)
+        for (int j = 0; j < pointsSpline.Count - 2 ; j += 3)
         {
             if (j < 2)
             {
@@ -52,6 +52,17 @@ public class ScriptBézier : MonoBehaviour
                 position = pointsBézier.Last();
             }
         }
+
+        p1 = pointsBézier[1];
+        p2 = pointsSpline[0];
+        p3 = pointsSpline[0];
+        p4 = pointsBézier[pointsBézier.Count - 2];
+        for (int i = 0; i < 8; i++)
+        {
+            t = i / 8f;
+            pointsBézier.Add(CalculateBezierPoint(t, p1, p2, p3, p4));
+        }
+        
         return pointsBézier;
     }
     
