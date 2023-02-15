@@ -78,9 +78,9 @@ public class CréateurCheminComplet : MonoBehaviour
             }
         } 
         compteur = 0;
-        for (int i = 0; i < largeur / 2; i++)
+        for (int i = 0; i < largeur / 2 - 1; i++)
         {
-            for (int j = 0; j < largeur / 2; j++)
+            for (int j = 1; j < largeur / 2; j++)
             {
                 tableau4[compteur++] = (largeur / 2 + i) * largeur + j;
             }
@@ -108,7 +108,15 @@ public class CréateurCheminComplet : MonoBehaviour
             }
             else
             {
-                ind[j]  = gen.Next(0, nbIndices);
+                if (j == 3)
+                {
+                    ind[j] = gen.Next(1, (largeur / 2 - 1) * (largeur / 2 - 1));
+                }
+                else
+                {
+                   ind[j]  = gen.Next(0, nbIndices); 
+                }
+                
             }
            
         }

@@ -86,7 +86,7 @@ public class CréateurChemin2D : MonoBehaviour
                 compteur++;
                 if (VérifierSiRestePas() && newPoint != pointFin)
                 {
-                    Debug.Log("MERDE");
+                    
                     Debug.Log(newPoint);
                     déjàVisités.Clear();
                     List<int> reChemin = DéterminerChemin2dAléatoire(pointDébut, pointFin);
@@ -98,12 +98,14 @@ public class CréateurChemin2D : MonoBehaviour
                     newPoint = pointFin;
                 }
             } while (newPoint == -1 || (newPoint == 0 && pointFin != 0));
-            
-            //Debug.Log(graph.nNodes);
-            if (VérifierCasesAutour(newPoint, déjàVisités) == graph.GetNeighbours(newPoint).Length && newPoint !=  0)
+            Debug.Log(newPoint + " newPoint");
+            Debug.Log(graph.GetNeighbours(newPoint).Length + " length");
+            //if (VérifierCasesAutour(newPoint, déjàVisités) == graph.GetNeighbours(newPoint).Length && newPoint !=  0)
+            if (VérifierCasesAutour(newPoint, déjàVisités) == 4 && newPoint % 8 != 0 )
             {
-                
+                Debug.Log("MERDE");
                 déjàVisités.Clear();
+                Debug.Log(pointDébut + " MERDE");
                 List<int> reChemin = DéterminerChemin2dAléatoire(pointDébut, pointFin);
                 
                 for (int i = 0; i < reChemin.Count - 1; i++)
@@ -130,6 +132,7 @@ public class CréateurChemin2D : MonoBehaviour
         return  listeFinale;
         
     }
+    
     
     // code de https://www.techiedelight.com/fr/remove-duplicates-from-list-csharp/
     private static List<T> RemoveDuplicates<T>(List<T> list) {
@@ -355,16 +358,98 @@ public class CréateurChemin2D : MonoBehaviour
         return newPoint;
     }
 
+    private int VérifierEnHaut(int point, List<int> liste)
+    {
+        int compteurVerif = 0;
+        
+        
+
+        if (point % largeur == 0)
+        {
+            compteurVerif++;
+        }
+        else
+        {
+            if (liste.Contains(point - 1) || tousPointsVisités.Contains(point -1))
+            {
+                compteurVerif++;
+            }
+        }
+
+        return compteurVerif;
+    }
+    private int VérifierDroite(int point, List<int> liste)
+    {
+        int compteurVerif = 0;
+        
+
+        if (point + largeur > largeur * largeur)
+        {
+            compteurVerif++;
+        }
+        else
+        {
+            if (liste.Contains(point + largeur) || tousPointsVisités.Contains(point + largeur))
+            {
+                compteurVerif++;
+            } 
+        }
+
+        return compteurVerif;
+    }
+    private int VérifierGauche(int point, List<int> liste)
+    {
+        int compteurVerif = 0;
+        
+
+        if (point - largeur > 0)
+        {
+            compteurVerif++;
+        }
+        else
+        {
+            if (liste.Contains(point - 1) || tousPointsVisités.Contains(point -1))
+            {
+                compteurVerif++;
+            }
+        }
+
+        return compteurVerif;
+    }
+    private int VérifierEnBas(int point, List<int> liste)
+    {
+        int compteurVerif = 0;
+        
+
+        if (point + 1 % largeur == 0)
+        {
+            compteurVerif++;
+        }
+        else
+        {
+            if (liste.Contains(point + 1) || tousPointsVisités.Contains(point + 1))
+            {
+                compteurVerif++;
+            }
+        }
+
+        return compteurVerif;
+    }
+    
     private int VérifierCasesAutour(int point, List<int> liste)
     {
         int compteurVerif = 0;
-        for (int i = 0; i < graph.GetNeighbours(point).Length; i++)
+        compteurVerif += VérifierDroite(point, liste);
+        compteurVerif += VérifierEnHaut(point, liste);
+        compteurVerif += VérifierGauche(point, liste);
+        compteurVerif += VérifierEnBas(point, liste);
+        /*for (int i = 0; i < graph.GetNeighbours(point).Length; i++)
         {
             if (liste.Contains(graph.GetNeighbours(point)[i]) || tousPointsVisités.Contains(graph.GetNeighbours(point)[i]))
             {
                 compteurVerif++;
             }
-        }
+        }*/
         return compteurVerif;
     }
     
@@ -411,7 +496,7 @@ public class CréateurChemin2D : MonoBehaviour
             for (int j = 0; j < largeur; j++)
             {
                 
-                positions.Add(new Vector3(i, 0, j)); 
+                positions.Add(new Vector3(i * 150, 0, j * 150)); 
             }
         }
         listePos.Add(new Vector3(0,0,0));
