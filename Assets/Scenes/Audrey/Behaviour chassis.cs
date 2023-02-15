@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Moteurs
+// enum?
+public interface Chassis
 {
-    public int Puissance {get; set;}
+    public int Poids {get; set;}
 }
