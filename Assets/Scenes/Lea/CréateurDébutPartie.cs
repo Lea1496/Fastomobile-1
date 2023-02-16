@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CréateurDébutPartie : MonoBehaviour
 {
-    private List<Behaviourauto> lesAutos;
+    private List<BehaviourAuto> lesAutos;
     [SerializeField] private GameObject arc;
     private int compteurAutos = 0;
     private Vector3 posPremier = new Vector3(335, 0, -50);
-    public CréateurDébutPartie(List<Behaviourauto> autos) //behavior auto pour le moment mais surement à changer
+    public CréateurDébutPartie(List<BehaviourAuto> autos) //behavior auto pour le moment mais surement à changer
     {
         lesAutos = autos;
         Instantiate(arc, new Vector3(300, 0, -61.5f), arc.transform.rotation);
