@@ -18,10 +18,10 @@ public class CréateurChemin3D : MonoBehaviour
     {
         get => listePos;
     }
-    public CréateurChemin3D(int Largeur, Graph graph)
+    public CréateurChemin3D(int Largeur)
     {
         largeur = Largeur;
-        listePos = new CréateurCheminComplet(largeur, graph).CheminComplet;
+        listePos = new CréateurCheminComplet(largeur).CheminComplet;
         
         relief = new List<char>(listePos.Count);
         maxCotes = listePos.Count / 5;
@@ -30,7 +30,7 @@ public class CréateurChemin3D : MonoBehaviour
         VérifierSiListeBonne();
         
     }
-
+   
     private int VérifierPos()
     {
         int pos = gen.Next(1, cotes.Count);

@@ -5,6 +5,7 @@ using Random = System.Random;
 
 public class CréateurCheminComplet : MonoBehaviour
 {
+    
     private Graph graph;
 
     private int largeur;
@@ -21,19 +22,14 @@ public class CréateurCheminComplet : MonoBehaviour
     private int[] tableau4;
 
     private List<Vector3> cheminComplet;
-    private CréateurChemin2D chemin;
 
     public List<Vector3> CheminComplet
     {
         get => cheminComplet;
-        private set => CheminComplet = cheminComplet;
     }
-
-
-    public CréateurCheminComplet(int Largeur, Graph Graph)
+    public CréateurCheminComplet(int Largeur)
     {
         largeur = Largeur;
-        graph = Graph;
         nbIndices = largeur / 2 * (largeur / 2);
         tableau1 = new int[largeur / 2 * (largeur / 2 -1)];
         tableau2 = new int[nbIndices];
@@ -41,12 +37,8 @@ public class CréateurCheminComplet : MonoBehaviour
         tableau4 = new int[nbIndices];
         CréerTableaux();
         positions = TransformerIndicesEnPostion();
-        chemin = new CréateurChemin2D(largeur, graph, positions[0], positions[1], positions[2], positions[3]);
-        cheminComplet = new List<Vector3>();
-        cheminComplet.AddRange(chemin.ListePos);
+        cheminComplet = new CréateurChemin2D(largeur, positions[0], positions[1], positions[2], positions[3]).ListePos;
         
-        
-
     }
 
     
@@ -88,13 +80,13 @@ public class CréateurCheminComplet : MonoBehaviour
           
     }
 
-    private List<Vector3> FormerChemin2D()
+    /*private List<Vector3> FormerChemin2D()
     {
         List<Vector3> lesChemins = new List<Vector3>();
         chemin = new CréateurChemin2D(largeur, graph, positions[0], positions[1], positions[2], positions[3]);
         lesChemins.AddRange(chemin.ListePos);
         return lesChemins;
-    }
+    }*/
 
     private int[] GénérerIndices()
     {
@@ -135,10 +127,5 @@ public class CréateurCheminComplet : MonoBehaviour
 
         return pos;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
