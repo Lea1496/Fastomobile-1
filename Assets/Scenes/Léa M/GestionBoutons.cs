@@ -14,5 +14,9 @@ public class GestionBoutons : MonoBehaviour
     {
         
     }
-    
+
+    public void ChoixMoteur()
+    {
+        
+    }
 }
