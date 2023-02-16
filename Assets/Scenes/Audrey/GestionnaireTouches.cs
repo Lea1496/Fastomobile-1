@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 // source.https://www.youtube.com/watch?v=p-3S73MaDP8&t=556s&ab_channel=Brackeys
 
-public class Gestionnairedestouches : Behaviourauto
+public class GestionnaireTouches : BehaviourAuto
 {
     PlayerControls controls;
 
@@ -22,6 +22,7 @@ public class Gestionnairedestouches : Behaviourauto
 
         controls.Gameplay.TournerDroite.performed += ctx => TournerDroite();
 
+        controls.Gameplay.Bonus.performed += ctx => GestionBonus();
         // faire une fonction qui va gérer les bonus dans gestion du player
     }
     void OnEnable()
