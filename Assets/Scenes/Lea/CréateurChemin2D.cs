@@ -5,10 +5,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Threading;
 using Random = System.Random;
 
+public class MarchePas : Exception { }
 public class CréateurChemin2D : MonoBehaviour
 {
+    
+
     int[] invalide = new int[4];
 
     private int largeur;
@@ -16,30 +20,26 @@ public class CréateurChemin2D : MonoBehaviour
     private Graph graph;
     private Random gen = new Random();
     private List<Vector3> listePos = new List<Vector3>();
-    
+    private int P1, P2, P3, P4;
    
     
     int pasU = 0, pasD = 0, pasL = 0, pasR = 0;
     int[] restrictions = new int[4];
     private List<int> tousPointsVisités = new List<int>();
-    List<int> déjàVisités = new List<int>();
+    public List<int> déjàVisités = new List<int>();
     public List<Vector3> ListePos
     {
         get => listePos;
-        private set => ListePos = listePos;
     }
-    public CréateurChemin2D(int Largeur, Graph Graph, int p1, int p2, int p3, int p4)
+    public CréateurChemin2D(int Largeur, int p1, int p2, int p3, int p4)
     {
         largeur = Largeur;
-        graph = Graph;
+        //graph = Graph;
+        P1 = p1;
+        P2 = p2;
+        P3 = p3;
+        P4 = p4;
         AssemblerChemin(p1, p2 , p3, p4);
-        /*DéterminerChemin2dAléatoire(0, p1);
-        DéterminerChemin2dAléatoire(p1, p2);
-        DéterminerChemin2dAléatoire(p2, p3);
-        DéterminerChemin2dAléatoire(p3, p4);
-        DéterminerChemin2dAléatoire(p4, 0);
-        tousPointsVisités = RemoveDuplicates(tousPointsVisités);
-        tousPointsVisités.Add(0);*/
         TransformerIntEnVector(tousPointsVisités);
         
     }
@@ -66,7 +66,8 @@ public class CréateurChemin2D : MonoBehaviour
     {
         int newPoint = 0;
         int currentPos = pointDébut;
-     
+         compteur = 0;
+        
         pasU = 0;
         pasD = 0;
         pasL = 0;
@@ -99,13 +100,14 @@ public class CréateurChemin2D : MonoBehaviour
                 }
             } while (newPoint == -1 || (newPoint == 0 && pointFin != 0));
             Debug.Log(newPoint + " newPoint");
-            Debug.Log(graph.GetNeighbours(newPoint).Length + " length");
+//            Debug.Log(graph.GetNeighbours(newPoint).Length + " length");
             //if (VérifierCasesAutour(newPoint, déjàVisités) == graph.GetNeighbours(newPoint).Length && newPoint !=  0)
             if (VérifierCasesAutour(newPoint, déjàVisités) == 4 && newPoint % 8 != 0 )
             {
                 Debug.Log("MERDE");
                 déjàVisités.Clear();
                 Debug.Log(pointDébut + " MERDE");
+                
                 List<int> reChemin = DéterminerChemin2dAléatoire(pointDébut, pointFin);
                 
                 for (int i = 0; i < reChemin.Count - 1; i++)
@@ -267,12 +269,16 @@ public class CréateurChemin2D : MonoBehaviour
                 invalide[i] = 0;
             }
         }
-        if (compteur == 0)
+        if (compteur == 0 && pointDébut == 0)
         {
             mouvement = 0;
+            
+        }
+        if ((pointDébut + 1) % 8 == 0 && compteur == 0)
+        {
+            mouvement = 3;
         }
 
-       
         if (mouvement == 0)
         {
             
@@ -312,7 +318,6 @@ public class CréateurChemin2D : MonoBehaviour
             }
             else
             {
-
                 if (mouvement == 2)
                 {
                     
@@ -334,7 +339,6 @@ public class CréateurChemin2D : MonoBehaviour
 
                 if (mouvement == 3)
                 {
-                   newPoint = -1;
                     if (pasR < restrictions[3])
                     {
                         newPoint = MoveRight(pos, déjàVisités);
@@ -362,8 +366,6 @@ public class CréateurChemin2D : MonoBehaviour
     {
         int compteurVerif = 0;
         
-        
-
         if (point % largeur == 0)
         {
             compteurVerif++;
@@ -490,12 +492,10 @@ public class CréateurChemin2D : MonoBehaviour
     private void TransformerIntEnVector(List<int> list)
     {
         List<Vector3> positions = new List<Vector3>(largeur * largeur);
-        int compteur = 0;
         for (int i = 0; i < largeur; i++)
         {
             for (int j = 0; j < largeur; j++)
             {
-                
                 positions.Add(new Vector3(i * 150, 0, j * 150)); 
             }
         }
@@ -508,27 +508,6 @@ public class CréateurChemin2D : MonoBehaviour
         
     }
     
-    
-    
-    
-    
-    
-    // Fonction vient de https://forum.unity.com/threads/generating-endless-bezier-curve.1009732/
-    private Vector3 CalculateBezierPoint (float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
-    {
-        float u = 1 - t;
-        float tt = t * t;
-        float uu = u * u;
-        float uuu = uu * u;
-        float ttt = tt * t;
- 
-        Vector3 p = uuu * p0;
-        p += 3 * uu * t * p1;
-        p += 3 * u * tt * p2;
-        p += ttt * p3;
- 
-        return p;
-    }
     
     
 }

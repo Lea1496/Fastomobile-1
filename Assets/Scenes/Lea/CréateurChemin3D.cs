@@ -5,51 +5,34 @@ using Random = System.Random;
 
 public class CréateurChemin3D : MonoBehaviour
 {
-    enum GrandeurCôte
-    {
-        petite,
-        grande
-    };
+    
     List<int> cotes = new List<int>();
     private int largeur;
     private List<Vector3> listePos; 
     private List<char> relief;
     private int maxCotes, maxTournantsCotes, minDroit;
     private Random gen = new Random();
-    private char tournant = 't';
-    private char côte = 'c';
-    private char côteTournant = 'e';
-    private char droit = 'd';
-
-    enum tournants
-    {
-        gaucheHaut,gaucheBas, droitHaut, droitBas, hautGauche, basGauche, hautDroit, basDroit
-    }
-    private string gaucheHaut = "gh";
-    private string droitHaut = "dh";
-    private string gaucheBas = "gb";
-    private string droiteBas = "db";
-    
+   // private char tournant = 't';
+  
     public List<Vector3> ListePos
     {
         get => listePos;
     }
-    public CréateurChemin3D(int Largeur, Graph graph)
+    public CréateurChemin3D(int Largeur)
     {
         largeur = Largeur;
-        listePos = new CréateurCheminComplet(largeur, graph).CheminComplet;
+        listePos = new CréateurCheminComplet(largeur).CheminComplet;
         
         relief = new List<char>(listePos.Count);
         maxCotes = listePos.Count / 5;
-        TrouverTournants();
-        DéterminerPointY();
+        //TrouverTournants();
+        CréerCotes();
         VérifierSiListeBonne();
         
     }
-
+   
     private int VérifierPos()
     {
-        
         int pos = gen.Next(1, cotes.Count);
         int fin = cotes[pos];
         cotes.Remove(fin -1 );
@@ -61,39 +44,39 @@ public class CréateurChemin3D : MonoBehaviour
     {
         int compteurTournantsCotes = 0;
         int pos;
-        
+        int grandeur = 0;
+        int bond = 0;
+
         for (int i = 2; i < relief.Count - 1; i++)
         {
             cotes.Add(i);
         }
-        List<int> derniersPos = new List<int>();
+        
         for (int i = 0; i < maxCotes && cotes.Count != 0; i++)
         {
             pos = VérifierPos();
+            grandeur = gen.Next(0, 2);
 
-            
-            if (relief[pos] != ' ')
+            if (grandeur == 0)
             {
-                compteurTournantsCotes++;
-                relief[pos] = côteTournant;
-                
+                bond = 20;
             }
             else
             {
-                relief[pos] = côte;
-               
+                if (grandeur == 1) 
+                {
+                    bond = 40;
+                }
             }
-            
+           
+            listePos[pos - 1] = new Vector3(listePos[pos - 1].x, bond, listePos[pos - 1].z);
+            listePos[pos] = new Vector3(listePos[pos].x, 2 * bond, listePos[pos].z);
+            listePos[pos + 1] = new Vector3(listePos[pos + 1].x, bond, listePos[pos + 1].z);
+
         }
-        for (int i = 0; i < relief.Count; i++)
-        {
-            if (relief[i] == ' ')
-            {
-                relief[i] = droit;
-            }
-        }
+        
     }
-    private void TrouverTournants()
+    /*private void TrouverTournants()
     {
         for (int i = 1; i < listePos.Count - 1; i++)
         {
@@ -109,40 +92,9 @@ public class CréateurChemin3D : MonoBehaviour
                 relief.Add(' ');
             }
         }
-    }
+    }*/
 
-    private void DéterminerPointY()
-    {
-        CréerCotes();
-        int grandeur = 0;
-        int bond = 0;
-        
-
-        for (int i = 0; i < relief.Count; i++)
-        {
-            grandeur = gen.Next(0, 2);
-
-            if (grandeur == 0)
-            {
-                bond = 20;
-            }
-            else
-            {
-                if (grandeur == 1) 
-                {
-                    bond = 40;
-                }
-            }
-            if (relief[i] == côte || relief[i] == côteTournant)
-            {
-                listePos[i - 1] = new Vector3(listePos[i - 1].x, bond, listePos[i - 1].z);
-                listePos[i] = new Vector3(listePos[i].x, 2 * bond, listePos[i].z);
-                i++;
-                listePos[i] = new Vector3(listePos[i].x, bond, listePos[i].z);
-                i++;
-            }
-        }
-    }
+    
 
     private void VérifierSiListeBonne()
     {
