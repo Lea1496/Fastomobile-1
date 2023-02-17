@@ -14,13 +14,13 @@ public class ScriptSpline : MonoBehaviour
         maillage = new Mesh();
         pointsSpline = GetComponent<GestionnaireJeux>().Chemin;
         Debug.Log(pointsSpline.Count + " nb points"); // pour vérifier que c'est pas 0
-        maillage = CréerMeshRoute(pointsSpline, true);
+        maillage = CréerMeshRoute(pointsSpline);
         GetComponent<MeshFilter>().mesh = maillage;
     }
-    private Mesh CréerMeshRoute(List<Vector3> pointsSpline, bool estFermé) // prend vector3 pour faire route et s'assure de fermer la route
+    private Mesh CréerMeshRoute(List<Vector3> pointsSpline) // prend vector3 pour faire route et s'assure de fermer la route
     {
         Vector3[] sommets = new Vector3[pointsSpline.Count * 2];
-        int nbTriangles = 2 * (pointsSpline.Count - 1) + ((estFermé) ? 2 : 0);
+        int nbTriangles = 2 * (pointsSpline.Count - 1) + 2;
         int[] triangle = new int[nbTriangles * 3];
         int indexSom = 0;
         int indexTri = 0;
@@ -28,36 +28,36 @@ public class ScriptSpline : MonoBehaviour
         for (int i = 0; i < pointsSpline.Count; i++) //pour chaque point on veut la direction forward et 2 sommets/point
         {
             Vector3 directionAvant = Vector3.zero;
-            if (i < pointsSpline.Count - 1 || estFermé) // dernier point
+            if (i < pointsSpline.Count - 1) // dernier point
             {
-                directionAvant += pointsSpline[(i + 1) % pointsSpline.Count] - pointsSpline[i];
+                directionAvant += pointsSpline[i + 1] - pointsSpline[i];
             }
-            if (i > 0 || estFermé) // premier point
+            if (i > 0) // premier point
             {
-                directionAvant += pointsSpline[i] - pointsSpline[(i - 1 + pointsSpline.Count) % pointsSpline.Count];
+                directionAvant += pointsSpline[i] - pointsSpline[i - 1];
             }
             directionAvant.Normalize();
-            Vector3 gauche = new Vector3(-directionAvant.y, directionAvant.x); //pour prendre sommet à coter du pt
+            Vector3 gauche = new Vector3(directionAvant.x, 0, directionAvant.z); //pour prendre sommet à coter du pt
 
             // calculer 2 sommets
-            sommets[indexSom] = pointsSpline[i] + gauche * largeurRoute * .5f;
-            sommets[indexSom + 1] = pointsSpline[i] - gauche * largeurRoute * .5f;
+            sommets[indexSom] = pointsSpline[i] + gauche * largeurRoute;
+            sommets[indexSom + 1] = pointsSpline[i] - gauche * largeurRoute;
 
             //tous les pts sauf le dernier pour faire les triangles 
-            if (i < pointsSpline.Count - 1 || estFermé)
+            if (i < pointsSpline.Count - 1)
             {
                 triangle[indexTri] = indexSom;
-                triangle[indexTri + 1] = (indexSom + 2) % sommets.Length;
+                triangle[indexTri + 1] = (indexSom + 2);
                 triangle[indexTri + 2] = indexSom + 1;
 
-                triangle[indexTri + 3] = indexSom + 1;
-                triangle[indexTri + 4] = (indexSom + 2) % sommets.Length;
-                triangle[indexTri + 5] = (indexSom + 3) % sommets.Length;
+                triangle[indexTri + 3] = indexSom + 2;
+                triangle[indexTri + 4] = (indexSom + 3);
+                triangle[indexTri + 5] = (indexSom + 1);
             }
             indexSom += 2;
             indexTri += 6;
         }
-
+        
         Mesh mesh = new Mesh();
         mesh.vertices = sommets;
         mesh.triangles = triangle;
