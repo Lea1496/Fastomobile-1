@@ -9,8 +9,8 @@ public class CréateurChemin3D : MonoBehaviour
     List<int> cotes = new List<int>();
     private int largeur;
     private List<Vector3> listePos; 
-    private List<char> relief;
-    private int maxCotes, maxTournantsCotes, minDroit;
+    //private List<char> relief;
+    private int maxCotes;
     private Random gen = new Random();
    // private char tournant = 't';
   
@@ -23,7 +23,7 @@ public class CréateurChemin3D : MonoBehaviour
         largeur = Largeur;
         listePos = new CréateurCheminComplet(largeur).CheminComplet;
         
-        relief = new List<char>(listePos.Count);
+       // relief = new List<char>(listePos.Count);
         maxCotes = listePos.Count / 5;
         //TrouverTournants();
         CréerCotes();
@@ -35,19 +35,17 @@ public class CréateurChemin3D : MonoBehaviour
     {
         int pos = gen.Next(1, cotes.Count);
         int fin = cotes[pos];
-        cotes.Remove(fin -1 );
-        cotes.Remove(fin);
-        cotes.Remove(fin + 1);
+        
         return fin;
     }
     private void CréerCotes()
     {
-        int compteurTournantsCotes = 0;
+        
         int pos;
         int grandeur = 0;
         int bond = 0;
 
-        for (int i = 2; i < relief.Count - 1; i++)
+        for (int i = 2; i < listePos.Count - 1; i++)
         {
             cotes.Add(i);
         }
@@ -72,6 +70,9 @@ public class CréateurChemin3D : MonoBehaviour
             listePos[pos - 1] = new Vector3(listePos[pos - 1].x, bond, listePos[pos - 1].z);
             listePos[pos] = new Vector3(listePos[pos].x, 2 * bond, listePos[pos].z);
             listePos[pos + 1] = new Vector3(listePos[pos + 1].x, bond, listePos[pos + 1].z);
+            cotes.Remove(pos -1 );
+            cotes.Remove(pos);
+            cotes.Remove(pos + 1);
 
         }
         

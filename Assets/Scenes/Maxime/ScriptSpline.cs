@@ -44,7 +44,7 @@ public class ScriptSpline : MonoBehaviour
             sommets[indexSom + 1] = pointsSpline[i] - gauche * largeurRoute;
 
             //tous les pts sauf le dernier pour faire les triangles 
-            if (i < pointsSpline.Count - 1)
+           /* if (i < pointsSpline.Count - 1)
             {
                 triangle[indexTri] = indexSom;
                 triangle[indexTri + 1] = (indexSom + 2);
@@ -53,11 +53,16 @@ public class ScriptSpline : MonoBehaviour
                 triangle[indexTri + 3] = indexSom + 2;
                 triangle[indexTri + 4] = (indexSom + 3);
                 triangle[indexTri + 5] = (indexSom + 1);
-            }
+            }*/
             indexSom += 2;
             indexTri += 6;
         }
-        
+
+        for (int i = 0; i < sommets.Length; i++)
+        {
+            Instantiate(GetComponent<GestionnaireJeux>().obstalce1, sommets[i],
+                GetComponent<GestionnaireJeux>().obstalce1.transform.rotation);
+        }
         Mesh mesh = new Mesh();
         mesh.vertices = sommets;
         mesh.triangles = triangle;

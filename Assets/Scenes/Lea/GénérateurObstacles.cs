@@ -10,26 +10,68 @@ public class GénérateurObstacles : MonoBehaviour
 
     private Random gen = new Random();
 
-    [SerializeField] private GameObject obstacle1;
-    [SerializeField] private GameObject obstacle2;
+    private GameObject obstacle1;
+    private GameObject obstacle2;
     private List<Vector3> points;
     private List<int> indices;
-    public GénérateurObstacles(List<Vector3> piste)
+    public GénérateurObstacles(List<Vector3> piste, GameObject o1, GameObject o2) // il va prendre la liste de vecteur bézier mais pas les verticies
     {
+        obstacle1 = o1;
+        obstacle2 = o2;
         points = piste;
         indices = new List<int>(piste.Count);
         for (int i = 0; i < indices.Count; i++)
         {
             indices[i] = i;
         }
+
+        for (int i = 0; i < maxObstacles; i++)
+        {
+            GénérerObstacles(); 
+        }
         
     }
+    
 
     private void GénérerObstacles()
     {
-        int obtstacle = 0;
-
+        int indice = gen.Next(0,2);
+        Vector3 point = points[gen.Next(0, indices.Count)];
         
+        while (points[indice] == new Vector3(-1, -1, -1))
+        {
+            indice = gen.Next(0,2);
+            point = points[gen.Next(0, indices.Count)];
+            
+        }
+        points[indice] = new Vector3(-1, -1 ,-1);
+        int xOuY = gen.Next(0, 2);
+        int[] neg = new int[] { -1, 1 };
+        int coté = neg[gen.Next(0, 2)];
+        int décalage = gen.Next(1, 45);
+        if (indice == 0)
+        {
+            if (xOuY == 1)
+            {
+                Instantiate(obstacle1, new Vector3(point.x + coté *décalage, point.y, point.z),obstacle1.transform.rotation);
+            }
+            else
+            {
+                Instantiate(obstacle1, new Vector3(point.x, point.y, point.z + coté *décalage),obstacle1.transform.rotation);
+            }
+            
+        }
+        else
+        {
+            if (xOuY == 1)
+            {
+                Instantiate(obstacle2, new Vector3(point.x + coté *décalage, point.y, point.z),obstacle2.transform.rotation);
+            }
+            else
+            {
+                Instantiate(obstacle2, new Vector3(point.x, point.y, point.z + coté *décalage),obstacle2.transform.rotation);
+            }
+        }
     }
     // Start is called before the first frame update
     void Start()

@@ -28,8 +28,9 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject terrain;
     [SerializeField] private GameObject point;
     [SerializeField] private GameObject point1;
+    [SerializeField] public GameObject obstalce1; // à changer
+   // [SerializeField] private GameObject obstacle2;
     private List<Vector3> chemin;
-    private float time = 0;
     public List<Vector3> Chemin
     {
         get => chemin;
@@ -54,7 +55,7 @@ public class GestionnaireJeux : MonoBehaviour
         Thread thread = new Thread(new ThreadStart(WorkThreadFunction)) ;
        
         thread.Start();
-        if (!thread.Join(new TimeSpan(0, 0, 1)) && chemin != null)
+        if (!thread.Join(new TimeSpan(0, 0, 1)) && chemin == null)
         {
             thread.Abort();
             Debug.Log("Ça a pas marché");
@@ -69,16 +70,12 @@ public class GestionnaireJeux : MonoBehaviour
        
        Refaire();
         //new CréateurTerrain(largeur, terrain);
-        //Graph graph = new CréateurGraphCarte(largeur).CréerGraph();
-        
-       
         for (int i = 0; i < chemin.Count; i++)
         {
             Instantiate(point, chemin[i], point.transform.rotation);
         }
         chemin = new ScriptBézier(chemin).PointsSpline;
-        //new CréateurDébutPartie(List<Behaviourauto> autos);
-        
+        //new GénérateurObstacles(chemin, obstalce1, obstacle2);
         Debug.Log("YAYY");
         Debug.Log(chemin.Count);
         for (int i = 0; i < chemin.Count; i++)
