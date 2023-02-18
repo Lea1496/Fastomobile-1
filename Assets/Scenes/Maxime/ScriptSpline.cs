@@ -28,7 +28,7 @@ public class ScriptSpline : MonoBehaviour
         for (int i = 0; i < pointsSpline.Count; i++) //pour chaque point on veut la direction forward et 2 sommets/point
         {
             Vector3 directionAvant = Vector3.zero;
-            if (i < pointsSpline.Count - 1) // dernier point
+            if (i < pointsSpline.Count - 1) // dernier point 
             {
                 directionAvant += pointsSpline[i + 1] - pointsSpline[i];
             }
@@ -37,7 +37,7 @@ public class ScriptSpline : MonoBehaviour
                 directionAvant += pointsSpline[i] - pointsSpline[i - 1];
             }
             directionAvant.Normalize();
-            Vector3 gauche = new Vector3(directionAvant.x, 0, directionAvant.z); //pour prendre sommet à coter du pt
+            Vector3 gauche = new Vector3(0, 0, directionAvant.z); //pour prendre sommet à coter du pt
 
             // calculer 2 sommets
             sommets[indexSom] = pointsSpline[i] + gauche * largeurRoute;
