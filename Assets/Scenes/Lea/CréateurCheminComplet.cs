@@ -6,7 +6,7 @@ using Random = System.Random;
 public class CréateurCheminComplet : MonoBehaviour
 {
     
-    private Graph graph;
+
 
     private int largeur;
 
