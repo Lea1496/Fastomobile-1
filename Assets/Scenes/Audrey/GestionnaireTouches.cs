@@ -31,6 +31,6 @@ public class GestionnaireTouches : BehaviourAuto
     }
     private void OnDisable()
     {
-        controls.Gameplay.Enable();
+        controls.Gameplay.Disable();
     }
 }
