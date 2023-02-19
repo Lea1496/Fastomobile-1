@@ -20,9 +20,9 @@ public class GénérateurObstacles : MonoBehaviour
         obstacle2 = o2;
         points = piste;
         indices = new List<int>(piste.Count);
-        for (int i = 0; i < indices.Count; i++)
+        for (int i = 0; i < piste.Count; i++)
         {
-            indices[i] = i;
+            indices.Add(i);;
         }
 
         for (int i = 0; i < maxObstacles; i++)
@@ -35,43 +35,47 @@ public class GénérateurObstacles : MonoBehaviour
 
     private void GénérerObstacles()
     {
-        int indice = gen.Next(0,2);
-        Vector3 point = points[gen.Next(0, indices.Count)];
+        for (int i = 0; i < maxObstacles; i++)
+        {
+            int indice = gen.Next(0,2);
+            Vector3 point = points[gen.Next(0, indices.Count)];
         
-        while (points[indice] == new Vector3(-1, -1, -1))
-        {
-            indice = gen.Next(0,2);
-            point = points[gen.Next(0, indices.Count)];
-            
-        }
-        points[indice] = new Vector3(-1, -1 ,-1);
-        int xOuY = gen.Next(0, 2);
-        int[] neg = new int[] { -1, 1 };
-        int coté = neg[gen.Next(0, 2)];
-        int décalage = gen.Next(1, 45);
-        if (indice == 0)
-        {
-            if (xOuY == 1)
+            while (points[indice] == new Vector3(-1, -1, -1) && indices.Count != 0)
             {
-                Instantiate(obstacle1, new Vector3(point.x + coté *décalage, point.y, point.z),obstacle1.transform.rotation);
+                indice = gen.Next(0,2);
+                point = points[gen.Next(0, indices.Count)];
+            
+            }
+            points[indice] = new Vector3(-1, -1 ,-1);
+            int xOuY = gen.Next(0, 2);
+            int[] neg = new int[] { -1, 1 };
+            int coté = neg[gen.Next(0, 2)];
+            int décalage = gen.Next(1, 45);
+            if (indice == 0)
+            {
+                if (xOuY == 1)
+                {
+                    Instantiate(obstacle1, new Vector3(point.x + coté *décalage, point.y, point.z),obstacle1.transform.rotation);
+                }
+                else
+                {
+                    Instantiate(obstacle1, new Vector3(point.x, point.y, point.z + coté *décalage),obstacle1.transform.rotation);
+                }
+            
             }
             else
             {
-                Instantiate(obstacle1, new Vector3(point.x, point.y, point.z + coté *décalage),obstacle1.transform.rotation);
-            }
-            
-        }
-        else
-        {
-            if (xOuY == 1)
-            {
-                Instantiate(obstacle2, new Vector3(point.x + coté *décalage, point.y, point.z),obstacle2.transform.rotation);
-            }
-            else
-            {
-                Instantiate(obstacle2, new Vector3(point.x, point.y, point.z + coté *décalage),obstacle2.transform.rotation);
+                if (xOuY == 1)
+                {
+                    Instantiate(obstacle2, new Vector3(point.x + coté *décalage, point.y, point.z),obstacle2.transform.rotation);
+                }
+                else
+                {
+                    Instantiate(obstacle2, new Vector3(point.x, point.y, point.z + coté *décalage),obstacle2.transform.rotation);
+                }
             }
         }
+        
     }
     // Start is called before the first frame update
     void Start()

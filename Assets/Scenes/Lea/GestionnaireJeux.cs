@@ -8,18 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-class Program
-{
-    static void Main(string[] args)
-    {
-  
-       
-        
-        
-    }
 
-   
-}
 
 public class GestionnaireJeux : MonoBehaviour
 {
@@ -29,7 +18,7 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject point;
     [SerializeField] private GameObject point1;
     [SerializeField] public GameObject obstalce1; // à changer
-   // [SerializeField] private GameObject obstacle2;
+    [SerializeField] private GameObject obstacle2;
     private List<Vector3> chemin;
     public List<Vector3> Chemin
     {
@@ -75,29 +64,16 @@ public class GestionnaireJeux : MonoBehaviour
             Instantiate(point, chemin[i], point.transform.rotation);
         }
         chemin = new ScriptBézier(chemin).PointsSpline;
+        
         //new GénérateurObstacles(chemin, obstalce1, obstacle2);
         Debug.Log("YAYY");
         Debug.Log(chemin.Count);
         for (int i = 0; i < chemin.Count; i++)
         {
+            Debug.Log(chemin[i]);
             Instantiate(point1, chemin[i], point1.transform.rotation);
         }
     }
 
-   /*private void Update()
-   {
-       Stopwatch watch = new Stopwatch();
-       watch.Start();
-       while (watch.ElapsedMilliseconds < 5000 && Thread.CurrentThread.IsAlive)
-           ;
-             
-       Thread.CurrentThread.Abort();
-       Console.WriteLine("Unable to connect");
-       time += Time.deltaTime;
-       if (time > 5 )
-       {
-           throw new MarchePas();
-       }
-
-   }*/
+   
 }

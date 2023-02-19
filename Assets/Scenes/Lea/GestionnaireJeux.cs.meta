@@ -7,6 +7,8 @@ MonoImporter:
   - terrain: {fileID: 6021201859497948706, guid: 35346684f1a966c489e82a98012619ca, type: 3}
   - point: {fileID: 4507749981864202150, guid: 76f1b763874aa914289c02ecb83d0be3, type: 3}
   - point1: {fileID: 4507749981864202150, guid: 7347b7b619eaf5547a15f9dbcb0e7209, type: 3}
+  - obstalce1: {fileID: 461673607304592863, guid: 5096861c1b02c7d4783663097dfbb830, type: 3}
+  - obstacle2: {fileID: 461673607304592863, guid: 5096861c1b02c7d4783663097dfbb830, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

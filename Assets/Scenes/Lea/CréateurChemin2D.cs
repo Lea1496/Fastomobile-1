@@ -99,7 +99,7 @@ public class CréateurChemin2D : MonoBehaviour
                     newPoint = pointFin;
                 }
             } while (newPoint == -1 || (newPoint == 0 && pointFin != 0));
-            Debug.Log(newPoint + " newPoint");
+//            Debug.Log(newPoint + " newPoint");
 //            Debug.Log(graph.GetNeighbours(newPoint).Length + " length");
             //if (VérifierCasesAutour(newPoint, déjàVisités) == graph.GetNeighbours(newPoint).Length && newPoint !=  0)
             if (VérifierCasesAutour(newPoint, déjàVisités) == 4 && newPoint % 8 != 0 )
