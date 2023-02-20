@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 1828300570}
   - component: {fileID: 1828300569}
   - component: {fileID: 1828300568}
+  - component: {fileID: 1828300573}
   m_Layer: 0
   m_Name: test mesh piste
   m_TagString: Untagged
@@ -401,6 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d83c7dd973013c458a59f0034b7b11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  "mat\xE9riaux": {fileID: 2100000, guid: 35c652289804b4947bada983bbfc10c1, type: 2}
 --- !u!23 &1828300569
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -420,8 +422,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -484,3 +485,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1828300573
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828300567}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
