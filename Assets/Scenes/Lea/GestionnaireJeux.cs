@@ -59,20 +59,19 @@ public class GestionnaireJeux : MonoBehaviour
        
        Refaire();
         //new CréateurTerrain(largeur, terrain);
-        for (int i = 0; i < chemin.Count; i++)
+        /*for (int i = 0; i < chemin.Count; i++)
         {
             Instantiate(point, chemin[i], point.transform.rotation);
-        }
+        }*/
         chemin = new ScriptBézier(chemin).PointsSpline;
         
         //new GénérateurObstacles(chemin, obstalce1, obstacle2);
-        Debug.Log("YAYY");
-        Debug.Log(chemin.Count);
-        for (int i = 0; i < chemin.Count; i++)
+     
+        /*for (int i = 0; i < chemin.Count; i++)
         {
             Debug.Log(chemin[i]);
             Instantiate(point1, chemin[i], point1.transform.rotation);
-        }
+        }*/
     }
 
    

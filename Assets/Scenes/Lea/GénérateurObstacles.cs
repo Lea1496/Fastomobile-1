@@ -25,10 +25,9 @@ public class GénérateurObstacles : MonoBehaviour
             indices.Add(i);;
         }
 
-        for (int i = 0; i < maxObstacles; i++)
-        {
+        
             GénérerObstacles(); 
-        }
+        
         
     }
     
@@ -37,15 +36,17 @@ public class GénérateurObstacles : MonoBehaviour
     {
         for (int i = 0; i < maxObstacles; i++)
         {
-            int indice = gen.Next(0,2);
-            Vector3 point = points[gen.Next(0, indices.Count)];
+            int indice = gen.Next(0, indices.Count);
+            Vector3 point = points[indice];
         
-            while (points[indice] == new Vector3(-1, -1, -1) && indices.Count != 0)
+            while (point == new Vector3(-1, -1, -1) )
             {
-                indice = gen.Next(0,2);
-                point = points[gen.Next(0, indices.Count)];
+                indice = gen.Next(0, indices.Count);
+                point = points[indice];
             
             }
+
+            
             points[indice] = new Vector3(-1, -1 ,-1);
             int xOuY = gen.Next(0, 2);
             int[] neg = new int[] { -1, 1 };

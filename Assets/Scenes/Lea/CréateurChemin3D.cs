@@ -13,7 +13,8 @@ public class CréateurChemin3D : MonoBehaviour
     private int maxCotes;
     private Random gen = new Random();
    // private char tournant = 't';
-  
+   private List<int> verif;
+
     public List<Vector3> ListePos
     {
         get => listePos;
@@ -22,12 +23,13 @@ public class CréateurChemin3D : MonoBehaviour
     {
         largeur = Largeur;
         listePos = new CréateurCheminComplet(largeur).CheminComplet;
+        verif = new List<int>();
         
        // relief = new List<char>(listePos.Count);
         maxCotes = listePos.Count / 5;
         //TrouverTournants();
         CréerCotes();
-        VérifierSiListeBonne();
+        //VérifierSiListeBonne();
         
     }
    
@@ -45,25 +47,26 @@ public class CréateurChemin3D : MonoBehaviour
         int grandeur = 0;
         int bond = 0;
 
-        for (int i = 2; i < listePos.Count - 1; i++)
-        {
-            cotes.Add(i);
-        }
-        
         for (int i = 0; i < maxCotes && cotes.Count != 0; i++)
         {
-            pos = VérifierPos();
+            do
+            {
+                pos = gen.Next(3, listePos.Count);
+            } while (verif.Contains(pos) || verif.Count == listePos.Count);
+            verif.Add(pos -1);
+            verif.Add(pos );
+            verif.Add(pos +1);
             grandeur = gen.Next(0, 2);
 
             if (grandeur == 0)
             {
-                bond = 20;
+                bond = 30;
             }
             else
             {
                 if (grandeur == 1) 
                 {
-                    bond = 40;
+                    bond = 60;
                 }
             }
            
@@ -97,7 +100,7 @@ public class CréateurChemin3D : MonoBehaviour
 
     
 
-    private void VérifierSiListeBonne()
+    /*private void VérifierSiListeBonne()
     {
         if (listePos.Count % 4 != 0)
         {
@@ -108,7 +111,7 @@ public class CréateurChemin3D : MonoBehaviour
                 listePos.Add(new Vector3(0,0,0));
             }
         }
-    }
+    }*/
 
    
 
