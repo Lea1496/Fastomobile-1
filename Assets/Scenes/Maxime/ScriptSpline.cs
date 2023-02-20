@@ -10,7 +10,7 @@ using UnityEngine;
 public class ScriptSpline : MonoBehaviour
 {
     private float largeurRoute = 70f;
-    private float tiling = 1;
+    //private float tiling = 1;
     private List<Vector3> pointsSpline;
     private Mesh maillage;
     Vector3[] sommets;
@@ -30,8 +30,8 @@ public class ScriptSpline : MonoBehaviour
         meshc.sharedMesh = maillage;
         GetComponent<MeshRenderer>().material = matériaux;
 
-        int textureRepeat = Mathf.RoundToInt(tiling * pointsSpline.Count * 0.5f); // enlever .5
-        GetComponent<MeshRenderer>().sharedMaterial.mainTextureScale = new Vector2(1, textureRepeat);
+        //int textureRepeat = Mathf.RoundToInt(tiling * pointsSpline.Count); 
+        //GetComponent<MeshRenderer>().sharedMaterial.mainTextureScale = new Vector2(1, textureRepeat);
     }
     private Mesh CréerMeshRoute(List<Vector3> pointsSpline) // prend vector3 pour faire route et s'assure de fermer la route
     {
@@ -61,11 +61,10 @@ public class ScriptSpline : MonoBehaviour
             sommets[indexSom + 1] = pointsSpline[i] - gauche * largeurRoute;
 
             //texture
-
             float completePercent = i / (float)(pointsSpline.Count - 1);
-            float v = 1 - Mathf.Abs(2 * completePercent - 1);
-            uvs[indexSom] = new Vector2(0, v);
-            uvs[indexSom + 1] = new Vector2(1, v);
+            //float v = 1 - Mathf.Abs(2 * completePercent - 1);
+            uvs[indexSom] = new Vector2(0, completePercent);
+            uvs[indexSom + 1] = new Vector2(1, completePercent);
 
             
             //tous les pts sauf le dernier pour faire les triangles 
@@ -94,6 +93,6 @@ public class ScriptSpline : MonoBehaviour
         mesh.uv = uvs;
         return mesh;
 
-        // mettre bord sur chaque bord
+       
     }
 }
