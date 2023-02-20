@@ -6,6 +6,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(MeshCollider))]
 public class ScriptSpline : MonoBehaviour
 {
     private float largeurRoute = 75f;
@@ -14,13 +15,15 @@ public class ScriptSpline : MonoBehaviour
     Vector3[] sommets;
     Vector3 gauche;
     Vector3 directionAvant;
+    
     private void Start()
     {
         maillage = new Mesh();
+        MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         pointsSpline = GetComponent<GestionnaireJeux>().Chemin;
-        Debug.Log(pointsSpline.Count + " nb points"); // pour vérifier que c'est pas 0
         maillage = CréerMeshRoute(pointsSpline);
         GetComponent<MeshFilter>().mesh = maillage;
+        meshc.sharedMesh = maillage;
     }
     private Mesh CréerMeshRoute(List<Vector3> pointsSpline) // prend vector3 pour faire route et s'assure de fermer la route
     {
