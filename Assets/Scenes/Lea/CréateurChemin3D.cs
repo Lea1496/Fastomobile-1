@@ -47,12 +47,12 @@ public class CréateurChemin3D : MonoBehaviour
         int grandeur = 0;
         int bond = 0;
 
-        for (int i = 0; i < maxCotes && cotes.Count != 0; i++)
+        for (int i = 0; i < maxCotes && verif.Count != listePos.Count ; i++)
         {
             do
             {
-                pos = gen.Next(3, listePos.Count);
-            } while (verif.Contains(pos) || verif.Count == listePos.Count);
+                pos = gen.Next(3, listePos.Count - 2);
+            } while (verif.Contains(pos) && verif.Count != listePos.Count);
             verif.Add(pos -1);
             verif.Add(pos );
             verif.Add(pos +1);
@@ -73,9 +73,7 @@ public class CréateurChemin3D : MonoBehaviour
             listePos[pos - 1] = new Vector3(listePos[pos - 1].x, bond, listePos[pos - 1].z);
             listePos[pos] = new Vector3(listePos[pos].x, 2 * bond, listePos[pos].z);
             listePos[pos + 1] = new Vector3(listePos[pos + 1].x, bond, listePos[pos + 1].z);
-            cotes.Remove(pos -1 );
-            cotes.Remove(pos);
-            cotes.Remove(pos + 1);
+            
 
         }
         

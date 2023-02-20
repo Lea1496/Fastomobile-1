@@ -18,7 +18,7 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject point;
     [SerializeField] private GameObject point1;
     [SerializeField] public GameObject obstalce1; // à changer
-    [SerializeField] private GameObject obstacle2;
+    [SerializeField] private GameObject obstacle2; // à changer
     private List<Vector3> chemin;
     public List<Vector3> Chemin
     {
@@ -27,6 +27,7 @@ public class GestionnaireJeux : MonoBehaviour
     
     // les deux prochaine fonctions viennent de
     // https://stackoverflow.com/questions/4501838/terminate-a-thread-after-an-interval-if-not-returned
+    
     private void WorkThreadFunction()
     {
         try
@@ -35,10 +36,9 @@ public class GestionnaireJeux : MonoBehaviour
         }
         catch 
         {
-            
+            Refaire();
         }
     }
-
     private void Refaire()
     {
         Thread thread = new Thread(new ThreadStart(WorkThreadFunction)) ;
@@ -58,14 +58,18 @@ public class GestionnaireJeux : MonoBehaviour
    {
        
        Refaire();
-        //new CréateurTerrain(largeur, terrain);
+        new CréateurTerrain(largeur, terrain);
         /*for (int i = 0; i < chemin.Count; i++)
         {
             Instantiate(point, chemin[i], point.transform.rotation);
         }*/
+        if (chemin == null)
+        {
+            Refaire();
+        }
         chemin = new ScriptBézier(chemin).PointsSpline;
         
-        //new GénérateurObstacles(chemin, obstalce1, obstacle2);
+        new GénérateurObstacles(chemin, obstalce1, obstacle2);
      
         /*for (int i = 0; i < chemin.Count; i++)
         {

@@ -10,7 +10,7 @@ public class CréateurTerrain : MonoBehaviour
     private float demiLongueur = 150f;
     
     
-    private Vector3 position = new Vector3(0, 0, 0);
+    private Vector3 position = new Vector3(0, -0.5f, 0);
     public CréateurTerrain(int largeur, GameObject terrain)
     {
         for (int i = 0; i < largeur; i++)

@@ -107,7 +107,7 @@ public class CréateurChemin2D : MonoBehaviour
                 Debug.Log("MERDE");
                 déjàVisités.Clear();
                 Debug.Log(pointDébut + " MERDE");
-                
+                throw new MarchePas();
                 List<int> reChemin = DéterminerChemin2dAléatoire(pointDébut, pointFin);
                 
                 for (int i = 0; i < reChemin.Count - 1; i++)
@@ -136,7 +136,7 @@ public class CréateurChemin2D : MonoBehaviour
     }
     
     
-    // code de https://www.techiedelight.com/fr/remove-duplicates-from-list-csharp/
+    // code de cette fonction https://www.techiedelight.com/fr/remove-duplicates-from-list-csharp/
     private static List<T> RemoveDuplicates<T>(List<T> list) {
         return new HashSet<T>(list).ToList();
     }

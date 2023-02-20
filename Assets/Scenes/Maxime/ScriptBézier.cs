@@ -40,7 +40,7 @@ public class ScriptBézier : MonoBehaviour
             }
             else
             {
-                p1 = position;
+                p1 = pointsSpline[j - 1];
                 p2 = pointsSpline[j];
                 p3 = pointsSpline[j + 1];
                 p4 = pointsSpline[j + 2];
@@ -51,19 +51,34 @@ public class ScriptBézier : MonoBehaviour
             for (int i = 1; i < 8; i++)
             {
                 t = i / 8f;
-                pointsBézier.Add(CalculateBezierPoint(t, p1, p2, p3, p4));
-                position = pointsBézier.Last();
+                /*if (j == 0)
+                {
+                    pointsBézier.Add(CalculateBezierPoint(7/8f, p1, p2, p3, p4));
+                    i = 7;
+                    pointsBézier.Remove(pointsBézier[0]);
+                    pointsBézier.Remove(pointsBézier[1]);
+                    position = pointsBézier.Last();
+                }*/
+                //else
+                {
+                    pointsBézier.Add(CalculateBezierPoint(t, p1, p2, p3, p4));
+                    position = pointsBézier.Last();
+                }
+                
             }
         }
+
         
         p1 = position;
         p2 = pointsSpline[dernièrePos];
-        p3 = pointsSpline[0];
-        p4 = pointsSpline[1];
+        p3 = pointsBézier[1];
+        p4 = pointsSpline[2];
+       
         for (int i = 0; i < 8; i++)
         {
             t = i / 8f;
             pointsBézier.Add(CalculateBezierPoint(t, p1, p2, p3, p4));
+            pointsBézier[i] = pointsBézier.Last();
         }
         
         return pointsBézier;
