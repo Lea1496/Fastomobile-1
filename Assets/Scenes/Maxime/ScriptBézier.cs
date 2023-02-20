@@ -26,8 +26,9 @@ public class ScriptBézier : MonoBehaviour
         Vector3 p3;
         Vector3 p4;
         pointsBézier.Add(Vector3.zero);
-        position = new Vector3(0, 0, 0); 
-        for (int j = 0; j < pointsSpline.Count - 2 ; j += 3)
+        position = new Vector3(0, 0, 0);
+        int dernièrePos = 0;
+        for (int j = 0; j < pointsSpline.Count - 3 ; j += 3)
         {
             if (j < 2)
             {
@@ -46,6 +47,7 @@ public class ScriptBézier : MonoBehaviour
 
             }
 
+            dernièrePos = j + 3;
             for (int i = 1; i < 8; i++)
             {
                 t = i / 8f;
@@ -53,11 +55,11 @@ public class ScriptBézier : MonoBehaviour
                 position = pointsBézier.Last();
             }
         }
-
-        p1 = pointsBézier[1];
-        p2 = pointsSpline[0];
+        
+        p1 = position;
+        p2 = pointsSpline[dernièrePos];
         p3 = pointsSpline[0];
-        p4 = pointsBézier[pointsBézier.Count - 2];
+        p4 = pointsSpline[1];
         for (int i = 0; i < 8; i++)
         {
             t = i / 8f;

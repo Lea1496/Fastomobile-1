@@ -9,7 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshCollider))]
 public class ScriptSpline : MonoBehaviour
 {
-    private float largeurRoute = 75f;
+    private float largeurRoute = 70f;
     private List<Vector3> pointsSpline;
     private Mesh maillage;
     Vector3[] sommets;
