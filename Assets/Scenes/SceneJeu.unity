@@ -402,6 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d83c7dd973013c458a59f0034b7b11d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sommets: []
   "mat\xE9riaux": {fileID: 2100000, guid: 35c652289804b4947bada983bbfc10c1, type: 2}
 --- !u!23 &1828300569
 MeshRenderer:
@@ -422,7 +423,8 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 2100000, guid: 815fabd266d558a40a67d0da32898a9b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
