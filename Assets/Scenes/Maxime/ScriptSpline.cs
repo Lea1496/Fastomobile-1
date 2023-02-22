@@ -30,7 +30,7 @@ public class ScriptSpline : MonoBehaviour
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
         GetComponent<MeshRenderer>().material = matériaux;
-
+        
         //int textureRepeat = Mathf.RoundToInt(tiling * pointsSpline.Count); 
         //GetComponent<MeshRenderer>().sharedMaterial.mainTextureScale = new Vector2(1, textureRepeat);
     }
@@ -39,7 +39,7 @@ public class ScriptSpline : MonoBehaviour
     {
         sommets = new Vector3[pointsSpline.Count * 2];
         Vector2[] uvs = new Vector2[sommets.Length]; // texture route
-        int nbTriangles = 2 * (pointsSpline.Count - 1) + 2;
+        int nbTriangles = 2 * pointsSpline.Count;
         int[] triangle = new int[nbTriangles * 3];
         int indexSom = 0;
         int indexTri = 0;

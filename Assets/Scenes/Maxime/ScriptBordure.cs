@@ -14,6 +14,7 @@ public class ScriptBordure : MonoBehaviour
 
     private void Start()
     {
+       
         //maillage = new Mesh();
         //MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         //maillage = AjouterBordure(sommets);
@@ -24,11 +25,13 @@ public class ScriptBordure : MonoBehaviour
         //int textureRepeat = Mathf.RoundToInt(tiling * pointsSpline.Count); 
         //GetComponent<MeshRenderer>().sharedMaterial.mainTextureScale = new Vector2(1, textureRepeat);
     }
+
+    
     private Mesh AjouterBordure(Vector3[] sommets)
     {
 
         Vector2[] uvs = new Vector2[sommets.Length]; // texture route
-        int nbTrianglesPair = (sommets.Length - 1) + 2;
+        int nbTrianglesPair = sommets.Length;
         int[] trianglePair = new int[nbTrianglesPair * 3];
         int indexSom = 0;
         int indexTri = 0;
