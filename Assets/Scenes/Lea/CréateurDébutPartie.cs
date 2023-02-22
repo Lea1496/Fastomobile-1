@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class CréateurDébutPartie : MonoBehaviour
 {
-    private List<BehaviourAuto> lesAutos;
-    [SerializeField] private GameObject arc;
+    private List<GameObject> lesAutos;
+    private Vector3 position;
     private int compteurAutos = 0;
-    private Vector3 posPremier = new Vector3(335, 0, -50);
-    public CréateurDébutPartie(List<BehaviourAuto> autos) //behavior auto pour le moment mais surement à changer
+    private Vector3 posPremier;
+    public CréateurDébutPartie(List<GameObject> autos, GameObject arc, Vector3 pos) //behavior auto pour le moment mais surement à changer
     {
+        posPremier =  new Vector3(335, 0, -50);
         lesAutos = autos;
-        Instantiate(arc, new Vector3(300, 0, -61.5f), arc.transform.rotation);
+        position = pos;
+        Instantiate(arc, new Vector3(posPremier.x + 30, 0, position.z), arc.transform.rotation);
         InstancierAutos();
     }
 
@@ -22,7 +24,7 @@ public class CréateurDébutPartie : MonoBehaviour
             for (int j = 0; j < lesAutos.Count / 4; j++)
             {
                 Instantiate(lesAutos[compteurAutos],
-                    new Vector3(posPremier.x - 35 * j - 4 * i, 0, posPremier.z + 32 * i + 6 * j),
+                    new Vector3(posPremier.x - 35 * j - 4 * i, 0, (position.z -37) + 32 * i - 6 * j),
                     lesAutos[compteurAutos++].transform.rotation);
             }
         }

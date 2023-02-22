@@ -51,7 +51,7 @@ public class CréateurChemin3D : MonoBehaviour
         {
             do
             {
-                pos = gen.Next(3, listePos.Count - 2);
+                pos = gen.Next(5, listePos.Count -7);
             } while (verif.Contains(pos) && verif.Count != listePos.Count);
             verif.Add(pos -1);
             verif.Add(pos );

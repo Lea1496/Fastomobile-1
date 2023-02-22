@@ -19,6 +19,8 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject point1;
     [SerializeField] public GameObject obstalce1; // à changer
     [SerializeField] private GameObject obstacle2; // à changer
+    [SerializeField] private GameObject auto;
+    [SerializeField] private GameObject arc;
     private List<Vector3> chemin;
     public List<Vector3> Chemin
     {
@@ -70,13 +72,21 @@ public class GestionnaireJeux : MonoBehaviour
         chemin = new ScriptBézier(chemin).PointsSpline;
         
         new GénérateurObstacles(chemin, obstalce1, obstacle2);
-     
-        /*for (int i = 0; i < chemin.Count; i++)
+
+        List<GameObject> autos = new List<GameObject>();
+
+        for (int i = 0; i < 13; i++)
         {
-            Debug.Log(chemin[i]);
+            autos.Add(auto);
+        }
+
+        new CréateurDébutPartie(autos, arc, chemin[chemin.Count - 9]);
+        for (int i = 0; i < chemin.Count; i++)
+        {
+            //Debug.Log(chemin[i]);
             Instantiate(point1, chemin[i], point1.transform.rotation);
-        }*/
-    }
+        }
+   }
 
    
 }
