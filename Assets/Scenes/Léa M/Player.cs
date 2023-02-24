@@ -10,4 +10,7 @@ public class Player : IPlayer
     public int Puissance { get; }
     public int IdVéhicule { get; }
     public int IdMoteur { get; }
+    
+    
+    
 }

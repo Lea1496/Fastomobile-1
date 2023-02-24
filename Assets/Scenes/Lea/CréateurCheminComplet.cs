@@ -5,9 +5,6 @@ using Random = System.Random;
 
 public class CréateurCheminComplet : MonoBehaviour
 {
-    
-
-
     private int largeur;
 
   

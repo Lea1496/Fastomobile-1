@@ -21,6 +21,7 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject obstacle2; // à changer
     [SerializeField] private GameObject auto;
     [SerializeField] private GameObject arc;
+    [SerializeField] private GameObject ligneArrivée;
     private List<Vector3> chemin;
     public List<Vector3> Chemin
     {
@@ -46,13 +47,13 @@ public class GestionnaireJeux : MonoBehaviour
         Thread thread = new Thread(new ThreadStart(WorkThreadFunction)) ;
        
         thread.Start();
-        if (!thread.Join(new TimeSpan(0, 0, 1)) && chemin == null)
+        /*if (!thread.Join(new TimeSpan(0, 0, 1)) && chemin == null)
         {
             thread.Abort();
             Debug.Log("Ça a pas marché");
             Refaire();
             
-        }
+        }*/
     }
 
     
@@ -80,13 +81,19 @@ public class GestionnaireJeux : MonoBehaviour
             autos.Add(auto);
         }
 
-        new CréateurDébutPartie(autos, arc, chemin[chemin.Count - 9]);
-        for (int i = 0; i < chemin.Count; i++)
+        new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 7]);
+        /*for (int i = 0; i < chemin.Count; i++)
         {
             //Debug.Log(chemin[i]);
             Instantiate(point1, chemin[i], point1.transform.rotation);
-        }
+        }*/
    }
 
-   
+   private void Update()
+   {
+       if (GetComponent<GestionnaireCollision>().CompteurTour == 3) // y a t'il y autre façon de faire ça
+       {
+           
+       }
+   }
 }

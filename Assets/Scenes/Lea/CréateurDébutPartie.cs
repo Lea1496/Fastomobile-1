@@ -8,12 +8,13 @@ public class CréateurDébutPartie : MonoBehaviour
     private Vector3 position;
     private int compteurAutos = 0;
     private Vector3 posPremier;
-    public CréateurDébutPartie(List<GameObject> autos, GameObject arc, Vector3 pos) //behavior auto pour le moment mais surement à changer
+    public CréateurDébutPartie(List<GameObject> autos, GameObject arc, GameObject ligne, Vector3 pos) //behavior auto pour le moment mais surement à changer
     {
         posPremier =  new Vector3(335, 0, -50);
         lesAutos = autos;
         position = pos;
-        Instantiate(arc, new Vector3(posPremier.x + 30, 0, position.z), arc.transform.rotation);
+        Instantiate(arc, new Vector3(position.x + 30, 0, position.z), arc.transform.rotation);
+        Instantiate(ligne, new Vector3(position.x + 30, 0, position.z), ligne.transform.rotation);
         InstancierAutos();
     }
 
@@ -24,7 +25,7 @@ public class CréateurDébutPartie : MonoBehaviour
             for (int j = 0; j < lesAutos.Count / 4; j++)
             {
                 Instantiate(lesAutos[compteurAutos],
-                    new Vector3(posPremier.x - 35 * j - 4 * i, 0, (position.z -37) + 32 * i - 6 * j),
+                    new Vector3(position.x - 35 * j - 4 * i, 0, (position.z -37) + 32 * i - 6 * j),
                     lesAutos[compteurAutos++].transform.rotation);
             }
         }
