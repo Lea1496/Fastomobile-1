@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class GestionnairePlayer : MonoBehaviour
+public class GameData
 {
     
+    public static Player P1 = new Player();
     
+
+
+
+
+
 }

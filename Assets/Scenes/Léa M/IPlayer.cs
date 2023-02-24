@@ -7,8 +7,8 @@ interface IPlayer
   int Vie { get; }
   string Nom { get;}
   int Argent { get; }
-  int Puissance { get; }
   int IdVéhicule { get; }
   int IdMoteur { get; }
+  GameObject Chassis { get; }
   
 }
