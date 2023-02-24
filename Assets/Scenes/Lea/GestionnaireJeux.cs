@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -47,13 +48,13 @@ public class GestionnaireJeux : MonoBehaviour
         Thread thread = new Thread(new ThreadStart(WorkThreadFunction)) ;
        
         thread.Start();
-        /*if (!thread.Join(new TimeSpan(0, 0, 1)) && chemin == null)
+        if (!thread.Join(new TimeSpan(0, 0, 1)) && chemin == null)
         {
             thread.Abort();
             Debug.Log("Ça a pas marché");
             Refaire();
             
-        }*/
+        }
     }
 
     
@@ -74,12 +75,9 @@ public class GestionnaireJeux : MonoBehaviour
         
         new GénérateurObstacles(chemin, obstalce1, obstacle2);
 
-        List<GameObject> autos = new List<GameObject>();
-
-        for (int i = 0; i < 13; i++)
-        {
-            autos.Add(auto);
-        }
+        List<Player> autos = new List<Player>(); //à changer
+        
+        
 
         new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 7]);
         /*for (int i = 0; i < chemin.Count; i++)
@@ -91,9 +89,10 @@ public class GestionnaireJeux : MonoBehaviour
 
    private void Update()
    {
-       if (GetComponent<GestionnaireCollision>().CompteurTour == 3) // y a t'il y autre façon de faire ça
+//       if (GetComponent<GestionnaireCollision>().CompteurTour == 3) // y a t'il y autre façon de faire ça
        {
            
        }
    }
+   
 }

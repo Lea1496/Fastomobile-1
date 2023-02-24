@@ -4,19 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : IPlayer
-{
-<<<<<<< HEAD
-    public int Vie { get; }
-    public string Nom { get; }
-    public int Argent { get; }
-    public int Puissance { get; }
-    public int IdVéhicule { get; }
-    public int IdMoteur { get; }
-    
-    
-    
-=======
-    
+{    
     public int Vie { get; set; }
     public string Nom { get; set; }
     public int Argent { get; private set; }
@@ -50,5 +38,4 @@ public class Player : IPlayer
     }
     
 
->>>>>>> 313385e96fc216e4bdbb80c4d9dd2b468dea3f58
 }

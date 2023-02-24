@@ -16,9 +16,16 @@ public class GestionnaireCollision : MonoBehaviour
         players = liste;
         for (int i = 0; i < players.Count; i++)
         {
-           // if (players[i])
+            if (players[i].Chassis.tag.Contains("p1"))
             {
-                
+                nbJoueur++;
+            }
+            else
+            {
+                if (players[i].Chassis.tag.Contains("p2"))
+                {
+                    nbJoueur++;
+                }
             }
         }
     }
@@ -40,7 +47,7 @@ public class GestionnaireCollision : MonoBehaviour
             }
             else
             {
-                if (collider.gameObject.tag.Contains("p2"))
+                if (collider.gameObject.tag.Contains("p2")) //à changer
                 {
                     compteurJoueursPassés++;
                 }
@@ -48,13 +55,14 @@ public class GestionnaireCollision : MonoBehaviour
 
             if (compteurJoueursPassés ==2)
             {
-                compteurTour++;
+                compteurTour++;  //mettre fin à la partie ici?
                 compteurJoueursPassés = 0;
             }
         }
         else
         {
             compteurTour++;
+            //mettre fin à la partie ici?
         }
         
     }
@@ -66,9 +74,9 @@ public class GestionnaireCollision : MonoBehaviour
         {
             for (int i = 0; i < players.Count; i++)
             {
-                if (point.thisCollider.gameObject.tag == players[i].Nom) // à modifier
+                if (players[i].Chassis.tag.Contains(point.thisCollider.gameObject.tag))
                 {
-                    
+                    players[i].EnleverVie(5); //changé cbm de vie...
                 }
             }
         }
@@ -76,7 +84,7 @@ public class GestionnaireCollision : MonoBehaviour
         {
             for (int i = 0; i < players.Count; i++)
             {
-                if (point.thisCollider.gameObject.name == players[i].Nom) // à modifier
+                if (players[i].Chassis.tag.Contains(point.thisCollider.gameObject.tag))
                 {
                     
                 }
@@ -86,7 +94,7 @@ public class GestionnaireCollision : MonoBehaviour
         {
             for (int i = 0; i < players.Count; i++)
             {
-                if (point.thisCollider.gameObject.name == players[i].Nom) // à modifier
+                if (players[i].Chassis.tag.Contains(point.thisCollider.gameObject.tag)) // à modifier
                 {
                     
                 }

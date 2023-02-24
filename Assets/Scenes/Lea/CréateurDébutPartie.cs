@@ -8,10 +8,15 @@ public class CréateurDébutPartie : MonoBehaviour
     private Vector3 position;
     private int compteurAutos = 0;
     private Vector3 posPremier;
-    public CréateurDébutPartie(List<GameObject> autos, GameObject arc, GameObject ligne, Vector3 pos) //behavior auto pour le moment mais surement à changer
+    public CréateurDébutPartie(List<Player> autos, GameObject arc, GameObject ligne, Vector3 pos) //behavior auto pour le moment mais surement à changer
     {
         posPremier =  new Vector3(335, 0, -50);
-        lesAutos = autos;
+        lesAutos = new List<GameObject>();
+        for (int i = 0; i < autos.Count; i++)
+        {
+            lesAutos.Add(autos[i].Chassis);
+        }
+        
         position = pos;
         Instantiate(arc, new Vector3(position.x + 30, 0, position.z), arc.transform.rotation);
         Instantiate(ligne, new Vector3(position.x + 30, 0, position.z), ligne.transform.rotation);
