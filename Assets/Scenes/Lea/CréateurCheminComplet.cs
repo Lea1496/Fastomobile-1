@@ -80,13 +80,7 @@ public class CréateurCheminComplet : MonoBehaviour
           
     }
 
-    /*private List<Vector3> FormerChemin2D()
-    {
-        List<Vector3> lesChemins = new List<Vector3>();
-        chemin = new CréateurChemin2D(largeur, graph, positions[0], positions[1], positions[2], positions[3]);
-        lesChemins.AddRange(chemin.ListePos);
-        return lesChemins;
-    }*/
+   
 
     private int[] GénérerIndices()
     {

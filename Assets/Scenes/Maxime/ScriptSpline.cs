@@ -2,6 +2,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
@@ -13,7 +14,7 @@ public class ScriptSpline : MonoBehaviour
     //private float tiling = 1;
     private List<Vector3> pointsSpline;
     private Mesh maillage;
-    Vector3[] sommets;
+    public Vector3[] sommets;
     Vector3 gauche;
     Vector3 directionAvant;
 
@@ -29,15 +30,16 @@ public class ScriptSpline : MonoBehaviour
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
         GetComponent<MeshRenderer>().material = matériaux;
-
+        
         //int textureRepeat = Mathf.RoundToInt(tiling * pointsSpline.Count); 
         //GetComponent<MeshRenderer>().sharedMaterial.mainTextureScale = new Vector2(1, textureRepeat);
     }
+
     private Mesh CréerMeshRoute(List<Vector3> pointsSpline) // prend vector3 pour faire route et s'assure de fermer la route
     {
         sommets = new Vector3[pointsSpline.Count * 2];
         Vector2[] uvs = new Vector2[sommets.Length]; // texture route
-        int nbTriangles = 2 * (pointsSpline.Count - 1) + 2;
+        int nbTriangles = 2 * pointsSpline.Count;
         int[] triangle = new int[nbTriangles * 3];
         int indexSom = 0;
         int indexTri = 0;
@@ -54,7 +56,7 @@ public class ScriptSpline : MonoBehaviour
                 directionAvant += pointsSpline[i] - pointsSpline[(i - 1 + pointsSpline.Count) % pointsSpline.Count];
             }
             directionAvant.Normalize();
-            gauche = new Vector3(-directionAvant.z, 0, directionAvant.x); //pour prendre sommet à coter du pt
+            gauche = new Vector3(-directionAvant.z, 0, directionAvant.x);  
 
             // calculer 2 sommets
             sommets[indexSom] = pointsSpline[i] + gauche * largeurRoute;
