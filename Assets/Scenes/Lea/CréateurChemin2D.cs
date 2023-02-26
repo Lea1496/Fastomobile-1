@@ -45,12 +45,6 @@ public class CréateurChemin2D : MonoBehaviour
     }
     private void AssemblerChemin(int p1, int p2, int p3, int p4)
     {
-        /*DéterminerChemin2dAléatoire(0, 10);
-        DéterminerChemin2dAléatoire(10, 28);
-        DéterminerChemin2dAléatoire(28, 46);
-        DéterminerChemin2dAléatoire(46, 32);
-        DéterminerChemin2dAléatoire(32, 0);*/
-        Debug.Log($"{p1} {p2} {p3} {p4}");
         DéterminerChemin2dAléatoire(0, p1);
         DéterminerChemin2dAléatoire(p1, p2);
         DéterminerChemin2dAléatoire(p2, p3);
@@ -85,7 +79,7 @@ public class CréateurChemin2D : MonoBehaviour
             {
                 newPoint = Bouger(currentPos, compteur);
                 compteur++;
-                if (VérifierSiRestePas() && newPoint != pointFin)
+                /*if (VérifierSiRestePas() && newPoint != pointFin)
                 {
                     
                     Debug.Log(newPoint);
@@ -97,7 +91,7 @@ public class CréateurChemin2D : MonoBehaviour
                         déjàVisités.Add(reChemin[i]);
                     }
                     newPoint = pointFin;
-                }
+                }*/
             } while (newPoint == -1 || (newPoint == 0 && pointFin != 0));
 //            Debug.Log(newPoint + " newPoint");
 //            Debug.Log(graph.GetNeighbours(newPoint).Length + " length");
@@ -107,7 +101,7 @@ public class CréateurChemin2D : MonoBehaviour
                 Debug.Log("MERDE");
                 déjàVisités.Clear();
                 Debug.Log(pointDébut + " MERDE");
-                
+                throw new MarchePas();
                 List<int> reChemin = DéterminerChemin2dAléatoire(pointDébut, pointFin);
                 
                 for (int i = 0; i < reChemin.Count - 1; i++)
@@ -136,13 +130,13 @@ public class CréateurChemin2D : MonoBehaviour
     }
     
     
-    // code de https://www.techiedelight.com/fr/remove-duplicates-from-list-csharp/
+    // code de cette fonction https://www.techiedelight.com/fr/remove-duplicates-from-list-csharp/
     private static List<T> RemoveDuplicates<T>(List<T> list) {
         return new HashSet<T>(list).ToList();
     }
 
-    private bool VérifierSiRestePas() => (pasD >= restrictions[0] && pasL >= restrictions[2] &&
-                                          pasR >= restrictions[3] && pasU >= restrictions[1]);
+    //private bool VérifierSiRestePas() => (pasD >= restrictions[0] && pasL >= restrictions[2] &&
+                                                                                    //pasR >= restrictions[3] && pasU >= restrictions[1]);
 
     private void CréerRestrictions(int pointDébut, int pointFin)
     {

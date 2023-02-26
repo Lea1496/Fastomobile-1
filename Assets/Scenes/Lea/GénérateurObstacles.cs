@@ -19,34 +19,29 @@ public class GénérateurObstacles : MonoBehaviour
         obstacle1 = o1;
         obstacle2 = o2;
         points = piste;
-        indices = new List<int>(piste.Count);
-        for (int i = 0; i < piste.Count; i++)
-        {
-            indices.Add(i);;
-        }
-
-        for (int i = 0; i < maxObstacles; i++)
-        {
-            GénérerObstacles(); 
-        }
+        indices = new List<int>();
+        
+        GénérerObstacles(); 
+        
         
     }
     
-
     private void GénérerObstacles()
     {
+        int indice;
+        Vector3 point;
         for (int i = 0; i < maxObstacles; i++)
         {
-            int indice = gen.Next(0,2);
-            Vector3 point = points[gen.Next(0, indices.Count)];
-        
-            while (points[indice] == new Vector3(-1, -1, -1) && indices.Count != 0)
+            do
             {
-                indice = gen.Next(0,2);
-                point = points[gen.Next(0, indices.Count)];
+                indice = gen.Next(5, points.Count);
+            } while (indices.Contains(indice) && indices.Count != points.Count);
+
+            indices.Add(indice);
+
+            point = points[indice];
             
-            }
-            points[indice] = new Vector3(-1, -1 ,-1);
+            
             int xOuY = gen.Next(0, 2);
             int[] neg = new int[] { -1, 1 };
             int coté = neg[gen.Next(0, 2)];
@@ -77,15 +72,5 @@ public class GénérateurObstacles : MonoBehaviour
         }
         
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

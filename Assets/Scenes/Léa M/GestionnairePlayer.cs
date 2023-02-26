@@ -1,19 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GestionnairePlayer : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject auto;
+    [SerializeField] private GameObject moto;
+    [SerializeField] private GameObject camion;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private List<Player> joueurs = new List<Player>(15);
+
+    
+
 }

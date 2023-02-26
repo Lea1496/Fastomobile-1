@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,7 +19,10 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject point;
     [SerializeField] private GameObject point1;
     [SerializeField] public GameObject obstalce1; // à changer
-    [SerializeField] private GameObject obstacle2;
+    [SerializeField] private GameObject obstacle2; // à changer
+    [SerializeField] private GameObject auto;
+    [SerializeField] private GameObject arc;
+    [SerializeField] private GameObject ligneArrivée;
     private List<Vector3> chemin;
     public List<Vector3> Chemin
     {
@@ -27,6 +31,7 @@ public class GestionnaireJeux : MonoBehaviour
     
     // les deux prochaine fonctions viennent de
     // https://stackoverflow.com/questions/4501838/terminate-a-thread-after-an-interval-if-not-returned
+    
     private void WorkThreadFunction()
     {
         try
@@ -35,10 +40,9 @@ public class GestionnaireJeux : MonoBehaviour
         }
         catch 
         {
-            
+            Refaire();
         }
     }
-
     private void Refaire()
     {
         Thread thread = new Thread(new ThreadStart(WorkThreadFunction)) ;
@@ -58,22 +62,37 @@ public class GestionnaireJeux : MonoBehaviour
    {
        
        Refaire();
-        //new CréateurTerrain(largeur, terrain);
-        for (int i = 0; i < chemin.Count; i++)
+        new CréateurTerrain(largeur, terrain);
+        /*for (int i = 0; i < chemin.Count; i++)
         {
             Instantiate(point, chemin[i], point.transform.rotation);
+        }*/
+        if (chemin == null)
+        {
+            Refaire();
         }
         chemin = new ScriptBézier(chemin).PointsSpline;
         
-        //new GénérateurObstacles(chemin, obstalce1, obstacle2);
-        Debug.Log("YAYY");
-        Debug.Log(chemin.Count);
-        for (int i = 0; i < chemin.Count; i++)
-        {
-            Debug.Log(chemin[i]);
-            Instantiate(point1, chemin[i], point1.transform.rotation);
-        }
-    }
+        new GénérateurObstacles(chemin, obstalce1, obstacle2);
 
+        List<Player> autos = new List<Player>(); //à changer
+        
+        
+
+        new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 7]);
+        /*for (int i = 0; i < chemin.Count; i++)
+        {
+            //Debug.Log(chemin[i]);
+            Instantiate(point1, chemin[i], point1.transform.rotation);
+        }*/
+   }
+
+   private void Update()
+   {
+//       if (GetComponent<GestionnaireCollision>().CompteurTour == 3) // y a t'il y autre façon de faire ça
+       {
+           
+       }
+   }
    
 }
