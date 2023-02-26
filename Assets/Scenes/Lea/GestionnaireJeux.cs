@@ -25,7 +25,11 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject camion;
     [SerializeField] private GameObject arc;
     [SerializeField] private GameObject ligneArrivée;
+    [SerializeField] private Camera cam1;
     private List<Vector3> chemin;
+    private GameObject mainPlayer;
+    
+    Vector3 offSet = new Vector3(-30, 30, 0);
     public List<Vector3> Chemin
     {
         get => chemin;
@@ -81,16 +85,23 @@ public class GestionnaireJeux : MonoBehaviour
         
         
 
-        new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 7]);
+        mainPlayer = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 7]).MainPlayer1;
+        
         /*for (int i = 0; i < chemin.Count; i++)
         {
             //Debug.Log(chemin[i]);
             Instantiate(point1, chemin[i], point1.transform.rotation);
+            
         }*/
+        
    }
 
    private void Update()
    {
+      Vector3 desiredPosition = mainPlayer.transform.position + offSet; 
+       //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, (15f * Time.smoothDeltaTime) );
+       cam1.transform.position = desiredPosition;
+       cam1.transform.LookAt(mainPlayer.transform);
 //       if (GetComponent<GestionnaireCollision>().CompteurTour == 3) // y a t'il y autre façon de faire ça
        {
            

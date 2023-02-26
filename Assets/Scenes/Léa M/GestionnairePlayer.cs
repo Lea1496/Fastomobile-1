@@ -27,10 +27,10 @@ public class GestionnairePlayer : MonoBehaviour
         joueurs[0].Puissance = AssignerPuissance(joueurs[0].IdMoteur);
         joueurs[0].Poid = AssignerPoid(joueurs[0].IdVéhicule);
         //joueurs[0].Chassis.tag = $"{joueurs[0]}p1";
-        for (int i = nbJoueurs; i < joueurs.Capacity; i++)
+        for (int i = nbJoueurs; i < 12; i++)
         {
             joueurs.Add(new Player());
-            joueurs[i].Nom = $"b{i}";
+            joueurs[i].Nom = $"bot{i}";
             joueurs[i].Vie = 100;
             joueurs[i].IdMoteur = 0;
             indiceChassis = gen.Next(0, 3);
