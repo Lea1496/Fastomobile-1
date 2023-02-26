@@ -9,6 +9,11 @@ MonoImporter:
   - point1: {fileID: 4507749981864202150, guid: 7347b7b619eaf5547a15f9dbcb0e7209, type: 3}
   - obstalce1: {fileID: 461673607304592863, guid: 5096861c1b02c7d4783663097dfbb830, type: 3}
   - obstacle2: {fileID: 461673607304592863, guid: 5096861c1b02c7d4783663097dfbb830, type: 3}
+  - auto: {fileID: 6102769514498293530, guid: 585ceda54c2307f42b63f8b1511d8527, type: 3}
+  - moto: {fileID: 6102769514498293530, guid: 585ceda54c2307f42b63f8b1511d8527, type: 3}
+  - camion: {fileID: 6102769514498293530, guid: 585ceda54c2307f42b63f8b1511d8527, type: 3}
+  - arc: {fileID: 1890588548742467344, guid: 63f7e3a5ea486a9438b4cd3142c7dc92, type: 3}
+  - "ligneArriv\xE9e": {fileID: 3242020418959028930, guid: 1a5a1e0c71ac38c4ca19b5419a9140aa, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

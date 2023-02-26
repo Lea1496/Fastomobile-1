@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BehaviourAuto : GestionnairePlayer
+public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
 {
     //source.https://www.youtube.com/watch?v=Ul01SxwPIvk&t=1407s&ab_channel=CyberChroma
     //savoir valeur de la vitesse pour l'odomètre

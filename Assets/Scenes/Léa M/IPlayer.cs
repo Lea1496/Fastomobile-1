@@ -9,6 +9,8 @@ interface IPlayer
   int Argent { get; }
   int IdVéhicule { get; }
   int IdMoteur { get; }
+  int Puissance { get; }
   GameObject Chassis { get; }
+  int Poid { get; }
   
 }
