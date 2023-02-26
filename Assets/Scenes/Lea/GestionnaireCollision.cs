@@ -70,35 +70,18 @@ public class GestionnaireCollision : MonoBehaviour
     {
         ContactPoint point = collision.GetContact(0);
 
-        if (point.otherCollider.gameObject.layer == coucheCollisionObstacle)
+        if (point.otherCollider.gameObject.layer == coucheCollisionObstacle) //Obstacle
         {
-            for (int i = 0; i < players.Count; i++)
-            {
-                if (players[i].Chassis.tag.Contains(point.thisCollider.gameObject.tag))
-                {
-                    players[i].EnleverVie(5); //changé cbm de vie...
-                }
-            }
+            point.thisCollider.GetComponent<Player>().EnleverVie(5); //changer cbm de vie
+            
         }
-        if (point.otherCollider.gameObject.layer == coucheCollisionCoin)
+        if (point.otherCollider.gameObject.layer == coucheCollisionCoin) //Argent
         {
-            for (int i = 0; i < players.Count; i++)
-            {
-                if (players[i].Chassis.tag.Contains(point.thisCollider.gameObject.tag))
-                {
-                    
-                }
-            }
+            
         }
-        if (point.otherCollider.gameObject.layer == coucheCollisionBonus)
+        if (point.otherCollider.gameObject.layer == coucheCollisionBonus) //Bonus
         {
-            for (int i = 0; i < players.Count; i++)
-            {
-                if (players[i].Chassis.tag.Contains(point.thisCollider.gameObject.tag)) // à modifier
-                {
-                    
-                }
-            }
+            
         }
         
     }

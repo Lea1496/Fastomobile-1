@@ -21,6 +21,8 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] public GameObject obstalce1; // à changer
     [SerializeField] private GameObject obstacle2; // à changer
     [SerializeField] private GameObject auto;
+    [SerializeField] private GameObject moto;
+    [SerializeField] private GameObject camion;
     [SerializeField] private GameObject arc;
     [SerializeField] private GameObject ligneArrivée;
     private List<Vector3> chemin;
@@ -75,7 +77,7 @@ public class GestionnaireJeux : MonoBehaviour
         
         new GénérateurObstacles(chemin, obstalce1, obstacle2);
 
-        List<Player> autos = new List<Player>(); //à changer
+        List<Player> autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
         
         
 
