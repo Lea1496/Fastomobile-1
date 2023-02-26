@@ -11,6 +11,10 @@ interface IPlayer
   int IdMoteur { get; }
   int Puissance { get; }
   GameObject Chassis { get; }
+<<<<<<< HEAD
   int Poids { get; }
+=======
+  int Poid { get; }
+>>>>>>> master
   
 }

@@ -12,7 +12,11 @@ public class Player : MonoBehaviour, IPlayer
     public int IdMoteur { get; set; }
     public GameObject Chassis { get; set; }
     public int Puissance { get; set; }
+<<<<<<< HEAD
     public int Poids { get; set; }
+=======
+    public int Poid { get; set; }
+>>>>>>> master
     
     public Player(/*int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance*/)
     {
