@@ -5,9 +5,11 @@ using UnityEngine;
 public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
 {
     //source.https://www.youtube.com/watch?v=Ul01SxwPIvk&t=1407s&ab_channel=CyberChroma
+    //source.https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=183s&ab_channel=GameDevChef
     //savoir valeur de la vitesse pour l'odomètre
 
     // faire un if pour la moto car deux roues et non quatre
+    // calcul avec Poids ? Influence dans le breakForce? Moins d'accelerationForce?
 
     private int Poids;
     private int Puissance;
@@ -25,7 +27,7 @@ public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
     public bool isBreaking;
     public bool isAccelerating;
 
-    [SerializeField] private float accelerationForce;
+    [SerializeField] private float accelerationForce; // reste a déterminer
     [SerializeField] private float breakForce;
     [SerializeField] private float maxSteerAngle;
 
@@ -46,7 +48,8 @@ public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
         frontRightWheelCollider.motorTorque = verticalI * Puissance;
         currentbreakForce = isBreaking ? breakForce : 0f;
         ApplyBreaking();
-        currentAcceleration = isAccelerating ? accelerationForce : 50f; // reste a déterminer
+        currentAcceleration = isAccelerating ? accelerationForce : 0f;
+        ApplyAcceleration(verticalI);
     }
 
     private void ApplyBreaking()
@@ -57,9 +60,10 @@ public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
         rearRightWheelCollider.brakeTorque = currentbreakForce;
     }
 
-    private void ApplyAcceleration()
+    private void ApplyAcceleration(float verticalI)
     {
-
+        frontRightWheelCollider.motorTorque =  verticalI * Puissance * currentAcceleration;
+        frontLeftWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
     }
 
     public void HandleSteering(float horizontalI)
