@@ -7,9 +7,11 @@ public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
     //source.https://www.youtube.com/watch?v=Ul01SxwPIvk&t=1407s&ab_channel=CyberChroma
     //savoir valeur de la vitesse pour l'odomètre
 
+    // faire un if pour la moto car deux roues et non quatre
+
     private int Poids;
     private int Puissance;
-    //private Rigidbody rb;
+   
 
     void Start()
     {
@@ -17,12 +19,70 @@ public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
         Puissance = GetComponent<Player>().Puissance;
     }
 
-    //public void GestionBonus() // ou mettre fonction dans gestionnaire du player ? 
-    //{
-    //    // faudrait que fonction reçoit le type de Bonus
-    //    // je mets la fonction la parce que je peux pas mettre plus de deux classes de base dans gestionnaire des touches
-    //}
+    private float currentSteerAngle;
+    private float currentbreakForce;
+    private float currentAcceleration;
+    public bool isBreaking;
+    public bool isAccelerating;
 
-    
+    [SerializeField] private float accelerationForce;
+    [SerializeField] private float breakForce;
+    [SerializeField] private float maxSteerAngle;
 
+    [SerializeField] private WheelCollider frontLeftWheelCollider;
+    [SerializeField] private WheelCollider frontRightWheelCollider;
+    [SerializeField] private WheelCollider rearLeftWheelCollider;
+    [SerializeField] private WheelCollider rearRightWheelCollider;
+
+    [SerializeField] private Transform frontLeftWheelTransform;
+    [SerializeField] private Transform frontRightWheeTransform;
+    [SerializeField] private Transform rearLeftWheelTransform;
+    [SerializeField] private Transform rearRightWheelTransform;
+
+
+    public void HandleMotor(float verticalI)
+    {
+        frontLeftWheelCollider.motorTorque = verticalI * Puissance;
+        frontRightWheelCollider.motorTorque = verticalI * Puissance;
+        currentbreakForce = isBreaking ? breakForce : 0f;
+        ApplyBreaking();
+        currentAcceleration = isAccelerating ? accelerationForce : 50f; // reste a déterminer
+    }
+
+    private void ApplyBreaking()
+    {
+        frontRightWheelCollider.brakeTorque = currentbreakForce;
+        frontLeftWheelCollider.brakeTorque = currentbreakForce;
+        rearLeftWheelCollider.brakeTorque = currentbreakForce;
+        rearRightWheelCollider.brakeTorque = currentbreakForce;
+    }
+
+    private void ApplyAcceleration()
+    {
+
+    }
+
+    public void HandleSteering(float horizontalI)
+    {
+        currentSteerAngle = maxSteerAngle * horizontalI;
+        frontLeftWheelCollider.steerAngle = currentSteerAngle;
+        frontRightWheelCollider.steerAngle = currentSteerAngle;
+    }
+
+    public void UpdateWheels()
+    {
+        UpdateSingleWheel(frontLeftWheelCollider, frontLeftWheelTransform);
+        UpdateSingleWheel(frontRightWheelCollider, frontRightWheeTransform);
+        UpdateSingleWheel(rearRightWheelCollider, rearRightWheelTransform);
+        UpdateSingleWheel(rearLeftWheelCollider, rearLeftWheelTransform);
+    }
+
+    public void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheelTransform)
+    {
+        Vector3 pos;
+        Quaternion rot;
+        wheelCollider.GetWorldPose(out pos, out rot);
+        wheelTransform.rotation = rot;
+        wheelTransform.position = pos;
+    }
 }

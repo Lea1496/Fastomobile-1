@@ -6,31 +6,22 @@ using UnityEngine.InputSystem;
 
 public class GestionnaireTouches : BehaviourAuto
 {
-    PlayerControls controls;
+    private float horizontalInput;
+    private float verticalInput;
 
-    void Awake()
+    private void FixedUpdate()
     {
-        controls = new PlayerControls();
-
-        controls.Gameplay.Avancer.performed += ctx => Avancer(); // ctx = contexte
-
-        controls.Gameplay.Arrêter.performed += ctx => Arrêter();
-
-        controls.Gameplay.Accélérer.performed += ctx => Accélérer();
-            
-        controls.Gameplay.TournerGauche.performed += ctx => TournerGauche();
-
-        controls.Gameplay.TournerDroite.performed += ctx => TournerDroite();
-
-        controls.Gameplay.Bonus.performed += ctx => GestionBonus();
-        // faire une fonction qui va gérer les bonus dans gestion du player
+        GetInput();
+        HandleMotor(verticalInput);
+        HandleSteering(horizontalInput);
+        UpdateWheels();
     }
-    void OnEnable()
+
+    private void GetInput()
     {
-        controls.Gameplay.Enable();
-    }
-    private void OnDisable()
-    {
-        controls.Gameplay.Disable();
+        horizontalInput = Input.GetAxis("LSHorizontal");
+        verticalInput = Input.GetAxis("LSVertical");
+        isBreaking = Input.GetKey(KeyCode.Joystick1Button6);
+        isAccelerating = Input.GetKey(KeyCode.Joystick1Button7);
     }
 }
