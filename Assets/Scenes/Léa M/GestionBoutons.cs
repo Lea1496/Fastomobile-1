@@ -60,8 +60,28 @@ public class GestionBoutons : MonoBehaviour
         }
     }
 
-    public void UnlockAvancé(int prix)
+    public bool Acheter(int prix)
     {
+        bool peutAcheter = false;
+        if (GameData.P1.Argent >= prix)
+        {
+            GameData.P1.Argent -= prix;
+            peutAcheter = true;
+            
+        }
+
+        return peutAcheter;
+    }
+    public void UnlockAvancé()
+    {
+        int prix = 1000;
+        bool PeutAcheter = Acheter(prix);
+        
+    }
+    public void UnlockExpert()
+    {
+        int prix = 2000;
+        bool PeutAcheter = Acheter(prix);
         
     }
     

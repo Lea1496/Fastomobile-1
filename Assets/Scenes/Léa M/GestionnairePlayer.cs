@@ -25,7 +25,7 @@ public class GestionnairePlayer : MonoBehaviour
         camion = Camion;
         joueurs[0].Chassis = AssignerChassis(joueurs[0].IdVéhicule);
         joueurs[0].Puissance = AssignerPuissance(joueurs[0].IdMoteur);
-        joueurs[0].Poid = AssignerPoid(joueurs[0].IdVéhicule);
+        joueurs[0].Poids = AssignerPoids(joueurs[0].IdVéhicule);
         //joueurs[0].Chassis.tag = $"{joueurs[0]}p1";
         for (int i = nbJoueurs; i < 12; i++)
         {
@@ -36,7 +36,7 @@ public class GestionnairePlayer : MonoBehaviour
             indiceChassis = gen.Next(0, 3);
             joueurs[i].Chassis = AssignerChassis(indiceChassis);
             joueurs[i].Puissance = AssignerPuissance(gen.Next(0,3));
-            joueurs[i].Poid = AssignerPoid(indiceChassis);
+            joueurs[i].Poids = AssignerPoids(indiceChassis);
            // joueurs[i].Chassis.tag = $"b{i}";
         }
     }
@@ -58,22 +58,22 @@ public class GestionnairePlayer : MonoBehaviour
 
         return puissance;
     }
-    private int AssignerPoid(int indice)
+    private int AssignerPoids(int indice)
     {
-        int poid = 150;
+        int poids = 150;
         if (indice == 1)
         {
-            poid = 50;
+            poids = 50;
         }
         else
         {
             if (indice == 2)
             {
-                poid = 100;
+                poids = 100;
             }
         }
 
-        return poid;
+        return poids;
     }
     private GameObject AssignerChassis(int indice)
     {

@@ -45,16 +45,18 @@ public class Player : MonoBehaviour, IPlayer
         GameData.P1.Vie += vieEnlevée;
     }
 
-    public void Acheter(int prix)
-    {
-        bool peutAcheter = false;
-        if (GameData.P1.Argent >= prix)
-        {
-            GameData.P1.Argent -= prix;
-            peutAcheter = true;
-            
-        }
-    }
+    // public bool Acheter(int prix)
+    // {
+    //     bool peutAcheter = false;
+    //     if (GameData.P1.Argent >= prix)
+    //     {
+    //         GameData.P1.Argent -= prix;
+    //         peutAcheter = true;
+    //         
+    //     }
+    //
+    //     return peutAcheter;
+    // }
     
 
 }

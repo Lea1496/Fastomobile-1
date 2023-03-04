@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class MagasinMoteurs : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //public void VeutAcheter(int prix)
+    //{
+    //   
+    //}
 
     // Update is called once per frame
     void Update()
