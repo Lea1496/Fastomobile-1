@@ -49,7 +49,7 @@ public class CréateurDébutPartie : MonoBehaviour
                     joueurs[compteurAutos].Vie, joueurs[compteurAutos].Nom,
                     joueurs[compteurAutos].IdVéhicule, joueurs[compteurAutos].IdMoteur,
                     joueurs[compteurAutos].Chassis, joueurs[compteurAutos].Puissance,
-                    joueurs[compteurAutos++].Poid);
+                    joueurs[compteurAutos++].Poids);
                 if (compteurAutos - 1 == 0)
                 {
                     mainPlayer1 = joueur;
