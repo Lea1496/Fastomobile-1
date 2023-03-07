@@ -53,7 +53,6 @@ public class CréateurDébutPartie : MonoBehaviour
                 if (compteurAutos - 1 == 0)
                 {
                     mainPlayer1 = joueur;
-                   // FindObjectOfType<Camera>().transform.LookAt(joueur.transform); // hummm
                 }
             }
 

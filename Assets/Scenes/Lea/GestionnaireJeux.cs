@@ -10,7 +10,7 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 
-
+[RequireComponent(typeof(ScriptSpline))]
 public class GestionnaireJeux : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -26,6 +26,10 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject arc;
     [SerializeField] private GameObject ligneArrivée;
     [SerializeField] private Camera cam1;
+    [SerializeField] private GameObject coin;
+    
+    private ScriptSpline CréerRoute;
+    
     private List<Vector3> chemin;
     private GameObject mainPlayer;
     
@@ -66,7 +70,8 @@ public class GestionnaireJeux : MonoBehaviour
     
    void Awake()
    {
-       
+
+       CréerRoute = GetComponent<ScriptSpline>();
        Refaire();
         new CréateurTerrain(largeur, terrain);
         /*for (int i = 0; i < chemin.Count; i++)
@@ -78,11 +83,11 @@ public class GestionnaireJeux : MonoBehaviour
             Refaire();
         }
         chemin = new ScriptBézier(chemin).PointsSpline;
+        CréerRoute.FaireMesh();
         
         new GénérateurObstacles(chemin, obstalce1, obstacle2);
-
+        new SpawnCoins(chemin, coin).GénérerCoins(15);
         List<Player> autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
-        
         
 
         mainPlayer = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 7]).MainPlayer1;

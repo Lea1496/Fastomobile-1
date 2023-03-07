@@ -33,8 +33,7 @@ public class ScriptSpline : MonoBehaviour
 
     //[SerializeField]
     //Material matériauxBordImp;
-
-    private void Start()
+    public void FaireMesh()
     {
         maillage = new Mesh();
         MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
@@ -43,6 +42,17 @@ public class ScriptSpline : MonoBehaviour
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
         GetComponent<MeshRenderer>().material = matériaux;
+    }
+
+    private void Start()
+    {
+        /*maillage = new Mesh();
+        MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
+        pointsSpline = GetComponent<GestionnaireJeux>().Chemin;
+        maillage = CréerMeshRoute(pointsSpline);
+        GetComponent<MeshFilter>().mesh = maillage;
+        meshc.sharedMesh = maillage;
+        GetComponent<MeshRenderer>().material = matériaux;*/
 
 
 

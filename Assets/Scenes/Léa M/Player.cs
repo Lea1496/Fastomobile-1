@@ -38,11 +38,16 @@ public class Player : MonoBehaviour, IPlayer
     }
     public void AjouterVie(int vieAjoutée)
     {
-        GameData.P1.Vie += vieAjoutée;
+        Vie += vieAjoutée;
     }
     public void EnleverVie(int vieEnlevée)
     {
-        GameData.P1.Vie += vieEnlevée;
+        Vie += vieEnlevée;
+    }
+
+    public void AjouterArgent(int nbArgent)
+    {
+        Argent += nbArgent;
     }
 
     // public bool Acheter(int prix)
@@ -57,6 +62,6 @@ public class Player : MonoBehaviour, IPlayer
     //
     //     return peutAcheter;
     // }
-    
+
 
 }

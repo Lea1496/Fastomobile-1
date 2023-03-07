@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GestionnaireCollision : MonoBehaviour
@@ -77,6 +78,8 @@ public class GestionnaireCollision : MonoBehaviour
         }
         if (point.otherCollider.gameObject.layer == coucheCollisionCoin) //Argent
         {
+            point.thisCollider.GetComponent<Player>().AjouterArgent(1);
+            Destroy(point.otherCollider.gameObject);
             
         }
         if (point.otherCollider.gameObject.layer == coucheCollisionBonus) //Bonus
