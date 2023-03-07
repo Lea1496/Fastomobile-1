@@ -63,7 +63,7 @@ public class GestionnaireCollision : MonoBehaviour
         else
         {
             compteurTour++;
-            //mettre fin à la partie ici?
+            //mettre fin à la partie ici??
         }
         
     }
