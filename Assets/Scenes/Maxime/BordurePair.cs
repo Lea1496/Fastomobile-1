@@ -46,6 +46,10 @@ public class BordurePair : MonoBehaviour
                 float completePercent = i / (float)(sommet.Length - 1);
                 uvsBordurePair[indexSomPair] = new Vector2(0, completePercent);
                 uvsBordurePair[indexSomPair + 1] = new Vector2(1, completePercent);
+                if (i + 2 >= sommet.Length)
+                {
+                    indexSomPair = 0;
+                }
 
                 if (i < sommet.Length - 1)
                 {

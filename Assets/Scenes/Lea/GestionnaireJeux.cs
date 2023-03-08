@@ -79,7 +79,6 @@ public class GestionnaireJeux : MonoBehaviour
     
    void Awake()
    {
-
        CréerRoute = GetComponent<ScriptSpline>();
        Refaire();
         new CréateurTerrain(largeur, terrain);
@@ -88,17 +87,13 @@ public class GestionnaireJeux : MonoBehaviour
             Refaire();
         }
         chemin = new ScriptBézier(chemin).PointsSpline;
-        CréerRoute.FaireMesh();
+        CréerRoute.FaireMesh(point1, point);
+        
         
         new GénérateurObstacles(chemin, obstalce1, obstacle2);
         GetComponent<GénérateurCoins>().GénérerCoins(15);
         autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
-        
-
         mainPlayer = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 7]).MainPlayer1;
-        
-        
-        
    }
 
    private void Update()
