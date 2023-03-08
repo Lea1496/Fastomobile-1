@@ -1,3 +1,4 @@
+// Maxime Fortier
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,8 +18,6 @@ public class BordureImpair : MonoBehaviour
     private void Start()
     {
         sommet = GetComponentInParent<ScriptSpline>().sommets;
-        //List<Vector3> pointsSpline2 = GetComponentInParent<GestionnaireJeux>().Chemin;
-        Debug.Log(sommet.Length);
         maillage = new Mesh();
         MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         maillage = AjouterBordure();
@@ -29,81 +28,14 @@ public class BordureImpair : MonoBehaviour
 
     private Mesh AjouterBordure()
     {
-        //bordure impair
-        //    Vector2[] uvsBordure = new Vector2[sommets.Length];
-        //    int nbTrianglesImpair = sommets.Length;
-        //    int[] triangleImpair = new int[nbTrianglesImpair * 3];
-        //    static bool EstPair(int nb) { return nb % 2 == 0; }
-        //    Vector3[] pointsBordureImpair = new Vector3[sommets.Length];
-        //    int indexSom = 0;
-        //    int indexTri = 0;
-
-        //    // bordure impair
-        //    for (int i = 0; i < sommets.Length; i++)
-        //    {
-        //        if (!EstPair(i))
-        //        {
-        //            pointsBordureImpair[i] = new Vector3(sommets[i].x, 0, sommets[i].z);
-        //            pointsBordureImpair[i + 1] = new Vector3(sommets[i].x, sommets[i].y + 5f, sommets[i].z);
-
-        //            float completePercent = i / (float)(sommets.Length - 1);
-        //            uvsBordure[indexSom] = new Vector2(0, completePercent);
-        //            uvsBordure[indexSom + 1] = new Vector2(1, completePercent);
-
-        //            if (i < sommets.Length - 1)
-        //            {
-        //                triangleImpair[indexTri] = indexSom;
-        //                triangleImpair[indexTri + 1] = (indexSom + 2) % pointsBordureImpair.Length;
-        //                triangleImpair[indexTri + 2] = indexSom + 1;
-
-        //                triangleImpair[indexTri + 3] = (indexSom + 1);
-        //                triangleImpair[indexTri + 4] = (indexSom + 2) % pointsBordureImpair.Length;
-        //                triangleImpair[indexTri + 5] = (indexSom + 3) % pointsBordureImpair.Length;
-        //            }
-        //            indexSom += 2;
-        //            indexTri += 6;
-        //        }
-        //    }
-
-        //    Mesh meshBordure = new Mesh();
-        //    meshBordure.vertices = pointsBordureImpair;
-        //    meshBordure.triangles = triangleImpair;
-        //    meshBordure.uv = uvsBordure;
-        //    return meshBordure;
-        //sommet = new Vector3[pointsSpline2.Count * 2];
-        int indexSomImpair = 0;
-        Vector2[] uvsBordureImpair = new Vector2[sommet.Length];
+        static bool EstPair(int nb) { return nb % 2 == 0; }
+        Vector2[] uvsBordureImpair = new Vector2[sommet.Length + 1];
+        Vector3[] pointsBordureImpair = new Vector3[sommet.Length + 1];
         int nbTrianglesImpair = sommet.Length;
         int[] triangleImpair = new int[nbTrianglesImpair * 3];
+        int indexSomImpair = 0;
         int indexTriImpair = 0;
-        static bool EstPair(int nb) { return nb % 2 == 0; }
-        Vector3[] pointsBordureImpair = new Vector3[sommet.Length + 1];
-        // int indexSom = 0;
-        //Vector3[] pointsBordureImpair = new Vector3[sommet.Length];
 
-        /*for (int i = 0; i < pointsSpline2.Count; i++)
-        {
-            Vector3 directionAvant2 = new Vector3();
-            directionAvant2 = Vector3.zero;
-            if (i < pointsSpline2.Count - 1)
-            {
-                directionAvant2 += pointsSpline2[(i + 1) % pointsSpline2.Count] - pointsSpline2[i];
-            }
-            if (i > 0)
-            {
-                directionAvant2 += pointsSpline2[i] - pointsSpline2[(i - 1 + pointsSpline2.Count) % pointsSpline2.Count];
-            }
-            directionAvant2.Normalize();
-            Vector3 gauche = new Vector3(-directionAvant2.z, 0, directionAvant2.x);
-
-            // calculer 2 sommets
-            sommet[indexSomPair] = pointsSpline2[i] + gauche * 70f;
-            sommet[indexSomPair + 1] = pointsSpline2[i] - gauche * 70f;
-            indexSom += 2;
-        }*/
-        Debug.Log(sommet.Length);
-
-        // bordure impair
         for (int i = 0; i < sommet.Length; i++)
         {
             if (!EstPair(i))

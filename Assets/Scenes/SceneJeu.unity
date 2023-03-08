@@ -250,7 +250,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1828300572}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &785475862
 MonoBehaviour:
@@ -446,7 +446,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1828300572}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1226918252
 MonoBehaviour:
@@ -681,6 +681,7 @@ GameObject:
   - component: {fileID: 1828300574}
   - component: {fileID: 1828300575}
   - component: {fileID: 1828300576}
+  - component: {fileID: 1828300577}
   m_Layer: 0
   m_Name: test mesh piste
   m_TagString: Untagged
@@ -764,8 +765,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 785475861}
   - {fileID: 1226918251}
+  - {fileID: 785475861}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -836,3 +837,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countDownTime: 3
   texte: {fileID: 1629056586}
+--- !u!114 &1828300577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828300567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6be4dece72878044a4ad9691137ad99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
