@@ -11,6 +11,7 @@ using Debug = UnityEngine.Debug;
 
 
 [RequireComponent(typeof(ScriptSpline))]
+[RequireComponent(typeof(GénérateurCoins))]
 public class GestionnaireJeux : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -32,13 +33,20 @@ public class GestionnaireJeux : MonoBehaviour
     
     private List<Vector3> chemin;
     private GameObject mainPlayer;
-    
+    private List<Player> autos;
     Vector3 offSet = new Vector3(-30, 30, 0);
     public List<Vector3> Chemin
     {
         get => chemin;
     }
-    
+    public GameObject Coin
+    {
+        get => coin;
+    }
+    public List<Player> Autos
+    {
+        get => autos;
+    }
     // les deux prochaine fonctions viennent de
     // https://stackoverflow.com/questions/4501838/terminate-a-thread-after-an-interval-if-not-returned
     
@@ -74,10 +82,6 @@ public class GestionnaireJeux : MonoBehaviour
        CréerRoute = GetComponent<ScriptSpline>();
        Refaire();
         new CréateurTerrain(largeur, terrain);
-        /*for (int i = 0; i < chemin.Count; i++)
-        {
-            Instantiate(point, chemin[i], point.transform.rotation);
-        }*/
         if (chemin == null)
         {
             Refaire();
@@ -86,18 +90,13 @@ public class GestionnaireJeux : MonoBehaviour
         CréerRoute.FaireMesh();
         
         new GénérateurObstacles(chemin, obstalce1, obstacle2);
-        new SpawnCoins(chemin, coin).GénérerCoins(15);
-        List<Player> autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
+        GetComponent<GénérateurCoins>().GénérerCoins(15);
+        autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
         
 
         mainPlayer = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 7]).MainPlayer1;
         
-        /*for (int i = 0; i < chemin.Count; i++)
-        {
-            //Debug.Log(chemin[i]);
-            Instantiate(point1, chemin[i], point1.transform.rotation);
-            
-        }*/
+        
         
    }
 

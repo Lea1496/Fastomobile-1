@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+[RequireComponent(typeof(GestionnaireJeux))]
 public class GestionnaireCollision : MonoBehaviour
 {
     [SerializeField] private int coucheCollisionObstacle;
@@ -12,25 +12,17 @@ public class GestionnaireCollision : MonoBehaviour
 
     private List<Player> players;
     private int nbJoueur = 0;
-    public GestionnaireCollision(List<Player> liste) // peut être changer pour un getcomponent de GestioonnairePlayer.Players
+
+    private void Start()
     {
-        players = liste;
+        players = GetComponent<GestionnaireJeux>().Autos;
         for (int i = 0; i < players.Count; i++)
         {
-            if (players[i].Chassis.tag.Contains("p1"))
-            {
-                nbJoueur++;
-            }
-            else
-            {
-                if (players[i].Chassis.tag.Contains("p2"))
-                {
-                    nbJoueur++;
-                }
-            }
+            //faire quelque chose pour déterminer nb vrais player
         }
     }
 
+    
     private int compteurJoueursPassés;
     private int compteurTour = 0;
 
@@ -63,7 +55,7 @@ public class GestionnaireCollision : MonoBehaviour
         else
         {
             compteurTour++;
-            //mettre fin à la partie ici??
+            //mettre fin à la partie ici?
         }
         
     }
@@ -80,6 +72,7 @@ public class GestionnaireCollision : MonoBehaviour
         {
             point.thisCollider.GetComponent<Player>().AjouterArgent(1);
             Destroy(point.otherCollider.gameObject);
+            GetComponent<GénérateurCoins>().GénérerCoins(1);
             
         }
         if (point.otherCollider.gameObject.layer == coucheCollisionBonus) //Bonus
