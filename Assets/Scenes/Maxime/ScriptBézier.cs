@@ -85,14 +85,14 @@ public class ScriptBézier : MonoBehaviour
         p3 = pointsBézier[2];
         p4 = pointsBézier[8];
        
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 8; i++)
         {
             t = i / 8f;
             //pointsBézier.Add(CalculateBezierPoint(t, p1, p2, p3, p4));
             pointsBézier[i] = CalculateBezierPoint(t, p1, p2, p3, p4);
         }
 
-        pointsBézier.Remove(pointsBézier[pointsBézier.Count - 1]);
+        //pointsBézier.Remove(pointsBézier[pointsBézier.Count - 1]);
         
         return pointsBézier;
     }

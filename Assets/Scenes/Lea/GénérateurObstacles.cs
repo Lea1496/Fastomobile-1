@@ -30,6 +30,11 @@ public class GénérateurObstacles : MonoBehaviour
     {
         int indice;
         Vector3 point;
+        int[] neg = new int[] { -1, 1 };
+        int cotéX;
+        int décalageX;
+        int décalageZ;
+        int cotéZ;
         for (int i = 0; i < maxObstacles; i++)
         {
             do
@@ -38,36 +43,19 @@ public class GénérateurObstacles : MonoBehaviour
             } while (indices.Contains(indice) && indices.Count != points.Count);
 
             indices.Add(indice);
-
+            
             point = points[indice];
-            
-            
-            int xOuY = gen.Next(0, 2);
-            int[] neg = new int[] { -1, 1 };
-            int coté = neg[gen.Next(0, 2)];
-            int décalage = gen.Next(1, 45);
-            if (indice == 0)
+            cotéX = neg[gen.Next(0, 2)];
+            décalageX = gen.Next(1, 45);
+            décalageZ = gen.Next(1, 45);
+            cotéZ = neg[gen.Next(0, 2)];
+            if (indice % 2 == 0)
             {
-                if (xOuY == 1)
-                {
-                    Instantiate(obstacle1, new Vector3(point.x + coté *décalage, point.y, point.z),obstacle1.transform.rotation);
-                }
-                else
-                {
-                    Instantiate(obstacle1, new Vector3(point.x, point.y, point.z + coté *décalage),obstacle1.transform.rotation);
-                }
-            
+                Instantiate(obstacle1, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),obstacle1.transform.rotation);
             }
             else
             {
-                if (xOuY == 1)
-                {
-                    Instantiate(obstacle2, new Vector3(point.x + coté *décalage, point.y, point.z),obstacle2.transform.rotation);
-                }
-                else
-                {
-                    Instantiate(obstacle2, new Vector3(point.x, point.y, point.z + coté *décalage),obstacle2.transform.rotation);
-                }
+                Instantiate(obstacle2, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),obstacle2.transform.rotation);
             }
         }
         

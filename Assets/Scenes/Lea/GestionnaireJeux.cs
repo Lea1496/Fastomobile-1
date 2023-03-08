@@ -93,7 +93,7 @@ public class GestionnaireJeux : MonoBehaviour
         new GénérateurObstacles(chemin, obstalce1, obstacle2);
         GetComponent<GénérateurCoins>().GénérerCoins(15);
         autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
-        mainPlayer = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 7]).MainPlayer1;
+        mainPlayer = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count -3]).MainPlayer1;
    }
 
    private void Update()

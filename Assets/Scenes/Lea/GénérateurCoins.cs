@@ -20,6 +20,11 @@ public class GénérateurCoins : MonoBehaviour
         points = GetComponent<GestionnaireJeux>().Chemin;
         coin = GetComponent<GestionnaireJeux>().Coin;
         int indice;
+        int[] neg = new int[] { -1, 1 };
+        int cotéX;
+        int décalageX;
+        int décalageZ;
+        int cotéZ;
         Vector3 point;
         for (int i = 0; i < maxCoins; i++)
         {
@@ -30,19 +35,15 @@ public class GénérateurCoins : MonoBehaviour
 
             indices.Add(indice);
             point = points[indice];
-            int xOuY = gen.Next(0, 2);
-            int[] neg = new int[] { -1, 1 };
-            int coté = neg[gen.Next(0, 2)];
-            int décalage = gen.Next(1, 45);
             
-            if (xOuY == 1)
-            {
-                Instantiate(coin, new Vector3(point.x + coté *décalage, point.y + 5, point.z),coin.transform.rotation);
-            }
-            else
-            {
-                Instantiate(coin, new Vector3(point.x, point.y + 5, point.z + coté *décalage),coin.transform.rotation);
-            }
+            cotéX = neg[gen.Next(0, 2)];
+            décalageX = gen.Next(1, 45);
+            décalageZ = gen.Next(1, 45);
+            cotéZ = neg[gen.Next(0, 2)];
+            
+           
+            Instantiate(coin, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),coin.transform.rotation);
+            
             
         }
     }
