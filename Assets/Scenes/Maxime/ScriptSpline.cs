@@ -129,85 +129,85 @@ public class ScriptSpline : MonoBehaviour
         }
 
         //bordure pair
-        //Vector2[] uvsBordurePair = new Vector2[sommets.Length];
-        //int nbTrianglesPair = sommets.Length;
-        //int[] trianglePair = new int[nbTrianglesPair * 3];
-        //static bool EstPair(int nb) { return nb % 2 == 0; }
-        //Vector3[] pointsBordurePair = new Vector3[sommets.Length];
-        //int indexSomPair = 0;
-        //int indexTriPair = 0;
+        Vector2[] uvsBordurePair = new Vector2[sommets.Length];
+        int nbTrianglesPair = sommets.Length;
+        int[] trianglePair = new int[nbTrianglesPair * 3];
+        static bool EstPair(int nb) { return nb % 2 == 0; }
+        Vector3[] pointsBordurePair = new Vector3[sommets.Length];
+        int indexSomPair = 0;
+        int indexTriPair = 0;
 
-        //// bordure pair
-        //for (int i = 0; i < sommets.Length; i++)
-        //{
-        //    if (EstPair(i))
-        //    {
-        //        pointsBordurePair[i] = new Vector3(sommets[i].x, 0, sommets[i].z);
-        //        pointsBordurePair[i + 1] = new Vector3(sommets[i].x, sommets[i].y + 5f, sommets[i].z);
-
-        //        float completePercent = i / (float)(sommets.Length - 1);
-        //        uvsBordurePair[indexSomPair] = new Vector2(0, completePercent);
-        //        uvsBordurePair[indexSomPair + 1] = new Vector2(1, completePercent);
-
-        //        if (i < sommets.Length - 1)
-        //        {
-        //            trianglePair[indexTriPair] = indexSomPair;
-        //            trianglePair[indexTriPair + 1] = (indexSomPair + 2) % pointsBordurePair.Length;
-        //            trianglePair[indexTriPair + 2] = indexSomPair + 1;
-
-        //            trianglePair[indexTriPair + 3] = (indexSomPair + 1);
-        //            trianglePair[indexTriPair + 4] = (indexSomPair + 2) % pointsBordurePair.Length;
-        //            trianglePair[indexTriPair + 5] = (indexSomPair + 3) % pointsBordurePair.Length;
-        //        }
-        //        indexSomPair += 2;
-        //        indexTriPair += 6;
-
-        //    }
-
-        //}
-
-        /*for (int i = 0; i < sommets.Length; i++)
+        // bordure pair
+        for (int i = 0; i < sommets.Length; i++)
         {
-            Instantiate(GetComponent<GestionnaireJeux>().obstalce1, sommets[i],
-                GetComponent<GestionnaireJeux>().obstalce1.transform.rotation);
-        }*/
+            if (EstPair(i))
+            {
+                pointsBordurePair[i] = new Vector3(sommets[i].x, 0, sommets[i].z);
+                pointsBordurePair[i + 1] = new Vector3(sommets[i].x, sommets[i].y + 5f, sommets[i].z);
 
-        //Vector3[] sommetsMesh = new Vector3[sommets.Length + pointsBordurePair.Length];
-        //for (int i = 0; i < sommets.Length; i++)
-        //{
-        //    sommetsMesh[i] = sommets[i];
-        //}
-        //for (int i = 0; i < pointsBordurePair.Length; i++)
-        //{
-        //    sommetsMesh[sommets.Length + i] = pointsBordurePair[i];
-        //}
+                float completePercent = i / (float)(sommets.Length - 1);
+                uvsBordurePair[indexSomPair] = new Vector2(0, completePercent);
+                uvsBordurePair[indexSomPair + 1] = new Vector2(1, completePercent);
+
+                if (i < sommets.Length - 1)
+                {
+                    trianglePair[indexTriPair] = indexSomPair;
+                    trianglePair[indexTriPair + 1] = (indexSomPair + 2) % pointsBordurePair.Length;
+                    trianglePair[indexTriPair + 2] = indexSomPair + 1;
+
+                    trianglePair[indexTriPair + 3] = (indexSomPair + 1);
+                    trianglePair[indexTriPair + 4] = (indexSomPair + 2) % pointsBordurePair.Length;
+                    trianglePair[indexTriPair + 5] = (indexSomPair + 3) % pointsBordurePair.Length;
+                }
+                indexSomPair += 2;
+                indexTriPair += 6;
+
+            }
+
+        }
+
+            /*for (int i = 0; i < sommets.Length; i++)
+            {
+                Instantiate(GetComponent<GestionnaireJeux>().obstalce1, sommets[i],
+                    GetComponent<GestionnaireJeux>().obstalce1.transform.rotation);
+            }*/
+
+            //Vector3[] sommetsMesh = new Vector3[sommets.Length + pointsBordurePair.Length];
+            //for (int i = 0; i < sommets.Length; i++)
+            //{
+            //    sommetsMesh[i] = sommets[i];
+            //}
+            //for (int i = 0; i < pointsBordurePair.Length; i++)
+            //{
+            //    sommetsMesh[sommets.Length + i] = pointsBordurePair[i];
+            //}
 
 
-        //int[] trianglesMesh = new int[triangle.Length + trianglePair.Length];
-        //for (int i = 0; i < triangle.Length; i++)
-        //{
-        //    trianglesMesh[i] = triangle[i];
-        //}
-        //for (int i = 0; i < trianglePair.Length; i++)
-        //{
-        //    trianglesMesh[triangle.Length + i] = trianglePair[i] + triangle.Length - 1;
-        //}
+            //int[] trianglesMesh = new int[triangle.Length + trianglePair.Length];
+            //for (int i = 0; i < triangle.Length; i++)
+            //{
+            //    trianglesMesh[i] = triangle[i];
+            //}
+            //for (int i = 0; i < trianglePair.Length; i++)
+            //{
+            //    trianglesMesh[triangle.Length + i] = trianglePair[i] + triangle.Length - 1;
+            //}
 
-        //Vector2[] uvsMesh = new Vector2[uvs.Length + uvsBordurePair.Length];
-        //for (int i = 0; i < uvs.Length; i++)
-        //{
-        //    uvsMesh[i] = uvs[i];
-        //}
-        //for (int i = 0; i < uvsBordurePair.Length; i++)
-        //{
-        //    uvsMesh[uvs.Length + i] = uvsBordurePair[i];
-        //}
+            //Vector2[] uvsMesh = new Vector2[uvs.Length + uvsBordurePair.Length];
+            //for (int i = 0; i < uvs.Length; i++)
+            //{
+            //    uvsMesh[i] = uvs[i];
+            //}
+            //for (int i = 0; i < uvsBordurePair.Length; i++)
+            //{
+            //    uvsMesh[uvs.Length + i] = uvsBordurePair[i];
+            //}
 
-        Debug.Log(sommets.Length);
+            Debug.Log(sommets.Length);
         Mesh mesh = new Mesh();
-        mesh.vertices = sommets;
-        mesh.triangles = triangle;
-        mesh.uv = uvs;
+        mesh.vertices = pointsBordurePair;
+        mesh.triangles = trianglePair;
+        mesh.uv = uvsBordurePair;
         return mesh;
     }
 
