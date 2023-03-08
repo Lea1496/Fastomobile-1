@@ -34,7 +34,7 @@ public class GénérateurObstacles : MonoBehaviour
         {
             do
             {
-                indice = gen.Next(5, points.Count);
+                indice = gen.Next(0, points.Count);
             } while (indices.Contains(indice) && indices.Count != points.Count);
 
             indices.Add(indice);
