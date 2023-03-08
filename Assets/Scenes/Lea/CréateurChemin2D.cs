@@ -79,37 +79,16 @@ public class CréateurChemin2D : MonoBehaviour
             {
                 newPoint = Bouger(currentPos, compteur);
                 compteur++;
-                /*if (VérifierSiRestePas() && newPoint != pointFin)
-                {
-                    
-                    Debug.Log(newPoint);
-                    déjàVisités.Clear();
-                    List<int> reChemin = DéterminerChemin2dAléatoire(pointDébut, pointFin);
                 
-                    for (int i = 0; i < reChemin.Count - 1; i++)
-                    {
-                        déjàVisités.Add(reChemin[i]);
-                    }
-                    newPoint = pointFin;
-                }*/
             } while (newPoint == -1 || (newPoint == 0 && pointFin != 0));
-//            Debug.Log(newPoint + " newPoint");
-//            Debug.Log(graph.GetNeighbours(newPoint).Length + " length");
-            //if (VérifierCasesAutour(newPoint, déjàVisités) == graph.GetNeighbours(newPoint).Length && newPoint !=  0)
-            if (VérifierCasesAutour(newPoint, déjàVisités) == 4 && newPoint % 8 != 0 )
+
+           /* if (VérifierCasesAutour(newPoint, déjàVisités) == 4 && newPoint % 8 != 0 )
             {
                 Debug.Log("MERDE");
                 déjàVisités.Clear();
                 Debug.Log(pointDébut + " MERDE");
                 throw new MarchePas();
-                List<int> reChemin = DéterminerChemin2dAléatoire(pointDébut, pointFin);
-                
-                for (int i = 0; i < reChemin.Count - 1; i++)
-                {
-                    déjàVisités.Add(reChemin[i]);
-                }
-                newPoint = pointFin;
-            }
+            }*/
            
             déjàVisités.Add(newPoint);
             currentPos = newPoint;
@@ -134,9 +113,6 @@ public class CréateurChemin2D : MonoBehaviour
     private static List<T> RemoveDuplicates<T>(List<T> list) {
         return new HashSet<T>(list).ToList();
     }
-
-    //private bool VérifierSiRestePas() => (pasD >= restrictions[0] && pasL >= restrictions[2] &&
-                                                                                    //pasR >= restrictions[3] && pasU >= restrictions[1]);
 
     private void CréerRestrictions(int pointDébut, int pointFin)
     {

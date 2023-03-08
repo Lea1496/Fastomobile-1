@@ -26,7 +26,6 @@ public class CréateurDébutPartie : MonoBehaviour
         for (int i = 0; i < autos.Count; i++)
         {
             lesAutos.Add(autos[i].Chassis);
-            Debug.Log(autos[i].Chassis.name);
         }
         position = pos;
         Instantiate(arc, new Vector3(position.x + 30, 0, position.z), arc.transform.rotation);
@@ -42,17 +41,17 @@ public class CréateurDébutPartie : MonoBehaviour
         {
             for (int j = 0; j < lesAutos.Count / 4; j++)
             {
-                GameObject joueur = Instantiate(lesAutos[compteurAutos],
+                GameObject thisJoueur = Instantiate(lesAutos[compteurAutos],
                     new Vector3(position.x - 35 * j - 4 * i, 0, (position.z - 37) + 32 * i - 6 * j),
                     lesAutos[compteurAutos].transform.rotation);
-                joueur.GetComponent<Player>().CréerPlayer(
+                thisJoueur.GetComponent<Player>().CréerPlayer(
                     joueurs[compteurAutos].Vie, joueurs[compteurAutos].Nom,
                     joueurs[compteurAutos].IdVéhicule, joueurs[compteurAutos].IdMoteur,
                     joueurs[compteurAutos].Chassis, joueurs[compteurAutos].Puissance,
                     joueurs[compteurAutos++].Poids);
                 if (compteurAutos - 1 == 0)
                 {
-                    mainPlayer1 = joueur;
+                    mainPlayer1 = thisJoueur;
                 }
             }
 

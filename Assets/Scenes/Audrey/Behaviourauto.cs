@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
-{
-    //source.https://www.youtube.com/watch?v=Ul01SxwPIvk&t=1407s&ab_channel=CyberChroma
+[RequireComponent(typeof(Player))]
+public class BehaviourAuto : MonoBehaviour
+{ 
     //source.https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=183s&ab_channel=GameDevChef
     //savoir valeur de la vitesse pour l'odomètre
 
     // faire un if pour la moto car deux roues et non quatre
-    // calcul avec Poids ? Influence dans le breakForce? Moins d'accelerationForce?
 
     private int Poids;
     private int Puissance;

@@ -11,7 +11,7 @@ public class GestionnairePlayer : MonoBehaviour
     private GameObject camion;
     private int indiceChassis;
     private Random gen = new Random();
-    private List<Player> joueurs = new List<Player>(15);
+    private List<Player> joueurs = new List<Player>(12);
 
     public List<Player> Joueurs
     {
@@ -26,7 +26,7 @@ public class GestionnairePlayer : MonoBehaviour
         joueurs[0].Chassis = AssignerChassis(joueurs[0].IdVéhicule);
         joueurs[0].Puissance = AssignerPuissance(joueurs[0].IdMoteur);
         joueurs[0].Poids = AssignerPoids(joueurs[0].IdVéhicule);
-        //joueurs[0].Chassis.tag = $"{joueurs[0]}p1";
+        
         for (int i = nbJoueurs; i < 12; i++)
         {
             joueurs.Add(new Player());
@@ -37,7 +37,7 @@ public class GestionnairePlayer : MonoBehaviour
             joueurs[i].Chassis = AssignerChassis(indiceChassis);
             joueurs[i].Puissance = AssignerPuissance(gen.Next(0,3));
             joueurs[i].Poids = AssignerPoids(indiceChassis);
-           // joueurs[i].Chassis.tag = $"b{i}";
+           
         }
     }
 

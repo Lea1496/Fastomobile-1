@@ -8,12 +8,10 @@ public class CréateurChemin3D : MonoBehaviour
     
     List<int> cotes = new List<int>();
     private int largeur;
-    private List<Vector3> listePos; 
-    //private List<char> relief;
+    private List<Vector3> listePos;
     private int maxCotes;
     private Random gen = new Random();
-   // private char tournant = 't';
-   private List<int> verif;
+    private List<int> verif;
 
     public List<Vector3> ListePos
     {
@@ -24,13 +22,9 @@ public class CréateurChemin3D : MonoBehaviour
         largeur = Largeur;
         listePos = new CréateurCheminComplet(largeur).CheminComplet;
         verif = new List<int>();
-        
-       // relief = new List<char>(listePos.Count);
         maxCotes = listePos.Count / 5;
-        //TrouverTournants();
         CréerCotes();
-        //VérifierSiListeBonne();
-        
+
     }
    
     private int VérifierPos()
@@ -78,42 +72,5 @@ public class CréateurChemin3D : MonoBehaviour
         }
         
     }
-    /*private void TrouverTournants()
-    {
-        for (int i = 1; i < listePos.Count - 1; i++)
-        {
-            if (listePos[i - 1].x != listePos[i + 1].x && listePos[i-1].y != listePos[i + 1].y)
-            {
-                relief.Add(tournant);
-                relief.Add(tournant);
-                relief.Add(tournant);
-                i += 2;
-            }
-            else
-            {
-                relief.Add(' ');
-            }
-        }
-    }*/
-
     
-
-    /*private void VérifierSiListeBonne()
-    {
-        if (listePos.Count % 4 != 0)
-        {
-            int compteur = (listePos.Count / 4) * 4 - listePos.Count - 2;
-
-            for (int i = 0; i < compteur; i++)
-            {
-                listePos.Add(new Vector3(0,0,0));
-            }
-        }
-    }*/
-
-   
-
-
-
-
 }
