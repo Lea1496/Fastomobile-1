@@ -11,7 +11,7 @@ public class BehaviourAuto : MonoBehaviour
 
     private int Poids;
     private int Puissance;
-    const int Moto = 2;   
+    private const int MOTO = 2;   
 
     void Start()
     {
@@ -47,7 +47,7 @@ public class BehaviourAuto : MonoBehaviour
 
     public void HandleMotor(float verticalI)
     {
-        if(GameData.P1.IdVéhicule != Moto)
+        if(GameData.P1.IdVéhicule != MOTO)
         {
             frontLeftWheelCollider.motorTorque = verticalI * Puissance;
             frontRightWheelCollider.motorTorque = verticalI * Puissance;
@@ -68,7 +68,7 @@ public class BehaviourAuto : MonoBehaviour
 
     private void ApplyBreaking()
     {
-        if (GameData.P1.IdVéhicule != Moto)
+        if (GameData.P1.IdVéhicule != MOTO)
         {
             frontRightWheelCollider.brakeTorque = currentbreakForce;
             frontLeftWheelCollider.brakeTorque = currentbreakForce;
@@ -84,7 +84,7 @@ public class BehaviourAuto : MonoBehaviour
 
     private void ApplyAcceleration(float verticalI)
     {
-        if (GameData.P1.IdVéhicule != Moto)
+        if (GameData.P1.IdVéhicule != MOTO)
         {
             frontRightWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
             frontLeftWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
@@ -98,7 +98,7 @@ public class BehaviourAuto : MonoBehaviour
     public void HandleSteering(float horizontalI)
     {
         currentSteerAngle = maxSteerAngle * horizontalI;
-        if(GameData.P1.IdVéhicule != Moto)
+        if(GameData.P1.IdVéhicule != MOTO)
         {
             frontLeftWheelCollider.steerAngle = currentSteerAngle;
             frontRightWheelCollider.steerAngle = currentSteerAngle;
@@ -111,7 +111,7 @@ public class BehaviourAuto : MonoBehaviour
 
     public void UpdateWheels()
     {
-        if(GameData.P1.IdVéhicule != Moto)
+        if(GameData.P1.IdVéhicule != MOTO)
         {
             UpdateSingleWheel(frontLeftWheelCollider, frontLeftWheelTransform);
             UpdateSingleWheel(frontRightWheelCollider, frontRightWheelTransform);
