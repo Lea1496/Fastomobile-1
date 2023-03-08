@@ -47,10 +47,7 @@ public class BordureImpair : MonoBehaviour
                 uvsBordureImpair[indexSomImpair] = new Vector2(0, completePercent);
                 uvsBordureImpair[indexSomImpair + 1] = new Vector2(1, completePercent);
 
-                if (i + 2 >= sommet.Length)
-                {
-                    indexSomImpair = 0;
-                }
+                
                 if (i < sommet.Length - 1)
                 {
                     triangleImpair[indexTriImpair] = indexSomImpair;
