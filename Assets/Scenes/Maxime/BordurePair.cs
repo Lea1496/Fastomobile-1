@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(MeshCollider))]
-public class ScriptBordure : MonoBehaviour
+public class BordurePair : MonoBehaviour
 {
     private Mesh maillage;
     private Vector3[] sommet;
@@ -18,8 +18,8 @@ public class ScriptBordure : MonoBehaviour
     {
         //System.Threading.Thread.Sleep(1000);
         sommet = GetComponentInParent<ScriptSpline>().sommets;
-        List<Vector3> pointsSpline2 = GetComponentInParent<GestionnaireJeux>().Chemin;
-        Debug.Log(pointsSpline2.Count);
+       // List<Vector3> pointsSpline2 = GetComponentInParent<GestionnaireJeux>().Chemin;
+        //Debug.Log(pointsSpline2.Count);
         maillage = new Mesh();
         MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         maillage = AjouterBordure();
@@ -44,7 +44,7 @@ public class ScriptBordure : MonoBehaviour
         int indexTriPair = 0;
         static bool EstPair(int nb) { return nb % 2 == 0; }
         Vector3[] pointsBordurePair = new Vector3[sommet.Length];
-        int indexSom = 0;
+       // int indexSom = 0;
         //Vector3[] pointsBordureImpair = new Vector3[sommet.Length];
 
         /*for (int i = 0; i < pointsSpline2.Count; i++)
@@ -67,7 +67,7 @@ public class ScriptBordure : MonoBehaviour
             sommet[indexSomPair + 1] = pointsSpline2[i] - gauche * 70f;
             indexSom += 2;
         }*/
-        Debug.Log(sommet.Length);
+        //Debug.Log(sommet.Length);
 
         // bordure pair
         for (int i = 0; i < sommet.Length; i++)
@@ -93,11 +93,8 @@ public class ScriptBordure : MonoBehaviour
                 }
                 indexSomPair += 2;
                 indexTriPair += 6;
-
             }
-
         }
-
         Mesh mesh = new Mesh();
         mesh.vertices = pointsBordurePair;
         mesh.triangles = trianglePair;
