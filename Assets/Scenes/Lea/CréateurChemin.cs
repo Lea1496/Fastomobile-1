@@ -9,10 +9,8 @@ using System.Threading;
 using Random = System.Random;
 
 public class MarchePas : Exception { }
-public class CréateurChemin2D : MonoBehaviour
+public class CréateurChemin : MonoBehaviour
 {
-    
-
     int[] invalide = new int[4];
 
     private int largeur;
@@ -21,30 +19,39 @@ public class CréateurChemin2D : MonoBehaviour
     private Random gen = new Random();
     private List<Vector3> listePos = new List<Vector3>();
     private int P1, P2, P3, P4;
-   
+    private int nbIndices;
+    
+
+    private int[] positions;
+    private int[] tableau1;
+    private int[] tableau2;
+    private int[] tableau3;
+    private int[] tableau4;
+
+    private List<Vector3> cheminComplet;
     
     int pasU = 0, pasD = 0, pasL = 0, pasR = 0;
     int[] restrictions = new int[4];
     private List<int> tousPointsVisités = new List<int>();
     public List<int> déjàVisités = new List<int>();
+    List<int> cotes = new List<int>();
+    
+   
+    private int maxCotes;
+    
+    private List<int> verif;
+
     public List<Vector3> ListePos
     {
         get => listePos;
     }
-    public CréateurChemin2D(int Largeur, int p1, int p2, int p3, int p4)
+    public CréateurChemin(int largeur)
     {
-        largeur = Largeur;
-        //graph = Graph;
-        P1 = p1;
-        P2 = p2;
-        P3 = p3;
-        P4 = p4;
-        AssemblerChemin(p1, p2 , p3, p4);
-        TransformerIntEnVector(tousPointsVisités);
-        
+        CréerChemin3D(largeur);
     }
-    private void AssemblerChemin(int p1, int p2, int p3, int p4)
+    private void CréerChemin2D(int p1, int p2, int p3, int p4)
     {
+        
         DéterminerChemin2dAléatoire(0, p1);
         DéterminerChemin2dAléatoire(p1, p2);
         DéterminerChemin2dAléatoire(p2, p3);
@@ -52,6 +59,7 @@ public class CréateurChemin2D : MonoBehaviour
         DéterminerChemin2dAléatoire(p4, 0);
         tousPointsVisités = RemoveDuplicates(tousPointsVisités);
         tousPointsVisités.Add(0);
+        TransformerIntEnVector(tousPointsVisités);
        
     }
   
@@ -415,13 +423,7 @@ public class CréateurChemin2D : MonoBehaviour
         compteurVerif += VérifierEnHaut(point, liste);
         compteurVerif += VérifierGauche(point, liste);
         compteurVerif += VérifierEnBas(point, liste);
-        /*for (int i = 0; i < graph.GetNeighbours(point).Length; i++)
-        {
-            if (liste.Contains(graph.GetNeighbours(point)[i]) || tousPointsVisités.Contains(graph.GetNeighbours(point)[i]))
-            {
-                compteurVerif++;
-            }
-        }*/
+        
         return compteurVerif;
     }
     
@@ -478,6 +480,147 @@ public class CréateurChemin2D : MonoBehaviour
         
     }
     
+    private void CréerCheminComplet()
+    {
+        nbIndices = largeur / 2 * (largeur / 2);
+        tableau1 = new int[largeur / 2 * (largeur / 2 -1)];
+        tableau2 = new int[nbIndices];
+        tableau3 = new int[nbIndices];
+        tableau4 = new int[nbIndices];
+        CréerTableaux();
+        positions = TransformerIndicesEnPostion();
+        CréerChemin2D(positions[0], positions[1], positions[2], positions[3]);
+        
+    }
+
     
+    private void CréerTableaux()
+    {
+        compteur = 0;
+        for (int i = 0; i < largeur / 2; i++)
+        {
+            for (int j = 1; j < largeur / 2; j++)
+            {
+                tableau1[compteur++] = i * largeur  + j;
+            }
+        }
+
+        compteur = 0;
+        for (int i = 0; i < largeur / 2; i++)
+        {
+            for (int j = 0; j < largeur / 2 ; j++)
+            {
+                tableau2[compteur++] = largeur / 2 + i * largeur + j ;
+            }
+        }
+        compteur = 0;
+        for (int i = 0; i < largeur / 2; i++)
+        {
+            for (int j = 0; j < largeur / 2 ; j++)
+            {
+                tableau3[compteur++] = (largeur / 2 + i) * largeur + largeur / 2 + j;
+            }
+        } 
+        compteur = 0;
+        for (int i = 0; i < largeur / 2 - 1; i++)
+        {
+            for (int j = 1; j < largeur / 2; j++)
+            {
+                tableau4[compteur++] = (largeur / 2 + i) * largeur + j;
+            }
+        }
+          
+    }
+
+   
+
+    private int[] GénérerIndices()
+    {
+        int[] ind = new int[4];
+
+        for (int j = 0; j < ind.Length; j++)
+        {
+            if (j == 0)
+            {
+                ind[j]  = gen.Next(1, largeur / 2 * (largeur / 2 -1));
+            }
+            else
+            {
+                if (j == 3)
+                {
+                    ind[j] = gen.Next(1, (largeur / 2 - 1) * (largeur / 2 - 1));
+                }
+                else
+                {
+                   ind[j]  = gen.Next(0, nbIndices); 
+                }
+                
+            }
+           
+        }
+
+        return ind;
+    }
+    private int[] TransformerIndicesEnPostion()
+    {
+        int[] indices = GénérerIndices();
+        int[] pos = new int[4];
+
+        pos[0] = tableau1[indices[0]];
+        pos[1] = tableau2[indices[1]];
+        pos[2] = tableau3[indices[2]];
+        pos[3] = tableau4[indices[3]];
+
+        return pos;
+    }
+    private void CréerChemin3D(int Largeur)
+    {
+        largeur = Largeur; 
+        CréerCheminComplet();
+        verif = new List<int>();
+        maxCotes = listePos.Count / 5;
+        CréerCotes();
+    }
+   
+    
+    private void CréerCotes()
+    {
+        
+        int pos;
+        int grandeur = 0;
+        int bond = 0;
+
+        for (int i = 0; i < maxCotes && verif.Count != listePos.Count ; i++)
+        {
+            do
+            {
+                pos = gen.Next(5, listePos.Count -7);
+            } while (verif.Contains(pos) && verif.Count != listePos.Count);
+            verif.Add(pos -1);
+            verif.Add(pos );
+            verif.Add(pos +1);
+            grandeur = gen.Next(0, 2);
+
+            if (grandeur == 0)
+            {
+                bond = 30;
+            }
+            else
+            {
+                if (grandeur == 1) 
+                {
+                    bond = 60;
+                }
+            }
+           
+            listePos[pos - 1] = new Vector3(listePos[pos - 1].x, bond, listePos[pos - 1].z);
+            listePos[pos] = new Vector3(listePos[pos].x, 2 * bond, listePos[pos].z);
+            listePos[pos + 1] = new Vector3(listePos[pos + 1].x, bond, listePos[pos + 1].z);
+        }
+        
+    }
     
 }
+
+    
+

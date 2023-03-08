@@ -47,6 +47,7 @@ public class GestionnaireJeux : MonoBehaviour
     {
         get => autos;
     }
+    
     // les deux prochaine fonctions viennent de
     // https://stackoverflow.com/questions/4501838/terminate-a-thread-after-an-interval-if-not-returned
     
@@ -54,7 +55,7 @@ public class GestionnaireJeux : MonoBehaviour
     {
         try
         {
-            chemin = new CréateurChemin3D(largeur).ListePos;
+            chemin = new CréateurChemin(largeur).ListePos;
         }
         catch 
         {
@@ -102,7 +103,7 @@ public class GestionnaireJeux : MonoBehaviour
 
    private void Update()
    {
-      Vector3 desiredPosition = mainPlayer.transform.position + offSet; 
+       Vector3 desiredPosition = mainPlayer.transform.position + offSet; 
        //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, (15f * Time.smoothDeltaTime) );
        cam1.transform.position = desiredPosition;
        cam1.transform.LookAt(mainPlayer.transform);
