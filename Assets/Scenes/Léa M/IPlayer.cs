@@ -12,6 +12,8 @@ interface IPlayer
   int Puissance { get; }
   GameObject Chassis { get; }
   int Poids { get; }
+  
+  bool IsMainPlayer { get; }
 
   
 }

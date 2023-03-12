@@ -14,6 +14,8 @@ public class Player : MonoBehaviour, IPlayer
     public int Puissance { get; set; }
     public int Poids { get; set; }
     
+    public bool IsMainPlayer { get; set; }
+    
     public Player(/*int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance*/)
     {
         /*Vie = vie;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour, IPlayer
         Chassis = chassis;
         Puissance = puissance;*/
         //Chassis.tag = Nom;
+        IsMainPlayer = false;
         Argent = 0;
     }
 

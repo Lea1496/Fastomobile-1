@@ -90,10 +90,13 @@ public class GestionnaireJeux : MonoBehaviour
         CréerRoute.FaireMesh(point1, point);
         
         
-        new GénérateurObstacles(chemin, obstalce1, obstacle2);
+        new GénérateurObstacles(chemin, obstalce1, obstacle2, GetComponent<ScriptSpline>().sommets);
         GetComponent<GénérateurCoins>().GénérerCoins(15);
         autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
-        mainPlayer = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count -3]).MainPlayer1;
+        mainPlayer = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[0]).MainPlayer1;
+        Vector3 test = new Vector3(0, 0, 1);
+        Vector3 test2 = new Vector3(1, 1, 2);
+        
    }
 
    private void Update()

@@ -82,7 +82,7 @@ public class ScriptBézier : MonoBehaviour
         }*/
         p1 = position;
         p2 = pointsSpline[dernièrePos];
-        p3 = pointsBézier[2];
+        p3 = pointsBézier[1];
         p4 = pointsBézier[8];
        
         for (int i = 0; i < 8; i++)
