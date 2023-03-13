@@ -10,7 +10,8 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 
-
+[RequireComponent(typeof(ScriptSpline))]
+[RequireComponent(typeof(GénérateurCoins))]
 public class GestionnaireJeux : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -26,13 +27,25 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject arc;
     [SerializeField] private GameObject ligneArrivée;
     [SerializeField] private Camera cam1;
+    [SerializeField] private GameObject coin;
+    
+    private ScriptSpline CréerRoute;
+    
     private List<Vector3> chemin;
     private GameObject mainPlayer;
-    
+    private List<Player> autos;
     Vector3 offSet = new Vector3(-30, 30, 0);
     public List<Vector3> Chemin
     {
         get => chemin;
+    }
+    public GameObject Coin
+    {
+        get => coin;
+    }
+    public List<Player> Autos
+    {
+        get => autos;
     }
     
     // les deux prochaine fonctions viennent de
@@ -42,7 +55,7 @@ public class GestionnaireJeux : MonoBehaviour
     {
         try
         {
-            chemin = new CréateurChemin3D(largeur).ListePos;
+            chemin = new CréateurChemin(largeur).ListePos;
         }
         catch 
         {
@@ -66,39 +79,29 @@ public class GestionnaireJeux : MonoBehaviour
     
    void Awake()
    {
-       
+       CréerRoute = GetComponent<ScriptSpline>();
        Refaire();
         new CréateurTerrain(largeur, terrain);
-        /*for (int i = 0; i < chemin.Count; i++)
-        {
-            Instantiate(point, chemin[i], point.transform.rotation);
-        }*/
         if (chemin == null)
         {
             Refaire();
         }
         chemin = new ScriptBézier(chemin).PointsSpline;
-        
-        new GénérateurObstacles(chemin, obstalce1, obstacle2);
-
-        List<Player> autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
+        CréerRoute.FaireMesh(point1, point);
         
         
-
-        mainPlayer = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 7]).MainPlayer1;
-        
-        /*for (int i = 0; i < chemin.Count; i++)
-        {
-            //Debug.Log(chemin[i]);
-            Instantiate(point1, chemin[i], point1.transform.rotation);
-            
-        }*/
+        new GénérateurObstacles(chemin, obstalce1, obstacle2, GetComponent<ScriptSpline>().sommets);
+        GetComponent<GénérateurCoins>().GénérerCoins(15);
+        autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
+        mainPlayer = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[0]).MainPlayer1;
+        Vector3 test = new Vector3(0, 0, 1);
+        Vector3 test2 = new Vector3(1, 1, 2);
         
    }
 
    private void Update()
    {
-      Vector3 desiredPosition = mainPlayer.transform.position + offSet; 
+       Vector3 desiredPosition = mainPlayer.transform.position + offSet; 
        //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, (15f * Time.smoothDeltaTime) );
        cam1.transform.position = desiredPosition;
        cam1.transform.LookAt(mainPlayer.transform);

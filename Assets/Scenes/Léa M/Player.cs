@@ -14,6 +14,8 @@ public class Player : MonoBehaviour, IPlayer
     public int Puissance { get; set; }
     public int Poids { get; set; }
     
+    public bool IsMainPlayer { get; set; }
+    
     public Player(/*int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance*/)
     {
         /*Vie = vie;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour, IPlayer
         Chassis = chassis;
         Puissance = puissance;*/
         //Chassis.tag = Nom;
+        IsMainPlayer = false;
         Argent = 0;
     }
 
@@ -38,11 +41,16 @@ public class Player : MonoBehaviour, IPlayer
     }
     public void AjouterVie(int vieAjoutée)
     {
-        GameData.P1.Vie += vieAjoutée;
+        Vie += vieAjoutée;
     }
     public void EnleverVie(int vieEnlevée)
     {
-        GameData.P1.Vie += vieEnlevée;
+        Vie += vieEnlevée;
+    }
+
+    public void AjouterArgent(int nbArgent)
+    {
+        Argent += nbArgent;
     }
 
     // public bool Acheter(int prix)
@@ -57,6 +65,6 @@ public class Player : MonoBehaviour, IPlayer
     //
     //     return peutAcheter;
     // }
-    
+
 
 }

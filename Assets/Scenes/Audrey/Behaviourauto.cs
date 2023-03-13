@@ -1,19 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
-{
-    //source.https://www.youtube.com/watch?v=Ul01SxwPIvk&t=1407s&ab_channel=CyberChroma
+[RequireComponent(typeof(Player))]
+public class BehaviourAuto : MonoBehaviour
+{ 
     //source.https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=183s&ab_channel=GameDevChef
     //savoir valeur de la vitesse pour l'odomètre
 
     // faire un if pour la moto car deux roues et non quatre
-    // calcul avec Poids ? Influence dans le breakForce? Moins d'accelerationForce?
 
     private int Poids;
     private int Puissance;
-    const int Moto = 2;   
+    private const int MOTO = 2;   
 
     void Start()
     {
@@ -49,7 +47,7 @@ public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
 
     public void HandleMotor(float verticalI)
     {
-        if(GameData.P1.IdVéhicule != Moto)
+        if(GameData.P1.IdVéhicule != MOTO)
         {
             frontLeftWheelCollider.motorTorque = verticalI * Puissance;
             frontRightWheelCollider.motorTorque = verticalI * Puissance;
@@ -70,7 +68,7 @@ public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
 
     private void ApplyBreaking()
     {
-        if (GameData.P1.IdVéhicule != Moto)
+        if (GameData.P1.IdVéhicule != MOTO)
         {
             frontRightWheelCollider.brakeTorque = currentbreakForce;
             frontLeftWheelCollider.brakeTorque = currentbreakForce;
@@ -86,7 +84,7 @@ public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
 
     private void ApplyAcceleration(float verticalI)
     {
-        if (GameData.P1.IdVéhicule != Moto)
+        if (GameData.P1.IdVéhicule != MOTO)
         {
             frontRightWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
             frontLeftWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
@@ -100,7 +98,7 @@ public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
     public void HandleSteering(float horizontalI)
     {
         currentSteerAngle = maxSteerAngle * horizontalI;
-        if(GameData.P1.IdVéhicule != Moto)
+        if(GameData.P1.IdVéhicule != MOTO)
         {
             frontLeftWheelCollider.steerAngle = currentSteerAngle;
             frontRightWheelCollider.steerAngle = currentSteerAngle;
@@ -113,7 +111,7 @@ public class BehaviourAuto : MonoBehaviour/*GestionnairePlayer*/
 
     public void UpdateWheels()
     {
-        if(GameData.P1.IdVéhicule != Moto)
+        if(GameData.P1.IdVéhicule != MOTO)
         {
             UpdateSingleWheel(frontLeftWheelCollider, frontLeftWheelTransform);
             UpdateSingleWheel(frontRightWheelCollider, frontRightWheelTransform);
