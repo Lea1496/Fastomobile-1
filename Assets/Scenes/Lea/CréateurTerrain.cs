@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CréateurTerrain : MonoBehaviour
+public class CréateurTerrain
 {
     
 
@@ -17,7 +17,7 @@ public class CréateurTerrain : MonoBehaviour
         {
             for (int j = 0; j < largeur; j++)
             {
-                Instantiate(terrain, position, terrain.transform.rotation);
+                GameObject.Instantiate(terrain, position, terrain.transform.rotation);
                 position.x += demiLongueur;
             }
 

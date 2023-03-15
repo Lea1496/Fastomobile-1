@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 
+
+
+/// <summary>
+/// Code provenant de la PFI de la session dernière
+/// </summary>
 public class RotationPrimitive : MonoBehaviour
 {
    [SerializeField]

@@ -9,7 +9,7 @@ using System.Threading;
 using Random = System.Random;
 
 public class MarchePas : Exception { }
-public class CréateurChemin : MonoBehaviour
+public class CréateurChemin
 {
     int[] invalide = new int[4];
 
@@ -47,16 +47,21 @@ public class CréateurChemin : MonoBehaviour
     }
     public CréateurChemin(int largeur)
     {
-        CréerChemin3D(largeur);
+        this.largeur = largeur;
+        CréerChemin3D();
     }
     private void CréerChemin2D(int p1, int p2, int p3, int p4)
     {
-        
-        DéterminerChemin2dAléatoire(0, p1);
+        tousPointsVisités.Add(1);
+        tousPointsVisités.Add(2);
+        tousPointsVisités.Add(3);
+        DéterminerChemin2dAléatoire(3, p1);
         DéterminerChemin2dAléatoire(p1, p2);
         DéterminerChemin2dAléatoire(p2, p3);
         DéterminerChemin2dAléatoire(p3, p4);
-        DéterminerChemin2dAléatoire(p4, 0);
+        DéterminerChemin2dAléatoire(p4, largeur * 3);
+        tousPointsVisités.Add(largeur * 2);
+        tousPointsVisités.Add(largeur);
         tousPointsVisités = RemoveDuplicates(tousPointsVisités);
         tousPointsVisités.Add(0);
         TransformerIntEnVector(tousPointsVisités);
@@ -97,7 +102,7 @@ public class CréateurChemin : MonoBehaviour
                 Debug.Log(pointDébut + " MERDE");
                 throw new MarchePas();
             }*/
-           
+          
             déjàVisités.Add(newPoint);
             currentPos = newPoint;
             
@@ -252,10 +257,10 @@ public class CréateurChemin : MonoBehaviour
             mouvement = 0;
             
         }
-        if ((pointDébut + 1) % 8 == 0 && compteur == 0)
+        /*if ((pointDébut + 1) % 8 == 0 && compteur == 0)
         {
             mouvement = 3;
-        }
+        }*/
 
         if (mouvement == 0)
         {
@@ -573,9 +578,8 @@ public class CréateurChemin : MonoBehaviour
 
         return pos;
     }
-    private void CréerChemin3D(int Largeur)
+    private void CréerChemin3D()
     {
-        largeur = Largeur; 
         CréerCheminComplet();
         verif = new List<int>();
         maxCotes = listePos.Count / 5;

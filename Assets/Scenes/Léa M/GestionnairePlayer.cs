@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
 
-public class GestionnairePlayer : MonoBehaviour
+public class GestionnairePlayer
 { 
     private GameObject auto;
     private GameObject moto;

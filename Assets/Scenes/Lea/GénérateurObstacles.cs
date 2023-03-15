@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using Random = System.Random;
 
-public class GénérateurObstacles : MonoBehaviour
+public class GénérateurObstacles
 {
     private int maxObstacles = 15;
 
@@ -55,11 +55,11 @@ public class GénérateurObstacles : MonoBehaviour
             cotéZ = neg[gen.Next(0, 2)];
             if (indice % 2 == 0)
             {
-                Instantiate(obstacle1, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),obstacle1.transform.rotation);
+                GameObject.Instantiate(obstacle1, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),obstacle1.transform.rotation);
             }
             else
             {
-                Instantiate(obstacle2, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),obstacle1.transform.rotation);
+                GameObject.Instantiate(obstacle2, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),obstacle1.transform.rotation);
             }
         }
         
@@ -99,10 +99,7 @@ public class GénérateurObstacles : MonoBehaviour
         Vector3 point2 = sommets[indice + 1];
         
         Vector3 vecteur = new Vector3(point2.x - point1.x, point2.y - point1.y, point2.z - point1.z);
-        if (Mathf.Abs(vecteur.x) > Mathf.Abs(vecteur.z))
-        {
-            
-        }
+        
         Vector3 pointZ = new Vector3(vecteur.x, vecteur.y, vecteur.z + 75);
         
         //float angle = Mathf.Acos(vecteur.x * pointZ.x + vecteur.y * pointZ.y + vecteur.z * pointZ.z);
