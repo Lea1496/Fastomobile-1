@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class ScriptBézier : MonoBehaviour
+public class ScriptBézier
 {
     private List<Vector3> pointsSpline = new List<Vector3>();
     public List<Vector3> PointsSpline
@@ -91,8 +91,8 @@ public class ScriptBézier : MonoBehaviour
             //pointsBézier.Add(CalculateBezierPoint(t, p1, p2, p3, p4));
             pointsBézier[i] = CalculateBezierPoint(t, p1, p2, p3, p4);
         }
-
-        //pointsBézier.Remove(pointsBézier[pointsBézier.Count - 1]);
+        pointsBézier[8] = Vector3.Lerp(pointsBézier[7], pointsBézier[9], 0.5f);
+        pointsBézier.Remove(pointsBézier[0]);
         
         return pointsBézier;
     }

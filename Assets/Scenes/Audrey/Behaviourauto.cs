@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Player))]
+
 public class BehaviourAuto : MonoBehaviour
 { 
     //source.https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=183s&ab_channel=GameDevChef
@@ -15,8 +16,9 @@ public class BehaviourAuto : MonoBehaviour
 
     void Start()
     {
-        Poids = GameData.P1.GetComponent<Player>().Poids;
-        Puissance = GameData.P1.GetComponent<Player>().Puissance;
+        Poids = GameData.P1.GetComponentInParent<Player>().Poids;
+        Puissance = GameData.P1.GetComponentInParent<Player>().Puissance;
+        AssignerColliders();
     }
 
     private float currentSteerAngle;
@@ -29,22 +31,60 @@ public class BehaviourAuto : MonoBehaviour
     [SerializeField] private float breakForce; 
     [SerializeField] private float maxSteerAngle; 
 
-    [SerializeField] private WheelCollider frontLeftWheelCollider;
-    [SerializeField] private WheelCollider frontRightWheelCollider;
-    [SerializeField] private WheelCollider rearLeftWheelCollider;
-    [SerializeField] private WheelCollider rearRightWheelCollider;
+    public WheelCollider frontLeftWheelCollider;
+    public WheelCollider frontRightWheelCollider;
+    public WheelCollider rearLeftWheelCollider;
+    private WheelCollider rearRightWheelCollider;
 
-    [SerializeField] private WheelCollider frontWheelCollider;
-    [SerializeField] private WheelCollider rearWheelCollider;
+    private WheelCollider frontWheelCollider;
+    private WheelCollider rearWheelCollider;
 
-    [SerializeField] private Transform frontLeftWheelTransform;
-    [SerializeField] private Transform frontRightWheelTransform;
-    [SerializeField] private Transform rearLeftWheelTransform;
-    [SerializeField] private Transform rearRightWheelTransform;
+    private Transform frontLeftWheelTransform;
+    private Transform frontRightWheelTransform;
+    private Transform rearLeftWheelTransform;
+    private Transform rearRightWheelTransform;
 
     [SerializeField] private Transform frontWheelTransfrom;
     [SerializeField] private Transform rearWheelTransfrom;
 
+    private void AssignerColliders()
+    {
+        WheelCollider[] lesColliders = GetComponentsInChildren<WheelCollider>();
+        Transform[] lesTransforms = GetComponentsInChildren<Transform>();
+        for (int i = 0; i < lesColliders.Length; i++)
+        {
+            if (lesColliders[i].gameObject.name == "left_front_wheel")
+            {
+                frontLeftWheelCollider = lesColliders[i];
+                frontLeftWheelTransform = lesTransforms[i];
+            }
+            else
+            {
+                if (lesColliders[i].gameObject.name == "right_front_wheel")
+                {
+                    frontRightWheelCollider = lesColliders[i];
+                    frontRightWheelTransform = lesTransforms[i];
+                }
+                else
+                {
+                    if (lesColliders[i].gameObject.name == "left_rear_wheel")
+                    {
+                        rearLeftWheelCollider = lesColliders[i];
+                        rearLeftWheelTransform = lesTransforms[i];
+
+                    }
+                    else
+                    {
+                        if (lesColliders[i].gameObject.name == "right_rear_wheel")
+                        {
+                            rearRightWheelCollider = lesColliders[i];
+                            rearRightWheelTransform = lesTransforms[i];
+                        }
+                    }
+                }
+            }
+        }
+    }
     public void HandleMotor(float verticalI)
     {
         if(GameData.P1.IdVéhicule != MOTO)
