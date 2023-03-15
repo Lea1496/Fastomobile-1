@@ -32,7 +32,7 @@ public class BordurePair : MonoBehaviour
         Vector2[] uvsBordurePair = new Vector2[sommet.Length];
         Vector3[] pointsBordurePair = new Vector3[sommet.Length];
         int nbTrianglesPair = sommet.Length;
-        int[] trianglePair = new int[nbTrianglesPair * 3];
+        int[] trianglePair = new int[nbTrianglesPair * 6];
         int indexSomPair = 0;
         int indexTriPair = 0;
         
@@ -57,10 +57,18 @@ public class BordurePair : MonoBehaviour
                     trianglePair[indexTriPair + 3] = (indexSomPair + 1);
                     trianglePair[indexTriPair + 4] = (indexSomPair + 2) % pointsBordurePair.Length;
                     trianglePair[indexTriPair + 5] = (indexSomPair + 3) % pointsBordurePair.Length;
+                    
+                    trianglePair[indexTriPair + 8] = indexSomPair;
+                    trianglePair[indexTriPair + 7] = (indexSomPair + 2) % pointsBordurePair.Length;
+                    trianglePair[indexTriPair + 6] = indexSomPair + 1;
+
+                    trianglePair[indexTriPair + 11] = (indexSomPair + 1);
+                    trianglePair[indexTriPair + 10] = (indexSomPair + 2) % pointsBordurePair.Length;
+                    trianglePair[indexTriPair + 9] = (indexSomPair + 3) % pointsBordurePair.Length;
                 }
                
                 indexSomPair += 2;
-                indexTriPair += 6;
+                indexTriPair += 12;
             }
         }
         Mesh mesh = new Mesh();

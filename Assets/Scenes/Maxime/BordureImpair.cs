@@ -32,7 +32,7 @@ public class BordureImpair : MonoBehaviour
         Vector2[] uvsBordureImpair = new Vector2[sommet.Length];
         Vector3[] pointsBordureImpair = new Vector3[sommet.Length];
         int nbTrianglesImpair = sommet.Length;
-        int[] triangleImpair = new int[nbTrianglesImpair * 3];
+        int[] triangleImpair = new int[nbTrianglesImpair * 6];
         int indexSomImpair = 0;
         int indexTriImpair = 0;
         int indice = 0;
@@ -60,19 +60,23 @@ public class BordureImpair : MonoBehaviour
                     triangleImpair[indexTriImpair + 5] = (indexSomImpair + 1);
                     triangleImpair[indexTriImpair + 4] = (indexSomImpair + 2) % pointsBordureImpair.Length;
                     triangleImpair[indexTriImpair + 3] = (indexSomImpair + 3) % pointsBordureImpair.Length;
+                    
+                    triangleImpair[indexTriImpair + 8] = indexSomImpair + 1;
+                    triangleImpair[indexTriImpair + 7] = (indexSomImpair + 2) % pointsBordureImpair.Length;
+                    triangleImpair[indexTriImpair + 6] = indexSomImpair;
+
+                    triangleImpair[indexTriImpair + 9] = (indexSomImpair + 1);
+                    triangleImpair[indexTriImpair + 10] = (indexSomImpair + 2) % pointsBordureImpair.Length;
+                    triangleImpair[indexTriImpair + 11] = (indexSomImpair + 3) % pointsBordureImpair.Length;
                 }
 
                 
                 indexSomImpair += 2;
-                indexTriImpair += 6;
+                indexTriImpair += 12;
                 //i++;
             }
         }
-
-        for (int i = 0; i < pointsBordureImpair.Length; i++)
-        {
-            Debug.Log(pointsBordureImpair[i]);
-        }
+        
         Mesh mesh = new Mesh();
         mesh.vertices = pointsBordureImpair;
         mesh.triangles = triangleImpair;
