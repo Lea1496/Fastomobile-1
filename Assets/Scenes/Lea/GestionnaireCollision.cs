@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 [RequireComponent(typeof(GestionnaireJeux))]
 public class GestionnaireCollision : MonoBehaviour
 {
@@ -15,10 +17,14 @@ public class GestionnaireCollision : MonoBehaviour
 
     private void Start()
     {
+        
         players = GetComponent<GestionnaireJeux>().Autos;
         for (int i = 0; i < players.Count; i++)
         {
-            //faire quelque chose pour déterminer nb vrais player
+            if (players[i].IsMainPlayer)
+            {
+                nbJoueur++;
+            }
         }
     }
 
@@ -34,16 +40,9 @@ public class GestionnaireCollision : MonoBehaviour
     {
         if (nbJoueur == 2)
         {
-            if (collider.gameObject.tag.Contains("p1")) //à changer
+            if (collider.gameObject.GetComponentInParent<Player>().IsMainPlayer) //à changer
             {
                 compteurJoueursPassés++;
-            }
-            else
-            {
-                if (collider.gameObject.tag.Contains("p2")) //à changer
-                {
-                    compteurJoueursPassés++;
-                }
             }
 
             if (compteurJoueursPassés ==2)
@@ -51,10 +50,25 @@ public class GestionnaireCollision : MonoBehaviour
                 compteurTour++;  //mettre fin à la partie ici?
                 compteurJoueursPassés = 0;
             }
+
+            if (compteurTour == 3)
+            {
+                
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
         }
         else
         {
-            compteurTour++;
+            if (collider.gameObject.GetComponentInParent<Player>().IsMainPlayer) //à changer
+            {
+                compteurTour++;
+            }
+
+            if (compteurTour == 3)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            
             //mettre fin à la partie ici?
         }
         
@@ -65,12 +79,12 @@ public class GestionnaireCollision : MonoBehaviour
 
         if (point.otherCollider.gameObject.layer == coucheCollisionObstacle) //Obstacle
         {
-            point.thisCollider.GetComponent<Player>().EnleverVie(5); //changer cbm de vie
+            point.thisCollider.GetComponentInParent<Player>().EnleverVie(5); //changer cbm de vie
             
         }
         if (point.otherCollider.gameObject.layer == coucheCollisionCoin) //Argent
         {
-            point.thisCollider.GetComponent<Player>().AjouterArgent(1);
+            point.thisCollider.GetComponentInParent<Player>().AjouterArgent(1);
             Destroy(point.otherCollider.gameObject);
             GetComponent<GénérateurCoins>().GénérerCoins(1);
             

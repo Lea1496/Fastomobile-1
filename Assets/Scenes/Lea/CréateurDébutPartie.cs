@@ -53,14 +53,22 @@ public class CréateurDébutPartie
                     joueurs[compteurAutos].IdVéhicule, joueurs[compteurAutos].IdMoteur,
                     joueurs[compteurAutos].Chassis, joueurs[compteurAutos].Puissance,
                     joueurs[compteurAutos].Poids, joueurs[compteurAutos++].IsMainPlayer);
+                
                 if (compteurAutos - 1 == 0)
                 {
                     mainPlayer1 = thisJoueur;
+                    thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
+                    thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
+                    thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
+                    
                 }
 
                 if (compteurAutos - 1 == 1 && joueurs[1].IsMainPlayer)
                 {
                     mainPlayer2 = thisJoueur;
+                    thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
+                    thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
+                    thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                 }
             }
 

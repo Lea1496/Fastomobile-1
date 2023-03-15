@@ -37,7 +37,7 @@ public class GestionnaireJeux : MonoBehaviour
     private GameObject mainPlayer1;
     private GameObject mainPlayer2;
     private List<Player> autos;
-    Vector3 offSet = new Vector3(-30, 30, 0);
+    Vector3 offSet = new Vector3(-30, 30, 30);
     private CréateurDébutPartie créateur;
     private Vector3 desiredPos;
     private Vector3 desiredPos2;
@@ -96,7 +96,7 @@ public class GestionnaireJeux : MonoBehaviour
         Vector3[] sommets = CréerRoute.sommets;
         for (int i = 0; i < chemin.Count; i++)
         {
-           Instantiate(obj,  Vector3.Lerp(sommets[compteur++], sommets[compteur++], 0.5f), obj.transform.rotation).GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i);
+           //Instantiate(obj,  Vector3.Lerp(sommets[compteur++], sommets[compteur++], 0.5f), obj.transform.rotation).GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i);
         }
         new GénérateurObstacles(chemin, obstalce1, obstacle2, sommets);
         Debug.Log(sommets.Length);
