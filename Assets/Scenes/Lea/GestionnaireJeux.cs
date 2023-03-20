@@ -37,12 +37,20 @@ public class GestionnaireJeux : MonoBehaviour
     private GameObject mainPlayer1;
     private GameObject mainPlayer2;
     private List<Player> autos;
-    Vector3 offSet = new Vector3(-30, 30, 0);
+    Vector3 offSet = new Vector3(-30, 20, 0);
     private CréateurDébutPartie créateur;
     private Vector3 desiredPos;
     private Vector3 desiredPos2;
     private GameObject ligne;
     private int compteur = 0;
+    public Player MainPlayer1
+    {
+        get => mainPlayer1.GetComponent<Player>();
+    }
+    public Player MainPlayer2
+    {
+        get => mainPlayer2.GetComponent<Player>();
+    }
     public List<Vector3> Chemin
     {
         get => chemin;
@@ -96,7 +104,7 @@ public class GestionnaireJeux : MonoBehaviour
         Vector3[] sommets = CréerRoute.sommets;
         for (int i = 0; i < chemin.Count; i++)
         {
-           Instantiate(obj,  Vector3.Lerp(sommets[compteur++], sommets[compteur++], 0.5f), obj.transform.rotation).GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i);
+           //Instantiate(obj,  Vector3.Lerp(sommets[compteur++], sommets[compteur++], 0.5f), obj.transform.rotation).GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i);
         }
         new GénérateurObstacles(chemin, obstalce1, obstacle2, sommets);
         Debug.Log(sommets.Length);
@@ -111,11 +119,16 @@ public class GestionnaireJeux : MonoBehaviour
 
    }
 
-   private void Update()
+   private void LateUpdate()
    {
        desiredPos = mainPlayer1.transform.position + offSet; 
        //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, (15f * Time.smoothDeltaTime) );
        cam1.transform.position = desiredPos;
+       cam1.transform.rotation = mainPlayer1.transform.rotation;
+       var cameraRotation = mainPlayer1.transform.rotation;
+       cameraRotation.x = 0;
+       cameraRotation.z = 0;
+       cam1.transform.rotation = cameraRotation;
        cam1.transform.LookAt(mainPlayer1.transform);
        /*if (mainPlayer2 != null) //faire mieux que ça
        {

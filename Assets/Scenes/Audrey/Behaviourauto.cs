@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Player))]
+//[RequireComponent(typeof(Player))]
 
 public class BehaviourAuto : MonoBehaviour
 { 
@@ -10,15 +10,16 @@ public class BehaviourAuto : MonoBehaviour
 
     // faire un if pour la moto car deux roues et non quatre
 
-    private int Poids;
-    private int Puissance;
+    public int Poids;
+    public int Puissance;
     private const int MOTO = 2;   
 
     void Start()
     {
-        Poids = GameData.P1.GetComponentInParent<Player>().Poids;
-        Puissance = GameData.P1.GetComponentInParent<Player>().Puissance;
-        AssignerColliders();
+      
+//        Poids = GameData.P1.GetComponentInParent<Player>().Poids;
+// Puissance = GameData.P1.GetComponentInParent<Player>().Puissance;
+        //AssignerColliders();
     }
 
     private float currentSteerAngle;
@@ -31,23 +32,23 @@ public class BehaviourAuto : MonoBehaviour
     [SerializeField] private float breakForce; 
     [SerializeField] private float maxSteerAngle; 
 
-    public WheelCollider frontLeftWheelCollider;
-    public WheelCollider frontRightWheelCollider;
-    public WheelCollider rearLeftWheelCollider;
-    private WheelCollider rearRightWheelCollider;
+    [SerializeField] WheelCollider frontLeftWheelCollider;
+    [SerializeField] WheelCollider frontRightWheelCollider;
+    [SerializeField] WheelCollider rearLeftWheelCollider;
+    [SerializeField] WheelCollider rearRightWheelCollider;
 
-    private WheelCollider frontWheelCollider;
-    private WheelCollider rearWheelCollider;
+    [SerializeField] WheelCollider frontWheelCollider;
+    [SerializeField] WheelCollider rearWheelCollider;
 
-    private Transform frontLeftWheelTransform;
-    private Transform frontRightWheelTransform;
-    private Transform rearLeftWheelTransform;
-    private Transform rearRightWheelTransform;
+    [SerializeField] Transform frontLeftWheelTransform;
+    [SerializeField] Transform frontRightWheelTransform;
+    [SerializeField] Transform rearLeftWheelTransform;
+    [SerializeField] Transform rearRightWheelTransform;
 
     [SerializeField] private Transform frontWheelTransfrom;
     [SerializeField] private Transform rearWheelTransfrom;
 
-    private void AssignerColliders()
+    /*private void AssignerColliders()
     {
         WheelCollider[] lesColliders = GetComponentsInChildren<WheelCollider>();
         Transform[] lesTransforms = GetComponentsInChildren<Transform>();
@@ -84,7 +85,7 @@ public class BehaviourAuto : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
     public void HandleMotor(float verticalI)
     {
         if(GameData.P1.IdVéhicule != MOTO)

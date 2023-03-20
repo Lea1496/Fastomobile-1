@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GestionBoutons : MonoBehaviour
 {
+    private DataCoin data = new DataCoin();
     public void DémarrerJeu()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -63,11 +64,10 @@ public class GestionBoutons : MonoBehaviour
     public bool Acheter(int prix)
     {
         bool peutAcheter = false;
-        if (GameData.P1.Argent >= prix)
+        if (data.AccederNbCoins("InfoPlayer1.txt") >= prix)
         {
-            GameData.P1.Argent -= prix;
+            data.AjouterCoin("InfoPlayer1.txt", -prix); 
             peutAcheter = true;
-            
         }
 
         return peutAcheter;

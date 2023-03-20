@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 785475864}
   - component: {fileID: 785475863}
   - component: {fileID: 785475862}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BordurePair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!23 &785475864
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 1226918254}
   - component: {fileID: 1226918253}
   - component: {fileID: 1226918252}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BordureImpair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,7 +472,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!23 &1226918254
@@ -680,9 +680,9 @@ GameObject:
   - component: {fileID: 1828300568}
   - component: {fileID: 1828300574}
   - component: {fileID: 1828300575}
-  - component: {fileID: 1828300576}
   - component: {fileID: 1828300577}
-  m_Layer: 0
+  - component: {fileID: 1828300578}
+  m_Layer: 3
   m_Name: test mesh piste
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -781,7 +781,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!114 &1828300574
@@ -797,7 +797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDownTime: 3
-  texte: {fileID: 0}
+  texte: {fileID: 1629056586}
 --- !u!114 &1828300575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,25 +818,13 @@ MonoBehaviour:
   obstacle2: {fileID: 461673607304592863, guid: 5096861c1b02c7d4783663097dfbb830, type: 3}
   auto: {fileID: 6102769514498293530, guid: 585ceda54c2307f42b63f8b1511d8527, type: 3}
   moto: {fileID: 6102769514498293530, guid: 585ceda54c2307f42b63f8b1511d8527, type: 3}
-  camion: {fileID: 2816254769309527770, guid: c5603bd9196f36e4e97ef48d486f93fe, type: 3}
+  camion: {fileID: 6102769514498293530, guid: 585ceda54c2307f42b63f8b1511d8527, type: 3}
   arc: {fileID: 1890588548742467344, guid: 63f7e3a5ea486a9438b4cd3142c7dc92, type: 3}
   "ligneArriv\xE9e": {fileID: 3242020418959028930, guid: 1a5a1e0c71ac38c4ca19b5419a9140aa, type: 3}
   cam1: {fileID: 963194227}
+  cam2: {fileID: 0}
   coin: {fileID: 2595880553212477942, guid: dcb3131067e88664eb517a854310deec, type: 3}
---- !u!114 &1828300576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828300567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eebc98d623f0ad047800a99ff99fa408, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countDownTime: 3
-  texte: {fileID: 1629056586}
+  obj: {fileID: 7082309984549950813, guid: f697af35a13ddc64496e83f65dc18f68, type: 3}
 --- !u!114 &1828300577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,3 +837,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6be4dece72878044a4ad9691137ad99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1828300578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828300567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55a558ea5009eb4a89be4ab057bb087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coucheCollisionObstacle: 9
+  coucheCollisionCoin: 7
+  coucheCollisionBonus: 0

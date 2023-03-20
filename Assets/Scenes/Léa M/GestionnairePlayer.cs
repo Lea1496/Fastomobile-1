@@ -19,6 +19,8 @@ public class GestionnairePlayer
     }
     public GestionnairePlayer(GameObject Auto, GameObject Moto, GameObject Camion, int nbJoueurs)
     {
+        GameData.P1.IsMainPlayer = true; // à changer
+        GameData.P1.Nom = "YAY";
         joueurs.Add(GameData.P1);
         auto = Auto;
         moto = Moto;
@@ -43,7 +45,7 @@ public class GestionnairePlayer
 
     private int AssignerPuissance(int indice)
     {
-        int puissance = 150;
+        int puissance = 1500;
         if (indice == 1)
         {
             puissance = 50;
@@ -52,7 +54,7 @@ public class GestionnairePlayer
         {
             if (indice == 2)
             {
-                puissance = 100;
+                puissance = 1000;
             }
         }
 
