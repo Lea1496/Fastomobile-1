@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameData
 {
     
-    public static Player P1 = new Player();
-    public static Player P2 = new Player();
+    public static PlayerData P1 = new PlayerData();
+    public static PlayerData P2 = new PlayerData();
     
     
     

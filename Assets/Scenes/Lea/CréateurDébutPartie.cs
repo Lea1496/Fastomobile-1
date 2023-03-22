@@ -6,7 +6,7 @@ using UnityEngine;
 public class CréateurDébutPartie
 {
     private List<GameObject> lesAutos;
-    private List<Player> joueurs;
+    private List<PlayerData> joueurs;
     private Player joueur;
     private Vector3 position;
     private int compteurAutos = 0;
@@ -21,7 +21,7 @@ public class CréateurDébutPartie
     {
         get => mainPlayer2;
     }
-    public CréateurDébutPartie(List<Player> autos, GameObject arc, GameObject ligne, Vector3 pos) //behavior auto pour le moment mais surement à changer
+    public CréateurDébutPartie(List<PlayerData> autos, GameObject arc, GameObject ligne, Vector3 pos) //behavior auto pour le moment mais surement à changer
     {
         
         posPremier =  new Vector3(335, 0, -50);
@@ -33,8 +33,10 @@ public class CréateurDébutPartie
         }
         position = pos;
         GameObject.Instantiate(arc, new Vector3(position.x + 30, 0, position.z), arc.transform.rotation);
-        GameObject.Instantiate(ligne, new Vector3(position.x + 30, 0, position.z), ligne.transform.rotation);
+        GameObject ligneArr = GameObject.Instantiate(ligne, new Vector3(position.x + 30, 0, position.z), ligne.transform.rotation);
+        //ligne.AddComponent<GestionnaireTrigger>().
         InstancierAutos();
+        
         
     }
 
@@ -58,7 +60,7 @@ public class CréateurDébutPartie
                 if (compteurAutos - 1 == 0)
                 {
                     mainPlayer1 = thisJoueur;
-                    thisJoueur.GetComponent<PlayerController>().enabled = true;
+                    thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                     

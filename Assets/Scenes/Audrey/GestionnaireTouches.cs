@@ -19,10 +19,11 @@ public class GestionnaireTouches : BehaviourAuto
 
     private void GetInput()
     {
-        //Debug.Log(verticalInput);
+        
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         isBreaking = Input.GetKey(KeyCode.Joystick1Button6);
         isAccelerating = Input.GetKey(KeyCode.Joystick1Button7);
+        
     }
 }

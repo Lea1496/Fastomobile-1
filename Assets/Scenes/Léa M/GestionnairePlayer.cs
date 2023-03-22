@@ -11,9 +11,9 @@ public class GestionnairePlayer
     private GameObject camion;
     private int indiceChassis;
     private Random gen = new Random();
-    private List<Player> joueurs = new List<Player>(12);
+    private List<PlayerData> joueurs = new List<PlayerData>(12);
 
-    public List<Player> Joueurs
+    public List<PlayerData> Joueurs
     {
         get => joueurs;
     }
@@ -31,7 +31,7 @@ public class GestionnairePlayer
         
         for (int i = nbJoueurs; i < 12; i++)
         {
-            joueurs.Add(new Player());
+            joueurs.Add(new PlayerData());
             joueurs[i].Nom = $"bot{i}";
             joueurs[i].Vie = 100;
             joueurs[i].IdMoteur = 0;

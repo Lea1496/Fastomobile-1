@@ -25,14 +25,14 @@ public class GénérateurCheckPoints : MonoBehaviour
     private int ind;
     [SerializeField] Material matériaux;
 
-    public void FaireMesh(int indice)
+    public void FaireMesh(int indice, List<Vector3> chemin)
     {
         //points = sommets;
         ind = indice;
         maillage = new Mesh();
         MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
-        pointsSpline = GetComponent<GestionnaireJeux>().Chemin;
-
+//        pointsSpline = GetComponent<GestionnaireJeux>().Chemin;
+        pointsSpline = chemin;
         CréerMesh(pointsSpline);
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;

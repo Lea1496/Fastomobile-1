@@ -12,11 +12,12 @@ public class BehaviourAuto : MonoBehaviour
 
     public int Poids;
     public int Puissance;
-    private const int MOTO = 2;   
+    private const int MOTO = 2;
+    private Player joueur;
 
     void Start()
     {
-      
+        joueur = GetComponent<Player>();
 //        Poids = GameData.P1.GetComponentInParent<Player>().Poids;
 // Puissance = GameData.P1.GetComponentInParent<Player>().Puissance;
         //AssignerColliders();
@@ -88,14 +89,15 @@ public class BehaviourAuto : MonoBehaviour
     }*/
     public void HandleMotor(float verticalI)
     {
-        if(GameData.P1.IdVéhicule != MOTO)
+       
+        if(joueur.IdVéhicule != MOTO)
         {
             frontLeftWheelCollider.motorTorque = verticalI * Puissance;
             frontRightWheelCollider.motorTorque = verticalI * Puissance;
             currentbreakForce = isBreaking ? breakForce : 0f;
             ApplyBreaking();
-            currentAcceleration = isAccelerating ? accelerationForce/Poids : 0f; // parce F=m*a
-            ApplyAcceleration(verticalI);
+            //currentAcceleration = isAccelerating ? accelerationForce/Poids : 0f; // parce F=m*a
+            //ApplyAcceleration(verticalI);
         }
         else
         {
@@ -109,7 +111,7 @@ public class BehaviourAuto : MonoBehaviour
 
     private void ApplyBreaking()
     {
-        if (GameData.P1.IdVéhicule != MOTO)
+        if (joueur.IdVéhicule != MOTO)
         {
             frontRightWheelCollider.brakeTorque = currentbreakForce;
             frontLeftWheelCollider.brakeTorque = currentbreakForce;
@@ -125,7 +127,7 @@ public class BehaviourAuto : MonoBehaviour
 
     private void ApplyAcceleration(float verticalI)
     {
-        if (GameData.P1.IdVéhicule != MOTO)
+        if (joueur.IdVéhicule != MOTO)
         {
             frontRightWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
             frontLeftWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
@@ -139,7 +141,7 @@ public class BehaviourAuto : MonoBehaviour
     public void HandleSteering(float horizontalI)
     {
         currentSteerAngle = maxSteerAngle * horizontalI;
-        if(GameData.P1.IdVéhicule != MOTO)
+        if(joueur.IdVéhicule != MOTO)
         {
             frontLeftWheelCollider.steerAngle = currentSteerAngle;
             frontRightWheelCollider.steerAngle = currentSteerAngle;
@@ -152,7 +154,7 @@ public class BehaviourAuto : MonoBehaviour
 
     public void UpdateWheels()
     {
-        if(GameData.P1.IdVéhicule != MOTO)
+        if(joueur.IdVéhicule != MOTO)
         {
             UpdateSingleWheel(frontLeftWheelCollider, frontLeftWheelTransform);
             UpdateSingleWheel(frontRightWheelCollider, frontRightWheelTransform);
