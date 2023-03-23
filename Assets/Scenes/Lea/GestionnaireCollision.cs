@@ -5,124 +5,65 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(GestionnaireJeux))]
+[RequireComponent(typeof(Player))]
+
+
 public class GestionnaireCollision : MonoBehaviour
 {
     [SerializeField] private int coucheCollisionObstacle;
     [SerializeField] private int coucheCollisionCoin;
     [SerializeField] private int coucheCollisionBonus;
 
-    public List<PlayerData> players;
-    public GénérateurCoins générateurC;
-    private int nbJoueur = 0;
+    [SerializeField] GameObject coin;
+
+    public List<Vector3> points;
+
+    public bool isMainPlayer1;
+
+    public bool isMainPlayer2;
+    //public List<PlayerData> players;
+    private GénérateurCoins générateurC;
     private Player joueur;
+    private int compteurJoueursPassés;
+    private DataCoin data;
+   
+
     private void Start()
     {
-        
-        players = GetComponent<GestionnaireJeux>().Autos;
-        for (int i = 0; i < players.Count; i++)
-        {
-            if (players[i].IsMainPlayer)
-            {
-                nbJoueur++;
-            }
-        }
+        générateurC = new GénérateurCoins();
+        data = new DataCoin();
     }
 
-    
-    private int compteurJoueursPassés;
-    private int compteurTour = 0;
-    private DataCoin data = new DataCoin();
-    private float temps = 0;
-    private int triggerCount = 0;
-    public int CompteurTour
-    {
-        get => compteurTour;
-    }
-
-    private void Update()
-    {
-        temps += Time.deltaTime;
-    }
-
-    private void OnTriggerEnter(Collider collider)
-    {
-        Debug.Log(collider.name);
-        if (collider.gameObject.layer == 6 && (triggerCount < 1 || temps > 10 ))
-        {
-            triggerCount = 0;
-            
-            if (nbJoueur == 2)
-            {
-                if (collider.gameObject.GetComponentInParent<Player>().IsMainPlayer) //à changer
-                {
-                    compteurJoueursPassés++;
-                }
-
-                if (compteurJoueursPassés ==2)
-                {
-                    triggerCount++;
-                    compteurTour++;  //mettre fin à la partie ici?
-                    compteurJoueursPassés = 0;
-                    
-                }
-
-                if (compteurTour == 4)
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                }
-            }
-            else
-            {
-            
-                if (collider.gameObject.GetComponentInParent<Player>().IsMainPlayer) //à changer
-                {
-                    compteurTour++;
-                    triggerCount++;
-                }
-
-                if (compteurTour == 4)
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                }
-            
-            
-            }
-        }
-        
-    }
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint point = collision.GetContact(0);
-        //Debug.Log(point.otherCollider.gameObject.layer + " o");
-        //Debug.Log(point.thisCollider.gameObject.layer + " t");
-        if (point.thisCollider.gameObject.layer == coucheCollisionObstacle) //Obstacle
+        
+        if (point.otherCollider.gameObject.layer == coucheCollisionObstacle) //Obstacle
         {
             Debug.Log(point.thisCollider.gameObject.layer);
-            point.thisCollider.GetComponentInParent<Player>().EnleverVie(5); //changer cbm de vie
+            point.thisCollider.GetComponent<Player>().EnleverVie(5); //changer cbm de vie
        
             
         }
         if (point.otherCollider.gameObject.layer == coucheCollisionCoin) //Argent
         {
-            joueur = point.thisCollider.GetComponentInParent<Player>();
+            //joueur = point.thisCollider.GetComponent<Player>();
             //joueur.AjouterArgent(1);
-            if (joueur.IsMainPlayer)
+            
+            if (isMainPlayer1)
             {
-                if (joueur.Nom == GetComponent<GestionnaireJeux>().MainPlayer1.name)
+                data.AjouterCoin("InfoPlayer1.txt", 1);
+            }
+            else
+            {
+                if (isMainPlayer2)
                 {
-                    data.AjouterCoin("InfoPlayer1.txt", 1);
-                }
-                else
-                {
-                    if (joueur.Nom == GetComponent<GestionnaireJeux>().MainPlayer2.name)
-                    {
-                        data.AjouterCoin("InfoPlayer2.txt", 1);
-                    }
+                    data.AjouterCoin("InfoPlayer2.txt", 1);
                 }
             }
+            
             Destroy(point.otherCollider.gameObject);
-            générateurC.GénérerCoins(1);
+            générateurC.GénérerCoins(1, points, coin);
             
         }
         if (point.otherCollider.gameObject.layer == coucheCollisionBonus) //Bonus

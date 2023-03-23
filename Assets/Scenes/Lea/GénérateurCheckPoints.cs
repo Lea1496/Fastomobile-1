@@ -25,15 +25,16 @@ public class GénérateurCheckPoints : MonoBehaviour
     private int ind;
     [SerializeField] Material matériaux;
 
-    public void FaireMesh(int indice, List<Vector3> chemin)
+    public void FaireMesh(int indice, List<Vector3> chemin, Vector3[] sommets)
     {
-        //points = sommets;
+        points = sommets;
         ind = indice;
         maillage = new Mesh();
-        MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
+        MeshCollider meshc = gameObject.GetComponent(typeof(MeshCollider)) as MeshCollider;
 //        pointsSpline = GetComponent<GestionnaireJeux>().Chemin;
         pointsSpline = chemin;
-        CréerMesh(pointsSpline);
+        maillage = CréerMesh();
+        GetComponent<MeshFilter>().mesh.Clear();
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
         GetComponent<MeshRenderer>().material = matériaux;
@@ -41,65 +42,50 @@ public class GénérateurCheckPoints : MonoBehaviour
 
     }
 
-    private void CréerMesh(List<Vector3> pointsSpline)
+    private Mesh CréerMesh()
     {
         // le code CréerMeshRoute vient de https://www.youtube.com/watch?v=Q12sb-sOhdI
         Mesh mesh;
-        sommets = new Vector3[4];
-        Vector2[] uvs = new Vector2[sommets.Length];
+        Vector3[] sommetsTri = new Vector3[4];
+        Vector2[] uvs = new Vector2[4];
         int nbTriangles = 2 * pointsSpline.Count;
         int[] triangle = new int[6];
         int indexSom = 0;
         int indexTri = 0;
 
-        //for (int i = 0; i < pointsSpline.Count; i++)
+        
+        sommetsTri[0] = points[ind];
+        sommetsTri[1] = points[ind + 1];
+
+
+
+        //sommets[0] = points[ind];
+        //sommets[1] = points[ind + 1];
+        sommetsTri[2] = new Vector3(sommetsTri[0].x, sommetsTri[0].y + 20, sommetsTri[0].z);
+        sommetsTri[3] = new Vector3(sommetsTri[1].x, sommetsTri[1].y + 20, sommetsTri[1].z);
+
+       // float completePercent = ind / (float)(pointsSpline.Count* 2 - 1);
+        
+        if (ind < pointsSpline.Count - 1)
         {
-            directionAvant = Vector3.zero;
-            if (ind < pointsSpline.Count - 1)
-            {
-                directionAvant += pointsSpline[(ind + 1) % pointsSpline.Count] - pointsSpline[ind];
-            }
-            if (ind > 0)
-            {
-                directionAvant += pointsSpline[ind] - pointsSpline[(ind - 1 + pointsSpline.Count) % pointsSpline.Count];
-            }
-            directionAvant.Normalize();
-            gauche = new Vector3(-directionAvant.z, 0, directionAvant.x);
+            triangle[0] = 0;
+            triangle[1] = 1;
+            triangle[2] = 3;
 
-            sommets[0] = pointsSpline[ind] + gauche * largeurRoute;
-            sommets[1] = pointsSpline[ind] - gauche * largeurRoute;
-
-
-
-            //sommets[0] = points[ind];
-            //sommets[1] = points[ind + 1];
-            sommets[2] = new Vector3(sommets[0].x, sommets[0].y + 20, sommets[0].z);
-            sommets[3] = new Vector3(sommets[1].x, sommets[1].y + 20, sommets[1].z);
-
-            float completePercent = ind / (float)(pointsSpline.Count - 1);
-            uvs[0] = new Vector2(0, completePercent);
-            uvs[1] = new Vector2(1, completePercent);
-
-            if (ind < pointsSpline.Count - 1)
-            {
-                triangle[0] = 0;
-                triangle[1] = 1;
-                triangle[2] = 3;
-
-                triangle[3] = 3;
-                triangle[4] = 2;
-                triangle[5] = 0;
-            }
-
-
-            // mesh = new Mesh();
-            maillage.vertices = sommets;
-            maillage.triangles = triangle;
-            maillage.uv = uvs;
-
-
-
+            triangle[3] = 3;
+            triangle[4] = 2;
+            triangle[5] = 0;
         }
+
+
+        mesh = new Mesh();
+        mesh.vertices = sommetsTri;
+        mesh.triangles = triangle;
+
+
+
+
+        return mesh;
     }
 }
 

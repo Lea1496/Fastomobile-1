@@ -488,7 +488,7 @@ public class CréateurChemin
     private void CréerCheminComplet()
     {
         nbIndices = largeur / 2 * (largeur / 2);
-        tableau1 = new int[largeur / 2 * (largeur / 2 -1)];
+        tableau1 = new int[largeur / 2 * (largeur / 2 - 3)];
         tableau2 = new int[nbIndices];
         tableau3 = new int[nbIndices];
         tableau4 = new int[nbIndices];
@@ -504,7 +504,7 @@ public class CréateurChemin
         compteur = 0;
         for (int i = 0; i < largeur / 2; i++)
         {
-            for (int j = 1; j < largeur / 2; j++)
+            for (int j = 3; j < largeur / 2; j++)
             {
                 tableau1[compteur++] = i * largeur  + j;
             }

@@ -5,20 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class GestionnaireTrigger : MonoBehaviour
 {
-    private List<Player> players;
+    public List<PlayerData> players;
     private int nbJoueur = 0;
     private Player joueur;
     private void Start()
     {
         
         //players = GetComponent<GestionnaireJeux>().Autos;
-        for (int i = 0; i < players.Count; i++)
+/*        for (int i = 0; i < players.Count; i++)
         {
             if (players[i].IsMainPlayer)
             {
                 nbJoueur++;
             }
-        }
+        }*/
     }
 
     

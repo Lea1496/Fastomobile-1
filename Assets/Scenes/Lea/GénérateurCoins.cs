@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 [RequireComponent(typeof(GestionnaireJeux))]
-public class GénérateurCoins : MonoBehaviour
+public class GénérateurCoins 
 {
     private int maxCoins = 15;
 
@@ -15,10 +15,8 @@ public class GénérateurCoins : MonoBehaviour
     private List<int> indices = new List<int>();
    
     
-    public void GénérerCoins(int nbCoins)
+    public void GénérerCoins(int nbCoins, List<Vector3> points, GameObject coin)
     {
-        points = GetComponent<GestionnaireJeux>().Chemin;
-        coin = GetComponent<GestionnaireJeux>().Coin;
         int indice;
         int[] neg = new int[] { -1, 1 };
         int cotéX;
@@ -42,7 +40,7 @@ public class GénérateurCoins : MonoBehaviour
             cotéZ = neg[gen.Next(0, 2)];
             
            
-            Instantiate(coin, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),coin.transform.rotation);
+            GameObject.Instantiate(coin, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),coin.transform.rotation);
             
             
         }
