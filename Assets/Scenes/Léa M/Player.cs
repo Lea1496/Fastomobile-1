@@ -13,7 +13,7 @@ public class Player : MonoBehaviour, IPlayer
     public GameObject Chassis { get; set; }
     public int Puissance { get; set; }
     public int Poids { get; set; }
-    
+    public int Rang { get; set; }
     public bool IsMainPlayer { get; set; }
     
     public Player(/*int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance*/)
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour, IPlayer
         Argent = 0;
     }
 
-    public void CréerPlayer(int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance, int poids, bool isMainPlayer)
+    public void CréerPlayer(int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance, int poids, bool isMainPlayer, int rang)
     {
         Vie = vie;
         Nom = nom;
@@ -39,6 +39,7 @@ public class Player : MonoBehaviour, IPlayer
         Puissance = puissance;
         Poids = poids;
         IsMainPlayer = isMainPlayer;
+        Rang = rang;
     }
     public void AjouterVie(int vieAjoutée)
     {

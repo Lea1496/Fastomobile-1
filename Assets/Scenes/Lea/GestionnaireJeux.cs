@@ -33,13 +33,15 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject coin;
     [SerializeField] private GameObject obj;
     [SerializeField] private Text textCoin;
-    private ScriptSpline CréerRoute;
+    [SerializeField] private Text textRang;
+    [SerializeField] private Text textCoin2;
+    [SerializeField] private Text textRang2;
+    private ScriptSpline créerRoute;
     
     private List<Vector3> chemin;
     private GameObject mainPlayer1;
     private GameObject mainPlayer2;
     private List<PlayerData> autos;
-    Vector3 offSet = new Vector3(-30, 20,0 );
     private CréateurDébutPartie créateur;
     private Vector3 desiredPos;
     private Vector3 desiredPos2;
@@ -47,6 +49,14 @@ public class GestionnaireJeux : MonoBehaviour
     private int compteur = 0;
     private Transform target;
     public List<string> ranking;
+    private Player mainPlayer1Live;
+    private Player mainPlayer2Live;
+    private float wantedRotationAngle;
+    private float wantedHeight;
+
+    private float currentRotationAngle;
+    private float currentHeight;
+    private Quaternion currentRotation;
     public Player MainPlayer1
     {
         get => mainPlayer1.GetComponent<Player>();
@@ -95,95 +105,42 @@ public class GestionnaireJeux : MonoBehaviour
             
         }
     }
-    /*private void WorkThreadFunction1()
-    {
-        try
-        {
-            //new CréateurTerrain(largeur, terrain);
-            Debug.Log("ici!!");
-            chemin = new ScriptBézier(chemin).PointsSpline;
-            Debug.Log(Chemin.Count);
-            CréerRoute.FaireMesh(chemin, point1, point);
-            Debug.Log("ici2");
-            Vector3[] sommets = CréerRoute.sommets;
-            for (int i = 0; i < chemin.Count; i++)
-            {
-                //Instantiate(obj,  Vector3.Lerp(sommets[compteur++], sommets[compteur++], 0.5f), obj.transform.rotation).GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i, chemin);
-            }
-            new GénérateurObstacles(chemin, obstalce1, obstacle2, sommets);
-            Debug.Log(sommets.Length);
-        
-            new GénérateurCoins().GénérerCoins(15, chemin, coin);
-            autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
-            //créateur = new CréateurDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 1], coin, chemin);
-            mainPlayer1 = créateur.MainPlayer1;
-            mainPlayer2 = créateur.MainPlayer2;
-        }
-        catch 
-        {
-           
-        }
-    }
-    private void Refaire1()
-    {
-        Thread thread = new Thread(new ThreadStart(WorkThreadFunction1)) ;
-       
-        thread.Start();
-        if (!thread.Join(new TimeSpan(0, 0, 1)))
-        {
-            Debug.Log("Ça a pas marché");
-            thread.Abort();
-           
-            
-            
-        }
-    }*/
 
-    
-   void Awake()
+    void Awake()
    {
-       
-       CréerRoute = GetComponent<ScriptSpline>();
+       créerRoute = GetComponent<ScriptSpline>();
        Refaire();
-       //Refaire1();
-        new CréateurTerrain(largeur, terrain);
+       new CréateurTerrain(largeur, terrain);
         créateur = GetComponent<CréateurDébutPartie>();
         chemin = new ScriptBézier(chemin).PointsSpline;
-        CréerRoute.FaireMesh(chemin,point1, point);
-        Vector3[] sommets = CréerRoute.sommets;
+        créerRoute.FaireMesh(chemin,point1, point);
+        Vector3[] sommets = créerRoute.sommets;
         GameObject checkpoint;
         for (int i = 0; i < chemin.Count -2; i++)
         {
-
             checkpoint = Instantiate(obj, Vector3.Lerp(sommets[compteur++], sommets[compteur++], 0.5f),
                 obj.transform.rotation);
-            checkpoint.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, chemin, sommets);
-          
-
+            checkpoint.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
         }
         new GénérateurObstacles(chemin, obstalce1, obstacle2, sommets);
-
         new GénérateurCoins().GénérerCoins(15, chemin, coin);
-        autos = new GestionnairePlayer(auto, moto, camion, 1).Joueurs; //à changer
-        Debug.Log(Chemin.Count);
+        autos = new GestionnairePlayer(/*auto, moto, camion,*/ ).Joueurs; //à changer
         créateur.CréerDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 1], chemin);
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
-        //mainPlayer1 =Instantiate(auto, new Vector3(75, 0, 75), auto.transform.rotation);
-
-
    }
 
    private void LateUpdate()
    {
+       mainPlayer1Live = mainPlayer1.GetComponent<Player>();
        //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
        // Calculate the current rotation angles
        target = mainPlayer1.transform;
-       float wantedRotationAngle = target.eulerAngles.y;
-       float wantedHeight = target.position.y + 30;
+       wantedRotationAngle = target.eulerAngles.y;
+       wantedHeight = target.position.y + 30;
 
-       float currentRotationAngle = cam1.transform.eulerAngles.y;
-       float currentHeight = cam1.transform.position.y;
+       currentRotationAngle = cam1.transform.eulerAngles.y;
+       currentHeight = cam1.transform.position.y;
 
        // Damp the rotation around the y-axis
        currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, 3f * Time.deltaTime);
@@ -192,7 +149,7 @@ public class GestionnaireJeux : MonoBehaviour
        currentHeight = Mathf.Lerp(currentHeight, wantedHeight, 2f * Time.deltaTime);
 
        // Convert the angle into a rotation
-       var currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
+       currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
 
        // Set the position of the camera on the x-z plane to:
        // distance meters behind the target
@@ -206,8 +163,51 @@ public class GestionnaireJeux : MonoBehaviour
 
        // Always look at the target
        cam1.transform.LookAt(target);
-       textCoin.text = mainPlayer1.GetComponent<Player>().Argent.ToString();
        
+       //Mon code
+       textCoin.text = mainPlayer1Live.Argent.ToString();
+       textRang.text = mainPlayer1Live.Rang.ToString();
+
+       if (mainPlayer2 != null) 
+       {
+           mainPlayer2Live = mainPlayer2.GetComponent<Player>();
+           
+           //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
+          
+           // Calculate the current rotation angles
+           target = mainPlayer2.transform;
+           wantedRotationAngle = target.eulerAngles.y;
+           wantedHeight = target.position.y + 30;
+
+           currentRotationAngle = cam2.transform.eulerAngles.y;
+           currentHeight = cam2.transform.position.y;
+
+           // Damp the rotation around the y-axis
+           currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, 3f * Time.deltaTime);
+
+           // Damp the height
+           currentHeight = Mathf.Lerp(currentHeight, wantedHeight, 2f * Time.deltaTime);
+
+           // Convert the angle into a rotation
+           currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
+
+           // Set the position of the camera on the x-z plane to:
+           // distance meters behind the target
+           cam2.transform.position = target.position;
+           cam2.transform.position -= currentRotation * Vector3.forward * 30;
+
+           cam1.transform.rotation = Quaternion.Slerp(cam1.transform.rotation, currentRotation, 3f * Time.deltaTime);
+
+           // Set the height of the camera
+           cam2.transform.position = new Vector3(cam2.transform.position.x, currentHeight, cam2.transform.position.z);
+
+           // Always look at the target
+           cam2.transform.LookAt(target);
+       
+           //Mon code
+           textCoin2.text = mainPlayer2Live.Argent.ToString();
+           textRang2.text = mainPlayer2Live.Rang.ToString();
+       }
        
        
        

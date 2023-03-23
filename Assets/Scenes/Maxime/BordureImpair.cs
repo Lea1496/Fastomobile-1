@@ -41,9 +41,6 @@ public class BordureImpair : MonoBehaviour
         {
             if (!EstPair(i))
             {
-                //i--;
-
-                
                 pointsBordureImpair[indexSomImpair] = new Vector3(sommet[i].x, 0, sommet[i].z);
                 pointsBordureImpair[indexSomImpair + 1] = new Vector3(sommet[i].x, sommet[i].y + 5f, sommet[i].z);
 
@@ -73,7 +70,7 @@ public class BordureImpair : MonoBehaviour
                 
                 indexSomImpair += 2;
                 indexTriImpair += 12;
-                //i++;
+                
             }
         }
         

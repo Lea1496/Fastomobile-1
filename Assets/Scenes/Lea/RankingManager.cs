@@ -5,10 +5,28 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class RankingManager : MonoBehaviour
 {
-    public List<string> Ranks { private get;  set; }
-    // Start is called before the first frame update
+    private List<string> Ranks = new List<string>();
+
+    private Player joueur;
+    
+  
     private void OnTriggerEnter(Collider collider)
     {
-        Ranks.Add(collider.GetComponent<Player>().Nom);
+        joueur = collider.GetComponentInParent<Player>();
+        Ranks.Add(joueur.Nom);
+        if (joueur.IsMainPlayer)
+        {
+            for (int i = 0; i < Ranks.Count; i++)
+            {
+                if (Ranks[i] == joueur.Nom)
+                {
+                    joueur.Rang = i + 1;
+                }
+            }
+        }
+        if (Ranks.Count == 12)
+        {
+            Ranks.Clear();
+        }
     }
 }

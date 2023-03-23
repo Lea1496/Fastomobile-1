@@ -16,6 +16,7 @@ public class CréateurDébutPartie: MonoBehaviour
     [SerializeField] private GameObject auto;
     [SerializeField] private GameObject camion;
     [SerializeField] private GameObject moto;
+    private GameObject ligneArr;
     private List<Vector3> points;
     public GameObject MainPlayer1
     {
@@ -55,9 +56,8 @@ public class CréateurDébutPartie: MonoBehaviour
         }
         position = pos;
         Instantiate(arc, new Vector3(position.x + 30, 0, position.z), arc.transform.rotation);
-        GameObject ligneArr = Instantiate(ligne, new Vector3(position.x + 30, 0, position.z), ligne.transform.rotation);
-        ligneArr.AddComponent<GestionnaireTrigger>().players = autos;
-        
+        ligneArr = Instantiate(ligne, new Vector3(position.x + 30, 0, position.z), ligne.transform.rotation);
+
         InstancierAutos();
         
         
@@ -78,16 +78,17 @@ public class CréateurDébutPartie: MonoBehaviour
                     joueurs[compteurAutos].Vie, joueurs[compteurAutos].Nom,
                     joueurs[compteurAutos].IdVéhicule, joueurs[compteurAutos].IdMoteur,
                     joueurs[compteurAutos].Chassis, joueurs[compteurAutos].Puissance,
-                    joueurs[compteurAutos].Poids, joueurs[compteurAutos++].IsMainPlayer);
+                    joueurs[compteurAutos].Poids, joueurs[compteurAutos++].IsMainPlayer, compteurAutos);
+                
                 GestionnaireCollision collisions = thisJoueur.GetComponent<GestionnaireCollision>();
                 
                 collisions.points = points;
-                Debug.Log(thisJoueur.GetComponent<Player>().Nom);
-               
+
                 if (compteurAutos - 1 == 0)
                 {
                     mainPlayer1 = thisJoueur;
                     collisions.isMainPlayer1 = true;
+                    ligneArr.GetComponent<GestionnaireTrigger>().isMainPlayer1 = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
@@ -96,6 +97,7 @@ public class CréateurDébutPartie: MonoBehaviour
 
                 if (compteurAutos - 1 == 1 && joueurs[1].IsMainPlayer)
                 {
+                    ligneArr.GetComponent<GestionnaireTrigger>().isMainPlayer1 = true;
                     mainPlayer2 = thisJoueur;
                     collisions.isMainPlayer2 = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;

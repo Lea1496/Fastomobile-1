@@ -5,56 +5,69 @@ using UnityEngine.SceneManagement;
 
 public class GestionnaireTrigger : MonoBehaviour
 {
-    public List<PlayerData> players;
     private int nbJoueur = 0;
     private Player joueur;
+    public bool isMainPlayer1;
+
+    public bool isMainPlayer2;
     private void Start()
     {
-        
-        //players = GetComponent<GestionnaireJeux>().Autos;
-/*        for (int i = 0; i < players.Count; i++)
+        nbJoueur = 1;
+        if (isMainPlayer2)
         {
-            if (players[i].IsMainPlayer)
-            {
-                nbJoueur++;
-            }
-        }*/
+            nbJoueur = 2;
+        }
     }
 
     
     private int compteurJoueursPassés;
     private int compteurTour = 0;
-    private DataCoin data = new DataCoin();
     private float temps = 0;
-    private int triggerCount = 0;
-    public int CompteurTour
-    {
-        get => compteurTour;
-    }
+    
 
     private void Update()
     {
         temps += Time.deltaTime;
     }
 
+    private List<string> Ranks = new List<string>();
+
+
+    // Start is called before the first frame update
+    
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log(collider.name);
-        if (collider.gameObject.layer == 6 && (triggerCount < 1 || temps > 10 ))
+        joueur = collider.GetComponentInParent<Player>();
+        Ranks.Add(joueur.Nom);
+        if (joueur.IsMainPlayer)
         {
-            triggerCount = 0;
-            
+            for (int i = 0; i < Ranks.Count; i++)
+            {
+                if (Ranks[i] == joueur.Nom)
+                {
+                    joueur.Rang = i + 1;
+                }
+            }
+        }
+
+        if (Ranks.Count == 12)
+        {
+            Ranks.Clear();
+        }
+        Debug.Log(collider.name);
+        if (collider.gameObject.layer == 6)
+        {
+ //AJOUTER QUELQUE CHOSE POUR QUE LE JOUEUR PUISSE PAS REPASSER
             if (nbJoueur == 2)
             {
-                if (collider.gameObject.GetComponentInParent<Player>().IsMainPlayer) //à changer
+                if (collider.gameObject.GetComponentInParent<Player>().IsMainPlayer) 
                 {
                     compteurJoueursPassés++;
                 }
 
                 if (compteurJoueursPassés ==2)
                 {
-                    triggerCount++;
-                    compteurTour++;  //mettre fin à la partie ici?
+                    compteurTour++;  
                     compteurJoueursPassés = 0;
                     
                 }
@@ -70,7 +83,6 @@ public class GestionnaireTrigger : MonoBehaviour
                 if (collider.gameObject.GetComponentInParent<Player>().IsMainPlayer) //à changer
                 {
                     compteurTour++;
-                    triggerCount++;
                 }
 
                 if (compteurTour == 4)

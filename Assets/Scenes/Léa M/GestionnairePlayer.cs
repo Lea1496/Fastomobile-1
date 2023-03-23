@@ -12,20 +12,24 @@ public class GestionnairePlayer
     private int indiceChassis;
     private Random gen = new Random();
     private List<PlayerData> joueurs = new List<PlayerData>(12);
-
+    private int nbJoueurs = 1;
     public List<PlayerData> Joueurs
     {
         get => joueurs;
     }
-    public GestionnairePlayer(GameObject Auto, GameObject Moto, GameObject Camion, int nbJoueurs)
+    public GestionnairePlayer(/*GameObject Auto, GameObject Moto, GameObject Camion,*/)
     {
+        if (GameData.P2.IsMainPlayer = true)
+        {
+            nbJoueurs = 2;
+        }
         GameData.P1.IsMainPlayer = true; // à changer
         GameData.P1.Nom = "YAY";
         joueurs.Add(GameData.P1);
-        auto = Auto;
+        /*auto = Auto;
         moto = Moto;
-        camion = Camion;
-        joueurs[0].Chassis = AssignerChassis(joueurs[0].IdVéhicule);
+        camion = Camion;*/
+        //joueurs[0].Chassis = AssignerChassis(joueurs[0].IdVéhicule);
         joueurs[0].Puissance = AssignerPuissance(joueurs[0].IdMoteur);
         joueurs[0].Poids = AssignerPoids(joueurs[0].IdVéhicule);
         
@@ -36,7 +40,7 @@ public class GestionnairePlayer
             joueurs[i].Vie = 100;
             joueurs[i].IdMoteur = 0;
             indiceChassis = gen.Next(0, 3);
-            joueurs[i].Chassis = AssignerChassis(indiceChassis);
+            //joueurs[i].Chassis = AssignerChassis(indiceChassis);
             joueurs[i].Puissance = AssignerPuissance(gen.Next(0,3));
             joueurs[i].Poids = AssignerPoids(indiceChassis);
            
@@ -77,7 +81,7 @@ public class GestionnairePlayer
 
         return poids;
     }
-    private GameObject AssignerChassis(int indice)
+   /* private GameObject AssignerChassis(int indice)
     {
         GameObject chassis = auto;
         if (indice == 1)
@@ -93,7 +97,7 @@ public class GestionnairePlayer
         }
 
         return chassis;
-    }
+    }*/
 
 
 
