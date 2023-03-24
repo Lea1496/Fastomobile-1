@@ -45,7 +45,7 @@ public class ScriptSpline : MonoBehaviour
         {
             Instantiate(p, sommets[i], p.transform.rotation);
         }
-        Debug.Log(sommets[1]);
+      
     }
 
     private Mesh CréerMeshRoute(List<Vector3> pointsSpline)

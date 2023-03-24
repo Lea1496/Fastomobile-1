@@ -47,7 +47,7 @@ public class Player : MonoBehaviour, IPlayer
     }
     public void EnleverVie(int vieEnlevée)
     {
-        Vie += vieEnlevée;
+        Vie -= vieEnlevée;
     }
 
     public void AjouterArgent(int nbArgent)

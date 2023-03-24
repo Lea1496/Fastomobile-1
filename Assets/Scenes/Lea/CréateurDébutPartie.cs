@@ -55,8 +55,8 @@ public class CréateurDébutPartie: MonoBehaviour
             lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
         }
         position = pos;
-        Instantiate(arc, new Vector3(position.x + 30, 0, position.z), arc.transform.rotation);
-        ligneArr = Instantiate(ligne, new Vector3(position.x + 30, 0, position.z), ligne.transform.rotation);
+        Instantiate(arc, new Vector3(position.x, 0, position.z), arc.transform.rotation);
+        ligneArr = Instantiate(ligne, new Vector3(position.x, 0, position.z), ligne.transform.rotation);
 
         InstancierAutos();
         
@@ -71,7 +71,7 @@ public class CréateurDébutPartie: MonoBehaviour
             for (int j = 0; j < lesAutos.Count / 4; j++)
             {
                 GameObject thisJoueur = Instantiate(lesAutos[compteurAutos],
-                    new Vector3(position.x - 35 * j - 4 * i, 5, (position.z - 37) + 32 * i - 6 * j),
+                    new Vector3(position.x - 35 * j - 4 * i - 30, 5, (position.z - 37) + 32 * i - 6 * j),
                     lesAutos[compteurAutos].transform.rotation);
                 
                 thisJoueur.GetComponent<Player>().CréerPlayer(
@@ -88,7 +88,7 @@ public class CréateurDébutPartie: MonoBehaviour
                 {
                     mainPlayer1 = thisJoueur;
                     collisions.isMainPlayer1 = true;
-                    ligneArr.GetComponent<GestionnaireTrigger>().isMainPlayer1 = true;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().isMainPlayer1 = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
@@ -97,7 +97,7 @@ public class CréateurDébutPartie: MonoBehaviour
 
                 if (compteurAutos - 1 == 1 && joueurs[1].IsMainPlayer)
                 {
-                    ligneArr.GetComponent<GestionnaireTrigger>().isMainPlayer1 = true;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().isMainPlayer2 = true;
                     mainPlayer2 = thisJoueur;
                     collisions.isMainPlayer2 = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;

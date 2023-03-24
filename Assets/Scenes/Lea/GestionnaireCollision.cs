@@ -20,7 +20,7 @@ public class GestionnaireCollision : MonoBehaviour
 
     public bool isMainPlayer1;
 
-    public bool isMainPlayer2;
+    public bool isMainPlayer2 = false;
     //public List<PlayerData> players;
     private GénérateurCoins générateurC;
     private Player joueur;
@@ -41,18 +41,18 @@ public class GestionnaireCollision : MonoBehaviour
         if (point.otherCollider.gameObject.layer == coucheCollisionObstacle) //Obstacle
         {
             Debug.Log(point.thisCollider.gameObject.layer);
-            point.thisCollider.GetComponent<Player>().EnleverVie(5); //changer cbm de vie
-       
-            
+            point.thisCollider.GetComponentInParent<Player>().EnleverVie(5); //changer cbm de vie
         }
         if (point.otherCollider.gameObject.layer == coucheCollisionCoin) //Argent
         {
             //joueur = point.thisCollider.GetComponent<Player>();
             //joueur.AjouterArgent(1);
-            
+            Debug.Log("MONEY");
+            gameObject.GetComponent<Player>().AjouterArgent(1);
             if (isMainPlayer1)
             {
                 data.AjouterCoin("InfoPlayer1.txt", 1);
+               
             }
             else
             {

@@ -19,9 +19,12 @@ public class GestionnairePlayer
     }
     public GestionnairePlayer(/*GameObject Auto, GameObject Moto, GameObject Camion,*/)
     {
-        if (GameData.P2.IsMainPlayer = true)
+       if (GameData.P2.IsMainPlayer)
         {
             nbJoueurs = 2;
+            Debug.Log("ici");
+            GameData.P2.Nom = "YAY1";
+            joueurs.Add(GameData.P2);
         }
         GameData.P1.IsMainPlayer = true; // à changer
         GameData.P1.Nom = "YAY";
@@ -66,16 +69,16 @@ public class GestionnairePlayer
     }
     private int AssignerPoids(int indice)
     {
-        int poids = 150;
+        int poids = 1500;
         if (indice == 1)
         {
-            poids = 50;
+            poids = 500;
         }
         else
         {
             if (indice == 2)
             {
-                poids = 100;
+                poids = 1000;
             }
         }
 

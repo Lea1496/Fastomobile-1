@@ -60,6 +60,7 @@ public class CréateurChemin
         DéterminerChemin2dAléatoire(p2, p3);
         DéterminerChemin2dAléatoire(p3, p4);
         DéterminerChemin2dAléatoire(p4, largeur * 3);
+        tousPointsVisités.Add(largeur * 3);
         tousPointsVisités.Add(largeur * 2);
         tousPointsVisités.Add(largeur);
         tousPointsVisités = RemoveDuplicates(tousPointsVisités);

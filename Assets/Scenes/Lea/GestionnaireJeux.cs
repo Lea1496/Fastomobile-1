@@ -23,9 +23,9 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject point1;
     [SerializeField] public GameObject obstalce1; // à changer
     [SerializeField] private GameObject obstacle2; // à changer
-    [SerializeField] private GameObject auto;
+    /*[SerializeField] private GameObject auto;
     [SerializeField] private GameObject moto;
-    [SerializeField] private GameObject camion;
+    [SerializeField] private GameObject camion;*/
     [SerializeField] private GameObject arc;
     [SerializeField] private GameObject ligneArrivée;
     [SerializeField] private Camera cam1;
@@ -34,8 +34,10 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject obj;
     [SerializeField] private Text textCoin;
     [SerializeField] private Text textRang;
+    [SerializeField] private Text textVie;
     [SerializeField] private Text textCoin2;
     [SerializeField] private Text textRang2;
+    [SerializeField] private Text textVie2;
     private ScriptSpline créerRoute;
     
     private List<Vector3> chemin;
@@ -125,7 +127,7 @@ public class GestionnaireJeux : MonoBehaviour
         new GénérateurObstacles(chemin, obstalce1, obstacle2, sommets);
         new GénérateurCoins().GénérerCoins(15, chemin, coin);
         autos = new GestionnairePlayer(/*auto, moto, camion,*/ ).Joueurs; //à changer
-        créateur.CréerDébutPartie(autos, arc, ligneArrivée, chemin[chemin.Count - 1], chemin);
+        créateur.CréerDébutPartie(autos, arc, ligneArrivée, chemin[0], chemin);
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
    }
@@ -137,7 +139,7 @@ public class GestionnaireJeux : MonoBehaviour
        // Calculate the current rotation angles
        target = mainPlayer1.transform;
        wantedRotationAngle = target.eulerAngles.y;
-       wantedHeight = target.position.y + 30;
+       wantedHeight = target.position.y + 20;
 
        currentRotationAngle = cam1.transform.eulerAngles.y;
        currentHeight = cam1.transform.position.y;
@@ -167,6 +169,7 @@ public class GestionnaireJeux : MonoBehaviour
        //Mon code
        textCoin.text = mainPlayer1Live.Argent.ToString();
        textRang.text = mainPlayer1Live.Rang.ToString();
+       textVie.text = mainPlayer1Live.Vie.ToString();
 
        if (mainPlayer2 != null) 
        {
@@ -177,7 +180,7 @@ public class GestionnaireJeux : MonoBehaviour
            // Calculate the current rotation angles
            target = mainPlayer2.transform;
            wantedRotationAngle = target.eulerAngles.y;
-           wantedHeight = target.position.y + 30;
+           wantedHeight = target.position.y + 20;
 
            currentRotationAngle = cam2.transform.eulerAngles.y;
            currentHeight = cam2.transform.position.y;
@@ -207,6 +210,7 @@ public class GestionnaireJeux : MonoBehaviour
            //Mon code
            textCoin2.text = mainPlayer2Live.Argent.ToString();
            textRang2.text = mainPlayer2Live.Rang.ToString();
+           textVie2.text = mainPlayer2Live.Vie.ToString();
        }
        
        

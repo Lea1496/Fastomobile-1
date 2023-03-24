@@ -94,6 +94,8 @@ public class BehaviourAuto : MonoBehaviour
         {
             frontLeftWheelCollider.motorTorque = verticalI * Puissance;
             frontRightWheelCollider.motorTorque = verticalI * Puissance;
+            rearLeftWheelCollider.motorTorque = verticalI * Puissance;
+            rearRightWheelCollider.motorTorque = verticalI * Puissance;
             currentbreakForce = isBreaking ? breakForce : 0f;
             ApplyBreaking();
             //currentAcceleration = isAccelerating ? accelerationForce/Poids : 0f; // parce F=m*a

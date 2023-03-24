@@ -19,15 +19,9 @@ public class PlayerData :  IPlayer
     
     public PlayerData(/*int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance*/)
     {
-        /*Vie = vie;
-        Nom = nom;
-        IdVéhicule = idVéhicule;
-        IdMoteur = idMoteur;
-        Chassis = chassis;
-        Puissance = puissance;*/
-        //Chassis.tag = Nom;
         IsMainPlayer = false;
         Argent = 0;
+        Vie = 100;
     }
 
     

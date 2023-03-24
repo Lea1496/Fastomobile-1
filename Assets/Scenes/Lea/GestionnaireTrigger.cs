@@ -9,7 +9,7 @@ public class GestionnaireTrigger : MonoBehaviour
     private Player joueur;
     public bool isMainPlayer1;
 
-    public bool isMainPlayer2;
+    public bool isMainPlayer2 = false;
     private void Start()
     {
         nbJoueur = 1;

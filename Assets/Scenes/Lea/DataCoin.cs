@@ -14,7 +14,7 @@ public class DataCoin
 
         using (fluxLecture = new StreamReader(Chemin + nomFichier))
         {
-            if (int.Parse(fluxLecture.ReadLine()) != null)
+//            if (int.Parse(fluxLecture.ReadLine()) != null)
             {
                 nbCoins = int.Parse(fluxLecture.ReadLine());
             }
@@ -33,11 +33,11 @@ public class DataCoin
         int coins;
         using (fluxLecture = new StreamReader(Chemin + nomFichier))
         {
-            if (int.Parse(fluxLecture.ReadLine()) != null)
+            //if (int.Parse(fluxLecture.ReadLine()) != null)
             {
                 coins = int.Parse(fluxLecture.ReadLine());
             }
-            else
+            //else
             {
                 coins = 0;
             }

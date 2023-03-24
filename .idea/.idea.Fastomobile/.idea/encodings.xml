@@ -2,7 +2,10 @@
 <project version="4">
   <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
     <file url="file://$PROJECT_DIR$/Assets/Scenes/Maxime/BordureImpair.cs" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/Assets/Scenes/Maxime/BordureImpairGrande.cs" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/Assets/Scenes/Maxime/BordureImpairGrande1.cs" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Assets/Scenes/Maxime/BordurePair.cs" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/Assets/Scenes/Maxime/BordurePairGrande.cs" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Assets/Scenes/Maxime/ScriptBordure.cs" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/Assets/Scenes/Maxime/ScriptSpline.cs" charset="windows-1252" />
   </component>
