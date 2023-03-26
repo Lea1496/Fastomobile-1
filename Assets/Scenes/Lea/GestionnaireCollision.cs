@@ -45,13 +45,10 @@ public class GestionnaireCollision : MonoBehaviour
         }
         if (point.otherCollider.gameObject.layer == coucheCollisionCoin) //Argent
         {
-            //joueur = point.thisCollider.GetComponent<Player>();
-            //joueur.AjouterArgent(1);
-            Debug.Log("MONEY");
             gameObject.GetComponent<Player>().AjouterArgent(1);
             if (isMainPlayer1)
             {
-                data.AjouterCoin("InfoPlayer1.txt", 1);
+                data.AjouterCoin("InfoPlayer1.txt", 1); //EST-CE QUE JE DEVRAIS À PLACE JUSTE L'AJOUTER QUAND JEU FINIT
                
             }
             else
