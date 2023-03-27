@@ -43,7 +43,13 @@ public class GestionnaireCollision : MonoBehaviour
             Debug.Log(point.thisCollider.gameObject.layer);
             point.thisCollider.GetComponentInParent<Player>().EnleverVie(5); //changer cbm de vie
         }
-        if (point.otherCollider.gameObject.layer == coucheCollisionCoin) //Argent
+        
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == coucheCollisionCoin)
         {
             gameObject.GetComponent<Player>().AjouterArgent(1);
             if (isMainPlayer1)
@@ -59,15 +65,13 @@ public class GestionnaireCollision : MonoBehaviour
                 }
             }
             
-            Destroy(point.otherCollider.gameObject);
+            Destroy(other.gameObject);
             générateurC.GénérerCoins(1, points, coin);
-            
         }
-        if (point.otherCollider.gameObject.layer == coucheCollisionBonus) //Bonus
+        if (other.gameObject.layer == coucheCollisionBonus) //Bonus
         {
             
         }
-        
+
     }
-    
 }

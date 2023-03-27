@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,6 +56,22 @@ public class Player : MonoBehaviour, IPlayer
         Argent += nbArgent;
     }
 
+    private void Start()
+    {
+        StartCoroutine(ActionnerAuto());
+        
+    }
+
+    private IEnumerator ActionnerAuto()
+    {
+        if (IsMainPlayer)
+        {
+            yield return new WaitForSeconds(3f);
+            gameObject.GetComponent<GestionnaireTouches>().enabled = true;
+        }
+        
+        
+    }
     // public bool Acheter(int prix)
     // {
     //     bool peutAcheter = false;

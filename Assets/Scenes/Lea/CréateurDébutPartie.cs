@@ -31,21 +31,20 @@ public class CréateurDébutPartie: MonoBehaviour
         GameObject chassis = auto;
         if (indice == 1)
         {
-            chassis = moto;
+            chassis = camion;
         }
         else
         {
             if (indice == 2)
             {
-                chassis = camion;
+                chassis = moto;
             }
         }
 
         return chassis;
     }
-    public void CréerDébutPartie(List<PlayerData> autos, GameObject arc, GameObject ligne, Vector3 pos,List<Vector3> pts) //behavior auto pour le moment mais surement à changer
+    public void CréerDébutPartie(List<PlayerData> autos, GameObject arc, GameObject ligne, List<Vector3> pts) //behavior auto pour le moment mais surement à changer
     {
-        Debug.Log(pts.Count);
         points = pts;
         posPremier =  new Vector3(335, 0, -50);
         lesAutos = new List<GameObject>();
@@ -54,7 +53,7 @@ public class CréateurDébutPartie: MonoBehaviour
         {
             lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
         }
-        position = pos;
+        position = points[0];
         Instantiate(arc, new Vector3(position.x, 0, position.z), arc.transform.rotation);
         ligneArr = Instantiate(ligne, new Vector3(position.x, 0, position.z), ligne.transform.rotation);
 
@@ -73,8 +72,8 @@ public class CréateurDébutPartie: MonoBehaviour
                 GameObject thisJoueur = Instantiate(lesAutos[compteurAutos],
                     new Vector3(position.x - 35 * j - 4 * i - 30, 5, (position.z - 37) + 32 * i - 6 * j),
                     lesAutos[compteurAutos].transform.rotation);
-                
-                thisJoueur.GetComponent<Player>().CréerPlayer(
+                Player leJoueur = thisJoueur.GetComponent<Player>();
+                leJoueur.CréerPlayer(
                     joueurs[compteurAutos].Vie, joueurs[compteurAutos].Nom,
                     joueurs[compteurAutos].IdVéhicule, joueurs[compteurAutos].IdMoteur,
                     joueurs[compteurAutos].Chassis, joueurs[compteurAutos].Puissance,
@@ -88,8 +87,9 @@ public class CréateurDébutPartie: MonoBehaviour
                 {
                     mainPlayer1 = thisJoueur;
                     collisions.isMainPlayer1 = true;
-                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().isMainPlayer1 = true;
-                    thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1 = leJoueur;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1.IsMainPlayer = true;
+                    //thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                     
@@ -97,10 +97,11 @@ public class CréateurDébutPartie: MonoBehaviour
 
                 if (compteurAutos - 1 == 1 && joueurs[1].IsMainPlayer)
                 {
-                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().isMainPlayer2 = true;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2 = leJoueur;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2.IsMainPlayer = true;
                     mainPlayer2 = thisJoueur;
                     collisions.isMainPlayer2 = true;
-                    thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
+                    //thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                 }

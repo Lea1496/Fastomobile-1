@@ -23,29 +23,20 @@ public class ScriptSpline : MonoBehaviour
     [SerializeField]
     Material matériaux;
 
-    public void FaireMesh(List<Vector3> chemin,GameObject p, GameObject p2)
+    public void FaireMesh(List<Vector3> chemin)
     {
-        Debug.Log("ici!! 3");
         maillage = new Mesh();
-        Debug.Log("ici!! 4");
         MeshCollider meshc = gameObject.GetComponent(typeof(MeshCollider)) as MeshCollider;
         
         pointsSpline = chemin;
-        /*for (int i = 0; i < pointsSpline.Count; i++)
-        {
-            Instantiate(p2, pointsSpline[i], p2.transform.rotation);
-        }*/
+        
         
         maillage = CréerMeshRoute(pointsSpline);
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
         GetComponent<MeshRenderer>().material = matériaux;
         
-        for (int i = 0; i < sommets.Length; i++)
-        {
-            Instantiate(p, sommets[i], p.transform.rotation);
-        }
-      
+       
     }
 
     private Mesh CréerMeshRoute(List<Vector3> pointsSpline)
@@ -97,8 +88,7 @@ public class ScriptSpline : MonoBehaviour
             indexSom += 2;
             indexTri += 6;
         }
-
-        Debug.Log(sommets.Length);
+        
         Mesh mesh = new Mesh();
         mesh.vertices = sommets;
         mesh.triangles = triangle;

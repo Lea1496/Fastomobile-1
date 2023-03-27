@@ -35,8 +35,7 @@ public class BordureImpairGrande : MonoBehaviour
         int[] triangleImpair = new int[nbTrianglesImpair * 6];
         int indexSomImpair = 0;
         int indexTriImpair = 0;
-        int indice = 0;
-        Debug.Log((sommet.Length));
+        
         for (int i = 1; i < sommet.Length ; i++)
         {
             if (!EstPair(i))

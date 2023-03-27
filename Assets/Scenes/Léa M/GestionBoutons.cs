@@ -25,6 +25,7 @@ public class GestionBoutons : MonoBehaviour
     {
         if (isCamion)
         {
+            Debug.Log("camion");
             GameData.P1.IdVéhicule = 1;
             GameData.P1.Vie = 200;
         }
@@ -33,6 +34,7 @@ public class GestionBoutons : MonoBehaviour
     {
         if (isMoto)
         {
+            Debug.Log("ICI");
             GameData.P1.IdVéhicule = 2;
             GameData.P1.Vie = 50;
         }

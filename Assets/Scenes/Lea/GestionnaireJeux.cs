@@ -23,15 +23,15 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject point1;
     [SerializeField] public GameObject obstalce1; // à changer
     [SerializeField] private GameObject obstacle2; // à changer
-    /*[SerializeField] private GameObject auto;
+    [SerializeField] private GameObject auto;
     [SerializeField] private GameObject moto;
-    [SerializeField] private GameObject camion;*/
+    [SerializeField] private GameObject camion;
     [SerializeField] private GameObject arc;
     [SerializeField] private GameObject ligneArrivée;
     [SerializeField] private Camera cam1;
     [SerializeField] private Camera cam2;
     [SerializeField] private GameObject coin;
-    [SerializeField] private GameObject obj;
+    [SerializeField] private GameObject checkpoint;
     [SerializeField] private Text textCoin;
     [SerializeField] private Text textRang;
     [SerializeField] private Text textVie;
@@ -115,19 +115,26 @@ public class GestionnaireJeux : MonoBehaviour
        new CréateurTerrain(largeur, terrain);
         créateur = GetComponent<CréateurDébutPartie>();
         chemin = new ScriptBézier(chemin).PointsSpline;
-        créerRoute.FaireMesh(chemin,point1, point);
+        créerRoute.FaireMesh(chemin);
         Vector3[] sommets = créerRoute.sommets;
         GameObject checkpoint;
+        
+        //Instancie les checkpoints
         for (int i = 0; i < chemin.Count -2; i++)
         {
-            checkpoint = Instantiate(obj, Vector3.Lerp(sommets[compteur++], sommets[compteur++], 0.5f),
-                obj.transform.rotation);
+            checkpoint = Instantiate(this.checkpoint, new Vector3(0,0,0),
+                this.checkpoint.transform.rotation);
             checkpoint.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
         }
+        
+        //Instancie les obstacles 
         new GénérateurObstacles(chemin, obstalce1, obstacle2, sommets);
+        //Instancie les coins
         new GénérateurCoins().GénérerCoins(15, chemin, coin);
+        //Crée la liste de joueurs
         autos = new GestionnairePlayer(/*auto, moto, camion,*/ ).Joueurs; //à changer
-        créateur.CréerDébutPartie(autos, arc, ligneArrivée, chemin[0], chemin);
+        //Crée le début de la partie
+        créateur.CréerDébutPartie(autos, arc, ligneArrivée, chemin);
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
    }

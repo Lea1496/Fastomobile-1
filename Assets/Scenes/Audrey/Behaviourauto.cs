@@ -49,44 +49,7 @@ public class BehaviourAuto : MonoBehaviour
     [SerializeField] private Transform frontWheelTransfrom;
     [SerializeField] private Transform rearWheelTransfrom;
 
-    /*private void AssignerColliders()
-    {
-        WheelCollider[] lesColliders = GetComponentsInChildren<WheelCollider>();
-        Transform[] lesTransforms = GetComponentsInChildren<Transform>();
-        for (int i = 0; i < lesColliders.Length; i++)
-        {
-            if (lesColliders[i].gameObject.name == "left_front_wheel")
-            {
-                frontLeftWheelCollider = lesColliders[i];
-                frontLeftWheelTransform = lesTransforms[i];
-            }
-            else
-            {
-                if (lesColliders[i].gameObject.name == "right_front_wheel")
-                {
-                    frontRightWheelCollider = lesColliders[i];
-                    frontRightWheelTransform = lesTransforms[i];
-                }
-                else
-                {
-                    if (lesColliders[i].gameObject.name == "left_rear_wheel")
-                    {
-                        rearLeftWheelCollider = lesColliders[i];
-                        rearLeftWheelTransform = lesTransforms[i];
-
-                    }
-                    else
-                    {
-                        if (lesColliders[i].gameObject.name == "right_rear_wheel")
-                        {
-                            rearRightWheelCollider = lesColliders[i];
-                            rearRightWheelTransform = lesTransforms[i];
-                        }
-                    }
-                }
-            }
-        }
-    }*/
+    
     public void HandleMotor(float verticalI)
     {
        

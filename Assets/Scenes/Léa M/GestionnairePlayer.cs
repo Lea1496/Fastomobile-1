@@ -17,18 +17,19 @@ public class GestionnairePlayer
     {
         get => joueurs;
     }
-    public GestionnairePlayer(/*GameObject Auto, GameObject Moto, GameObject Camion,*/)
+    public GestionnairePlayer(/*GameObject Auto, GameObject Moto, GameObject Camion*/)
     {
-       if (GameData.P2.IsMainPlayer)
+       
+        GameData.P1.IsMainPlayer = true; // à changer
+        GameData.P1.Nom = "YAY";
+        joueurs.Add(GameData.P1);
+        if (GameData.P2.IsMainPlayer)
         {
             nbJoueurs = 2;
             Debug.Log("ici");
             GameData.P2.Nom = "YAY1";
             joueurs.Add(GameData.P2);
         }
-        GameData.P1.IsMainPlayer = true; // à changer
-        GameData.P1.Nom = "YAY";
-        joueurs.Add(GameData.P1);
         /*auto = Auto;
         moto = Moto;
         camion = Camion;*/
@@ -43,7 +44,7 @@ public class GestionnairePlayer
             joueurs[i].Vie = 100;
             joueurs[i].IdMoteur = 0;
             indiceChassis = gen.Next(0, 3);
-            //joueurs[i].Chassis = AssignerChassis(indiceChassis);
+            joueurs[i].IdVéhicule = indiceChassis;
             joueurs[i].Puissance = AssignerPuissance(gen.Next(0,3));
             joueurs[i].Poids = AssignerPoids(indiceChassis);
            
@@ -52,16 +53,16 @@ public class GestionnairePlayer
 
     private int AssignerPuissance(int indice)
     {
-        int puissance = 15000;
+        int puissance = 1500;
         if (indice == 1)
         {
-            puissance = 50;
+            puissance = 500;
         }
         else
         {
             if (indice == 2)
             {
-                puissance = 10000;
+                puissance = 1000;
             }
         }
 
@@ -69,33 +70,33 @@ public class GestionnairePlayer
     }
     private int AssignerPoids(int indice)
     {
-        int poids = 1500;
+        int poids = 150;
         if (indice == 1)
         {
-            poids = 500;
+            poids = 50;
         }
         else
         {
             if (indice == 2)
             {
-                poids = 1000;
+                poids = 100;
             }
         }
 
         return poids;
     }
-   /* private GameObject AssignerChassis(int indice)
+    /*private GameObject AssignerChassis(int indice)
     {
         GameObject chassis = auto;
         if (indice == 1)
         {
-            chassis = moto;
+            chassis = camion;
         }
         else
         {
             if (indice == 2)
             {
-                chassis = camion;
+                chassis = moto;
             }
         }
 

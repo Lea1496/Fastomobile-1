@@ -24,7 +24,7 @@ public class GénérateurCoins
         int décalageZ;
         int cotéZ;
         Vector3 point;
-        for (int i = 0; i < maxCoins; i++)
+        for (int i = 0; i < nbCoins; i++)
         {
             do
             {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,38 +8,38 @@ public class GestionnaireTrigger : MonoBehaviour
 {
     private int nbJoueur = 0;
     private Player joueur;
-    public bool isMainPlayer1;
+    public Player mainPlayer1;
 
-    public bool isMainPlayer2 = false;
+    public Player mainPlayer2;
     private void Start()
     {
         nbJoueur = 1;
-        if (isMainPlayer2)
+        if (mainPlayer2 != null)
         {
             nbJoueur = 2;
         }
     }
 
-    
-    private int compteurJoueursPassés;
+    private int compteurTourJoueur1;
+    private int compteurTourJoueur2;
     private int compteurTour = 0;
+
     private float temps = 0;
-    
+
+    private List<string> Ranks = new List<string>();
 
     private void Update()
     {
         temps += Time.deltaTime;
     }
 
-    private List<string> Ranks = new List<string>();
-
 
     // Start is called before the first frame update
     
     private void OnTriggerEnter(Collider collider)
     {
-        joueur = collider.GetComponentInParent<Player>();
-        Ranks.Add(joueur.Nom);
+        joueur = collider.gameObject.GetComponentInParent<Player>();
+        /*Ranks.Add(joueur.Nom);
         if (joueur.IsMainPlayer)
         {
             for (int i = 0; i < Ranks.Count; i++)
@@ -54,22 +55,26 @@ public class GestionnaireTrigger : MonoBehaviour
         {
             Ranks.Clear();
         }
-        Debug.Log(collider.name);
+        Debug.Log(collider.name);*/
         if (collider.gameObject.layer == 6)
         {
  //AJOUTER QUELQUE CHOSE POUR QUE LE JOUEUR PUISSE PAS REPASSER
             if (nbJoueur == 2)
             {
-                if (collider.gameObject.GetComponentInParent<Player>().IsMainPlayer) 
+                if (joueur.Nom == mainPlayer1.Nom)
                 {
-                    compteurJoueursPassés++;
+                    compteurTourJoueur1++;
                 }
-
-                if (compteurJoueursPassés ==2)
+                if (joueur.Nom == mainPlayer2.Nom)
                 {
-                    compteurTour++;  
-                    compteurJoueursPassés = 0;
-                    
+                    compteurTourJoueur2++;
+                }
+                if (compteurTourJoueur1 != 0 && compteurTourJoueur2 != 0)
+                {
+                    compteurTour++;
+                    compteurTourJoueur1 = 0;
+                    compteurTourJoueur2 = 0;
+
                 }
 
                 if (compteurTour == 4)
@@ -80,9 +85,10 @@ public class GestionnaireTrigger : MonoBehaviour
             else
             {
             
-                if (collider.gameObject.GetComponentInParent<Player>().IsMainPlayer) //à changer
+                if ((joueur.IsMainPlayer && temps > 15) || ((joueur.IsMainPlayer && compteurTour == 0))) //à changer
                 {
                     compteurTour++;
+                    temps = 0;
                 }
 
                 if (compteurTour == 4)
