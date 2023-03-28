@@ -23,9 +23,9 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject point1;
     [SerializeField] public GameObject obstalce1; // à changer
     [SerializeField] private GameObject obstacle2; // à changer
-    [SerializeField] private GameObject auto;
+   /* [SerializeField] private GameObject auto;
     [SerializeField] private GameObject moto;
-    [SerializeField] private GameObject camion;
+    [SerializeField] private GameObject camion;*/
     [SerializeField] private GameObject arc;
     [SerializeField] private GameObject ligneArrivée;
     [SerializeField] private Camera cam1;
@@ -142,7 +142,9 @@ public class GestionnaireJeux : MonoBehaviour
    private void LateUpdate()
    {
        mainPlayer1Live = mainPlayer1.GetComponent<Player>();
+       
        //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
+       
        // Calculate the current rotation angles
        target = mainPlayer1.transform;
        wantedRotationAngle = target.eulerAngles.y;
@@ -220,27 +222,6 @@ public class GestionnaireJeux : MonoBehaviour
            textVie2.text = mainPlayer2Live.Vie.ToString();
        }
        
-       
-       
-       /*desiredPos = mainPlayer1.transform.position + offSet; 
-       //Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, (15f * Time.smoothDeltaTime) );
-       cam1.transform.position = desiredPos;
-       cam1.transform.rotation = mainPlayer1.transform.rotation;
-       var cameraRotation = mainPlayer1.transform.rotation;
-       cameraRotation.x = 0;
-       cameraRotation.z = 0;
-       cam1.transform.rotation = cameraRotation;
-       cam1.transform.LookAt(mainPlayer1.transform);
-       /*if (mainPlayer2 != null) //faire mieux que ça
-       {
-           desiredPos2 = mainPlayer2.transform.position + offSet;
-           cam1.transform.position = desiredPos;
-           cam1.transform.LookAt(mainPlayer1.transform);
-       }*/
-//       if (GetComponent<GestionnaireCollision>().CompteurTour == 3) // y a t'il y autre façon de faire ça
-       {
-           
-       }
    }
    
 }

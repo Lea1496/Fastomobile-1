@@ -89,7 +89,6 @@ public class CréateurDébutPartie: MonoBehaviour
                     collisions.isMainPlayer1 = true;
                     ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1 = leJoueur;
                     ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1.IsMainPlayer = true;
-                    //thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                     
@@ -101,7 +100,6 @@ public class CréateurDébutPartie: MonoBehaviour
                     ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2.IsMainPlayer = true;
                     mainPlayer2 = thisJoueur;
                     collisions.isMainPlayer2 = true;
-                    //thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                 }

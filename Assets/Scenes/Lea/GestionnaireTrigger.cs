@@ -32,14 +32,12 @@ public class GestionnaireTrigger : MonoBehaviour
     {
         temps += Time.deltaTime;
     }
-
-
-    // Start is called before the first frame update
+    
     
     private void OnTriggerEnter(Collider collider)
     {
         joueur = collider.gameObject.GetComponentInParent<Player>();
-        /*Ranks.Add(joueur.Nom);
+        Ranks.Add(joueur.Nom);
         if (joueur.IsMainPlayer)
         {
             for (int i = 0; i < Ranks.Count; i++)
@@ -55,10 +53,10 @@ public class GestionnaireTrigger : MonoBehaviour
         {
             Ranks.Clear();
         }
-        Debug.Log(collider.name);*/
+        Debug.Log(collider.name);
         if (collider.gameObject.layer == 6)
         {
- //AJOUTER QUELQUE CHOSE POUR QUE LE JOUEUR PUISSE PAS REPASSER
+
             if (nbJoueur == 2)
             {
                 if (joueur.Nom == mainPlayer1.Nom)
