@@ -61,8 +61,8 @@ public class BehaviourAuto : MonoBehaviour
             rearRightWheelCollider.motorTorque = verticalI * Puissance;
             currentbreakForce = isBreaking ? breakForce : 0f;
             ApplyBreaking();
-            //currentAcceleration = isAccelerating ? accelerationForce/Poids : 0f; // parce F=m*a
-            //ApplyAcceleration(verticalI);
+            currentAcceleration = isAccelerating ? accelerationForce/Poids : 0f; // parce F=m*a
+            ApplyAcceleration(verticalI);
         }
         else
         {

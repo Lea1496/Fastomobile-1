@@ -1351,6 +1351,7 @@ MonoBehaviour:
   cam1: {fileID: 963194227}
   cam2: {fileID: 1974713177}
   coin: {fileID: 2595880553212477942, guid: dcb3131067e88664eb517a854310deec, type: 3}
+  bonus: {fileID: 1000014038691284, guid: efebddd0b5766bd499be8b63f581de68, type: 3}
   checkpoint: {fileID: 7082309984549950813, guid: f697af35a13ddc64496e83f65dc18f68, type: 3}
   textCoin: {fileID: 1183569945}
   textRang: {fileID: 1603952794}

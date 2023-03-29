@@ -15,14 +15,14 @@ public class GestionnaireCollision : MonoBehaviour
     [SerializeField] private int coucheCollisionBonus;
 
     [SerializeField] GameObject coin;
-
+    [SerializeField] GameObject bonus;
     public Vector3[] points;
 
     public bool isMainPlayer1;
 
     public bool isMainPlayer2 = false;
     //public List<PlayerData> players;
-    private GénérateurCoins générateurC;
+    private GénérateurObjets générateur;
     private Player joueur;
     private int compteurJoueursPassés;
     private DataCoin data;
@@ -30,7 +30,7 @@ public class GestionnaireCollision : MonoBehaviour
 
     private void Start()
     {
-        générateurC = new GénérateurCoins();
+        générateur = new GénérateurObjets();
         data = new DataCoin();
     }
 
@@ -66,11 +66,12 @@ public class GestionnaireCollision : MonoBehaviour
             }
             
             Destroy(other.gameObject);
-            générateurC.GénérerCoins(1, points, coin);
+            générateur.GénérerCoins(1, points, coin);
         }
         if (other.gameObject.layer == coucheCollisionBonus) //Bonus
         {
-            
+            Destroy(other.gameObject);
+            générateur.GénérerBonus(1, points, bonus);
         }
 
     }

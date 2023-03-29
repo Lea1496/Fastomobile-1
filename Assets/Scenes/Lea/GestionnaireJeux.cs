@@ -31,6 +31,7 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private Camera cam1;
     [SerializeField] private Camera cam2;
     [SerializeField] private GameObject coin;
+    [SerializeField] private GameObject bonus;
     [SerializeField] private GameObject checkpoint;
     [SerializeField] private Text textCoin;
     [SerializeField] private Text textRang;
@@ -127,14 +128,13 @@ public class GestionnaireJeux : MonoBehaviour
             checkpoint.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
         }
         
-        //Instancie les obstacles 
-        new GénérateurObstacles(obstalce1, obstacle2, sommets);
-        //Instancie les coins
-        new GénérateurCoins().GénérerCoins(15, sommets, coin);
+        //Instancie les coins, obstacles et bonus
+        new GénérateurObjets().GénérerObjets(obstalce1, obstacle2, coin, bonus, sommets);
         //Crée la liste de joueurs
         autos = new GestionnairePlayer(/*auto, moto, camion,*/ ).Joueurs; //à changer
         //Crée le début de la partie
         créateur.CréerDébutPartie(autos, chemin, sommets);
+       
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
    }
