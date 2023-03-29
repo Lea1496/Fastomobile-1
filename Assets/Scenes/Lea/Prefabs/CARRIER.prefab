@@ -291,7 +291,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!114 &69337463720263931
 MonoBehaviour:
@@ -340,6 +340,7 @@ MonoBehaviour:
   coucheCollisionCoin: 7
   coucheCollisionBonus: 0
   coin: {fileID: 2595880553212477942, guid: dcb3131067e88664eb517a854310deec, type: 3}
+  bonus: {fileID: 1000014038691284, guid: efebddd0b5766bd499be8b63f581de68, type: 3}
   points: []
   isMainPlayer1: 0
   isMainPlayer2: 0
