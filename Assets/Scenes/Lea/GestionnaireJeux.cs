@@ -25,9 +25,9 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject obstacle2; // à changer
    /* [SerializeField] private GameObject auto;
     [SerializeField] private GameObject moto;
-    [SerializeField] private GameObject camion;*/
+    [SerializeField] private GameObject camion;
     [SerializeField] private GameObject arc;
-    [SerializeField] private GameObject ligneArrivée;
+    [SerializeField] private GameObject ligneArrivée;*/
     [SerializeField] private Camera cam1;
     [SerializeField] private Camera cam2;
     [SerializeField] private GameObject coin;
@@ -128,13 +128,13 @@ public class GestionnaireJeux : MonoBehaviour
         }
         
         //Instancie les obstacles 
-        new GénérateurObstacles(chemin, obstalce1, obstacle2, sommets);
+        new GénérateurObstacles(obstalce1, obstacle2, sommets);
         //Instancie les coins
-        new GénérateurCoins().GénérerCoins(15, chemin, coin);
+        new GénérateurCoins().GénérerCoins(15, sommets, coin);
         //Crée la liste de joueurs
         autos = new GestionnairePlayer(/*auto, moto, camion,*/ ).Joueurs; //à changer
         //Crée le début de la partie
-        créateur.CréerDébutPartie(autos, arc, ligneArrivée, chemin);
+        créateur.CréerDébutPartie(autos, chemin, sommets);
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
    }

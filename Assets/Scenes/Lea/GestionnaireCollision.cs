@@ -16,7 +16,7 @@ public class GestionnaireCollision : MonoBehaviour
 
     [SerializeField] GameObject coin;
 
-    public List<Vector3> points;
+    public Vector3[] points;
 
     public bool isMainPlayer1;
 

@@ -16,8 +16,11 @@ public class CréateurDébutPartie: MonoBehaviour
     [SerializeField] private GameObject auto;
     [SerializeField] private GameObject camion;
     [SerializeField] private GameObject moto;
+    [SerializeField] private GameObject arc;
+    [SerializeField] private GameObject ligne;
     private GameObject ligneArr;
     private List<Vector3> points;
+    private Vector3[] sommets;
     public GameObject MainPlayer1
     {
         get => mainPlayer1;
@@ -43,12 +46,13 @@ public class CréateurDébutPartie: MonoBehaviour
 
         return chassis;
     }
-    public void CréerDébutPartie(List<PlayerData> autos, GameObject arc, GameObject ligne, List<Vector3> pts) //behavior auto pour le moment mais surement à changer
+    public void CréerDébutPartie(List<PlayerData> autos, List<Vector3> pts, Vector3[] som) //behavior auto pour le moment mais surement à changer
     {
         points = pts;
         posPremier =  new Vector3(335, 0, -50);
         lesAutos = new List<GameObject>();
         joueurs = autos;
+        sommets = som;
         for (int i = 0; i < autos.Count; i++)
         {
             lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
@@ -80,8 +84,8 @@ public class CréateurDébutPartie: MonoBehaviour
                     joueurs[compteurAutos].Poids, joueurs[compteurAutos++].IsMainPlayer, compteurAutos);
                 
                 GestionnaireCollision collisions = thisJoueur.GetComponent<GestionnaireCollision>();
-                
-                collisions.points = points;
+
+                collisions.points = sommets;
 
                 if (compteurAutos - 1 == 0)
                 {

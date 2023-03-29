@@ -59,7 +59,7 @@ public class Player : MonoBehaviour, IPlayer
     private void Start()
     {
         StartCoroutine(ActionnerAuto());
-        
+        StopCoroutine(ActionnerAuto());
     }
 
     private IEnumerator ActionnerAuto()

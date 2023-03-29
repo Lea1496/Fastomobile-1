@@ -10,12 +10,10 @@ public class GénérateurCoins
     private Random gen = new Random();
 
     private GameObject coin;
-
-    private List<Vector3> points;
     private List<int> indices = new List<int>();
    
     
-    public void GénérerCoins(int nbCoins, List<Vector3> points, GameObject coin)
+    public void GénérerCoins(int nbCoins, Vector3[] sommets, GameObject coin)
     {
         int indice;
         int[] neg = new int[] { -1, 1 };
@@ -24,25 +22,44 @@ public class GénérateurCoins
         int décalageZ;
         int cotéZ;
         Vector3 point;
+        Debug.Log(sommets.Length);
+        int décalage;
+        
+        Vector3 pointA;
+        Vector3 pointB;
+        Vector3 instanciatePosition;
         for (int i = 0; i < nbCoins; i++)
         {
             do
             {
-                indice = gen.Next(5, points.Count - 8);
-            } while (indices.Contains(indice) && indices.Count != points.Count);
+                indice = gen.Next(3, sommets.Length - 3);
+            } while (indices.Contains(indice));
 
             indices.Add(indice);
-            point = points[indice];
+            /* point = points[indice];
+             
+             cotéX = neg[gen.Next(0, 2)];
+             décalageX = gen.Next(1, 45);
+             décalageZ = gen.Next(1, 45);
+             
+             cotéZ = neg[gen.Next(0, 2)];*/
+            décalage = gen.Next(20, 80);
+            if (indice % 2 == 0)
+            {
+                pointA = sommets[indice];
+                pointB = sommets[indice + 1];
+            }
+            else
+            {
+                pointA = sommets[indice + 1];
+                pointB = sommets[indice + 2];
+            }
             
-            cotéX = neg[gen.Next(0, 2)];
-            décalageX = gen.Next(1, 45);
-            décalageZ = gen.Next(1, 45);
-            cotéZ = neg[gen.Next(0, 2)];
+            instanciatePosition = Vector3.Lerp(pointA, pointB, décalage / 100f);
             
-           
-            GameObject.Instantiate(coin, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),coin.transform.rotation);
-            
-            
+            GameObject.Instantiate(coin,
+                new Vector3(instanciatePosition.x, instanciatePosition.y + 5, instanciatePosition.z),
+                coin.transform.rotation);
         }
     }
         
