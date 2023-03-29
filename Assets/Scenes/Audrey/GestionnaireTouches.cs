@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-// source.https://www.youtube.com/watch?v=p-3S73MaDP8&t=556s&ab_channel=Brackeys
+
+/// Source:https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=587s&ab_channel=GameDevChef
 
 public class GestionnaireTouches : BehaviourAuto
 {
