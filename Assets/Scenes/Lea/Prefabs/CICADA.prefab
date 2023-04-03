@@ -938,6 +938,7 @@ GameObject:
   - component: {fileID: 3281117221796923038}
   - component: {fileID: 5539412352787265945}
   - component: {fileID: 2455426509895015900}
+  - component: {fileID: 614392753400559197}
   m_Layer: 0
   m_Name: CICADA
   m_TagString: Player
@@ -952,7 +953,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6102769514498293530}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.70710677}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.13, y: -0.83, z: -0.23}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
@@ -961,7 +962,7 @@ Transform:
   - {fileID: 8636465768075747038}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!54 &4005492339459347072
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1035,7 +1036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coucheCollisionObstacle: 9
   coucheCollisionCoin: 7
-  coucheCollisionBonus: 0
+  coucheCollisionBonus: 11
   coin: {fileID: 2595880553212477942, guid: dcb3131067e88664eb517a854310deec, type: 3}
   bonus: {fileID: 1000014038691284, guid: efebddd0b5766bd499be8b63f581de68, type: 3}
   points: []
@@ -1054,6 +1055,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.774203, z: 3.5256746}
   m_Center: {x: 0, y: 0.8186229, z: 0.12057247}
+--- !u!114 &614392753400559197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6102769514498293530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5823d2f15a3f9864783222164591c819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backLeft: {fileID: 8620185912326918259}
+  backRight: {fileID: 6969102754267783360}
+  frontLeft: {fileID: 8166318413265339416}
+  frontRight: {fileID: 1337641141387948730}
+  upDir: {x: 0, y: 0, z: 0}
+  carModel: {fileID: 6102769514498293530}
+  raycastPoint: {fileID: 6648181309909814983}
 --- !u!1 &6405075573785876084
 GameObject:
   m_ObjectHideFlags: 0

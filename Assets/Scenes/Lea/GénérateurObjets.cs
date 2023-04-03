@@ -99,14 +99,14 @@ public class GénérateurObjets
             
              if (indice % 2 == 0)
              {
-                 GameObject.Instantiate(obstacle1, new Vector3(instanciatePosition.x, instanciatePosition.y + 5 , instanciatePosition.z),
-                     obstacle1.transform.rotation);
+                 GameObject.Instantiate(obstacle1, new Vector3(instanciatePosition.x, instanciatePosition.y , instanciatePosition.z),
+                     Quaternion.LookRotation( Vector3.Lerp(pointA, pointB, décalage/100f )));
                  //GameObject.Instantiate(obstacle1, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),obstacle1.transform.rotation);
              }
              else
              {
                  GameObject.Instantiate(obstacle2, new Vector3(instanciatePosition.x, instanciatePosition.y + 5 , instanciatePosition.z),
-                     obstacle1.transform.rotation);
+                     Quaternion.LookRotation( Vector3.Lerp(pointA, pointB, décalage/100f )));
                  //GameObject.Instantiate(obstacle2, new Vector3(point.x + cotéX * décalageX, point.y + 5, point.z + cotéZ * décalageZ),obstacle1.transform.rotation);
              }
         }
@@ -142,7 +142,7 @@ public class GénérateurObjets
             }
             instanciatePosition = Vector3.Lerp(pointA, pointB, décalage/100f );
             
-            GameObject.Instantiate(bonus, new Vector3(instanciatePosition.x, instanciatePosition.y + 5 , instanciatePosition.z),
+            GameObject.Instantiate(bonus, new Vector3(instanciatePosition.x, instanciatePosition.y, instanciatePosition.z),
                 bonus.transform.rotation);
         }
         

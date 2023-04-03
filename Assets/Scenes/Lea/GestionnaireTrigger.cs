@@ -86,6 +86,7 @@ public class GestionnaireTrigger : MonoBehaviour
                 if ((joueur.IsMainPlayer && temps > 15) || ((joueur.IsMainPlayer && compteurTour == 0))) //à changer
                 {
                     compteurTour++;
+                    Debug.Log(compteurTour);
                     temps = 0;
                 }
 

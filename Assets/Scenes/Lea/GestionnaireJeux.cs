@@ -131,10 +131,14 @@ public class GestionnaireJeux : MonoBehaviour
         //Instancie les coins, obstacles et bonus
         new GénérateurObjets().GénérerObjets(obstalce1, obstacle2, coin, bonus, sommets);
         //Crée la liste de joueurs
-        autos = new GestionnairePlayer(/*auto, moto, camion,*/ ).Joueurs; //à changer
+        autos = new GestionnairePlayer().Joueurs; //à changer
         //Crée le début de la partie
         créateur.CréerDébutPartie(autos, chemin, sommets);
        
+        TerrainData theTerrain = new Object2Terrain().CreateTerrain1(gameObject);
+        GameObject terrainObject = Terrain.CreateTerrainGameObject(theTerrain);
+        terrainObject.transform.SetLocalPositionAndRotation(new Vector3(-68,-1,-68), terrainObject.transform.rotation);
+      
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
    }

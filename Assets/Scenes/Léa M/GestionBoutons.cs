@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,6 +13,22 @@ public class GestionBoutons : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void ToggleUnJoueur(bool isUnJoueur)
+    {
+        if (isUnJoueur)
+        {
+            GameData.P1.IsMainPlayer = true;
+            GameData.P2.IsMainPlayer = false;
+        }
+    }
+    public void ToggleDeuxJoueurs(bool isDeuxJoueurs)
+    {
+        if (isDeuxJoueurs)
+        {
+            GameData.P1.IsMainPlayer = true;
+            GameData.P2.IsMainPlayer = true;
+        }
+    }
     //Choix voiture
     public void ToggleVoiture(bool isVoiture)
     {

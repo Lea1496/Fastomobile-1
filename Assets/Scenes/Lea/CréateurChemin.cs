@@ -584,11 +584,11 @@ public class CréateurChemin
         CréerCheminComplet();
         verif = new List<int>();
         maxCotes = listePos.Count / 5;
-        //CréerCotes();
+        CréerCotes();
     }
 
 
-    /*private void CréerCotes()
+    private void CréerCotes()
     {
 
         int pos;
@@ -624,7 +624,7 @@ public class CréateurChemin
             listePos[pos + 1] = new Vector3(listePos[pos + 1].x, bond, listePos[pos + 1].z);
         }
 
-    }*/
+    }
 }
 
     
