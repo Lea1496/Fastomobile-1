@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 //[RequireComponent(typeof(Player))]
 
+/// Source:https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=587s&ab_channel=GameDevChef
+
+
 public class BehaviourAuto : MonoBehaviour
 { 
     //source.https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=183s&ab_channel=GameDevChef
