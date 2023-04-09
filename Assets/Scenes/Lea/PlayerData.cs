@@ -16,9 +16,13 @@ public class PlayerData :  IPlayer
     public int Poids { get; set; }
     
     public bool IsMainPlayer { get; set; }
+    public bool IsMainPlayer1 { get; set; }
+    public bool IsMainPlayer2 { get; set; }
     
     public PlayerData(/*int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance*/)
     {
+        IsMainPlayer1 = false;
+        IsMainPlayer2 = false;
         IsMainPlayer = false;
         Argent = 0;
         Vie = 100;

@@ -16,16 +16,11 @@ public class Player : MonoBehaviour, IPlayer
     public int Poids { get; set; }
     public int Rang { get; set; }
     public bool IsMainPlayer { get; set; }
+    public bool IsMainPlayer1 { get; set; }
+    public bool IsMainPlayer2 { get; set; }
     
-    public Player(/*int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance*/)
+    public Player()
     {
-        /*Vie = vie;
-        Nom = nom;
-        IdVéhicule = idVéhicule;
-        IdMoteur = idMoteur;
-        Chassis = chassis;
-        Puissance = puissance;*/
-        //Chassis.tag = Nom;
         IsMainPlayer = false;
         Argent = 0;
     }

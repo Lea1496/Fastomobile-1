@@ -39,6 +39,7 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private Text textCoin2;
     [SerializeField] private Text textRang2;
     [SerializeField] private Text textVie2;
+    [SerializeField] private GameObject PlayerData2;
     private ScriptSpline créerRoute;
     
     private List<Vector3> chemin;
@@ -51,6 +52,7 @@ public class GestionnaireJeux : MonoBehaviour
     private GameObject ligne;
     private int compteur = 0;
     private Transform target;
+    private Transform target2;
     public List<string> ranking;
     private Player mainPlayer1Live;
     private Player mainPlayer2Live;
@@ -60,6 +62,13 @@ public class GestionnaireJeux : MonoBehaviour
     private float currentRotationAngle;
     private float currentHeight;
     private Quaternion currentRotation;
+    
+    private float wantedRotationAngle2;
+    private float wantedHeight2;
+
+    private float currentRotationAngle2;
+    private float currentHeight2;
+    private Quaternion currentRotation2;
     public Player MainPlayer1
     {
         get => mainPlayer1.GetComponent<Player>();
@@ -119,13 +128,20 @@ public class GestionnaireJeux : MonoBehaviour
         créerRoute.FaireMesh(chemin);
         Vector3[] sommets = créerRoute.sommets;
         GameObject checkpoint;
-        
+        if (GameData.P2.IsMainPlayer)
+        {
+            cam2.gameObject.SetActive(true);
+            cam1.rect = new Rect(0.5f, 0, 0.5f, 1);
+            PlayerData2.SetActive(true);
+        }
         //Instancie les checkpoints
         for (int i = 0; i < chemin.Count -2; i++)
         {
             checkpoint = Instantiate(this.checkpoint, new Vector3(0,0,0),
                 this.checkpoint.transform.rotation);
             checkpoint.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
+            DontDestroyOnLoad(checkpoint);
+            checkpoint.tag = "Checkpoint";
         }
         
         //Instancie les coins, obstacles et bonus
@@ -184,41 +200,41 @@ public class GestionnaireJeux : MonoBehaviour
        textRang.text = mainPlayer1Live.Rang.ToString();
        textVie.text = mainPlayer1Live.Vie.ToString();
 
-       if (mainPlayer2 != null) 
+       if (GameData.P2.IsMainPlayer) 
        {
            mainPlayer2Live = mainPlayer2.GetComponent<Player>();
            
            //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
           
            // Calculate the current rotation angles
-           target = mainPlayer2.transform;
-           wantedRotationAngle = target.eulerAngles.y;
-           wantedHeight = target.position.y + 20;
+           target2 = mainPlayer2.transform;
+           wantedRotationAngle2 = target2.eulerAngles.y;
+           wantedHeight2 = target2.position.y + 20;
 
-           currentRotationAngle = cam2.transform.eulerAngles.y;
-           currentHeight = cam2.transform.position.y;
+           currentRotationAngle2 = cam2.transform.eulerAngles.y;
+           currentHeight2 = cam2.transform.position.y;
 
            // Damp the rotation around the y-axis
-           currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, 3f * Time.deltaTime);
+           currentRotationAngle2 = Mathf.LerpAngle(currentRotationAngle2, wantedRotationAngle2, 3f * Time.deltaTime);
 
            // Damp the height
-           currentHeight = Mathf.Lerp(currentHeight, wantedHeight, 2f * Time.deltaTime);
+           currentHeight2 = Mathf.Lerp(currentHeight2, wantedHeight2, 2f * Time.deltaTime);
 
            // Convert the angle into a rotation
-           currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
+           currentRotation2 = Quaternion.Euler(0, currentRotationAngle2, 0);
 
            // Set the position of the camera on the x-z plane to:
            // distance meters behind the target
-           cam2.transform.position = target.position;
-           cam2.transform.position -= currentRotation * Vector3.forward * 30;
+           cam2.transform.position = target2.position;
+           cam2.transform.position -= currentRotation2 * Vector3.forward * 30;
 
-           cam1.transform.rotation = Quaternion.Slerp(cam1.transform.rotation, currentRotation, 3f * Time.deltaTime);
+           cam2.transform.rotation = Quaternion.Slerp(cam2.transform.rotation, currentRotation2, 3f * Time.deltaTime);
 
            // Set the height of the camera
-           cam2.transform.position = new Vector3(cam2.transform.position.x, currentHeight, cam2.transform.position.z);
+           cam2.transform.position = new Vector3(cam2.transform.position.x, currentHeight2, cam2.transform.position.z);
 
            // Always look at the target
-           cam2.transform.LookAt(target);
+           cam2.transform.LookAt(target2);
        
            //Mon code
            textCoin2.text = mainPlayer2Live.Argent.ToString();

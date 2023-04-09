@@ -19,8 +19,7 @@ public class GestionnairePlayer
     }
     public GestionnairePlayer(/*GameObject Auto, GameObject Moto, GameObject Camion*/)
     {
-       
-        GameData.P1.IsMainPlayer = true; // à changer
+        
         GameData.P1.Nom = "YAY";
         joueurs.Add(GameData.P1);
         if (GameData.P2.IsMainPlayer)

@@ -17,10 +17,7 @@ public class GestionnaireCollision : MonoBehaviour
     [SerializeField] GameObject coin;
     [SerializeField] GameObject bonus;
     public Vector3[] points;
-
-    public bool isMainPlayer1;
-
-    public bool isMainPlayer2 = false;
+    
     //public List<PlayerData> players;
     private GénérateurObjets générateur;
     private Player joueur;
@@ -51,19 +48,6 @@ public class GestionnaireCollision : MonoBehaviour
         if (other.gameObject.layer == coucheCollisionCoin)
         {
             gameObject.GetComponent<Player>().AjouterArgent(1);
-            if (isMainPlayer1)
-            {
-                data.AjouterCoin("InfoPlayer1.txt", 1); //EST-CE QUE JE DEVRAIS À PLACE JUSTE L'AJOUTER QUAND JEU FINIT
-               
-            }
-            else
-            {
-                if (isMainPlayer2)
-                {
-                    data.AjouterCoin("InfoPlayer2.txt", 1);
-                }
-            }
-            
             Destroy(other.gameObject);
             générateur.GénérerCoins(1, points, coin);
         }

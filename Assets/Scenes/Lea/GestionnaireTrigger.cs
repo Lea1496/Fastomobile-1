@@ -11,6 +11,8 @@ public class GestionnaireTrigger : MonoBehaviour
     public Player mainPlayer1;
 
     public Player mainPlayer2;
+    private const string CheminPlayer1 = "InfoPlayer1.txt";
+    private const string CheminPlayer2 = "InfoPlayer2.txt";
     private void Start()
     {
         nbJoueur = 1;
@@ -23,6 +25,7 @@ public class GestionnaireTrigger : MonoBehaviour
     private int compteurTourJoueur1;
     private int compteurTourJoueur2;
     private int compteurTour = 0;
+    private DataCoin data;
 
     private float temps = 0;
 
@@ -62,14 +65,27 @@ public class GestionnaireTrigger : MonoBehaviour
                 if (joueur.Nom == mainPlayer1.Nom)
                 {
                     compteurTourJoueur1++;
+                    if (compteurTourJoueur1 == 4)
+                    {
+                        data.AjouterCoin(CheminPlayer1, joueur.Argent);
+                    }
                 }
-                if (joueur.Nom == mainPlayer2.Nom)
+                else
                 {
-                    compteurTourJoueur2++;
+                    if (joueur.Nom == mainPlayer2.Nom)
+                    {
+                        compteurTourJoueur2++;
+                        if (compteurTourJoueur2 == 4)
+                        {
+                            data.AjouterCoin(CheminPlayer2, joueur.Argent);
+                        }
+                    }
                 }
-                if (compteurTourJoueur1 != 0 && compteurTourJoueur2 != 0)
+                
+                if (compteurTourJoueur1 > compteurTour && compteurTourJoueur2 > compteurTour)
                 {
                     compteurTour++;
+                    
                     compteurTourJoueur1 = 0;
                     compteurTourJoueur2 = 0;
 
@@ -90,7 +106,7 @@ public class GestionnaireTrigger : MonoBehaviour
                     temps = 0;
                 }
 
-                if (compteurTour == 4)
+                if (compteurTour == 4 || Time.deltaTime > 10)
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
