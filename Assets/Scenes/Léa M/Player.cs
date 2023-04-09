@@ -18,11 +18,16 @@ public class Player : MonoBehaviour, IPlayer
     public bool IsMainPlayer { get; set; }
     public bool IsMainPlayer1 { get; set; }
     public bool IsMainPlayer2 { get; set; }
-    
+    public int Tour { get; set; }
+    public bool IsFinished { get; set; }
     public Player()
     {
         IsMainPlayer = false;
+        IsMainPlayer1 = false;
+        IsMainPlayer2 = false;
         Argent = 0;
+        Tour = 0;
+        IsFinished = false;
     }
 
     public void CréerPlayer(int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance, int poids, bool isMainPlayer, int rang)
@@ -67,18 +72,7 @@ public class Player : MonoBehaviour, IPlayer
         
         
     }
-    // public bool Acheter(int prix)
-    // {
-    //     bool peutAcheter = false;
-    //     if (GameData.P1.Argent >= prix)
-    //     {
-    //         GameData.P1.Argent -= prix;
-    //         peutAcheter = true;
-    //         
-    //     }
-    //
-    //     return peutAcheter;
-    // }
+    
 
 
 }

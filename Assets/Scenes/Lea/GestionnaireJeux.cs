@@ -39,6 +39,10 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private Text textCoin2;
     [SerializeField] private Text textRang2;
     [SerializeField] private Text textVie2;
+    [SerializeField] private Text textLaps;
+    [SerializeField] private Text textLaps2;
+    [SerializeField] private Text textFinish;
+    [SerializeField] private Text textFinish2;
     [SerializeField] private GameObject PlayerData2;
     private ScriptSpline créerRoute;
     
@@ -162,6 +166,12 @@ public class GestionnaireJeux : MonoBehaviour
    private void LateUpdate()
    {
        mainPlayer1Live = mainPlayer1.GetComponent<Player>();
+
+       if (mainPlayer1Live.IsFinished)
+       {
+           mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
+           textFinish.enabled = true;
+       }
        
        //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
        
@@ -199,11 +209,16 @@ public class GestionnaireJeux : MonoBehaviour
        textCoin.text = mainPlayer1Live.Argent.ToString();
        textRang.text = mainPlayer1Live.Rang.ToString();
        textVie.text = mainPlayer1Live.Vie.ToString();
+       textLaps.text = $"{mainPlayer1Live.Tour}/3";
 
        if (GameData.P2.IsMainPlayer) 
        {
            mainPlayer2Live = mainPlayer2.GetComponent<Player>();
-           
+           if (mainPlayer2Live.IsFinished)
+           {
+               mainPlayer2.GetComponent<GestionnaireTouches>().enabled = false;
+               textFinish2.enabled = true;
+           }
            //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
           
            // Calculate the current rotation angles
@@ -240,6 +255,7 @@ public class GestionnaireJeux : MonoBehaviour
            textCoin2.text = mainPlayer2Live.Argent.ToString();
            textRang2.text = mainPlayer2Live.Rang.ToString();
            textVie2.text = mainPlayer2Live.Vie.ToString();
+           textLaps2.text = $"{mainPlayer2Live.Tour}/3";
        }
        
    }

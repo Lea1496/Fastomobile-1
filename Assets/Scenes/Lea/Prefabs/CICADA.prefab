@@ -1040,8 +1040,6 @@ MonoBehaviour:
   coin: {fileID: 2595880553212477942, guid: dcb3131067e88664eb517a854310deec, type: 3}
   bonus: {fileID: 1000014038691284, guid: efebddd0b5766bd499be8b63f581de68, type: 3}
   points: []
-  isMainPlayer1: 0
-  isMainPlayer2: 0
 --- !u!65 &2455426509895015900
 BoxCollider:
   m_ObjectHideFlags: 0

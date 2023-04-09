@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3899213793330139139}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: "LigneArriv\xE9e"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 5166461754330337346}
   - component: {fileID: 5659789225839190550}
   - component: {fileID: 7991431198317033249}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,5 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6ca069d4b35e94e99bdef1d5da672d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMainPlayer1: 0
-  isMainPlayer2: 0
+  mainPlayer1: {fileID: 0}
+  mainPlayer2: {fileID: 0}
+  ranks: []

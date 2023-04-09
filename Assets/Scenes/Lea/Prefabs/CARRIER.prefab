@@ -508,8 +508,6 @@ MonoBehaviour:
   coin: {fileID: 2595880553212477942, guid: dcb3131067e88664eb517a854310deec, type: 3}
   bonus: {fileID: 1000014038691284, guid: efebddd0b5766bd499be8b63f581de68, type: 3}
   points: []
-  isMainPlayer1: 0
-  isMainPlayer2: 0
 --- !u!65 &6908441412559658571
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -742,7 +740,6 @@ GameObject:
   - component: {fileID: 6125417884057442946}
   - component: {fileID: 6125417884056344642}
   - component: {fileID: 6125417884068033858}
-  - component: {fileID: 7042664883985083197}
   m_Layer: 6
   m_Name: CARRIER_LOW
   m_TagString: Untagged
@@ -835,20 +832,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!64 &7042664883985083197
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6125417884058535554}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 8ad2b04b404b5794d9868fa7e1b1ea74, type: 3}
 --- !u!1 &7135562780818884317
 GameObject:
   m_ObjectHideFlags: 0

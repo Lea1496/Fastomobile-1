@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class RankingManager : MonoBehaviour
 {
-    private List<string> Ranks = new List<string>();
+    public List<string> ranks = new List<string>();
 
     private Player joueur;
     
@@ -13,20 +13,25 @@ public class RankingManager : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         joueur = collider.GetComponentInParent<Player>();
-        Ranks.Add(joueur.Nom);
+        if (!ranks.Contains(joueur.Nom))
+        {
+            ranks.Add(joueur.Nom);
+        }
+       
+        Debug.Log(joueur.Nom);
         if (joueur.IsMainPlayer)
         {
-            for (int i = 0; i < Ranks.Count; i++)
+            for (int i = 0; i < ranks.Count; i++)
             {
-                if (Ranks[i] == joueur.Nom)
+                if (ranks[i] == joueur.Nom)
                 {
                     joueur.Rang = i + 1;
                 }
             }
         }
-        if (Ranks.Count == 12)
+        if (ranks.Count == 12)
         {
-            Ranks.Clear();
+            ranks.Clear();
         }
     }
 }

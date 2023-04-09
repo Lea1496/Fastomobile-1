@@ -55,11 +55,13 @@ public class CréateurChemin
         tousPointsVisités.Add(1);
         tousPointsVisités.Add(2);
         tousPointsVisités.Add(3);
+        //tousPointsVisités.Add(4);
         DéterminerChemin2dAléatoire(3, p1);
         DéterminerChemin2dAléatoire(p1, p2);
         DéterminerChemin2dAléatoire(p2, p3);
         DéterminerChemin2dAléatoire(p3, p4);
-        DéterminerChemin2dAléatoire(p4, largeur * 3);
+        DéterminerChemin2dAléatoire(p4, largeur * 4);
+        tousPointsVisités.Add(largeur * 4);
         tousPointsVisités.Add(largeur * 3);
         tousPointsVisités.Add(largeur * 2);
         tousPointsVisités.Add(largeur);
@@ -584,7 +586,7 @@ public class CréateurChemin
         CréerCheminComplet();
         verif = new List<int>();
         maxCotes = listePos.Count / 5;
-        CréerCotes();
+        //CréerCotes();
     }
 
 
