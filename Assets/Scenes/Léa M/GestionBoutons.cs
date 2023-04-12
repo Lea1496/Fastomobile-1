@@ -8,8 +8,11 @@ using UnityEngine.UI;
 public class GestionBoutons : MonoBehaviour
 {
     private DataCoin data = new DataCoin();
+    private const string CheminPlayer1 = "InfoPlayer1.txt";
+    private const string CheminPlayer2 = "InfoPlayer2.txt";
     public void DémarrerJeu()
     {
+        
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -29,6 +32,16 @@ public class GestionBoutons : MonoBehaviour
         
     }
 
+    public void NouvellePartie()
+    {
+        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        for (int i = 0; i < checkpoints.Length; i++)
+        {
+            Destroy(checkpoints[i]);
+        }
+        data.EnleverCoin(CheminPlayer1, CheminPlayer2);
+        SceneManager.LoadScene(0);
+    }
     public void RecommencerJeux()
     {
         GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
@@ -36,7 +49,7 @@ public class GestionBoutons : MonoBehaviour
         {
             Destroy(checkpoints[i]);
         }
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
     public void ToggleUnJoueur(bool isUnJoueur)
     {
@@ -58,11 +71,14 @@ public class GestionBoutons : MonoBehaviour
             Debug.Log(GameData.P2.IsMainPlayer);
         }
     }
+    
     //Choix voiture
     public void ToggleVoiture(bool isVoiture)
     {
+        
         if (isVoiture)
         {
+            Debug.Log("ICI");
             GameData.P1.IdVéhicule = 0;
             GameData.P1.Vie = 100;
         }

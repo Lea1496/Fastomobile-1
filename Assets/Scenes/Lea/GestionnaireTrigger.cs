@@ -36,9 +36,9 @@ public class GestionnaireTrigger : MonoBehaviour
     {
         temps1 += Time.deltaTime;
         temps2 += Time.deltaTime;
-        //if (compteurTour == 4 || temps > 10)
+            if (compteurTour == 4 || temps1 > 10)
         {
-           //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+           SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
     
@@ -69,7 +69,7 @@ public class GestionnaireTrigger : MonoBehaviour
             if (nbJoueur == 2)
             {
                 
-                if (joueur.Nom == mainPlayer1.Nom && temps1 > 15)
+                if (joueur.Nom == mainPlayer1.Nom && (temps1 > 15 || compteurTourJoueur1 == 0))
                 {
                     joueur.Tour++;
                     compteurTourJoueur1++;
@@ -82,7 +82,7 @@ public class GestionnaireTrigger : MonoBehaviour
                 }
                 else
                 {
-                    if (joueur.Nom == mainPlayer2.Nom && temps2 > 15)
+                    if (joueur.Nom == mainPlayer2.Nom && (temps2 > 15 || compteurTourJoueur2 == 0))
                     {
                         joueur.Tour++;
                         temps2 = 0;

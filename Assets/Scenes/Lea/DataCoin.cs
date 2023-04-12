@@ -24,6 +24,17 @@ public class DataCoin
         }
     }
 
+    public void EnleverCoin(string nomFichier1, string nomFichier2)
+    {
+        using (fluxÉcriture = new StreamWriter(Chemin + nomFichier1))
+        {
+            fluxÉcriture.Write(0);
+        }
+        using (fluxÉcriture = new StreamWriter(Chemin + nomFichier2))
+        {
+            fluxÉcriture.Write(0);
+        }
+    }
     public int AccederNbCoins(string nomFichier)
     {
         int coins;

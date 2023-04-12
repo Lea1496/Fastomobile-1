@@ -20,13 +20,12 @@ public class GestionnairePlayer
     public GestionnairePlayer(/*GameObject Auto, GameObject Moto, GameObject Camion*/)
     {
         
-        GameData.P1.Nom = "YAY";
+        GameData.P1.Nom = "Player1";
         joueurs.Add(GameData.P1);
         if (GameData.P2.IsMainPlayer)
         {
             nbJoueurs = 2;
-            Debug.Log("ici");
-            GameData.P2.Nom = "YAY1";
+            GameData.P2.Nom = "Player2";
             joueurs.Add(GameData.P2);
         }
         /*auto = Auto;

@@ -155,9 +155,9 @@ public class GestionnaireJeux : MonoBehaviour
         //Crée le début de la partie
         créateur.CréerDébutPartie(autos, chemin, sommets);
        
-        TerrainData theTerrain = new Object2Terrain().CreateTerrain1(gameObject);
-        GameObject terrainObject = Terrain.CreateTerrainGameObject(theTerrain);
-        terrainObject.transform.SetLocalPositionAndRotation(new Vector3(-68,-1,-68), terrainObject.transform.rotation);
+        //TerrainData theTerrain = new Object2Terrain().CreateTerrain1(gameObject);
+        //GameObject terrainObject = Terrain.CreateTerrainGameObject(theTerrain);
+       // terrainObject.transform.SetLocalPositionAndRotation(new Vector3(-68,-1,-68), terrainObject.transform.rotation);
       
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
@@ -208,6 +208,7 @@ public class GestionnaireJeux : MonoBehaviour
        //Mon code
        textCoin.text = mainPlayer1Live.Argent.ToString();
        textRang.text = mainPlayer1Live.Rang.ToString();
+       Debug.Log(mainPlayer1Live.Vie);
        textVie.text = mainPlayer1Live.Vie.ToString();
        textLaps.text = $"{mainPlayer1Live.Tour}/3";
 
@@ -220,7 +221,7 @@ public class GestionnaireJeux : MonoBehaviour
                textFinish2.enabled = true;
            }
            //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
-          
+       
            // Calculate the current rotation angles
            target2 = mainPlayer2.transform;
            wantedRotationAngle2 = target2.eulerAngles.y;
