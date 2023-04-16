@@ -629,6 +629,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6099348359936996214, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
   m_PrefabInstance: {fileID: 836306667}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &836306669 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5148009524915001304, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
+  m_PrefabInstance: {fileID: 836306667}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &857586728 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 116923867105802731, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
@@ -681,7 +692,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.009405231, g: 0.0094164135, b: 0.009433985, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -702,7 +713,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1166,6 +1177,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
+--- !u!114 &1279341330 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5148009524915001304, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
+  m_PrefabInstance: {fileID: 1279341329}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1389459148 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3234696370070856478, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
@@ -1567,6 +1589,8 @@ MonoBehaviour:
   textLaps2: {fileID: 1220469595}
   textFinish: {fileID: 1011992337}
   textFinish2: {fileID: 1063883827}
+  textGameOver: {fileID: 1279341330}
+  textGameOver2: {fileID: 836306669}
   PlayerData2: {fileID: 1069204324}
   ranking: []
 --- !u!114 &1828300579
@@ -1657,7 +1681,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

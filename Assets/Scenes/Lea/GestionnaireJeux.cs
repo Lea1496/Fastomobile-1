@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
@@ -23,11 +24,6 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject point1;
     [SerializeField] public GameObject obstalce1; // à changer
     [SerializeField] private GameObject obstacle2; // à changer
-   /* [SerializeField] private GameObject auto;
-    [SerializeField] private GameObject moto;
-    [SerializeField] private GameObject camion;
-    [SerializeField] private GameObject arc;
-    [SerializeField] private GameObject ligneArrivée;*/
     [SerializeField] private Camera cam1;
     [SerializeField] private Camera cam2;
     [SerializeField] private GameObject coin;
@@ -43,6 +39,8 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private Text textLaps2;
     [SerializeField] private Text textFinish;
     [SerializeField] private Text textFinish2;
+    [SerializeField] private Text textGameOver;
+    [SerializeField] private Text textGameOver2;
     [SerializeField] private GameObject PlayerData2;
     private ScriptSpline créerRoute;
     
@@ -57,12 +55,13 @@ public class GestionnaireJeux : MonoBehaviour
     private int compteur = 0;
     private Transform target;
     private Transform target2;
-    public List<string> ranking;
+   // public List<string> ranking;
     private Player mainPlayer1Live;
     private Player mainPlayer2Live;
     private float wantedRotationAngle;
     private float wantedHeight;
-
+    private bool isGameOver1 = false;
+    private bool isGameOver2 = false;
     private float currentRotationAngle;
     private float currentHeight;
     private Quaternion currentRotation;
@@ -172,7 +171,13 @@ public class GestionnaireJeux : MonoBehaviour
            mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
            textFinish.enabled = true;
        }
-       
+
+       if (mainPlayer1Live.Vie <= 0)
+       {
+           mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
+          GameOver(cam1, textGameOver, 1);
+          isGameOver1 = true;
+       }
        //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
        
        // Calculate the current rotation angles
@@ -208,7 +213,6 @@ public class GestionnaireJeux : MonoBehaviour
        //Mon code
        textCoin.text = mainPlayer1Live.Argent.ToString();
        textRang.text = mainPlayer1Live.Rang.ToString();
-       Debug.Log(mainPlayer1Live.Vie);
        textVie.text = mainPlayer1Live.Vie.ToString();
        textLaps.text = $"{mainPlayer1Live.Tour}/3";
 
@@ -219,7 +223,25 @@ public class GestionnaireJeux : MonoBehaviour
            {
                mainPlayer2.GetComponent<GestionnaireTouches>().enabled = false;
                textFinish2.enabled = true;
+               if (isGameOver1)
+               {
+                   StartCoroutine(FinirPartie());
+                   StopCoroutine(FinirPartie());
+               }
            }
+           if (mainPlayer2Live.Vie <= 0)
+           {
+               mainPlayer2.GetComponent<GestionnaireTouches>().enabled = false;
+               GameOver(cam2, textGameOver2, 2);
+               isGameOver2 = true;
+               if (mainPlayer1Live.IsFinished)
+               {
+                   StartCoroutine(FinirPartie());
+                   StopCoroutine(FinirPartie());
+               }
+
+           }
+           
            //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
        
            // Calculate the current rotation angles
@@ -257,8 +279,49 @@ public class GestionnaireJeux : MonoBehaviour
            textRang2.text = mainPlayer2Live.Rang.ToString();
            textVie2.text = mainPlayer2Live.Vie.ToString();
            textLaps2.text = $"{mainPlayer2Live.Tour}/3";
+           if (mainPlayer1Live.Vie == 0 && mainPlayer2Live.Vie == 0)
+           {
+               SceneManager.LoadScene(5);
+           }
+       }
+
+       if (mainPlayer1Live.Vie == 0 && !GameData.P2.IsMainPlayer )
+       {
+           SceneManager.LoadScene(5);
        }
        
    }
+
+   private IEnumerator FinirPartie()
+   {
+       yield return new WaitForSeconds(1f);
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+   }
+   private void GameOver(Camera cam, Text texte, int indice)
+   {
+       cam.clearFlags = CameraClearFlags.SolidColor;
+       cam.cullingMask = 0;
+       texte.enabled = true;
+       DésactiverTextes(indice);
+   }
+
+   private void DésactiverTextes(int indice)
+   {
+       if (indice == 1)
+       {
+           textCoin.enabled = false;
+           textRang.enabled = false;
+           textVie.enabled = false;
+           textLaps.enabled = false;
+       }
+       else
+       {
+           textCoin2.enabled = false;
+           textRang2.enabled = false;
+           textVie2.enabled = false;
+           textLaps2.enabled = false;
+       }
+   }
+   
    
 }

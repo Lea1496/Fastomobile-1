@@ -586,7 +586,7 @@ public class CréateurChemin
         CréerCheminComplet();
         verif = new List<int>();
         maxCotes = listePos.Count / 5;
-        //CréerCotes();
+        CréerCotes();
     }
 
 
@@ -611,13 +611,13 @@ public class CréateurChemin
 
             if (grandeur == 0)
             {
-                bond = 30;
+                bond = 10;
             }
             else
             {
                 if (grandeur == 1)
                 {
-                    bond = 60;
+                    bond = 20;
                 }
             }
 
