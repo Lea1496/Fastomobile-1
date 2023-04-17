@@ -31,6 +31,7 @@ public class LeaderboardCreator : MonoBehaviour
             }
         }*/
        Player joueurEnTrop = null;
+       
        if (!joueurs[0].GetComponentInChildren<Player>().IsFinished)
        {
            joueurEnTrop = joueurs[0].GetComponentInChildren<Player>();
@@ -47,23 +48,17 @@ public class LeaderboardCreator : MonoBehaviour
        List<string> rang;
        ranking = new List<string>();
        //rang = checkpoints[0].GetComponentInChildren<RankingManager>().ranks;
-       rang = new List<string>();
-
+       rang = new List<string>(12);
+        Debug.Log(joueurs.Length);
        int compt = 1;
        for (int i = 0; i < joueurs.Length; i++)
        {
-           while (rang.Count != joueurs.Length)
+           for (int j = 0; j < joueurs.Length; j++)
            {
-               for (int j = 0; j < joueurs.Length; j++)
-               {
-                   joueur = joueurs[i].GetComponentInChildren<Player>();
-                   if (joueur.Rang == compt && !rang.Contains(joueur.Nom))
-                   { 
-                       rang.Add(joueur.Nom);
-                       compt++;
-                   }
-               }
+               joueur = joueurs[i].GetComponentInChildren<Player>();
+               rang[joueur.Rang - 1] = joueur.Nom;
            }
+           
        }
 
        if (joueurEnTrop != null)

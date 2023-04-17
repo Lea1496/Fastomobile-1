@@ -34,7 +34,7 @@ public class GestionBoutons : MonoBehaviour
 
     public void NouvellePartie()
     {
-        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < checkpoints.Length; i++)
         {
             Destroy(checkpoints[i]);
@@ -44,7 +44,7 @@ public class GestionBoutons : MonoBehaviour
     }
     public void RecommencerJeux()
     {
-        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < checkpoints.Length; i++)
         {
             Destroy(checkpoints[i]);

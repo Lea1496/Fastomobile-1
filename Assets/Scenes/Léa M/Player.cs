@@ -20,6 +20,7 @@ public class Player : MonoBehaviour, IPlayer
     public bool IsMainPlayer2 { get; set; }
     public int Tour { get; set; }
     public bool IsFinished { get; set; }
+    public bool IsGameOver { get; set; }
     public Player()
     {
         IsMainPlayer = false;
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour, IPlayer
         Argent = 0;
         Tour = 0;
         IsFinished = false;
+        IsGameOver = false;
     }
 
     public void CréerPlayer(int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance, int poids, bool isMainPlayer, int rang)

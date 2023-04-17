@@ -34,9 +34,6 @@ public class CréateurChemin
     int[] restrictions = new int[4];
     private List<int> tousPointsVisités = new List<int>();
     public List<int> déjàVisités = new List<int>();
-    List<int> cotes = new List<int>();
-    
-   
     private int maxCotes;
     
     private List<int> verif;
@@ -55,7 +52,6 @@ public class CréateurChemin
         tousPointsVisités.Add(1);
         tousPointsVisités.Add(2);
         tousPointsVisités.Add(3);
-        //tousPointsVisités.Add(4);
         DéterminerChemin2dAléatoire(3, p1);
         DéterminerChemin2dAléatoire(p1, p2);
         DéterminerChemin2dAléatoire(p2, p3);
@@ -348,7 +344,7 @@ public class CréateurChemin
         return newPoint;
     }
 
-    private int VérifierEnHaut(int point, List<int> liste)
+    /*private int VérifierEnHaut(int point, List<int> liste)
     {
         int compteurVerif = 0;
         
@@ -422,9 +418,9 @@ public class CréateurChemin
         }
 
         return compteurVerif;
-    }
+    }*/
     
-    private int VérifierCasesAutour(int point, List<int> liste)
+   /* private int VérifierCasesAutour(int point, List<int> liste)
     {
         int compteurVerif = 0;
         compteurVerif += VérifierDroite(point, liste);
@@ -433,7 +429,7 @@ public class CréateurChemin
         compteurVerif += VérifierEnBas(point, liste);
         
         return compteurVerif;
-    }
+    }*/
     
     
     private int MoveUp(int point, List<int> visités)

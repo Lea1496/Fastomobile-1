@@ -30,11 +30,17 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject bonus;
     [SerializeField] private GameObject checkpoint;
     [SerializeField] private Text textCoin;
+    [SerializeField] private Text textCn;
     [SerializeField] private Text textRang;
+    [SerializeField] private Text textRg;
     [SerializeField] private Text textVie;
+    [SerializeField] private Text textV;
     [SerializeField] private Text textCoin2;
+    [SerializeField] private Text textCn2;
     [SerializeField] private Text textRang2;
+    [SerializeField] private Text textRg2;
     [SerializeField] private Text textVie2;
+    [SerializeField] private Text textV2;
     [SerializeField] private Text textLaps;
     [SerializeField] private Text textLaps2;
     [SerializeField] private Text textFinish;
@@ -55,7 +61,6 @@ public class GestionnaireJeux : MonoBehaviour
     private int compteur = 0;
     private Transform target;
     private Transform target2;
-   // public List<string> ranking;
     private Player mainPlayer1Live;
     private Player mainPlayer2Live;
     private float wantedRotationAngle;
@@ -292,6 +297,55 @@ public class GestionnaireJeux : MonoBehaviour
        
    }
 
+   private void GérerCaméra(Player mainPlayerLive, float currentRotationAngle, float currentHeight,
+       Quaternion currentRotation, float wantedRotationAngle, float wantedHeight)
+   {
+       mainPlayer1Live = mainPlayer1.GetComponent<Player>();
+
+       if (mainPlayer1Live.IsFinished)
+       {
+           mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
+           textFinish.enabled = true;
+       }
+
+       if (mainPlayer1Live.Vie <= 0)
+       {
+           mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
+           GameOver(cam1, textGameOver, 1);
+           isGameOver1 = true;
+       }
+       //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
+       
+       // Calculate the current rotation angles
+       target = mainPlayer1.transform;
+       wantedRotationAngle = target.eulerAngles.y;
+       wantedHeight = target.position.y + 20;
+
+       currentRotationAngle = cam1.transform.eulerAngles.y;
+       currentHeight = cam1.transform.position.y;
+
+       // Damp the rotation around the y-axis
+       currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, 3f * Time.deltaTime);
+
+       // Damp the height
+       currentHeight = Mathf.Lerp(currentHeight, wantedHeight, 2f * Time.deltaTime);
+
+       // Convert the angle into a rotation
+       currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
+
+       // Set the position of the camera on the x-z plane to:
+       // distance meters behind the target
+       cam1.transform.position = target.position;
+       cam1.transform.position -= currentRotation * Vector3.forward * 30;
+
+       cam1.transform.rotation = Quaternion.Slerp(cam1.transform.rotation, currentRotation, 3f * Time.deltaTime);
+
+       // Set the height of the camera
+       cam1.transform.position = new Vector3(cam1.transform.position.x, currentHeight, cam1.transform.position.z);
+
+       // Always look at the target
+       cam1.transform.LookAt(target);
+   }
    private IEnumerator FinirPartie()
    {
        yield return new WaitForSeconds(1f);
@@ -313,6 +367,9 @@ public class GestionnaireJeux : MonoBehaviour
            textRang.enabled = false;
            textVie.enabled = false;
            textLaps.enabled = false;
+           textCn.enabled = false;
+           textRg.enabled = false;
+           textV.enabled = false;
        }
        else
        {
@@ -320,6 +377,9 @@ public class GestionnaireJeux : MonoBehaviour
            textRang2.enabled = false;
            textVie2.enabled = false;
            textLaps2.enabled = false;
+           textCn2.enabled = false;
+           textRg2.enabled = false;
+           textV2.enabled = false;
        }
    }
    
