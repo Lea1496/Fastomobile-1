@@ -138,14 +138,13 @@ public class GestionBoutons : MonoBehaviour
     public void UnlockAvancé()
     {
         int prix = 1000;
-        bool PeutAcheter = Acheter(prix);
+        bool peutAcheter = Acheter(prix);
         
     }
     public void UnlockExpert()
     {
         int prix = 2000;
-        bool PeutAcheter = Acheter(prix);
-        
+        bool peutAcheter = Acheter(prix);
     }
     public void ToggleVoiture2(bool isVoiture)
     {
