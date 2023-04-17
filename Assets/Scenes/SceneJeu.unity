@@ -1580,11 +1580,17 @@ MonoBehaviour:
   bonus: {fileID: 1000014038691284, guid: efebddd0b5766bd499be8b63f581de68, type: 3}
   checkpoint: {fileID: 7082309984549950813, guid: f697af35a13ddc64496e83f65dc18f68, type: 3}
   textCoin: {fileID: 286762940}
+  textCn: {fileID: 0}
   textRang: {fileID: 120116468}
+  textRg: {fileID: 0}
   textVie: {fileID: 857586728}
+  textV: {fileID: 0}
   textCoin2: {fileID: 115546502}
+  textCn2: {fileID: 0}
   textRang2: {fileID: 65040080}
+  textRg2: {fileID: 0}
   textVie2: {fileID: 18517284}
+  textV2: {fileID: 0}
   textLaps: {fileID: 1389459148}
   textLaps2: {fileID: 1220469595}
   textFinish: {fileID: 1011992337}
@@ -1592,7 +1598,6 @@ MonoBehaviour:
   textGameOver: {fileID: 1279341330}
   textGameOver2: {fileID: 836306669}
   PlayerData2: {fileID: 1069204324}
-  ranking: []
 --- !u!114 &1828300579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,7 +1809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7174237940859082719, guid: 08869ae1ab957ab468d0b31198020329, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08869ae1ab957ab468d0b31198020329, type: 3}
