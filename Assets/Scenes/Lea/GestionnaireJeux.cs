@@ -18,8 +18,8 @@ using Debug = UnityEngine.Debug;
 public class GestionnaireJeux : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private int largeur;
-    [SerializeField] private GameObject terrain;
+    [SerializeField] private int largeur;  
+    public GameObject terrain;
     [SerializeField] private GameObject point;
     [SerializeField] private GameObject point1;
     [SerializeField] public GameObject obstalce1; // à changer
