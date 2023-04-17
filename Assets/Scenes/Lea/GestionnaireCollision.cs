@@ -37,7 +37,7 @@ public class GestionnaireCollision : MonoBehaviour
         
         if (point.otherCollider.gameObject.layer == coucheCollisionObstacle) //Obstacle
         {
-            point.thisCollider.GetComponentInParent<Player>().EnleverVie(5); //changer cbm de vie
+            point.thisCollider.GetComponentInParent<Player>().EnleverVie(50); //changer cbm de vie
         }
         
         

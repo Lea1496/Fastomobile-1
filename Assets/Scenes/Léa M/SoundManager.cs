@@ -31,7 +31,7 @@ public static class SoundManager
     	{
     		GameObject soundGameObject = new GameObject("Sound");
     		AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
-    		audioSource.PlayOneShot(GetAudioClip(sound));
+    		//audioSource.PlayOneShot(GetAudioClip(sound));
     	}
     
     }
@@ -87,7 +87,7 @@ public static class SoundManager
     	}
     }
     
-    private static AudioClip GetAudioClip(Sound sound)
+   /* private static AudioClip GetAudioClip(Sound sound)
     {
     	foreach(GameAssets.SoundAudioClip soundAudioClip in GameAssets.i.soundAudioClipArray)
     	{
@@ -96,5 +96,5 @@ public static class SoundManager
     	}
 
         return null;
-    }
+    }*/
 }
