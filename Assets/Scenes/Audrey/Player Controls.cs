@@ -28,126 +28,70 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""id"": ""f9dc6dd1-496d-4aab-8f2d-dbacb634c346"",
             ""actions"": [
                 {
-                    ""name"": ""Accélérer"",
-                    ""type"": ""Button"",
-                    ""id"": ""6224445d-4d47-4bf0-9212-e95394a70acc"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""f6dc95b6-70a4-4f13-90ac-426549d33756"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Arrêter"",
-                    ""type"": ""Button"",
-                    ""id"": ""a273f2ca-be9c-486c-90a7-7cc3423e33de"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Bonus"",
-                    ""type"": ""Button"",
-                    ""id"": ""427763b4-53fe-4cea-9930-6525f5571063"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Avancer"",
-                    ""type"": ""Button"",
-                    ""id"": ""82231c51-b9c1-4bf5-930e-e39bc0df1816"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Tourner Gauche"",
-                    ""type"": ""Button"",
-                    ""id"": ""d061cf67-88e1-46fc-86f3-aedb3381f4e4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Tourner Droite"",
-                    ""type"": ""Button"",
-                    ""id"": ""0c8a54df-5cc3-4dc4-910a-db870969f02c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""ffed55fc-a934-4ede-a8e6-12052866664c"",
-                    ""path"": ""<DualShockGamepad>/rightTrigger"",
+                    ""name"": ""2D Vector"",
+                    ""id"": ""4fffcda7-2e4d-4e65-974a-5c0aefe1b509"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Accélérer"",
-                    ""isComposite"": false,
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""4761aa58-b004-4825-a730-2a80f89506ce"",
-                    ""path"": ""<DualShockGamepad>/leftStick/down"",
+                    ""name"": ""up"",
+                    ""id"": ""eaadaa63-9088-4cdb-9dc6-e910692adf4d"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Arrêter"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""b6543f52-7e61-4586-b333-e3b2c39977e6"",
-                    ""path"": ""<DualShockGamepad>/buttonNorth"",
+                    ""name"": ""down"",
+                    ""id"": ""ea2a158d-0081-4ba4-9331-6f6e6a9a92c2"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Bonus"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""65c8c6f8-ce5a-439a-8d28-df0a8bdef2fa"",
-                    ""path"": ""<DualShockGamepad>/leftStick/up"",
+                    ""name"": ""left"",
+                    ""id"": ""fdc3e0ee-39de-44dd-a4a4-59172383eb37"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Avancer"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""3962d71e-8288-4bfd-a7a5-7a0af76ecfbe"",
-                    ""path"": ""<DualShockGamepad>/rightStick/left"",
+                    ""name"": ""right"",
+                    ""id"": ""24a1ad35-85ab-47dc-a52d-21f195709792"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Tourner Gauche"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bea81cef-3616-406c-bc50-209355e77306"",
-                    ""path"": ""<DualShockGamepad>/rightStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Tourner Droite"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -156,12 +100,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Accélérer = m_Gameplay.FindAction("Accélérer", throwIfNotFound: true);
-        m_Gameplay_Arrêter = m_Gameplay.FindAction("Arrêter", throwIfNotFound: true);
-        m_Gameplay_Bonus = m_Gameplay.FindAction("Bonus", throwIfNotFound: true);
-        m_Gameplay_Avancer = m_Gameplay.FindAction("Avancer", throwIfNotFound: true);
-        m_Gameplay_TournerGauche = m_Gameplay.FindAction("Tourner Gauche", throwIfNotFound: true);
-        m_Gameplay_TournerDroite = m_Gameplay.FindAction("Tourner Droite", throwIfNotFound: true);
+        m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -221,22 +160,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
-    private readonly InputAction m_Gameplay_Accélérer;
-    private readonly InputAction m_Gameplay_Arrêter;
-    private readonly InputAction m_Gameplay_Bonus;
-    private readonly InputAction m_Gameplay_Avancer;
-    private readonly InputAction m_Gameplay_TournerGauche;
-    private readonly InputAction m_Gameplay_TournerDroite;
+    private readonly InputAction m_Gameplay_Move;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Accélérer => m_Wrapper.m_Gameplay_Accélérer;
-        public InputAction @Arrêter => m_Wrapper.m_Gameplay_Arrêter;
-        public InputAction @Bonus => m_Wrapper.m_Gameplay_Bonus;
-        public InputAction @Avancer => m_Wrapper.m_Gameplay_Avancer;
-        public InputAction @TournerGauche => m_Wrapper.m_Gameplay_TournerGauche;
-        public InputAction @TournerDroite => m_Wrapper.m_Gameplay_TournerDroite;
+        public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -246,57 +175,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                @Accélérer.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAccélérer;
-                @Accélérer.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAccélérer;
-                @Accélérer.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAccélérer;
-                @Arrêter.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnArrêter;
-                @Arrêter.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnArrêter;
-                @Arrêter.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnArrêter;
-                @Bonus.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBonus;
-                @Bonus.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBonus;
-                @Bonus.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBonus;
-                @Avancer.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAvancer;
-                @Avancer.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAvancer;
-                @Avancer.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAvancer;
-                @TournerGauche.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTournerGauche;
-                @TournerGauche.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTournerGauche;
-                @TournerGauche.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTournerGauche;
-                @TournerDroite.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTournerDroite;
-                @TournerDroite.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTournerDroite;
-                @TournerDroite.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTournerDroite;
+                @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Accélérer.started += instance.OnAccélérer;
-                @Accélérer.performed += instance.OnAccélérer;
-                @Accélérer.canceled += instance.OnAccélérer;
-                @Arrêter.started += instance.OnArrêter;
-                @Arrêter.performed += instance.OnArrêter;
-                @Arrêter.canceled += instance.OnArrêter;
-                @Bonus.started += instance.OnBonus;
-                @Bonus.performed += instance.OnBonus;
-                @Bonus.canceled += instance.OnBonus;
-                @Avancer.started += instance.OnAvancer;
-                @Avancer.performed += instance.OnAvancer;
-                @Avancer.canceled += instance.OnAvancer;
-                @TournerGauche.started += instance.OnTournerGauche;
-                @TournerGauche.performed += instance.OnTournerGauche;
-                @TournerGauche.canceled += instance.OnTournerGauche;
-                @TournerDroite.started += instance.OnTournerDroite;
-                @TournerDroite.performed += instance.OnTournerDroite;
-                @TournerDroite.canceled += instance.OnTournerDroite;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
             }
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
     public interface IGameplayActions
     {
-        void OnAccélérer(InputAction.CallbackContext context);
-        void OnArrêter(InputAction.CallbackContext context);
-        void OnBonus(InputAction.CallbackContext context);
-        void OnAvancer(InputAction.CallbackContext context);
-        void OnTournerGauche(InputAction.CallbackContext context);
-        void OnTournerDroite(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
     }
 }
