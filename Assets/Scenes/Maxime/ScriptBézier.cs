@@ -51,35 +51,13 @@ public class ScriptBézier
             for (int i = 1; i < 8; i++)
             {
                 t = i / 8f;
-                /*if (j == 0)
-                {
-                    pointsBézier.Add(CalculateBezierPoint(7/8f, p1, p2, p3, p4));
-                    i = 7;
-                    pointsBézier.Remove(pointsBézier[0]);
-                    pointsBézier.Remove(pointsBézier[1]);
-                    position = pointsBézier.Last();
-                }*/
-                //else
-                {
-                    pointsBézier.Add(CalculateBezierPoint(t, p1, p2, p3, p4));
-                    position = pointsBézier.Last();
-                }
                 
+                pointsBézier.Add(CalculateBezierPoint(t, p1, p2, p3, p4));
+                position = pointsBézier.Last();
             }
         }
 
         
-        /*p1 = position;
-        p2 = pointsSpline[dernièrePos];
-        p3 = pointsBézier[1];
-        p4 = pointsSpline[2];
-       
-        for (int i = 0; i < 7; i++)
-        {
-            t = i / 8f;
-            pointsBézier.Add(CalculateBezierPoint(t, p1, p2, p3, p4));
-            pointsBézier[i] = pointsBézier.Last();
-        }*/
         p1 = position;
         p2 = pointsSpline[dernièrePos];
         p3 = pointsBézier[1];
@@ -88,7 +66,6 @@ public class ScriptBézier
         for (int i = 0; i < 8; i++)
         {
             t = i / 8f;
-            //pointsBézier.Add(CalculateBezierPoint(t, p1, p2, p3, p4));
             pointsBézier[i] = CalculateBezierPoint(t, p1, p2, p3, p4);
         }
         pointsBézier[8] = Vector3.Lerp(pointsBézier[7], pointsBézier[9], 0.5f);

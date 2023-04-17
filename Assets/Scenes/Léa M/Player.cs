@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,23 +14,23 @@ public class Player : MonoBehaviour, IPlayer
     public GameObject Chassis { get; set; }
     public int Puissance { get; set; }
     public int Poids { get; set; }
-    
+    public int Rang { get; set; }
     public bool IsMainPlayer { get; set; }
-    
-    public Player(/*int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance*/)
+    public bool IsMainPlayer1 { get; set; }
+    public bool IsMainPlayer2 { get; set; }
+    public int Tour { get; set; }
+    public bool IsFinished { get; set; }
+    public Player()
     {
-        /*Vie = vie;
-        Nom = nom;
-        IdVéhicule = idVéhicule;
-        IdMoteur = idMoteur;
-        Chassis = chassis;
-        Puissance = puissance;*/
-        //Chassis.tag = Nom;
         IsMainPlayer = false;
+        IsMainPlayer1 = false;
+        IsMainPlayer2 = false;
         Argent = 0;
+        Tour = 0;
+        IsFinished = false;
     }
 
-    public void CréerPlayer(int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance, int poids, bool isMainPlayer)
+    public void CréerPlayer(int vie, string nom, int idVéhicule, int idMoteur, GameObject chassis, int puissance, int poids, bool isMainPlayer, int rang)
     {
         Vie = vie;
         Nom = nom;
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour, IPlayer
         Puissance = puissance;
         Poids = poids;
         IsMainPlayer = isMainPlayer;
+        Rang = rang;
     }
     public void AjouterVie(int vieAjoutée)
     {
@@ -46,7 +48,7 @@ public class Player : MonoBehaviour, IPlayer
     }
     public void EnleverVie(int vieEnlevée)
     {
-        Vie += vieEnlevée;
+        Vie -= vieEnlevée;
     }
 
     public void AjouterArgent(int nbArgent)
@@ -54,18 +56,23 @@ public class Player : MonoBehaviour, IPlayer
         Argent += nbArgent;
     }
 
-    // public bool Acheter(int prix)
-    // {
-    //     bool peutAcheter = false;
-    //     if (GameData.P1.Argent >= prix)
-    //     {
-    //         GameData.P1.Argent -= prix;
-    //         peutAcheter = true;
-    //         
-    //     }
-    //
-    //     return peutAcheter;
-    // }
+    private void Start()
+    {
+        StartCoroutine(ActionnerAuto());
+        StopCoroutine(ActionnerAuto());
+    }
+
+    private IEnumerator ActionnerAuto()
+    {
+        if (IsMainPlayer)
+        {
+            yield return new WaitForSeconds(3f);
+            gameObject.GetComponent<GestionnaireTouches>().enabled = true;
+        }
+        
+        
+    }
+    
 
 
 }

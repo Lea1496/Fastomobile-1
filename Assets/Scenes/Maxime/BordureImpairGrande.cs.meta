@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: fe81ad0f5f291784dba4fbc5a7b8d6ac
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - "mat\xE9riauxBordImp": {fileID: 2100000, guid: 815fabd266d558a40a67d0da32898a9b, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

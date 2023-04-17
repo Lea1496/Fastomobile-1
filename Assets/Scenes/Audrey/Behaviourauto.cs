@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 //[RequireComponent(typeof(Player))]
 
+/// Source:https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=587s&ab_channel=GameDevChef
+
+
 public class BehaviourAuto : MonoBehaviour
 { 
     //source.https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=183s&ab_channel=GameDevChef
@@ -12,11 +15,12 @@ public class BehaviourAuto : MonoBehaviour
 
     public int Poids;
     public int Puissance;
-    private const int MOTO = 2;   
+    private const int MOTO = 2;
+    private Player joueur;
 
     void Start()
     {
-      
+        joueur = GetComponent<Player>();
 //        Poids = GameData.P1.GetComponentInParent<Player>().Poids;
 // Puissance = GameData.P1.GetComponentInParent<Player>().Puissance;
         //AssignerColliders();
@@ -48,50 +52,16 @@ public class BehaviourAuto : MonoBehaviour
     [SerializeField] private Transform frontWheelTransfrom;
     [SerializeField] private Transform rearWheelTransfrom;
 
-    /*private void AssignerColliders()
-    {
-        WheelCollider[] lesColliders = GetComponentsInChildren<WheelCollider>();
-        Transform[] lesTransforms = GetComponentsInChildren<Transform>();
-        for (int i = 0; i < lesColliders.Length; i++)
-        {
-            if (lesColliders[i].gameObject.name == "left_front_wheel")
-            {
-                frontLeftWheelCollider = lesColliders[i];
-                frontLeftWheelTransform = lesTransforms[i];
-            }
-            else
-            {
-                if (lesColliders[i].gameObject.name == "right_front_wheel")
-                {
-                    frontRightWheelCollider = lesColliders[i];
-                    frontRightWheelTransform = lesTransforms[i];
-                }
-                else
-                {
-                    if (lesColliders[i].gameObject.name == "left_rear_wheel")
-                    {
-                        rearLeftWheelCollider = lesColliders[i];
-                        rearLeftWheelTransform = lesTransforms[i];
-
-                    }
-                    else
-                    {
-                        if (lesColliders[i].gameObject.name == "right_rear_wheel")
-                        {
-                            rearRightWheelCollider = lesColliders[i];
-                            rearRightWheelTransform = lesTransforms[i];
-                        }
-                    }
-                }
-            }
-        }
-    }*/
+    
     public void HandleMotor(float verticalI)
     {
-        if(GameData.P1.IdVéhicule != MOTO)
+       
+        if(joueur.IdVéhicule != MOTO)
         {
             frontLeftWheelCollider.motorTorque = verticalI * Puissance;
             frontRightWheelCollider.motorTorque = verticalI * Puissance;
+            rearLeftWheelCollider.motorTorque = verticalI * Puissance;
+            rearRightWheelCollider.motorTorque = verticalI * Puissance;
             currentbreakForce = isBreaking ? breakForce : 0f;
             ApplyBreaking();
             currentAcceleration = isAccelerating ? accelerationForce/Poids : 0f; // parce F=m*a
@@ -109,7 +79,7 @@ public class BehaviourAuto : MonoBehaviour
 
     private void ApplyBreaking()
     {
-        if (GameData.P1.IdVéhicule != MOTO)
+        if (joueur.IdVéhicule != MOTO)
         {
             frontRightWheelCollider.brakeTorque = currentbreakForce;
             frontLeftWheelCollider.brakeTorque = currentbreakForce;
@@ -125,7 +95,7 @@ public class BehaviourAuto : MonoBehaviour
 
     private void ApplyAcceleration(float verticalI)
     {
-        if (GameData.P1.IdVéhicule != MOTO)
+        if (joueur.IdVéhicule != MOTO)
         {
             frontRightWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
             frontLeftWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
@@ -139,7 +109,7 @@ public class BehaviourAuto : MonoBehaviour
     public void HandleSteering(float horizontalI)
     {
         currentSteerAngle = maxSteerAngle * horizontalI;
-        if(GameData.P1.IdVéhicule != MOTO)
+        if(joueur.IdVéhicule != MOTO)
         {
             frontLeftWheelCollider.steerAngle = currentSteerAngle;
             frontRightWheelCollider.steerAngle = currentSteerAngle;
@@ -152,7 +122,7 @@ public class BehaviourAuto : MonoBehaviour
 
     public void UpdateWheels()
     {
-        if(GameData.P1.IdVéhicule != MOTO)
+        if(joueur.IdVéhicule != MOTO)
         {
             UpdateSingleWheel(frontLeftWheelCollider, frontLeftWheelTransform);
             UpdateSingleWheel(frontRightWheelCollider, frontRightWheelTransform);

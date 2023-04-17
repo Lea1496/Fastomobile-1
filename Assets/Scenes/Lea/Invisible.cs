@@ -4,12 +4,11 @@ using UnityEngine;
  
 public class Invisible : MonoBehaviour
 {
-    Renderer test;
-    //code de https://vionixstudio.com/2021/08/19/make-a-gameobject-invisible-in-unity/
+    Renderer obj;
     void Start()
     {
-        test= GetComponent<MeshRenderer>();
-        test.enabled= false;
+        obj = GetComponent<MeshRenderer>();
+        obj.enabled= false;
     }
 
 }

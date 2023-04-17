@@ -15,135 +15,83 @@ using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 [RequireComponent(typeof(MeshCollider))]
 public class GénérateurCheckPoints : MonoBehaviour
 {
-    private float largeurRoute = 70f;
-    private List<Vector3> pointsSpline;
-    public Vector3[] sommets;
+    
     Vector3 gauche;
     Vector3 directionAvant;
     private Vector3[] points;
     private Mesh maillage;
     private int ind;
-    [SerializeField] Material matériaux;
+  
 
-    public void FaireMesh(int indice)
+    public void FaireMesh(int indice, Vector3[] sommets)
     {
-        //points = sommets;
+        points = sommets;
         ind = indice;
         maillage = new Mesh();
-        MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
-        pointsSpline = GetComponent<GestionnaireJeux>().Chemin;
-
-        CréerMesh(pointsSpline);
+        MeshCollider meshc = gameObject.GetComponent(typeof(MeshCollider)) as MeshCollider;
+        maillage = CréerMesh();
+        GetComponent<MeshFilter>().mesh.Clear();
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
-        GetComponent<MeshRenderer>().material = matériaux;
-
+        gameObject.GetComponent<MeshCollider>().convex = true;
+        gameObject.GetComponent<MeshCollider>().isTrigger = true;
 
     }
 
-    private void CréerMesh(List<Vector3> pointsSpline)
+    private Mesh CréerMesh()
     {
-        // le code CréerMeshRoute vient de https://www.youtube.com/watch?v=Q12sb-sOhdI
         Mesh mesh;
-        sommets = new Vector3[4];
-        Vector2[] uvs = new Vector2[sommets.Length];
-        int nbTriangles = 2 * pointsSpline.Count;
-        int[] triangle = new int[6];
-        int indexSom = 0;
-        int indexTri = 0;
+        Vector3[] sommetsTri = new Vector3[8];
+        Vector2[] uvs = new Vector2[4];
+        int[] triangle = new int[24];
+        
+        sommetsTri[0] = points[ind];
+        sommetsTri[1] = points[ind + 1];
 
-        //for (int i = 0; i < pointsSpline.Count; i++)
-        {
-            directionAvant = Vector3.zero;
-            if (ind < pointsSpline.Count - 1)
-            {
-                directionAvant += pointsSpline[(ind + 1) % pointsSpline.Count] - pointsSpline[ind];
-            }
-            if (ind > 0)
-            {
-                directionAvant += pointsSpline[ind] - pointsSpline[(ind - 1 + pointsSpline.Count) % pointsSpline.Count];
-            }
-            directionAvant.Normalize();
-            gauche = new Vector3(-directionAvant.z, 0, directionAvant.x);
+        sommetsTri[2] = new Vector3(sommetsTri[0].x, sommetsTri[0].y + 20, sommetsTri[0].z);
+        sommetsTri[3] = new Vector3(sommetsTri[1].x, sommetsTri[1].y + 20, sommetsTri[1].z);
+        sommetsTri[4] = new Vector3(sommetsTri[0].x + 1, sommetsTri[0].y, sommetsTri[0].z);
+        sommetsTri[5] = new Vector3(sommetsTri[1].x +1, sommetsTri[1].y, sommetsTri[1].z);
+        sommetsTri[6] = new Vector3(sommetsTri[0].x +1, sommetsTri[0].y + 20, sommetsTri[0].z);
+        sommetsTri[7] = new Vector3(sommetsTri[1].x +1, sommetsTri[1].y + 20, sommetsTri[1].z);
+        
+            triangle[0] = 0;
+            triangle[1] = 1;
+            triangle[2] = 3;
 
-            sommets[0] = pointsSpline[ind] + gauche * largeurRoute;
-            sommets[1] = pointsSpline[ind] - gauche * largeurRoute;
+            triangle[3] = 3;
+            triangle[4] = 2;
+            triangle[5] = 0;
+            
+            triangle[6] = 7;
+            triangle[7] = 5;
+            triangle[8] = 4;
 
-
-
-            //sommets[0] = points[ind];
-            //sommets[1] = points[ind + 1];
-            sommets[2] = new Vector3(sommets[0].x, sommets[0].y + 20, sommets[0].z);
-            sommets[3] = new Vector3(sommets[1].x, sommets[1].y + 20, sommets[1].z);
-
-            float completePercent = ind / (float)(pointsSpline.Count - 1);
-            uvs[0] = new Vector2(0, completePercent);
-            uvs[1] = new Vector2(1, completePercent);
-
-            if (ind < pointsSpline.Count - 1)
-            {
-                triangle[0] = 0;
-                triangle[1] = 1;
-                triangle[2] = 3;
-
-                triangle[3] = 3;
-                triangle[4] = 2;
-                triangle[5] = 0;
-            }
-
-
-            // mesh = new Mesh();
-            maillage.vertices = sommets;
-            maillage.triangles = triangle;
-            maillage.uv = uvs;
-
-
-
-        }
+            triangle[9] = 4;
+            triangle[10] = 6;
+            triangle[11] = 7;
+            
+            triangle[12] = 1;
+            triangle[13] = 0;
+            triangle[14] = 4;
+            
+            triangle[15] = 1;
+            triangle[16] = 4;
+            triangle[17] = 5;
+            
+            triangle[18] = 2;
+            triangle[19] = 3;
+            triangle[20] = 6;
+            
+            triangle[21] = 3;
+            triangle[22] = 7;
+            triangle[23] = 6;
+            
+        mesh = new Mesh();
+        mesh.vertices = sommetsTri;
+        mesh.triangles = triangle;
+        
+        return mesh;
     }
 }
 
-
-/*public class GénérateurCheckPoints
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    public GénérateurCheckPoints(Vector3[] sommets, GameObject ligne, Transform transform)
-    {
-        Vector3 dernièrePos = new Vector3();
-        Vector3 point1;
-        Vector3 point2;
-        
-        for (int i = 0; i + +2< sommets.Length; i ++)
-        {
-            point1 = sommets[i + 1];
-            point2 = sommets[i];
-            Vector3 vecteur = new Vector3(point2.x - point1.x, point2.y - point1.y, point2.z - point1.z);
-        
-            Vector3 pointZ = new Vector3(vecteur.x, vecteur.y, vecteur.z + 150);
-        
-            float angle = Mathf.Acos(vecteur.x * pointZ.x + vecteur.y * pointZ.y + vecteur.z * pointZ.z);
-            if (i != 0)
-            {
-                GameObject.Instantiate(ligne,  Vector3.Lerp(sommets[i++], sommets[i], 0.5f), Quaternion.LookRotation(Vector3.Lerp(sommets[i - 1], sommets[i], 0.5f)));
-            }
-            else
-            {
-               // GameObject.Instantiate(ligne,  Vector3.Lerp(sommets[i++], sommets[i], 0.5f), transform.rotation);
-            }
-            dernièrePos = Vector3.Lerp(sommets[i++], sommets[i], 0.5f);
-            
-        }
-        
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}*/

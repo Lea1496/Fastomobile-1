@@ -14,6 +14,10 @@ interface IPlayer
   int Poids { get; }
   
   bool IsMainPlayer { get; }
-
+  bool IsMainPlayer1 { get; }
+  bool IsMainPlayer2 { get; }
+  
+  int Tour { get; }
+  bool IsFinished { get; }
   
 }

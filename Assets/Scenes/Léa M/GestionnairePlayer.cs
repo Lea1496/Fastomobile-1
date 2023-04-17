@@ -11,32 +11,38 @@ public class GestionnairePlayer
     private GameObject camion;
     private int indiceChassis;
     private Random gen = new Random();
-    private List<Player> joueurs = new List<Player>(12);
-
-    public List<Player> Joueurs
+    private List<PlayerData> joueurs = new List<PlayerData>(12);
+    private int nbJoueurs = 1;
+    public List<PlayerData> Joueurs
     {
         get => joueurs;
     }
-    public GestionnairePlayer(GameObject Auto, GameObject Moto, GameObject Camion, int nbJoueurs)
+    public GestionnairePlayer(/*GameObject Auto, GameObject Moto, GameObject Camion*/)
     {
-        GameData.P1.IsMainPlayer = true; // à changer
-        GameData.P1.Nom = "YAY";
+        
+        GameData.P1.Nom = "Player1";
         joueurs.Add(GameData.P1);
-        auto = Auto;
+        if (GameData.P2.IsMainPlayer)
+        {
+            nbJoueurs = 2;
+            GameData.P2.Nom = "Player2";
+            joueurs.Add(GameData.P2);
+        }
+        /*auto = Auto;
         moto = Moto;
-        camion = Camion;
-        joueurs[0].Chassis = AssignerChassis(joueurs[0].IdVéhicule);
+        camion = Camion;*/
+        //joueurs[0].Chassis = AssignerChassis(joueurs[0].IdVéhicule);
         joueurs[0].Puissance = AssignerPuissance(joueurs[0].IdMoteur);
         joueurs[0].Poids = AssignerPoids(joueurs[0].IdVéhicule);
         
         for (int i = nbJoueurs; i < 12; i++)
         {
-            joueurs.Add(new Player());
+            joueurs.Add(new PlayerData());
             joueurs[i].Nom = $"bot{i}";
             joueurs[i].Vie = 100;
             joueurs[i].IdMoteur = 0;
             indiceChassis = gen.Next(0, 3);
-            joueurs[i].Chassis = AssignerChassis(indiceChassis);
+            joueurs[i].IdVéhicule = indiceChassis;
             joueurs[i].Puissance = AssignerPuissance(gen.Next(0,3));
             joueurs[i].Poids = AssignerPoids(indiceChassis);
            
@@ -45,16 +51,16 @@ public class GestionnairePlayer
 
     private int AssignerPuissance(int indice)
     {
-        int puissance = 1500;
+        int puissance = 15000;
         if (indice == 1)
         {
-            puissance = 50;
+            puissance = 5000;
         }
         else
         {
             if (indice == 2)
             {
-                puissance = 1000;
+                puissance = 10000;
             }
         }
 
@@ -77,23 +83,23 @@ public class GestionnairePlayer
 
         return poids;
     }
-    private GameObject AssignerChassis(int indice)
+    /*private GameObject AssignerChassis(int indice)
     {
         GameObject chassis = auto;
         if (indice == 1)
         {
-            chassis = moto;
+            chassis = camion;
         }
         else
         {
             if (indice == 2)
             {
-                chassis = camion;
+                chassis = moto;
             }
         }
 
         return chassis;
-    }
+    }*/
 
 
 

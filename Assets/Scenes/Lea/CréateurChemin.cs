@@ -55,11 +55,14 @@ public class CréateurChemin
         tousPointsVisités.Add(1);
         tousPointsVisités.Add(2);
         tousPointsVisités.Add(3);
+        //tousPointsVisités.Add(4);
         DéterminerChemin2dAléatoire(3, p1);
         DéterminerChemin2dAléatoire(p1, p2);
         DéterminerChemin2dAléatoire(p2, p3);
         DéterminerChemin2dAléatoire(p3, p4);
-        DéterminerChemin2dAléatoire(p4, largeur * 3);
+        DéterminerChemin2dAléatoire(p4, largeur * 4);
+        tousPointsVisités.Add(largeur * 4);
+        tousPointsVisités.Add(largeur * 3);
         tousPointsVisités.Add(largeur * 2);
         tousPointsVisités.Add(largeur);
         tousPointsVisités = RemoveDuplicates(tousPointsVisités);
@@ -488,7 +491,7 @@ public class CréateurChemin
     private void CréerCheminComplet()
     {
         nbIndices = largeur / 2 * (largeur / 2);
-        tableau1 = new int[largeur / 2 * (largeur / 2 -1)];
+        tableau1 = new int[largeur / 2 * (largeur / 2 - 3)];
         tableau2 = new int[nbIndices];
         tableau3 = new int[nbIndices];
         tableau4 = new int[nbIndices];
@@ -504,7 +507,7 @@ public class CréateurChemin
         compteur = 0;
         for (int i = 0; i < largeur / 2; i++)
         {
-            for (int j = 1; j < largeur / 2; j++)
+            for (int j = 3; j < largeur / 2; j++)
             {
                 tableau1[compteur++] = i * largeur  + j;
             }
@@ -583,26 +586,27 @@ public class CréateurChemin
         CréerCheminComplet();
         verif = new List<int>();
         maxCotes = listePos.Count / 5;
-        CréerCotes();
+        //CréerCotes();
     }
-   
-    
+
+
     private void CréerCotes()
     {
-        
+
         int pos;
         int grandeur = 0;
         int bond = 0;
 
-        for (int i = 0; i < maxCotes && verif.Count != listePos.Count ; i++)
+        for (int i = 0; i < maxCotes && verif.Count != listePos.Count; i++)
         {
             do
             {
-                pos = gen.Next(5, listePos.Count -7);
+                pos = gen.Next(5, listePos.Count - 7);
             } while (verif.Contains(pos) && verif.Count != listePos.Count);
-            verif.Add(pos -1);
-            verif.Add(pos );
-            verif.Add(pos +1);
+
+            verif.Add(pos - 1);
+            verif.Add(pos);
+            verif.Add(pos + 1);
             grandeur = gen.Next(0, 2);
 
             if (grandeur == 0)
@@ -611,19 +615,18 @@ public class CréateurChemin
             }
             else
             {
-                if (grandeur == 1) 
+                if (grandeur == 1)
                 {
                     bond = 60;
                 }
             }
-           
+
             listePos[pos - 1] = new Vector3(listePos[pos - 1].x, bond, listePos[pos - 1].z);
             listePos[pos] = new Vector3(listePos[pos].x, 2 * bond, listePos[pos].z);
             listePos[pos + 1] = new Vector3(listePos[pos + 1].x, bond, listePos[pos + 1].z);
         }
-        
+
     }
-    
 }
 
     

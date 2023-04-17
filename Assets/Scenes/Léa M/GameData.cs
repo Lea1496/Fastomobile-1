@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class GameData
 {
-    
-    public static Player P1 = new Player();
-    public static Player P2 = new Player();
-    
-    
-    
-
-
-
-
+    public static PlayerData P1 = new PlayerData() { Vie = 100 };
+    public static PlayerData P2 = new PlayerData() { Vie = 100 };
 }

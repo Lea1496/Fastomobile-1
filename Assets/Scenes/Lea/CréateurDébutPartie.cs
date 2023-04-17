@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CréateurDébutPartie
+public class CréateurDébutPartie: MonoBehaviour
 {
     private List<GameObject> lesAutos;
-    private List<Player> joueurs;
+    private List<PlayerData> joueurs;
     private Player joueur;
     private Vector3 position;
     private int compteurAutos = 0;
     private Vector3 posPremier;
     private GameObject mainPlayer1;
     private GameObject mainPlayer2;
+    [SerializeField] private GameObject auto;
+    [SerializeField] private GameObject camion;
+    [SerializeField] private GameObject moto;
+    [SerializeField] private GameObject arc;
+    [SerializeField] private GameObject ligne;
+    private GameObject ligneArr;
+    private List<Vector3> points;
+    private Vector3[] sommets;
     public GameObject MainPlayer1
     {
         get => mainPlayer1;
@@ -21,44 +29,69 @@ public class CréateurDébutPartie
     {
         get => mainPlayer2;
     }
-    public CréateurDébutPartie(List<Player> autos, GameObject arc, GameObject ligne, Vector3 pos) //behavior auto pour le moment mais surement à changer
+    private GameObject AssignerChassis(int indice)
     {
-        
+        GameObject chassis = auto;
+        if (indice == 1)
+        {
+            chassis = camion;
+        }
+        else
+        {
+            if (indice == 2)
+            {
+                chassis = moto;
+            }
+        }
+
+        return chassis;
+    }
+    public void CréerDébutPartie(List<PlayerData> autos, List<Vector3> pts, Vector3[] som) //behavior auto pour le moment mais surement à changer
+    {
+        points = pts;
         posPremier =  new Vector3(335, 0, -50);
         lesAutos = new List<GameObject>();
         joueurs = autos;
+        sommets = som;
         for (int i = 0; i < autos.Count; i++)
         {
-            lesAutos.Add(autos[i].Chassis);
+            lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
         }
-        position = pos;
-        GameObject.Instantiate(arc, new Vector3(position.x + 30, 0, position.z), arc.transform.rotation);
-        GameObject.Instantiate(ligne, new Vector3(position.x + 30, 0, position.z), ligne.transform.rotation);
+        position = points[points.Count - 2];
+        Instantiate(arc, new Vector3(position.x , 0, position.z), arc.transform.rotation);
+        ligneArr = Instantiate(ligne, new Vector3(position.x , 0, position.z), ligne.transform.rotation);
         InstancierAutos();
+        
         
     }
 
     private void InstancierAutos()
     {
       
-        for (int i = 0; i < lesAutos.Count / 3; i++)
+        for (int j = 0; j < lesAutos.Count / 4; j++)
         {
-            for (int j = 0; j < lesAutos.Count / 4; j++)
+            for (int i = 0; i < lesAutos.Count / 3; i++)
             {
-                GameObject thisJoueur = GameObject.Instantiate(lesAutos[compteurAutos],
-                    new Vector3(position.x - 35 * j - 4 * i, 5, (position.z - 37) + 32 * i - 6 * j),
+                GameObject thisJoueur = Instantiate(lesAutos[compteurAutos],
+                    new Vector3(position.x - 35 * j - 4 * i -30, 5, (position.z - 37) + 32 * i - 6 * j),
                     lesAutos[compteurAutos].transform.rotation);
-                
-                thisJoueur.GetComponent<Player>().CréerPlayer(
+                Player leJoueur = thisJoueur.GetComponent<Player>();
+                leJoueur.CréerPlayer(
                     joueurs[compteurAutos].Vie, joueurs[compteurAutos].Nom,
                     joueurs[compteurAutos].IdVéhicule, joueurs[compteurAutos].IdMoteur,
                     joueurs[compteurAutos].Chassis, joueurs[compteurAutos].Puissance,
-                    joueurs[compteurAutos].Poids, joueurs[compteurAutos++].IsMainPlayer);
-                Debug.Log(thisJoueur.GetComponent<Player>().Nom);
+                    joueurs[compteurAutos].Poids, joueurs[compteurAutos++].IsMainPlayer, compteurAutos);
+                
+                GestionnaireCollision collisions = thisJoueur.GetComponent<GestionnaireCollision>();
+
+                collisions.points = sommets;
+
                 if (compteurAutos - 1 == 0)
                 {
                     mainPlayer1 = thisJoueur;
-                    thisJoueur.GetComponent<PlayerController>().enabled = true;
+                   // collisions.isMainPlayer1 = true;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1 = leJoueur;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1.IsMainPlayer = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                     
@@ -67,7 +100,9 @@ public class CréateurDébutPartie
                 if (compteurAutos - 1 == 1 && joueurs[1].IsMainPlayer)
                 {
                     mainPlayer2 = thisJoueur;
-                    thisJoueur.GetComponent<GestionnaireTouches>().enabled = true;
+                   // collisions.isMainPlayer2 = true;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2 = leJoueur;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2.IsMainPlayer = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                 }
@@ -80,3 +115,5 @@ public class CréateurDébutPartie
     }
     
 }
+
+
