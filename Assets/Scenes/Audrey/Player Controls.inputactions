@@ -13,6 +13,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Break",
+                    "type": "Button",
+                    "id": "14c7dacb-15ad-4b7e-90c1-8fdf994f5f1d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Accelerate",
+                    "type": "Button",
+                    "id": "a4afeeed-faaa-4711-81e1-e8adb0557d86",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -70,6 +88,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "4acb1c9a-5dc0-4bc0-ada3-6b9bf183b311",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Break",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be2b6dbe-1384-4398-9fa7-9da53f3439ff",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

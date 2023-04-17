@@ -10,6 +10,19 @@ public class GestionnaireTouches : BehaviourAuto
     private float horizontalInput;
     private float verticalInput;
 
+    private PlayerControls controls;
+    private Vector2 move;
+
+    private void Awake()
+    {
+        controls = new PlayerControls();
+    }
+
+    private void Update()
+    {
+        move = controls.Gameplay.Move.ReadValue<Vector2>();
+    }
+
     private void FixedUpdate()
     {
         GetInput();
@@ -19,12 +32,20 @@ public class GestionnaireTouches : BehaviourAuto
     }
 
     private void GetInput()
+    {  
+        horizontalInput = move.x;
+        verticalInput = move.y;
+        isBreaking = controls.Gameplay.Break.IsPressed();
+        isAccelerating = controls.Gameplay.Accelerate.IsPressed();
+    }
+
+    private void OnEnable()
     {
-        
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        isBreaking = Input.GetKey(KeyCode.Joystick1Button6);
-        isAccelerating = Input.GetKey(KeyCode.Joystick1Button7);
-        
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
 }

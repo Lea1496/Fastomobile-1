@@ -35,6 +35,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Break"",
+                    ""type"": ""Button"",
+                    ""id"": ""14c7dacb-15ad-4b7e-90c1-8fdf994f5f1d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Accelerate"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4afeeed-faaa-4711-81e1-e8adb0557d86"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +110,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4acb1c9a-5dc0-4bc0-ada3-6b9bf183b311"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Break"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be2b6dbe-1384-4398-9fa7-9da53f3439ff"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accelerate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +141,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_Break = m_Gameplay.FindAction("Break", throwIfNotFound: true);
+        m_Gameplay_Accelerate = m_Gameplay.FindAction("Accelerate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,11 +203,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_Break;
+    private readonly InputAction m_Gameplay_Accelerate;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @Break => m_Wrapper.m_Gameplay_Break;
+        public InputAction @Accelerate => m_Wrapper.m_Gameplay_Accelerate;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -178,6 +224,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @Break.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBreak;
+                @Break.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBreak;
+                @Break.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBreak;
+                @Accelerate.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAccelerate;
+                @Accelerate.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAccelerate;
+                @Accelerate.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnAccelerate;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -185,6 +237,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Break.started += instance.OnBreak;
+                @Break.performed += instance.OnBreak;
+                @Break.canceled += instance.OnBreak;
+                @Accelerate.started += instance.OnAccelerate;
+                @Accelerate.performed += instance.OnAccelerate;
+                @Accelerate.canceled += instance.OnAccelerate;
             }
         }
     }
@@ -192,5 +250,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnBreak(InputAction.CallbackContext context);
+        void OnAccelerate(InputAction.CallbackContext context);
     }
 }
