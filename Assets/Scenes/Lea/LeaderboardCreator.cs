@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class LeaderboardCreator : MonoBehaviour
@@ -30,9 +31,9 @@ public class LeaderboardCreator : MonoBehaviour
                 ligne = checkpoints[i];
             }
         }*/
-       Player joueurEnTrop = null;
+       List<Player> joueursEnTrop = null;
        
-       if (!joueurs[0].GetComponentInChildren<Player>().IsFinished)
+       /*if (!joueurs[0].GetComponentInChildren<Player>().IsFinished)
        {
            joueurEnTrop = joueurs[0].GetComponentInChildren<Player>();
        }
@@ -42,8 +43,15 @@ public class LeaderboardCreator : MonoBehaviour
            {
                joueurEnTrop = joueurs[1].GetComponentInChildren<Player>();
            }
-       }
+       }*/
 
+       for (int i = 0; i < joueurs.Length; i++)
+       {
+           if (joueurs[i].GetComponentInChildren<Player>().Vie <= 0)
+           {
+               joueursEnTrop.Add(joueurs[i].GetComponentInChildren<Player>());
+           }
+       }
        
        List<string> rang;
        ranking = new List<string>();
@@ -61,9 +69,13 @@ public class LeaderboardCreator : MonoBehaviour
            
        }
 
-       if (joueurEnTrop != null)
+       if (joueursEnTrop.Count != 0)
        {
-           rang.Remove(joueurEnTrop.Nom);
+           for (int i = 0; i <  joueursEnTrop.Count; i++)
+           {
+               rang.Remove(joueursEnTrop[i].Nom);
+           }
+           
        }
        Debug.Log(rang.Count);
       /* for (int i = 0; i < rang.Count; i++)
