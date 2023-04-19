@@ -7,11 +7,13 @@ using UnityEngine;
 
 
 public class BehaviourAuto : MonoBehaviour
-{ 
+{
     //source.https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=183s&ab_channel=GameDevChef
     //savoir valeur de la vitesse pour l'odomètre
 
     // faire un if pour la moto car deux roues et non quatre
+    public GameObject centerOfMass;
+    public Rigidbody rb;
 
     public int Poids;
     public int Puissance;
@@ -22,6 +24,8 @@ public class BehaviourAuto : MonoBehaviour
     void Start()
     {
         joueur = GetComponent<Player>();
+        rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = centerOfMass.transform.localPosition;
 //        Poids = GameData.P1.GetComponentInParent<Player>().Poids;
 // Puissance = GameData.P1.GetComponentInParent<Player>().Puissance;
         //AssignerColliders();
