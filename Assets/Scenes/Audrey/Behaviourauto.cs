@@ -17,18 +17,15 @@ public class BehaviourAuto : MonoBehaviour
 
     public int Poids;
     public int Puissance;
-    private const int MOTO = 2;
-    private Player joueur;
+   
 
     public float vitesse = 0;
     void Start()
     {
-        joueur = GetComponent<Player>();
+        
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass.transform.localPosition;
-//        Poids = GameData.P1.GetComponentInParent<Player>().Poids;
-// Puissance = GameData.P1.GetComponentInParent<Player>().Puissance;
-        //AssignerColliders();
+
     }
 
     private float currentSteerAngle;
@@ -57,9 +54,6 @@ public class BehaviourAuto : MonoBehaviour
     
     public void HandleMotor(float verticalI)
     {
-       
-        
-        vitesse = verticalI * Puissance;
         frontLeftWheelCollider.motorTorque = verticalI * Puissance;
         frontRightWheelCollider.motorTorque = verticalI * Puissance;
         rearLeftWheelCollider.motorTorque = verticalI * Puissance;
@@ -91,7 +85,6 @@ public class BehaviourAuto : MonoBehaviour
     public void HandleSteering(float horizontalI)
     {
         currentSteerAngle = maxSteerAngle * horizontalI;
-        
         frontLeftWheelCollider.steerAngle = currentSteerAngle;
         frontRightWheelCollider.steerAngle = currentSteerAngle;
         

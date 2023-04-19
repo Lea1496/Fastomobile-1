@@ -44,7 +44,9 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private Text textFinish2;
     [SerializeField] private Text textGameOver;
     [SerializeField] private Text textGameOver2;
-    
+
+    [SerializeField] private Speedometer speedometer;
+    [SerializeField] private Speedometer speedometer2;
     [SerializeField] private GameObject PlayerData2;
     private ScriptSpline créerRoute;
     
@@ -169,7 +171,7 @@ public class GestionnaireJeux : MonoBehaviour
        mainPlayer1Live = mainPlayer1.GetComponent<Player>();
        existsMainPlayer2 = GameData.P2.IsMainPlayer;
 
-       speedP1 = (int)Math.Floor(mainPlayer1Live.GetComponent<Rigidbody>().velocity.magnitude);
+        speedometer.speed = (int)Math.Floor(mainPlayer1Live.GetComponent<Rigidbody>().velocity.magnitude) * 3;
    
        if (mainPlayer1Live.IsFinished)
        {
@@ -199,7 +201,7 @@ public class GestionnaireJeux : MonoBehaviour
        if (existsMainPlayer2) 
        {
            mainPlayer2Live = mainPlayer2.GetComponent<Player>();
-           speedP2 = (int)Math.Floor(mainPlayer2Live.GetComponent<Rigidbody>().velocity.magnitude);
+           speedometer2.speed = (int)Math.Floor(mainPlayer2Live.GetComponent<Rigidbody>().velocity.magnitude) * 3;
            if (mainPlayer2Live.IsFinished)
            {
                ChangerAffichageÉcran(mainPlayer2, cam2, 2, finish, textFinish2);
