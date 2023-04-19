@@ -156,7 +156,7 @@ public class GestionBoutons : MonoBehaviour
     {
         int prix = 50;
         bool peutAcheter = Acheter(prix,"InfoPlayer1.txt");
-        avancé.enabled = peutAcheter;
+        //avancé.enabled = peutAcheter;
         if (avancé.isActiveAndEnabled)
         {
             avancéToggle.enabled = peutAcheter; 
@@ -168,7 +168,6 @@ public class GestionBoutons : MonoBehaviour
     {
         int prix = 100;
         bool peutAcheter = Acheter(prix,"InfoPlayer1.txt");
-        expert.enabled = peutAcheter;
         if (expert.isActiveAndEnabled)
         {
             expertToggle.enabled = peutAcheter;
