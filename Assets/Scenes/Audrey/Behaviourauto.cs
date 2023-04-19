@@ -18,8 +18,7 @@ public class BehaviourAuto : MonoBehaviour
     public int Poids;
     public int Puissance;
    
-
-    public float vitesse = 0;
+    
     void Start()
     {
         
