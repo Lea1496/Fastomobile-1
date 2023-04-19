@@ -10,6 +10,11 @@ public class GestionBoutons : MonoBehaviour
     private DataCoin data = new DataCoin();
     private const string CheminPlayer1 = "InfoPlayer1.txt";
     private const string CheminPlayer2 = "InfoPlayer2.txt";
+    public Button avancé;
+    public Button expert;
+    public Toggle avancéToggle;
+    public Toggle expertToggle;
+    
     public void DémarrerJeu()
     {
         
@@ -123,29 +128,46 @@ public class GestionBoutons : MonoBehaviour
         }
     }
 
-    public bool Acheter(int prix)
+    public bool Acheter(int prix,string player)
     {
         bool peutAcheter = false;
-        if (data.AccederNbCoins("InfoPlayer1.txt") >= prix)
+        if (data.AccederNbCoins(player) >= prix)
         {
-            data.AjouterCoin("InfoPlayer1.txt", -prix); 
+            data.AjouterCoin(player, -prix); 
             peutAcheter = true;
             GetComponentInChildren<AffichageArgentMenu>().AfficherCoin();
         }
 
         return peutAcheter;
     }
+    // public bool Acheter(int prix)
+    // {
+    //     bool peutAcheter = false;
+    //     if (data.AccederNbCoins("InfoPlayer1.txt") >= prix)
+    //     {
+    //         data.AjouterCoin("InfoPlayer1.txt", -prix); 
+    //         peutAcheter = true;
+    //         GetComponentInChildren<AffichageArgentMenu>().AfficherCoin();
+    //     }
+    //
+    //     return peutAcheter;
+    // }
     public void UnlockAvancé()
     {
         int prix = 1000;
-        bool PeutAcheter = Acheter(prix);
-        
+        bool peutAcheter = Acheter(prix,"InfoPlayer1.txt");
+        avancé.enabled = peutAcheter;
+        avancéToggle.enabled = peutAcheter;
+        avancé.gameObject.SetActive(!peutAcheter);
     }
     public void UnlockExpert()
     {
         int prix = 2000;
-        bool PeutAcheter = Acheter(prix);
-        
+        bool peutAcheter = Acheter(prix,"InfoPlayer1.txt");
+        expert.enabled = peutAcheter;
+        expertToggle.enabled = peutAcheter;
+        expert.gameObject.SetActive(!peutAcheter);
+
     }
     public void ToggleVoiture2(bool isVoiture)
     {
@@ -197,28 +219,29 @@ public class GestionBoutons : MonoBehaviour
         }
     }
 
-    public bool Acheter2(int prix)
-    {
-        bool peutAcheter = false;
-        if (data.AccederNbCoins("InfoPlayer2.txt") >= prix)
-        {
-            data.AjouterCoin("InfoPlayer2.txt", -prix); 
-            peutAcheter = true;
-            GetComponentInChildren<AffichageArgentMenu>().AfficherCoin();
-        }
-
-        return peutAcheter;
-    }
+    // public bool Acheter2(int prix)
+    // {
+    //     bool peutAcheter = false;
+    //     if (data.AccederNbCoins("InfoPlayer2.txt") >= prix)
+    //     {
+    //         data.AjouterCoin("InfoPlayer2.txt", -prix); 
+    //         peutAcheter = true;
+    //         GetComponentInChildren<AffichageArgentMenu>().AfficherCoin();
+    //     }
+    //
+    //     return peutAcheter;
+    // }
     public void UnlockAvancé2()
     {
         int prix = 1000;
-        bool PeutAcheter = Acheter(prix);
+        bool peutAcheter = Acheter(prix,"InfoPlayer2.txt");
+        
         
     }
     public void UnlockExpert2()
     {
         int prix = 2000;
-        bool PeutAcheter = Acheter(prix);
+        bool peutAcheter = Acheter(prix,"InfoPlayer2.txt");
         
     }
     
