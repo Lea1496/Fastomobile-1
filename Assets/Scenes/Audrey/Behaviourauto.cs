@@ -46,100 +46,67 @@ public class BehaviourAuto : MonoBehaviour
     [SerializeField] WheelCollider rearLeftWheelCollider;
     [SerializeField] WheelCollider rearRightWheelCollider;
 
-    [SerializeField] WheelCollider frontWheelCollider;
-    [SerializeField] WheelCollider rearWheelCollider;
+    
 
     [SerializeField] Transform frontLeftWheelTransform;
     [SerializeField] Transform frontRightWheelTransform;
     [SerializeField] Transform rearLeftWheelTransform;
     [SerializeField] Transform rearRightWheelTransform;
 
-    [SerializeField] private Transform frontWheelTransfrom;
-    [SerializeField] private Transform rearWheelTransfrom;
 
     
     public void HandleMotor(float verticalI)
     {
        
-        if(joueur.IdVéhicule != MOTO)
-        {
-            vitesse = verticalI * Puissance;
-            frontLeftWheelCollider.motorTorque = verticalI * Puissance;
-            frontRightWheelCollider.motorTorque = verticalI * Puissance;
-            rearLeftWheelCollider.motorTorque = verticalI * Puissance;
-            rearRightWheelCollider.motorTorque = verticalI * Puissance;
-            currentbreakForce = isBreaking ? breakForce : 0f;
-            ApplyBreaking();
-            currentAcceleration = isAccelerating ? accelerationForce/Poids : 0f; // parce F=m*a
-            ApplyAcceleration(verticalI);
-        }
-        else
-        {
-            frontWheelCollider.motorTorque = verticalI * Puissance;
-            currentbreakForce = isBreaking ? breakForce : 0f;
-            ApplyBreaking();
-            currentAcceleration = isAccelerating ? accelerationForce/Poids : 0f;
-            ApplyAcceleration(verticalI);
-        }
+        
+        vitesse = verticalI * Puissance;
+        frontLeftWheelCollider.motorTorque = verticalI * Puissance;
+        frontRightWheelCollider.motorTorque = verticalI * Puissance;
+        rearLeftWheelCollider.motorTorque = verticalI * Puissance;
+        rearRightWheelCollider.motorTorque = verticalI * Puissance;
+        currentbreakForce = isBreaking ? breakForce : 0f;
+        ApplyBreaking();
+        currentAcceleration = isAccelerating ? accelerationForce/Poids : 0f; // parce F=m*a
+        ApplyAcceleration(verticalI);
+        
     }
 
     private void ApplyBreaking()
     {
-        if (joueur.IdVéhicule != MOTO)
-        {
-            frontRightWheelCollider.brakeTorque = currentbreakForce;
-            frontLeftWheelCollider.brakeTorque = currentbreakForce;
-            rearLeftWheelCollider.brakeTorque = currentbreakForce;
-            rearRightWheelCollider.brakeTorque = currentbreakForce;
-        }
-        else
-        {
-            frontWheelCollider.brakeTorque = currentbreakForce;
-            rearWheelCollider.brakeTorque = currentbreakForce;
-        }
+       
+        frontRightWheelCollider.brakeTorque = currentbreakForce;
+        frontLeftWheelCollider.brakeTorque = currentbreakForce;
+        rearLeftWheelCollider.brakeTorque = currentbreakForce;
+        rearRightWheelCollider.brakeTorque = currentbreakForce;
+        
     }
 
     private void ApplyAcceleration(float verticalI)
     {
-        if (joueur.IdVéhicule != MOTO)
-        {
-            frontRightWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
-            frontLeftWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
-        }
-        else
-        {
-            frontWheelCollider.brakeTorque = verticalI * Puissance * currentAcceleration;
-        }
+        frontRightWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration; 
+        frontLeftWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;
+       
     }
 
     public void HandleSteering(float horizontalI)
     {
         currentSteerAngle = maxSteerAngle * horizontalI;
-        if(joueur.IdVéhicule != MOTO)
-        {
-            frontLeftWheelCollider.steerAngle = currentSteerAngle;
-            frontRightWheelCollider.steerAngle = currentSteerAngle;
-        }
-        else
-        {
-            frontWheelCollider.steerAngle = currentSteerAngle;
-        }  
+        
+        frontLeftWheelCollider.steerAngle = currentSteerAngle;
+        frontRightWheelCollider.steerAngle = currentSteerAngle;
+        
+       
     }
 
     public void UpdateWheels()
     {
-        if(joueur.IdVéhicule != MOTO)
-        {
-            UpdateSingleWheel(frontLeftWheelCollider, frontLeftWheelTransform);
-            UpdateSingleWheel(frontRightWheelCollider, frontRightWheelTransform);
-            UpdateSingleWheel(rearRightWheelCollider, rearRightWheelTransform);
-            UpdateSingleWheel(rearLeftWheelCollider, rearLeftWheelTransform);
-        }
-        else
-        {
-            UpdateSingleWheel(frontWheelCollider, frontWheelTransfrom);
-            UpdateSingleWheel(rearWheelCollider, rearWheelTransfrom);
-        }       
+        
+        UpdateSingleWheel(frontLeftWheelCollider, frontLeftWheelTransform);
+        UpdateSingleWheel(frontRightWheelCollider, frontRightWheelTransform);
+        UpdateSingleWheel(rearRightWheelCollider, rearRightWheelTransform);
+        UpdateSingleWheel(rearLeftWheelCollider, rearLeftWheelTransform);
+        
+            
     }
 
     public void UpdateSingleWheel(WheelCollider wheelCollider, Transform wheelTransform)

@@ -6,6 +6,7 @@ using System.Net.Mime;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,23 +31,20 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject bonus;
     [SerializeField] private GameObject checkpoint;
     [SerializeField] private Text textCoin;
-    [SerializeField] private Text textCn;
     [SerializeField] private Text textRang;
     [SerializeField] private Text textRg;
     [SerializeField] private Text textVie;
-    [SerializeField] private Text textV;
     [SerializeField] private Text textCoin2;
-    [SerializeField] private Text textCn2;
     [SerializeField] private Text textRang2;
     [SerializeField] private Text textRg2;
     [SerializeField] private Text textVie2;
-    [SerializeField] private Text textV2;
     [SerializeField] private Text textLaps;
     [SerializeField] private Text textLaps2;
     [SerializeField] private Text textFinish;
     [SerializeField] private Text textFinish2;
     [SerializeField] private Text textGameOver;
     [SerializeField] private Text textGameOver2;
+    
     [SerializeField] private GameObject PlayerData2;
     private ScriptSpline créerRoute;
     
@@ -63,20 +61,16 @@ public class GestionnaireJeux : MonoBehaviour
     private Transform target2;
     private Player mainPlayer1Live;
     private Player mainPlayer2Live;
-    private float wantedRotationAngle;
-    private float wantedHeight;
+   
     private bool isGameOver1 = false;
     private bool isGameOver2 = false;
-    private float currentRotationAngle;
-    private float currentHeight;
-    private Quaternion currentRotation;
-    
-    private float wantedRotationAngle2;
-    private float wantedHeight2;
 
-    private float currentRotationAngle2;
-    private float currentHeight2;
-    private Quaternion currentRotation2;
+    private string gameOver = "Game Over!";
+    private string finish = "Finish!";
+
+    private bool existsMainPlayer2 = false;
+    private int speedP1 = 0;
+    private int speedP2 = 0;
     public Player MainPlayer1
     {
         get => mainPlayer1.GetComponent<Player>();
@@ -128,6 +122,7 @@ public class GestionnaireJeux : MonoBehaviour
 
     void Awake()
    {
+       
        créerRoute = GetComponent<ScriptSpline>();
        Refaire();
        new CréateurTerrain(largeur, terrain);
@@ -163,124 +158,78 @@ public class GestionnaireJeux : MonoBehaviour
       
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
+
+        Debug.Log(mainPlayer1.GetComponent<Player>().IsFinished);
+        
    }
 
    private void LateUpdate()
    {
+       
        mainPlayer1Live = mainPlayer1.GetComponent<Player>();
+       existsMainPlayer2 = GameData.P2.IsMainPlayer;
 
+       speedP1 = (int)Math.Floor(mainPlayer1Live.GetComponent<Rigidbody>().velocity.magnitude);
+   
        if (mainPlayer1Live.IsFinished)
        {
-           mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
-           textFinish.enabled = true;
+           //mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
+       
+           ChangerAffichageÉcran(mainPlayer1, cam1, 1, finish, textFinish);
        }
-
-       if (mainPlayer1Live.Vie <= 0)
+       else
        {
-           mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
-          GameOver(cam1, 1);
-          isGameOver1 = true;
+           if (mainPlayer1Live.Vie <= 0)
+           {
+               //mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
+               ChangerAffichageÉcran(mainPlayer1, cam1, 1, gameOver, textGameOver);
+               isGameOver1 = true;
+           }
        }
-       //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
-       
-       // Calculate the current rotation angles
-       target = mainPlayer1.transform;
-       wantedRotationAngle = target.eulerAngles.y;
-       wantedHeight = target.position.y + 20;
-
-       currentRotationAngle = cam1.transform.eulerAngles.y;
-       currentHeight = cam1.transform.position.y;
-
-       // Damp the rotation around the y-axis
-       currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, 3f * Time.deltaTime);
-
-       // Damp the height
-       currentHeight = Mathf.Lerp(currentHeight, wantedHeight, 2f * Time.deltaTime);
-
-       // Convert the angle into a rotation
-       currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
-
-       // Set the position of the camera on the x-z plane to:
-       // distance meters behind the target
-       cam1.transform.position = target.position;
-       cam1.transform.position -= currentRotation * Vector3.forward * 30;
-
-       cam1.transform.rotation = Quaternion.Slerp(cam1.transform.rotation, currentRotation, 3f * Time.deltaTime);
-
-       // Set the height of the camera
-       cam1.transform.position = new Vector3(cam1.transform.position.x, currentHeight, cam1.transform.position.z);
-
-       // Always look at the target
-       cam1.transform.LookAt(target);
-       
-       //Mon code
-       textCoin.text = mainPlayer1Live.Argent.ToString();
+   
+       GérerCaméra(mainPlayer1Live, cam1);
+   
+       textCoin.text = $"Coin: {mainPlayer1Live.Argent.ToString()}";
        textRang.text = mainPlayer1Live.Rang.ToString();
-       textVie.text = mainPlayer1Live.Vie.ToString();
+       textVie.text = $"HP: {mainPlayer1Live.Vie.ToString()}";
        textLaps.text = $"{mainPlayer1Live.Tour}/3";
+       
+       
 
-       if (GameData.P2.IsMainPlayer) 
+       if (existsMainPlayer2) 
        {
            mainPlayer2Live = mainPlayer2.GetComponent<Player>();
+           speedP2 = (int)Math.Floor(mainPlayer2Live.GetComponent<Rigidbody>().velocity.magnitude);
            if (mainPlayer2Live.IsFinished)
            {
-               mainPlayer2.GetComponent<GestionnaireTouches>().enabled = false;
-               textFinish2.enabled = true;
+               ChangerAffichageÉcran(mainPlayer2, cam2, 2, finish, textFinish2);
                if (isGameOver1)
                {
                    StartCoroutine(FinirPartie());
                    StopCoroutine(FinirPartie());
                }
            }
-           if (mainPlayer2Live.Vie <= 0)
+           else
            {
-               mainPlayer2.GetComponent<GestionnaireTouches>().enabled = false;
-               GameOver(cam2, 2);
-               isGameOver2 = true;
-               if (mainPlayer1Live.IsFinished)
+               if (mainPlayer2Live.Vie <= 0)
                {
-                   StartCoroutine(FinirPartie());
-                   StopCoroutine(FinirPartie());
-               }
+                   mainPlayer2.GetComponent<GestionnaireTouches>().enabled = false;
+                   ChangerAffichageÉcran(mainPlayer2, cam2, 2, gameOver, textGameOver2);
+                   isGameOver2 = true;
+                   if (mainPlayer1Live.IsFinished)
+                   {
+                       StartCoroutine(FinirPartie());
+                       StopCoroutine(FinirPartie());
+                   }
 
+               }   
            }
-           
-           //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
-       
-           // Calculate the current rotation angles
-           target2 = mainPlayer2.transform;
-           wantedRotationAngle2 = target2.eulerAngles.y;
-           wantedHeight2 = target2.position.y + 20;
 
-           currentRotationAngle2 = cam2.transform.eulerAngles.y;
-           currentHeight2 = cam2.transform.position.y;
-
-           // Damp the rotation around the y-axis
-           currentRotationAngle2 = Mathf.LerpAngle(currentRotationAngle2, wantedRotationAngle2, 3f * Time.deltaTime);
-
-           // Damp the height
-           currentHeight2 = Mathf.Lerp(currentHeight2, wantedHeight2, 2f * Time.deltaTime);
-
-           // Convert the angle into a rotation
-           currentRotation2 = Quaternion.Euler(0, currentRotationAngle2, 0);
-
-           // Set the position of the camera on the x-z plane to:
-           // distance meters behind the target
-           cam2.transform.position = target2.position;
-           cam2.transform.position -= currentRotation2 * Vector3.forward * 30;
-
-           cam2.transform.rotation = Quaternion.Slerp(cam2.transform.rotation, currentRotation2, 3f * Time.deltaTime);
-
-           // Set the height of the camera
-           cam2.transform.position = new Vector3(cam2.transform.position.x, currentHeight2, cam2.transform.position.z);
-
-           // Always look at the target
-           cam2.transform.LookAt(target2);
-       
-           //Mon code
-           textCoin2.text = mainPlayer2Live.Argent.ToString();
+           GérerCaméra(mainPlayer2Live, cam2);
+          
+           textCoin2.text = $"Coin: {mainPlayer2Live.Argent.ToString()}";
            textRang2.text = mainPlayer2Live.Rang.ToString();
-           textVie2.text = mainPlayer2Live.Vie.ToString();
+           textVie2.text = $"HP: {mainPlayer1Live.Vie.ToString()}";
            textLaps2.text = $"{mainPlayer2Live.Tour}/3";
            if (mainPlayer1Live.Vie == 0 && mainPlayer2Live.Vie == 0)
            {
@@ -295,12 +244,10 @@ public class GestionnaireJeux : MonoBehaviour
        
    }
 
+   //Cette fonction vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
    private void GérerCaméra(Player mainPlayer, Camera cam)
    {
-       Player mainPlayerLive = mainPlayer.GetComponent<Player>();
-       
-       //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
-       
+
        // Calculate the current rotation angles
        Transform target = mainPlayer.transform;
        float wantedRotationAngle = target.eulerAngles.y;
@@ -320,28 +267,43 @@ public class GestionnaireJeux : MonoBehaviour
 
        // Set the position of the camera on the x-z plane to:
        // distance meters behind the target
-       cam1.transform.position = target.position;
-       cam1.transform.position -= currentRotation * Vector3.forward * 30;
+       cam.transform.position = target.position;
+       cam.transform.position -= currentRotation * Vector3.forward * 30;
 
-       cam1.transform.rotation = Quaternion.Slerp(cam1.transform.rotation, currentRotation, 3f * Time.deltaTime);
+       cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, currentRotation, 3f * Time.deltaTime);
 
        // Set the height of the camera
-       cam1.transform.position = new Vector3(cam1.transform.position.x, currentHeight, cam1.transform.position.z);
+       cam.transform.position = new Vector3(cam.transform.position.x, currentHeight, cam.transform.position.z);
 
        // Always look at the target
-       cam1.transform.LookAt(target);
+       cam.transform.LookAt(target);
    }
    private IEnumerator FinirPartie()
    {
-       yield return new WaitForSeconds(1f);
+       yield return new WaitForSeconds(2f);
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
    }
-   private void GameOver(Camera cam, int indice)
+   private void ChangerAffichageÉcran(GameObject player, Camera cam, int indice, string action, Text text)
    {
-       cam.clearFlags = CameraClearFlags.SolidColor;
-       cam.cullingMask = 0;
+       player.GetComponent<GestionnaireTouches>().enabled = false;
+
+       MeshRenderer[] renderers = player.GetComponentsInChildren<MeshRenderer>();
+
+       for (int i = 0; i < renderers.Length; i++)
+       {
+           renderers[i].enabled = false;
+       }
        
+       cam.clearFlags = CameraClearFlags.SolidColor;
        DésactiverTextes(indice);
+       cam.cullingMask = 0;
+       text.text = action;
+       if (existsMainPlayer2)
+       {
+           text.alignment = TextAnchor.MiddleRight;
+       }
+
+       
    }
 
    private void DésactiverTextes(int indice)
@@ -352,10 +314,8 @@ public class GestionnaireJeux : MonoBehaviour
            textRang.enabled = false;
            textVie.enabled = false;
            textLaps.enabled = false;
-           textCn.enabled = false;
            textRg.enabled = false;
-           textV.enabled = false;
-           textGameOver.enabled = true;
+           
        }
        else
        {
@@ -363,10 +323,8 @@ public class GestionnaireJeux : MonoBehaviour
            textRang2.enabled = false;
            textVie2.enabled = false;
            textLaps2.enabled = false;
-           textCn2.enabled = false;
            textRg2.enabled = false;
-           textV2.enabled = false;
-           textGameOver2.enabled = true;
+           
        }
    }
    

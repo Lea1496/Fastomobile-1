@@ -644,7 +644,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3052701116727769119}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.07, y: 0.06180605, z: 0.1}
+  m_LocalPosition: {x: -0.23, y: -0.77, z: -0.01}
   m_LocalScale: {x: 0.19999996, y: 0.2, z: 0.19999996}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1022,6 +1022,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbd73b2f7cbf24930be7cd1114f7e90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  centerOfMass: {fileID: 3052701116727769119}
+  rb: {fileID: 4005492339459347072}
   Poids: 0
   Puissance: 0
   vitesse: 0
@@ -1034,14 +1036,10 @@ MonoBehaviour:
   frontRightWheelCollider: {fileID: 2475404683071148436}
   rearLeftWheelCollider: {fileID: 9214742049835942439}
   rearRightWheelCollider: {fileID: 4771377729343608794}
-  frontWheelCollider: {fileID: 0}
-  rearWheelCollider: {fileID: 0}
   frontLeftWheelTransform: {fileID: 1692975336161941265}
   frontRightWheelTransform: {fileID: 1692975336161941269}
   rearLeftWheelTransform: {fileID: 1692975336161941271}
   rearRightWheelTransform: {fileID: 1692975336161941275}
-  frontWheelTransfrom: {fileID: 0}
-  rearWheelTransfrom: {fileID: 0}
 --- !u!114 &3281117221796923038
 MonoBehaviour:
   m_ObjectHideFlags: 0

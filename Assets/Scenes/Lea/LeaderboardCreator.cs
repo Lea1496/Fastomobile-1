@@ -79,10 +79,11 @@ public class LeaderboardCreator : MonoBehaviour
            for (int i = 0; i <  joueursEnTrop.Count; i++)
            {
                rang.Remove(joueursEnTrop[i].Nom);
+               rang.Add(joueursEnTrop[i].Nom + " (Dead) " );
            }
            
        }
-       Debug.Log(rang.Count);
+       
       /* for (int i = 0; i < rang.Count; i++)
        {
            ranking.Add(rang[i]);

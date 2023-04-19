@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(Player))]
@@ -17,6 +18,7 @@ public class RankingManager : MonoBehaviour
         {
             ranks.Add(joueur.Nom);
         }
+        
        
         Debug.Log(joueur.Nom);
         if (joueur.IsMainPlayer)
@@ -34,4 +36,5 @@ public class RankingManager : MonoBehaviour
             ranks.Clear();
         }
     }
+    
 }

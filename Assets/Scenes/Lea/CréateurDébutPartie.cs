@@ -15,7 +15,7 @@ public class CréateurDébutPartie: MonoBehaviour
     private GameObject mainPlayer2;
     [SerializeField] private GameObject auto;
     [SerializeField] private GameObject camion;
-    [SerializeField] private GameObject moto;
+    [SerializeField] private GameObject police;
     [SerializeField] private GameObject arc;
     [SerializeField] private GameObject ligne;
     private GameObject ligneArr;
@@ -40,7 +40,7 @@ public class CréateurDébutPartie: MonoBehaviour
         {
             if (indice == 2)
             {
-                chassis = moto;
+                chassis = police;
             }
         }
 
@@ -100,7 +100,6 @@ public class CréateurDébutPartie: MonoBehaviour
                 if (compteurAutos - 1 == 1 && joueurs[1].IsMainPlayer)
                 {
                     mainPlayer2 = thisJoueur;
-                   // collisions.isMainPlayer2 = true;
                     ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2 = leJoueur;
                     ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2.IsMainPlayer = true;
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
