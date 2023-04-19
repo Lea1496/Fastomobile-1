@@ -636,7 +636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9111463212632545121, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
@@ -687,6 +687,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &869243553 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7289922699360488296, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
+  m_PrefabInstance: {fileID: 836306667}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea40dc4f59c8fb419fc9b168b6de9d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &923733704 stripped
@@ -1647,6 +1658,8 @@ MonoBehaviour:
   textFinish2: {fileID: 836306671}
   textGameOver: {fileID: 1279341330}
   textGameOver2: {fileID: 836306669}
+  speedometer: {fileID: 1958328606}
+  speedometer2: {fileID: 869243553}
   PlayerData2: {fileID: 1069204324}
 --- !u!114 &1828300579
 MonoBehaviour:
@@ -1694,6 +1707,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6099348359936996214, guid: b57b81134e7dc1d4884be0971474c7d8, type: 3}
   m_PrefabInstance: {fileID: 1795571743}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1958328606 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7289922699360488296, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
+  m_PrefabInstance: {fileID: 1279341329}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea40dc4f59c8fb419fc9b168b6de9d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1974713174
 GameObject:
   m_ObjectHideFlags: 0

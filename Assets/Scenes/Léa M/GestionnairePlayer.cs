@@ -28,10 +28,7 @@ public class GestionnairePlayer
             GameData.P2.Nom = "Player2";
             joueurs.Add(GameData.P2);
         }
-        /*auto = Auto;
-        moto = Moto;
-        camion = Camion;*/
-        //joueurs[0].Chassis = AssignerChassis(joueurs[0].IdVéhicule);
+    
         joueurs[0].Puissance = AssignerPuissance(joueurs[0].IdMoteur);
         joueurs[0].Poids = AssignerPoids(joueurs[0].IdVéhicule);
         
