@@ -156,23 +156,36 @@ public class GestionBoutons : MonoBehaviour
     {
         int prix = 50;
         bool peutAcheter = Acheter(prix,"InfoPlayer1.txt");
-        //avancé.enabled = peutAcheter;
-        if (avancé.isActiveAndEnabled)
+        //avancé.interactable = false;
+        if (peutAcheter)
         {
-            avancéToggle.enabled = peutAcheter; 
-            avancé.gameObject.SetActive(!peutAcheter);
+            //avancé.interactable = true;
+            avancéToggle.gameObject.SetActive(true);
+            avancéToggle.enabled = true;
+            avancé.gameObject.SetActive(false);
         }
-
+        // if (avancé.isActiveAndEnabled)
+        // {
+        //     avancéToggle.enabled = peutAcheter; 
+        //     avancé.gameObject.SetActive(!peutAcheter);
+        // }
     }
     public void UnlockExpert()
     {
         int prix = 100;
         bool peutAcheter = Acheter(prix,"InfoPlayer1.txt");
-        if (expert.isActiveAndEnabled)
+        if (peutAcheter)
         {
-            expertToggle.enabled = peutAcheter;
-            expert.gameObject.SetActive(!peutAcheter);            
+            //avancé.interactable = true;
+            expertToggle.gameObject.SetActive(true);
+            expertToggle.enabled = true;
+            expert.gameObject.SetActive(false);
         }
+        // if (expert.isActiveAndEnabled)
+        // {
+        //     expertToggle.enabled = peutAcheter;
+        //     expert.gameObject.SetActive(!peutAcheter);            
+        // }
     }
     public void ToggleVoiture2(bool isVoiture)
     {
