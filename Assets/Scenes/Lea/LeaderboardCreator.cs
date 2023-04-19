@@ -24,6 +24,7 @@ public class LeaderboardCreator : MonoBehaviour
         leaderboardTexts = GetComponentsInChildren<TextMeshProUGUI>();
         //checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
         joueurs = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log(leaderboardTexts.Length);
        /* for (int i = 0; i < checkpoints.Length; i++)
         {
             if (checkpoints[i].layer == 12)
@@ -31,7 +32,7 @@ public class LeaderboardCreator : MonoBehaviour
                 ligne = checkpoints[i];
             }
         }*/
-       List<Player> joueursEnTrop = null;
+       List<Player> joueursEnTrop = new List<Player>();
        
        /*if (!joueurs[0].GetComponentInChildren<Player>().IsFinished)
        {
@@ -57,6 +58,10 @@ public class LeaderboardCreator : MonoBehaviour
        ranking = new List<string>();
        //rang = checkpoints[0].GetComponentInChildren<RankingManager>().ranks;
        rang = new List<string>(12);
+       for (int i = 0; i < 12; i++)
+       {
+           rang.Add("a");
+       }
         Debug.Log(joueurs.Length);
        int compt = 1;
        for (int i = 0; i < joueurs.Length; i++)
@@ -105,7 +110,7 @@ public class LeaderboardCreator : MonoBehaviour
 */
         for (int i = 0; i < rang.Count; i++)
         {
-            leaderboardTexts[i].text = ranking[i];
+            leaderboardTexts[i].text = rang[i];
         }
     }
 }

@@ -148,8 +148,6 @@ public class GestionnaireJeux : MonoBehaviour
             checkpoint = Instantiate(this.checkpoint, new Vector3(0,0,0),
                 this.checkpoint.transform.rotation);
             checkpoint.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
-            DontDestroyOnLoad(checkpoint);
-            checkpoint.tag = "Checkpoint";
         }
         
         //Instancie les coins, obstacles et bonus
@@ -180,7 +178,7 @@ public class GestionnaireJeux : MonoBehaviour
        if (mainPlayer1Live.Vie <= 0)
        {
            mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
-          GameOver(cam1, textGameOver, 1);
+          GameOver(cam1, 1);
           isGameOver1 = true;
        }
        //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
@@ -237,7 +235,7 @@ public class GestionnaireJeux : MonoBehaviour
            if (mainPlayer2Live.Vie <= 0)
            {
                mainPlayer2.GetComponent<GestionnaireTouches>().enabled = false;
-               GameOver(cam2, textGameOver2, 2);
+               GameOver(cam2, 2);
                isGameOver2 = true;
                if (mainPlayer1Live.IsFinished)
                {
@@ -297,32 +295,19 @@ public class GestionnaireJeux : MonoBehaviour
        
    }
 
-   private void GérerCaméra(Player mainPlayerLive, float currentRotationAngle, float currentHeight,
-       Quaternion currentRotation, float wantedRotationAngle, float wantedHeight)
+   private void GérerCaméra(Player mainPlayer, Camera cam)
    {
-       mainPlayer1Live = mainPlayer1.GetComponent<Player>();
-
-       if (mainPlayer1Live.IsFinished)
-       {
-           mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
-           textFinish.enabled = true;
-       }
-
-       if (mainPlayer1Live.Vie <= 0)
-       {
-           mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
-           GameOver(cam1, textGameOver, 1);
-           isGameOver1 = true;
-       }
+       Player mainPlayerLive = mainPlayer.GetComponent<Player>();
+       
        //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
        
        // Calculate the current rotation angles
-       target = mainPlayer1.transform;
-       wantedRotationAngle = target.eulerAngles.y;
-       wantedHeight = target.position.y + 20;
+       Transform target = mainPlayer.transform;
+       float wantedRotationAngle = target.eulerAngles.y;
+       float wantedHeight = target.position.y + 20;
 
-       currentRotationAngle = cam1.transform.eulerAngles.y;
-       currentHeight = cam1.transform.position.y;
+       float  currentRotationAngle = cam.transform.eulerAngles.y;
+       float currentHeight = cam.transform.position.y;
 
        // Damp the rotation around the y-axis
        currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, 3f * Time.deltaTime);
@@ -331,7 +316,7 @@ public class GestionnaireJeux : MonoBehaviour
        currentHeight = Mathf.Lerp(currentHeight, wantedHeight, 2f * Time.deltaTime);
 
        // Convert the angle into a rotation
-       currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
+       Quaternion currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
 
        // Set the position of the camera on the x-z plane to:
        // distance meters behind the target
@@ -351,11 +336,11 @@ public class GestionnaireJeux : MonoBehaviour
        yield return new WaitForSeconds(1f);
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
    }
-   private void GameOver(Camera cam, Text texte, int indice)
+   private void GameOver(Camera cam, int indice)
    {
        cam.clearFlags = CameraClearFlags.SolidColor;
        cam.cullingMask = 0;
-       texte.enabled = true;
+       
        DésactiverTextes(indice);
    }
 
@@ -370,6 +355,7 @@ public class GestionnaireJeux : MonoBehaviour
            textCn.enabled = false;
            textRg.enabled = false;
            textV.enabled = false;
+           textGameOver.enabled = true;
        }
        else
        {
@@ -380,6 +366,7 @@ public class GestionnaireJeux : MonoBehaviour
            textCn2.enabled = false;
            textRg2.enabled = false;
            textV2.enabled = false;
+           textGameOver2.enabled = true;
        }
    }
    

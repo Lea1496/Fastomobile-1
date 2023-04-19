@@ -18,6 +18,7 @@ public class BehaviourAuto : MonoBehaviour
     private const int MOTO = 2;
     private Player joueur;
 
+    public float vitesse = 0;
     void Start()
     {
         joueur = GetComponent<Player>();
@@ -58,6 +59,7 @@ public class BehaviourAuto : MonoBehaviour
        
         if(joueur.IdVéhicule != MOTO)
         {
+            vitesse = verticalI * Puissance;
             frontLeftWheelCollider.motorTorque = verticalI * Puissance;
             frontRightWheelCollider.motorTorque = verticalI * Puissance;
             rearLeftWheelCollider.motorTorque = verticalI * Puissance;

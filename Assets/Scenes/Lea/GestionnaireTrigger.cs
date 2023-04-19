@@ -36,9 +36,9 @@ public class GestionnaireTrigger : MonoBehaviour
     {
         temps1 += Time.deltaTime;
         temps2 += Time.deltaTime;
-            if (compteurTour == 4 || temps1 > 10)
+            if (compteurTour == 4 || temps1 > 2)
         {
-           //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+          // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
     
