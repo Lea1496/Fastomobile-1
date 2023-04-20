@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ public class GestionBoutons : MonoBehaviour
     public Button expert;
     public Toggle avancéToggle;
     public Toggle expertToggle;
-    
+    [SerializeField] private PlayerInputManager inputManager;
     public void DémarrerJeu()
     {
         
@@ -62,7 +63,7 @@ public class GestionBoutons : MonoBehaviour
         {
             GameData.P1.IsMainPlayer = true;
             GameData.P2.IsMainPlayer = false;
-            GameData.P1.IsMainPlayer1 = true;
+            GameData.P1.IsMainPlayer = true;
         }
     }
     public void ToggleDeuxJoueurs(bool isDeuxJoueurs)
@@ -71,9 +72,8 @@ public class GestionBoutons : MonoBehaviour
         {
             GameData.P1.IsMainPlayer = true;
             GameData.P2.IsMainPlayer = true;
-            GameData.P1.IsMainPlayer1 = true;
-            GameData.P2.IsMainPlayer1 = true;
-            Debug.Log(GameData.P2.IsMainPlayer);
+            GameData.P1.IsMainPlayer = true;
+            GameData.P2.IsMainPlayer = true;
         }
     }
     

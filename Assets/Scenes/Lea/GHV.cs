@@ -6,8 +6,27 @@ using UnityEngine;
 
 public class GHV : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Transform backLeft;
+    int xRotationLimit = 200;
+    int yRotationLimit = 200;
+    int zRotationLimit = 200;
+ 
+    private void  Update () {
+ 
+        if(transform.localRotation.eulerAngles.x > xRotationLimit){
+            transform.localRotation = Quaternion.identity;
+        }
+ 
+        if(transform.localRotation.eulerAngles.y > yRotationLimit){
+            transform.localRotation = Quaternion.identity;
+        }
+ 
+        if(transform.localRotation.eulerAngles.z > zRotationLimit){
+            transform.localRotation = Quaternion.identity;
+        }
+    }
+}
+// Start is called before the first frame update
+    /*public Transform backLeft;
     public Transform backRight;
     public Transform frontLeft;
     public Transform frontRight;
@@ -34,7 +53,7 @@ public class GHV : MonoBehaviour
         // Get the vectors that connect the raycast hit points
 //        Debug.Log(Terrain.activeTerrain.SampleHeight(frontLeft.position));
         // Keep at specific height above terrain
-        pos = gameObject.transform.position;
+        /*pos = gameObject.transform.position;
         gameObject.transform.position = new Vector3(pos.x, Terrain.activeTerrain.SampleHeight(pos) + 1f, pos.z);
         if (Terrain.activeTerrain.SampleHeight(frontLeft.position) > 1.5f)
         {
@@ -79,6 +98,6 @@ public class GHV : MonoBehaviour
         Debug.DrawRay(rf.point, Vector3.up);*/
        
  
-    }
+   // }
     
-}
+//}

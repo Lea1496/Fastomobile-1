@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5190309801020266581}
   - component: {fileID: 8662280395286995798}
   - component: {fileID: 7862867568396934043}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5088937514699569419}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

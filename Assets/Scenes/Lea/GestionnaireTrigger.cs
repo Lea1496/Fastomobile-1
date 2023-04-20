@@ -16,10 +16,11 @@ public class GestionnaireTrigger : MonoBehaviour
     private void Start()
     {
         nbJoueur = 1;
-        if (mainPlayer2 != null)
+        if (GameData.P2.IsMainPlayer)
         {
             nbJoueur = 2;
         }
+        Debug.Log(nbJoueur);
     }
 
     private int compteurTourJoueur1;
@@ -68,7 +69,7 @@ public class GestionnaireTrigger : MonoBehaviour
 
             if (nbJoueur == 2)
             {
-                
+                Debug.Log(joueur.Nom);
                 if (joueur.Nom == mainPlayer1.Nom && (temps1 > 15 || compteurTourJoueur1 == 0))
                 {
                     joueur.Tour++;
@@ -100,7 +101,7 @@ public class GestionnaireTrigger : MonoBehaviour
                     compteurTour++;
                     compteurTourJoueur1 = 0;
                     compteurTourJoueur2 = 0;
-
+                    Debug.Log("ligne");
                 }
 
                 if (compteurTour == 4)

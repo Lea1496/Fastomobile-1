@@ -1,7 +1,9 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//[RequireComponent(typeof(Player))]
+using UnityEngine.InputSystem;
 
 /// Source:https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=587s&ab_channel=GameDevChef
 
@@ -17,11 +19,12 @@ public class BehaviourAuto : MonoBehaviour
 
     public int Poids;
     public int Puissance;
-   
+
+    private CharacterController controller;
     
     void Start()
     {
-        
+        controller = gameObject.GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass.transform.localPosition;
 
@@ -64,7 +67,7 @@ public class BehaviourAuto : MonoBehaviour
         
     }
 
-    private void ApplyBreaking()
+    public void ApplyBreaking()
     {
        
         frontRightWheelCollider.brakeTorque = currentbreakForce;
@@ -74,7 +77,7 @@ public class BehaviourAuto : MonoBehaviour
         
     }
 
-    private void ApplyAcceleration(float verticalI)
+    public void ApplyAcceleration(float verticalI)
     {
         frontRightWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration; 
         frontLeftWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration;

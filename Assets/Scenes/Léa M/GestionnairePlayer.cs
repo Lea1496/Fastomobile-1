@@ -27,6 +27,8 @@ public class GestionnairePlayer
             nbJoueurs = 2;
             GameData.P2.Nom = "Player2";
             joueurs.Add(GameData.P2);
+            joueurs[1].Puissance = AssignerPuissance(joueurs[1].IdMoteur);
+            joueurs[1].Poids = AssignerPoids(joueurs[1].IdVéhicule);
         }
     
         joueurs[0].Puissance = AssignerPuissance(joueurs[0].IdMoteur);
@@ -65,16 +67,16 @@ public class GestionnairePlayer
     }
     private int AssignerPoids(int indice)
     {
-        int poids = 150;
+        int poids = 1500;
         if (indice == 1)
         {
-            poids = 50;
+            poids = 500;
         }
         else
         {
             if (indice == 2)
             {
-                poids = 100;
+                poids = 1000;
             }
         }
 

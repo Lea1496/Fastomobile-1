@@ -19,8 +19,7 @@ public class RankingManager : MonoBehaviour
             ranks.Add(joueur.Nom);
         }
         
-       
-        Debug.Log(joueur.Nom);
+        
         if (joueur.IsMainPlayer)
         {
             for (int i = 0; i < ranks.Count; i++)

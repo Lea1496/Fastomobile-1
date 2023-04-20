@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
+using UnityEngine.InputSystem;
 
 
 [RequireComponent(typeof(ScriptSpline))]
@@ -48,6 +49,7 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private Speedometer speedometer;
     [SerializeField] private Speedometer speedometer2;
     [SerializeField] private GameObject PlayerData2;
+    [SerializeField] private PlayerInputManager inputManager;
     private ScriptSpline créerRoute;
     
     private List<Vector3> chemin;
@@ -160,12 +162,15 @@ public class GestionnaireJeux : MonoBehaviour
       
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
-
-        Debug.Log(mainPlayer1.GetComponent<Player>().IsFinished);
+       /* if (mainPlayer2.GetComponentInChildren<Player>().IsMainPlayer2)
+        {
+            inputManager.JoinPlayer(1, -1, "Controller2");
+        }*/
         
    }
-
-   private void LateUpdate()
+    
+    
+    private void LateUpdate()
    {
        
        mainPlayer1Live = mainPlayer1.GetComponent<Player>();
@@ -231,7 +236,7 @@ public class GestionnaireJeux : MonoBehaviour
           
            textCoin2.text = $"Coin: {mainPlayer2Live.Argent.ToString()}";
            textRang2.text = mainPlayer2Live.Rang.ToString();
-           textVie2.text = $"HP: {mainPlayer1Live.Vie.ToString()}";
+           textVie2.text = $"HP: {mainPlayer2Live.Vie.ToString()}";
            textLaps2.text = $"{mainPlayer2Live.Tour}/3";
            if (mainPlayer1Live.Vie == 0 && mainPlayer2Live.Vie == 0)
            {
@@ -243,17 +248,17 @@ public class GestionnaireJeux : MonoBehaviour
        {
            SceneManager.LoadScene(5);
        }
+
        
    }
 
    //Cette fonction vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
    private void GérerCaméra(Player mainPlayer, Camera cam)
    {
-
        // Calculate the current rotation angles
        Transform target = mainPlayer.transform;
        float wantedRotationAngle = target.eulerAngles.y;
-       float wantedHeight = target.position.y + 20;
+       float wantedHeight = target.position.y + 25;
 
        float  currentRotationAngle = cam.transform.eulerAngles.y;
        float currentHeight = cam.transform.position.y;
@@ -270,7 +275,7 @@ public class GestionnaireJeux : MonoBehaviour
        // Set the position of the camera on the x-z plane to:
        // distance meters behind the target
        cam.transform.position = target.position;
-       cam.transform.position -= currentRotation * Vector3.forward * 30;
+       cam.transform.position -= currentRotation * Vector3.forward * 40;
 
        cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, currentRotation, 3f * Time.deltaTime);
 

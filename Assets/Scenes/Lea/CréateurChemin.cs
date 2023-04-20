@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using Random = System.Random;
 
-public class MarchePas : Exception { }
+
 public class CréateurChemin
 {
     int[] invalide = new int[4];
@@ -56,7 +56,7 @@ public class CréateurChemin
         DéterminerChemin2dAléatoire(p1, p2);
         DéterminerChemin2dAléatoire(p2, p3);
         DéterminerChemin2dAléatoire(p3, p4);
-        DéterminerChemin2dAléatoire(p4, largeur * 4);
+        DéterminerChemin2dAléatoire(p4, largeur * 5);
         tousPointsVisités.Add(largeur * 4);
         tousPointsVisités.Add(largeur * 3);
         tousPointsVisités.Add(largeur * 2);
