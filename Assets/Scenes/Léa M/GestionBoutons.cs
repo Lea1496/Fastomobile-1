@@ -15,7 +15,11 @@ public class GestionBoutons : MonoBehaviour
     public Button expert;
     public Toggle avancéToggle;
     public Toggle expertToggle;
+
     [SerializeField] private PlayerInputManager inputManager;
+
+    public bool déjàAcheté;
+
     public void DémarrerJeu()
     {
         
@@ -47,6 +51,8 @@ public class GestionBoutons : MonoBehaviour
         }
         data.EnleverCoin(CheminPlayer1, CheminPlayer2);
         SceneManager.LoadScene(0);
+        //déjàAcheté = false;
+        
     }
     public void RecommencerJeux()
     {
@@ -155,7 +161,7 @@ public class GestionBoutons : MonoBehaviour
     public void UnlockAvancé()
     {
         int prix = 50;
-        bool peutAcheter = Acheter(prix,"InfoPlayer1.txt");
+        bool peutAcheter = Acheter(prix,CheminPlayer1);
         //avancé.interactable = false;
         if (peutAcheter)
         {
@@ -173,7 +179,7 @@ public class GestionBoutons : MonoBehaviour
     public void UnlockExpert()
     {
         int prix = 100;
-        bool peutAcheter = Acheter(prix,"InfoPlayer1.txt");
+        bool peutAcheter = Acheter(prix,CheminPlayer1);
         if (peutAcheter)
         {
             //avancé.interactable = true;
@@ -251,15 +257,15 @@ public class GestionBoutons : MonoBehaviour
     // }
     public void UnlockAvancé2()
     {
-        int prix = 1000;
-        bool peutAcheter = Acheter(prix,"InfoPlayer2.txt");
-        
-        
+        int prix = 50;
+        bool peutAcheter = Acheter(prix,CheminPlayer2);
+        expertToggle.enabled = true;
+
     }
     public void UnlockExpert2()
     {
-        int prix = 2000;
-        bool peutAcheter = Acheter(prix,"InfoPlayer2.txt");
+        int prix = 100;
+        bool peutAcheter = Acheter(prix,CheminPlayer2);
         
     }
     
