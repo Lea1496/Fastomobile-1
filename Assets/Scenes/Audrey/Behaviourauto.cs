@@ -21,13 +21,13 @@ public class BehaviourAuto : MonoBehaviour
     public int Puissance;
 
     private CharacterController controller;
-    
+    public Vector3 Try = new Vector3(0, -0.9f, 0);
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = centerOfMass.transform.localPosition;
-
+        //rb.centerOfMass = centerOfMass.transform.localPosition;
+        rb.centerOfMass = Try;
     }
 
     private float currentSteerAngle;

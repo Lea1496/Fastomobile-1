@@ -47,13 +47,13 @@ public class CréateurDébutPartie: MonoBehaviour
 
         return chassis;
     }
-    public void CréerDébutPartie(List<PlayerData> autos, List<Vector3> pts) 
+    public void CréerDébutPartie(List<PlayerData> autos, List<Vector3> pts, Vector3[] som)
     {
         points = pts;
         posPremier =  new Vector3(335, 0, -50);
         lesAutos = new List<GameObject>();
         joueurs = autos;
-        
+        sommets = som;
         for (int i = 0; i < autos.Count; i++)
         {
             lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));

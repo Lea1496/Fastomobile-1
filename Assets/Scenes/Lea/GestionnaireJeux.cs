@@ -150,14 +150,14 @@ public class GestionnaireJeux : MonoBehaviour
                 this.checkpoint.transform.rotation);
             checkpoint.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
         }
-        
+        //Instancie ligne d'arrivée
         gameObject.GetComponentInChildren<CréateurLigneArrivée>().FaireMesh(new Vector3(chemin[chemin.Count -1].x, 0, chemin[chemin.Count -1].z +70),new Vector3(chemin[chemin.Count -1].x, 0, chemin[chemin.Count -1].z -70));
         //Instancie les coins, obstacles et bonus
         new GénérateurObjets().GénérerObjets(obstalce1, obstacle2, coin, bonus, sommets);
         //Crée la liste de joueurs
         autos = new GestionnairePlayer().Joueurs; //à changer
         //Crée le début de la partie
-        créateur.CréerDébutPartie(autos, chemin);
+        créateur.CréerDébutPartie(autos, chemin, sommets);
        
         //TerrainData theTerrain = new Object2Terrain().CreateTerrain1(gameObject);
         //GameObject terrainObject = Terrain.CreateTerrainGameObject(theTerrain);
