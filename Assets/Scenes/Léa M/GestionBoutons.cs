@@ -15,6 +15,10 @@ public class GestionBoutons : MonoBehaviour
     public Button expert;
     public Toggle avancéToggle;
     public Toggle expertToggle;
+    public Button avancé2;
+    public Button expert2;
+    public Toggle avancéToggle2;
+    public Toggle expertToggle2;
 
     [SerializeField] private PlayerInputManager inputManager;
 
