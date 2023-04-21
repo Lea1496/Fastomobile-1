@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2051,11 +2051,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fd6be7a6ef8c54ca5c58018a21edcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "avanc\xE9": {fileID: 0}
-  expert: {fileID: 0}
-  "avanc\xE9Toggle": {fileID: 0}
-  expertToggle: {fileID: 0}
+  "avanc\xE9": {fileID: 1710658311}
+  expert: {fileID: 1721061956}
+  "avanc\xE9Toggle": {fileID: 1640676862}
+  expertToggle: {fileID: 345499279}
+  "avanc\xE92": {fileID: 1710658311}
+  expert2: {fileID: 1721061956}
+  "avanc\xE9Toggle2": {fileID: 1640676862}
+  expertToggle2: {fileID: 345499279}
   inputManager: {fileID: 0}
+  "d\xE9j\xE0Achet\xE9": 0
 --- !u!1 &662137703
 GameObject:
   m_ObjectHideFlags: 0
@@ -3615,7 +3620,12 @@ MonoBehaviour:
   expert: {fileID: 0}
   "avanc\xE9Toggle": {fileID: 0}
   expertToggle: {fileID: 0}
+  "avanc\xE92": {fileID: 0}
+  expert2: {fileID: 0}
+  "avanc\xE9Toggle2": {fileID: 0}
+  expertToggle2: {fileID: 0}
   inputManager: {fileID: 0}
+  "d\xE9j\xE0Achet\xE9": 0
 --- !u!1 &1329877924
 GameObject:
   m_ObjectHideFlags: 0
@@ -5108,7 +5118,12 @@ MonoBehaviour:
   expert: {fileID: 0}
   "avanc\xE9Toggle": {fileID: 0}
   expertToggle: {fileID: 0}
+  "avanc\xE92": {fileID: 0}
+  expert2: {fileID: 0}
+  "avanc\xE9Toggle2": {fileID: 0}
+  expertToggle2: {fileID: 0}
   inputManager: {fileID: 0}
+  "d\xE9j\xE0Achet\xE9": 0
 --- !u!1 &1955910427
 GameObject:
   m_ObjectHideFlags: 0
