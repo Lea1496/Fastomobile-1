@@ -53,7 +53,7 @@ public class GestionnairePlayer
         int puissance = 15000;
         if (indice == 1)
         {
-            puissance = 5000;
+            puissance = 50000;
         }
         else
         {
@@ -67,16 +67,16 @@ public class GestionnairePlayer
     }
     private int AssignerPoids(int indice)
     {
-        int poids = 1500;
+        int poids = 15;
         if (indice == 1)
         {
-            poids = 500;
+            poids = 5;
         }
         else
         {
             if (indice == 2)
             {
-                poids = 1000;
+                poids = 10;
             }
         }
 

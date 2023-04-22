@@ -45,36 +45,42 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private Text textFinish2;
     [SerializeField] private Text textGameOver;
     [SerializeField] private Text textGameOver2;
-
     [SerializeField] private Speedometer speedometer;
     [SerializeField] private Speedometer speedometer2;
-    [SerializeField] private GameObject PlayerData2;
-    [SerializeField] private PlayerInputManager inputManager;
+    [SerializeField] private Canvas speedometerCanv;
+    [SerializeField] private Canvas speedometerCanv2;
+    [SerializeField] private GameObject playerData2;
+
     private ScriptSpline créerRoute;
-    
     private List<Vector3> chemin;
     private GameObject mainPlayer1;
     private GameObject mainPlayer2;
     private List<PlayerData> autos;
+    private Vector3[] sommets;
     private CréateurDébutPartie créateur;
     private Vector3 desiredPos;
     private Vector3 desiredPos2;
     private GameObject ligne;
-    private int compteur = 0;
     private Transform target;
     private Transform target2;
     private Player mainPlayer1Live;
     private Player mainPlayer2Live;
-   
+    GameObject checkpointInst;
     private bool isGameOver1 = false;
     private bool isGameOver2 = false;
-
+    private MeshRenderer[] renderers;
+    private Collider[] colliders;
+    private MeshRenderer[] renderers2;
+    private Collider[] colliders2;
+    private Rigidbody rg1;
+    private Rigidbody rg2;
     private string gameOver = "Game Over!";
     private string finish = "Finish!";
 
     private bool existsMainPlayer2 = false;
-    private int speedP1 = 0;
-    private int speedP2 = 0;
+    private float temps = 0;
+    
+    
     public Player MainPlayer1
     {
         get => mainPlayer1.GetComponent<Player>();
@@ -133,29 +139,33 @@ public class GestionnaireJeux : MonoBehaviour
         créateur = GetComponent<CréateurDébutPartie>();
         chemin = new ScriptBézier(chemin).PointsSpline;
         créerRoute.FaireMesh(chemin);
-        Vector3[] sommets = créerRoute.sommets;
-        GameObject checkpoint;
+        sommets = créerRoute.sommets;
+        
         
         if (GameData.P2.IsMainPlayer)
         {
             cam2.gameObject.SetActive(true);
             cam1.rect = new Rect(0.5f, 0, 0.5f, 1);
-            PlayerData2.SetActive(true);
+            playerData2.SetActive(true);
         }
         
         //Instancie les checkpoints
-        for (int i = 0; i < chemin.Count -2; i++)
+        for (int i = 2; i < chemin.Count -2; i++)
         {
-            checkpoint = Instantiate(this.checkpoint, new Vector3(0,0,0),
+            checkpointInst = Instantiate(this.checkpoint, Vector3.zero, 
                 this.checkpoint.transform.rotation);
-            checkpoint.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
+            checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
         }
+        
         //Instancie ligne d'arrivée
         gameObject.GetComponentInChildren<CréateurLigneArrivée>().FaireMesh(new Vector3(chemin[chemin.Count -1].x, 0, chemin[chemin.Count -1].z +70),new Vector3(chemin[chemin.Count -1].x, 0, chemin[chemin.Count -1].z -70));
+        
         //Instancie les coins, obstacles et bonus
         new GénérateurObjets().GénérerObjets(obstalce1, obstacle2, coin, bonus, sommets);
+        
         //Crée la liste de joueurs
-        autos = new GestionnairePlayer().Joueurs; //à changer
+        autos = new GestionnairePlayer().Joueurs;
+        
         //Crée le début de la partie
         créateur.CréerDébutPartie(autos, chemin, sommets);
        
@@ -165,85 +175,151 @@ public class GestionnaireJeux : MonoBehaviour
       
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
-       /* if (mainPlayer2.GetComponentInChildren<Player>().IsMainPlayer2)
-        {
-            inputManager.JoinPlayer(1, -1, "Controller2");
-        }*/
-        
+        mainPlayer1Live = mainPlayer1.GetComponent<Player>();
+        mainPlayer2Live = mainPlayer2.GetComponent<Player>();
+        rg1 = mainPlayer1.GetComponent<Rigidbody>();
+        rg2 = mainPlayer2.GetComponent<Rigidbody>();
+        renderers = mainPlayer1.GetComponentsInChildren<MeshRenderer>();
+        colliders = mainPlayer1.GetComponentsInChildren<Collider>();
+        renderers2 = mainPlayer2.GetComponentsInChildren<MeshRenderer>();
+        colliders2 = mainPlayer2.GetComponentsInChildren<Collider>();
+
    }
     
     
     private void LateUpdate()
-   {
-       
-       mainPlayer1Live = mainPlayer1.GetComponent<Player>();
+    {
+        temps += Time.deltaTime;
+        
+        //Fait les deux premiers checkpoints
+        if (temps >= 20)
+        {
+            checkpointInst = Instantiate(checkpoint, Vector3.zero, 
+                checkpoint.transform.rotation);
+            checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(0, sommets);
+            checkpointInst = Instantiate(checkpoint, Vector3.zero, 
+                checkpoint.transform.rotation);
+            checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(2, sommets);
+        }
+        
+       //mainPlayer1Live = mainPlayer1.GetComponent<Player>(); //NÉCESSAIRE??
        existsMainPlayer2 = GameData.P2.IsMainPlayer;
 
-        speedometer.speed = (int)Math.Floor(mainPlayer1Live.GetComponent<Rigidbody>().velocity.magnitude) * 3;
-   
-       if (mainPlayer1Live.IsFinished)
-       {
-           //mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
        
-           ChangerAffichageÉcran(mainPlayer1, cam1, 1, finish, textFinish);
-       }
-       else
-       {
-           if (mainPlayer1Live.Vie <= 0)
-           {
-               //mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
-               ChangerAffichageÉcran(mainPlayer1, cam1, 1, gameOver, textGameOver);
-               isGameOver1 = true;
-           }
-       }
+        speedometer.speed = (int)Math.Floor(rg1.velocity.magnitude) * 3;
+        if (!isGameOver1)
+        {
+            if (mainPlayer1Live.IsFinished)
+            {
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    colliders[i].enabled = false;
+                }
+
+                for (int i = 0; i < renderers.Length; i++)
+                {
+                    renderers[i].enabled = false;
+                }
+
+                rg1.useGravity = false;
+                ChangerAffichageÉcran(mainPlayer1, cam1, 1, finish, textFinish);
+            }
+            else
+            {
+                if (mainPlayer1Live.Vie <= 0)
+                {
+                    for (int i = 0; i < colliders.Length; i++)
+                    {
+                        colliders[i].enabled = false;
+                    }
+
+                    for (int i = 0; i < renderers.Length; i++)
+                    {
+                        renderers[i].enabled = false;
+                    }
+
+                    rg1.useGravity = false;
+                    ChangerAffichageÉcran(mainPlayer1, cam1, 1, gameOver, textGameOver);
+                    isGameOver1 = true;
+                }
+            }
    
-       GérerCaméra(mainPlayer1Live, cam1);
+            GérerCaméra(mainPlayer1Live, cam1);
    
-       textCoin.text = $"Coin: {mainPlayer1Live.Argent.ToString()}";
-       textRang.text = mainPlayer1Live.Rang.ToString();
-       textVie.text = $"HP: {mainPlayer1Live.Vie.ToString()}";
-       textLaps.text = $"{mainPlayer1Live.Tour}/3";
+            textCoin.text = $"Coin: {mainPlayer1Live.Argent.ToString()}";
+            textRang.text = mainPlayer1Live.Rang.ToString();
+            textVie.text = $"HP: {mainPlayer1Live.Vie.ToString()}";
+            textLaps.text = $"{mainPlayer1Live.Tour}/3";
+        }
+       
        
        
 
        if (existsMainPlayer2) 
        {
-           mainPlayer2Live = mainPlayer2.GetComponent<Player>();
-           speedometer2.speed = (int)Math.Floor(mainPlayer2Live.GetComponent<Rigidbody>().velocity.magnitude) * 3;
-           if (mainPlayer2Live.IsFinished)
+           //mainPlayer2Live = mainPlayer2.GetComponent<Player>(); //NÉCESSAIRE??
+           speedometer2.speed = (int)Math.Floor(rg2.velocity.magnitude) * 3;
+           if (!isGameOver2)
            {
-               ChangerAffichageÉcran(mainPlayer2, cam2, 2, finish, textFinish2);
-               if (isGameOver1)
+               if (mainPlayer2Live.IsFinished)
                {
-                   StartCoroutine(FinirPartie());
-                   StopCoroutine(FinirPartie());
-               }
-           }
-           else
-           {
-               if (mainPlayer2Live.Vie <= 0)
-               {
-                   mainPlayer2.GetComponent<GestionnaireTouches>().enabled = false;
-                   ChangerAffichageÉcran(mainPlayer2, cam2, 2, gameOver, textGameOver2);
-                   isGameOver2 = true;
-                   if (mainPlayer1Live.IsFinished)
+                   for (int i = 0; i < colliders.Length; i++)
+                   {
+                       colliders[i].enabled = false;
+                   }
+
+                   for (int i = 0; i < renderers.Length; i++)
+                   {
+                       renderers[i].enabled = false;
+                   }
+
+                   rg1.useGravity = false;
+                   ChangerAffichageÉcran(mainPlayer2, cam2, 2, finish, textFinish2);
+                   if (isGameOver1)
                    {
                        StartCoroutine(FinirPartie());
                        StopCoroutine(FinirPartie());
                    }
+               }
+               else
+               {
+                   if (mainPlayer2Live.Vie <= 0)
+                   {
+                       for (int i = 0; i < colliders.Length; i++)
+                       {
+                           colliders[i].enabled = false;
+                       }
 
-               }   
+                       for (int i = 0; i < renderers.Length; i++)
+                       {
+                           renderers[i].enabled = false;
+                       }
+
+                       rg1.useGravity = false;
+                       ChangerAffichageÉcran(mainPlayer2, cam2, 2, gameOver, textGameOver2);
+                       isGameOver2 = true;
+                       if (mainPlayer1Live.IsFinished)
+                       {
+                           StartCoroutine(FinirPartie());
+                           StopCoroutine(FinirPartie());
+                       }
+
+                   }   
+               }
+
+               GérerCaméra(mainPlayer2Live, cam2);
+          
+               textCoin2.text = $"Coin: {mainPlayer2Live.Argent.ToString()}";
+               textRang2.text = mainPlayer2Live.Rang.ToString();
+               textVie2.text = $"HP: {mainPlayer2Live.Vie.ToString()}";
+               textLaps2.text = $"{mainPlayer2Live.Tour}/3";
            }
 
-           GérerCaméra(mainPlayer2Live, cam2);
-          
-           textCoin2.text = $"Coin: {mainPlayer2Live.Argent.ToString()}";
-           textRang2.text = mainPlayer2Live.Rang.ToString();
-           textVie2.text = $"HP: {mainPlayer2Live.Vie.ToString()}";
-           textLaps2.text = $"{mainPlayer2Live.Tour}/3";
+           
            if (mainPlayer1Live.Vie == 0 && mainPlayer2Live.Vie == 0)
            {
-               SceneManager.LoadScene(5);
+               StartCoroutine(FinirPartie());
+               StopCoroutine(FinirPartie());
            }
        }
 
@@ -291,18 +367,10 @@ public class GestionnaireJeux : MonoBehaviour
    private IEnumerator FinirPartie()
    {
        yield return new WaitForSeconds(2f);
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+       SceneManager.LoadScene(5);
    }
    private void ChangerAffichageÉcran(GameObject player, Camera cam, int indice, string action, Text text)
    {
-       player.GetComponent<GestionnaireTouches>().enabled = false;
-
-       MeshRenderer[] renderers = player.GetComponentsInChildren<MeshRenderer>();
-
-       for (int i = 0; i < renderers.Length; i++)
-       {
-           renderers[i].enabled = false;
-       }
        
        cam.clearFlags = CameraClearFlags.SolidColor;
        DésactiverTextes(indice);
@@ -312,9 +380,8 @@ public class GestionnaireJeux : MonoBehaviour
        {
            text.alignment = TextAnchor.MiddleRight;
        }
-
-       
-   }
+       player.GetComponent<GestionnaireTouches>().enabled = false; //À CHANGER???
+    }
 
    private void DésactiverTextes(int indice)
    {
@@ -325,7 +392,7 @@ public class GestionnaireJeux : MonoBehaviour
            textVie.enabled = false;
            textLaps.enabled = false;
            textRg.enabled = false;
-           
+           speedometerCanv.enabled = false;
        }
        else
        {
@@ -334,7 +401,7 @@ public class GestionnaireJeux : MonoBehaviour
            textVie2.enabled = false;
            textLaps2.enabled = false;
            textRg2.enabled = false;
-           
+           speedometerCanv2.enabled = false;
        }
    }
    

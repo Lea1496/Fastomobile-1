@@ -18,8 +18,10 @@ public class GestionnaireCollision : MonoBehaviour
 
     [SerializeField] GameObject coin;
     [SerializeField] GameObject bonus;
-    [SerializeField] private Text textBonus1;
-    [SerializeField] private Text textBonus2;
+    [SerializeField] private Text textBonusVie;
+    [SerializeField] private Text textBonusVitesse;
+    [SerializeField] private Text textBonusVie2;
+    [SerializeField] private Text textBonusVitesse2;
     public Vector3[] points;
 
     private Random gen = new Random();
@@ -40,7 +42,7 @@ public class GestionnaireCollision : MonoBehaviour
         
         if (point.otherCollider.gameObject.layer == coucheCollisionObstacle) //Obstacle
         {
-            point.thisCollider.GetComponentInParent<Player>().EnleverVie(5); //changer cbm de vie
+            point.thisCollider.GetComponentInParent<Player>().EnleverVie(100); //changer cbm de vie
         }
         
         
@@ -49,9 +51,10 @@ public class GestionnaireCollision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         int ind;
+        joueur = gameObject.GetComponent<Player>();
         if (other.gameObject.layer == coucheCollisionCoin)
         {
-            gameObject.GetComponent<Player>().AjouterArgent(1);
+            joueur.AjouterArgent(1);
             Destroy(other.gameObject);
             générateur.GénérerCoins(1, points, coin);
         }
@@ -60,20 +63,41 @@ public class GestionnaireCollision : MonoBehaviour
             Destroy(other.gameObject);
             générateur.GénérerBonus(1, points, bonus);
             ind = gen.Next(0, 2);
-            if (ind == 0)
+            if (joueur.IsMainPlayer2)
             {
-                gameObject.GetComponent<Player>().AjouterVie(10);
-                textBonus1.text = bonusVie;
-                StartCoroutine(AfficherBonus(textBonus1));
-                StopCoroutine(AfficherBonus(textBonus1));
+                if (ind == 0)
+                {
+                    joueur.AjouterVie(10);
+                    textBonusVie2.text = bonusVie;
+                    StartCoroutine(AfficherBonus(textBonusVie2));
+                    StopCoroutine(AfficherBonus(textBonusVie2));
+                }
+                else
+                {
+                    gameObject.GetComponent<GestionnaireTouches>().ApplyAcceleration(3f);
+                    textBonusVitesse2.text = bonusVitesse;
+                    StartCoroutine(AfficherBonus(textBonusVitesse2));
+                    StopCoroutine(AfficherBonus(textBonusVitesse2));
+                }
             }
             else
             {
-                gameObject.GetComponent<GestionnaireTouches>().ApplyAcceleration(1f);
-                textBonus2.text = bonusVitesse;
-                StartCoroutine(AfficherBonus(textBonus2));
-                StopCoroutine(AfficherBonus(textBonus2));
+                if (ind == 0)
+                {
+                    gameObject.GetComponent<Player>().AjouterVie(10);
+                    textBonusVie.text = bonusVie;
+                    StartCoroutine(AfficherBonus(textBonusVie));
+                    StopCoroutine(AfficherBonus(textBonusVie));
+                }
+                else
+                {
+                    gameObject.GetComponent<GestionnaireTouches>().ApplyAcceleration(3f);
+                    textBonusVitesse.text = bonusVitesse;
+                    StartCoroutine(AfficherBonus(textBonusVitesse));
+                    StopCoroutine(AfficherBonus(textBonusVitesse));
+                }
             }
+            
 
             
         }

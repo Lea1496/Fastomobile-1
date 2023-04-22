@@ -33,12 +33,11 @@ public class CréateurLigneArrivée : MonoBehaviour
         Vector2[] uvs = new Vector2[4];
         int[] triangle = new int[6];
 
-        sommets[0] = new Vector3(p1.x , p1.y + 0.1f, p1.z);
-        sommets[1] = new Vector3(p2.x, p2.y+0.1f, p2.z);
+        sommets[0] = new Vector3(p1.x , p1.y + 0.5f, p1.z);
+        sommets[1] = new Vector3(p2.x, p2.y + 0.5f, p2.z);
 
-        sommets[2] = new Vector3(p1.x +10, p1.y + 0.1f, p1.z);
-        sommets[3] = new Vector3(p2.x + 10 , p2.y +0.1f, p2.z);
-        
+        sommets[2] = new Vector3(p1.x +10, p1.y + 0.5f, p1.z);
+        sommets[3] = new Vector3(p2.x + 10 , p2.y +0.5f, p2.z);
         
         triangle[0] = 2;
         triangle[1] = 1;

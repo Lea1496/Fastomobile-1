@@ -682,6 +682,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &836306672 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7604129027504885601, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
+  m_PrefabInstance: {fileID: 836306667}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &857586728 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 116923867105802731, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
@@ -1257,6 +1262,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!223 &1279341333 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7604129027504885601, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
+  m_PrefabInstance: {fileID: 1279341329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1389459148 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3234696370070856478, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
@@ -1807,8 +1817,9 @@ MonoBehaviour:
   textGameOver2: {fileID: 836306669}
   speedometer: {fileID: 1958328606}
   speedometer2: {fileID: 869243553}
-  PlayerData2: {fileID: 1069204324}
-  inputManager: {fileID: 0}
+  speedometerCanv: {fileID: 1279341333}
+  speedometerCanv2: {fileID: 836306672}
+  playerData2: {fileID: 1069204324}
 --- !u!114 &1828300579
 MonoBehaviour:
   m_ObjectHideFlags: 0

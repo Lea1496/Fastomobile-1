@@ -83,8 +83,10 @@ public class CréateurDébutPartie: MonoBehaviour
                     joueurs[compteurAutos].Chassis, joueurs[compteurAutos].Puissance,
                     joueurs[compteurAutos].Poids, joueurs[compteurAutos++].IsMainPlayer, compteurAutos);
                 DontDestroyOnLoad(thisJoueur);
+                GameData.Ranks.Add(leJoueur.Nom);
+                GameData.LesJoueurs.Add(leJoueur);
                 GestionnaireCollision collisions = thisJoueur.GetComponent<GestionnaireCollision>();
-
+                
                 collisions.points = sommets;
 
                 if (compteurAutos - 1 == 0)

@@ -39,15 +39,7 @@ public class GestionnaireTouches : BehaviourAuto
         {                                                                      
             playerNb = 2;                                                      
         }                                                                      
-        Debug.Log(playerNb);                                                   
-        Debug.Log(Gamepad.all[0]);                                             
-        Debug.Log(Gamepad.all[1]);                                             
-        if (gameObject.GetComponent<Player>().IsMainPlayer2)
-        {
-            Debug.Log("HERE");
-            gameObject.GetComponent<PlayerInput>().defaultControlScheme = "keyboard";
-            gameObject.GetComponent<PlayerInput>().defaultActionMap = "keyboardGameplay";
-        }
+        
      
     }
     private void Update()
@@ -57,10 +49,6 @@ public class GestionnaireTouches : BehaviourAuto
             if (playerNb == 1)
             {
                 move = Gamepad.all[0].leftStick.ReadValue();
-                // move = Gamepad.current.leftStick.ReadValue();
-//                Debug.Log(Gamepad.current);
-                //Debug.Log(move);
-               
             }
             else
             {
@@ -92,35 +80,22 @@ public class GestionnaireTouches : BehaviourAuto
         {
             if (playerNb == 1)
             {
-                if (Gamepad.all[0].rightTrigger.isPressed)
-                {
-                    isBreaking = true;
-                }
+                isBreaking = Gamepad.all[0].rightTrigger.IsPressed();
 
-                if (Gamepad.all[0].leftTrigger.IsPressed())
-                {
-                    isAccelerating = true;
-                }
+                isAccelerating = Gamepad.all[0].leftTrigger.IsPressed();
             }
             else
             {
-                if (Gamepad.all[1].rightTrigger.IsPressed())
-                {
-                    isBreaking = true;
-                }
+                isBreaking = Gamepad.all[1].rightTrigger.IsPressed();
 
-                if (Gamepad.all[1].leftTrigger.IsPressed())
-                {
-                    isAccelerating = true;
-                }
+                isAccelerating = Gamepad.all[1].leftTrigger.IsPressed();
             }
 
         }
         horizontalInput = move.x;
         verticalInput = move.y;
-        //isBreaking = controls.Gameplay.Break.IsPressed();
-        //isAccelerating = controls.Gameplay.Accelerate.IsPressed();
-        
+        Debug.Log(verticalInput);
+
     }
     private void OnEnable()
     {
