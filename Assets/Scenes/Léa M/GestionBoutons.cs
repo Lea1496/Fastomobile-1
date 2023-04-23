@@ -56,7 +56,6 @@ public class GestionBoutons : MonoBehaviour
         data.EnleverCoin(CheminPlayer1, CheminPlayer2);
         SceneManager.LoadScene(0);
         //déjàAcheté = false;
-        
     }
     public void RecommencerJeux()
     {
@@ -106,9 +105,9 @@ public class GestionBoutons : MonoBehaviour
             GameData.P1.Vie = 200;
         }
     }
-    public void ToggleMoto(bool isMoto)
+    public void TogglePolice(bool isPolice)
     {
-        if (isMoto)
+        if (isPolice)
         {
             GameData.P1.IdVéhicule = 2;
             GameData.P1.Vie = 50;
@@ -214,9 +213,9 @@ public class GestionBoutons : MonoBehaviour
             GameData.P2.Vie = 200;
         }
     }
-    public void ToggleMoto2(bool isMoto)
+    public void TogglePolice2(bool isPolice)
     {
-        if (isMoto)
+        if (isPolice)
         {
             Debug.Log("ICI");
             GameData.P2.IdVéhicule = 2;
@@ -263,13 +262,27 @@ public class GestionBoutons : MonoBehaviour
     {
         int prix = 50;
         bool peutAcheter = Acheter(prix,CheminPlayer2);
-        expertToggle.enabled = true;
+        //expertToggle.enabled = true;
+        if (peutAcheter)
+        {
+            //avancé.interactable = true;
+            avancéToggle2.gameObject.SetActive(true);
+            avancéToggle2.enabled = true;
+            avancé2.gameObject.SetActive(false);
+        }
 
     }
     public void UnlockExpert2()
     {
         int prix = 100;
         bool peutAcheter = Acheter(prix,CheminPlayer2);
+        if (peutAcheter)
+        {
+            //avancé.interactable = true;
+            expertToggle2.gameObject.SetActive(true);
+            expertToggle2.enabled = true;
+            expert2.gameObject.SetActive(false);
+        }
         
     }
     
