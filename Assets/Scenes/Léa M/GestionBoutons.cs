@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -22,7 +23,22 @@ public class GestionBoutons : MonoBehaviour
 
     [SerializeField] private PlayerInputManager inputManager;
 
-    public bool déjàAcheté;
+    private bool avancéDéjàAcheté = false;
+    private bool expertDéjàAcheté = false;
+    private bool expertDéjàAcheté2 = false;
+    private bool avancéDéjàAcheté2 = false;
+    public void Awake()
+    {
+        avancé.gameObject.SetActive(true);
+        avancé.enabled = true;
+        expert.gameObject.SetActive(true);
+        expert.enabled = true;
+        
+        avancé.gameObject.SetActive(true);
+        avancé2.enabled = true;
+        expert2.gameObject.SetActive(true);
+        expert2.enabled = true;
+    }
 
     public void DémarrerJeu()
     {
@@ -42,8 +58,6 @@ public class GestionBoutons : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
             }
         }
-        
-        
     }
 
     public void NouvellePartie()
@@ -55,7 +69,10 @@ public class GestionBoutons : MonoBehaviour
         }
         data.EnleverCoin(CheminPlayer1, CheminPlayer2);
         SceneManager.LoadScene(0);
-        //déjàAcheté = false;
+        avancéDéjàAcheté = false;
+        avancéDéjàAcheté2 = false;
+        expertDéjàAcheté = false;
+        expertDéjàAcheté2 = false;
     }
     public void RecommencerJeux()
     {
@@ -64,7 +81,28 @@ public class GestionBoutons : MonoBehaviour
         {
             Destroy(checkpoints[i]);
         }
+        avancéToggle.gameObject.SetActive(avancéDéjàAcheté);
+        avancé.enabled = !avancéDéjàAcheté;
+        avancéToggle.enabled = avancéDéjàAcheté;
+        avancé.gameObject.SetActive(!avancéDéjàAcheté);
+        
+        expertToggle.gameObject.SetActive(expertDéjàAcheté);
+        expert.enabled = !expertDéjàAcheté;
+        expertToggle.enabled = expertDéjàAcheté;
+        expert.gameObject.SetActive(!expertDéjàAcheté);
+        
+        avancéToggle2.gameObject.SetActive(avancéDéjàAcheté2);
+        avancé2.enabled = !avancéDéjàAcheté2;
+        avancéToggle2.enabled = avancéDéjàAcheté2;
+        avancé2.gameObject.SetActive(!avancéDéjàAcheté2);
+        
+        expertToggle2.gameObject.SetActive(expertDéjàAcheté2);
+        expert2.enabled = !expertDéjàAcheté2;
+        expertToggle2.enabled = expertDéjàAcheté2;
+        expert2.gameObject.SetActive(!expertDéjàAcheté);
+        
         SceneManager.LoadScene(1);
+        
     }
     public void ToggleUnJoueur(bool isUnJoueur)
     {
@@ -173,6 +211,8 @@ public class GestionBoutons : MonoBehaviour
             avancéToggle.enabled = true;
             avancé.gameObject.SetActive(false);
         }
+
+        avancéDéjàAcheté = true;
         // if (avancé.isActiveAndEnabled)
         // {
         //     avancéToggle.enabled = peutAcheter; 
@@ -190,6 +230,8 @@ public class GestionBoutons : MonoBehaviour
             expertToggle.enabled = true;
             expert.gameObject.SetActive(false);
         }
+
+        expertDéjàAcheté = true;
         // if (expert.isActiveAndEnabled)
         // {
         //     expertToggle.enabled = peutAcheter;
@@ -271,6 +313,7 @@ public class GestionBoutons : MonoBehaviour
             avancé2.gameObject.SetActive(false);
         }
 
+        avancéDéjàAcheté2 = true;
     }
     public void UnlockExpert2()
     {
@@ -283,7 +326,8 @@ public class GestionBoutons : MonoBehaviour
             expertToggle2.enabled = true;
             expert2.gameObject.SetActive(false);
         }
-        
+
+        expertDéjàAcheté2 = true;
     }
     
 }
