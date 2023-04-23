@@ -25,7 +25,7 @@ public class Speedometer : MonoBehaviour
         speedLabelTemplateTransform.gameObject.SetActive(false);
 
         speed = 0f;
-        speedMax = 200f;
+        speedMax = 400f;
 
         CreateSpeedLabels();
     }

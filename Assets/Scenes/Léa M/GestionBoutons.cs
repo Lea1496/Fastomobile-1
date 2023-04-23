@@ -134,15 +134,12 @@ public class GestionBoutons : MonoBehaviour
         {
             GameData.P1.IsMainPlayer = true;
             GameData.P2.IsMainPlayer = false;
-            GameData.P1.IsMainPlayer = true;
         }
     }
     public void ToggleDeuxJoueurs(bool isDeuxJoueurs)
     {
         if (isDeuxJoueurs)
         {
-            GameData.P1.IsMainPlayer = true;
-            GameData.P2.IsMainPlayer = true;
             GameData.P1.IsMainPlayer = true;
             GameData.P2.IsMainPlayer = true;
         }

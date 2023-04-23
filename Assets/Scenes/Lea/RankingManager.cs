@@ -15,7 +15,7 @@ public class RankingManager : MonoBehaviour
     {
         
         joueur = collider.GetComponentInParent<Player>();
-        
+      
         if (joueur.Rang != compteur + 1)
         {
             nomAChanger = GameData.Ranks[compteur];

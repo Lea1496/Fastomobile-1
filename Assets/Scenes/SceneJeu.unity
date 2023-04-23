@@ -1794,7 +1794,7 @@ MonoBehaviour:
   terrain: {fileID: 6021201859497948706, guid: 35346684f1a966c489e82a98012619ca, type: 3}
   point: {fileID: 4507749981864202150, guid: 76f1b763874aa914289c02ecb83d0be3, type: 3}
   point1: {fileID: 4507749981864202150, guid: 7347b7b619eaf5547a15f9dbcb0e7209, type: 3}
-  obstalce1: {fileID: 579533310182082935, guid: b6e6982b772a1bc46b88d93db630bee4, type: 3}
+  obstalce1: {fileID: 1026222739917526287, guid: 7f98c8176bfca7347b11006aac2c90ce, type: 3}
   obstacle2: {fileID: 8552901019017533310, guid: f26c4802677a5194091851e89ded1f3a, type: 3}
   cam1: {fileID: 963194227}
   cam2: {fileID: 1974713177}

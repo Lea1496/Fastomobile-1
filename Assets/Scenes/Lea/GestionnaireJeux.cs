@@ -169,21 +169,27 @@ public class GestionnaireJeux : MonoBehaviour
         //Crée le début de la partie
         créateur.CréerDébutPartie(autos, chemin, sommets);
        
-        //TerrainData theTerrain = new Object2Terrain().CreateTerrain1(gameObject);
-        //GameObject terrainObject = Terrain.CreateTerrainGameObject(theTerrain);
-       // terrainObject.transform.SetLocalPositionAndRotation(new Vector3(-68,-1,-68), terrainObject.transform.rotation);
-      
+        /*TerrainData theTerrain = new Object2Terrain().CreateTerrain1(gameObject);
+        GameObject terrainObject = Terrain.CreateTerrainGameObject(theTerrain);
+        terrainObject.transform.SetLocalPositionAndRotation(new Vector3(-68,0,-68), terrainObject.transform.rotation);*/
+        
+        existsMainPlayer2 = GameData.P2.IsMainPlayer;
+
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
         mainPlayer1Live = mainPlayer1.GetComponent<Player>();
-        mainPlayer2Live = mainPlayer2.GetComponent<Player>();
         rg1 = mainPlayer1.GetComponent<Rigidbody>();
-        rg2 = mainPlayer2.GetComponent<Rigidbody>();
         renderers = mainPlayer1.GetComponentsInChildren<MeshRenderer>();
         colliders = mainPlayer1.GetComponentsInChildren<Collider>();
-        renderers2 = mainPlayer2.GetComponentsInChildren<MeshRenderer>();
-        colliders2 = mainPlayer2.GetComponentsInChildren<Collider>();
+        
 
+        if (existsMainPlayer2)
+        {
+            mainPlayer2Live = mainPlayer2.GetComponent<Player>();
+            rg2 = mainPlayer2.GetComponent<Rigidbody>();
+            renderers2 = mainPlayer2.GetComponentsInChildren<MeshRenderer>();
+            colliders2 = mainPlayer2.GetComponentsInChildren<Collider>();
+        }
    }
     
     
@@ -203,14 +209,14 @@ public class GestionnaireJeux : MonoBehaviour
         }
         
        //mainPlayer1Live = mainPlayer1.GetComponent<Player>(); //NÉCESSAIRE??
-       existsMainPlayer2 = GameData.P2.IsMainPlayer;
-
+       
        
         speedometer.speed = (int)Math.Floor(rg1.velocity.magnitude) * 3;
         if (!isGameOver1)
         {
             if (mainPlayer1Live.IsFinished)
             {
+                ChangerAffichageÉcran(mainPlayer1, cam1, 1, finish, textFinish);
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     colliders[i].enabled = false;
@@ -222,12 +228,18 @@ public class GestionnaireJeux : MonoBehaviour
                 }
 
                 rg1.useGravity = false;
-                ChangerAffichageÉcran(mainPlayer1, cam1, 1, finish, textFinish);
+                
+                if (isGameOver2)
+                {
+                    StartCoroutine(FinirPartie());
+                    StopCoroutine(FinirPartie());
+                }
             }
             else
             {
                 if (mainPlayer1Live.Vie <= 0)
                 {
+                    ChangerAffichageÉcran(mainPlayer1, cam1, 1, gameOver, textGameOver);
                     for (int i = 0; i < colliders.Length; i++)
                     {
                         colliders[i].enabled = false;
@@ -239,8 +251,9 @@ public class GestionnaireJeux : MonoBehaviour
                     }
 
                     rg1.useGravity = false;
-                    ChangerAffichageÉcran(mainPlayer1, cam1, 1, gameOver, textGameOver);
+                    
                     isGameOver1 = true;
+                    
                 }
             }
    
@@ -263,6 +276,7 @@ public class GestionnaireJeux : MonoBehaviour
            {
                if (mainPlayer2Live.IsFinished)
                {
+                   ChangerAffichageÉcran(mainPlayer2, cam2, 2, finish, textFinish2);
                    for (int i = 0; i < colliders.Length; i++)
                    {
                        colliders[i].enabled = false;
@@ -274,7 +288,7 @@ public class GestionnaireJeux : MonoBehaviour
                    }
 
                    rg1.useGravity = false;
-                   ChangerAffichageÉcran(mainPlayer2, cam2, 2, finish, textFinish2);
+                   
                    if (isGameOver1)
                    {
                        StartCoroutine(FinirPartie());
@@ -285,6 +299,7 @@ public class GestionnaireJeux : MonoBehaviour
                {
                    if (mainPlayer2Live.Vie <= 0)
                    {
+                       ChangerAffichageÉcran(mainPlayer2, cam2, 2, gameOver, textGameOver2);
                        for (int i = 0; i < colliders.Length; i++)
                        {
                            colliders[i].enabled = false;
@@ -296,7 +311,7 @@ public class GestionnaireJeux : MonoBehaviour
                        }
 
                        rg1.useGravity = false;
-                       ChangerAffichageÉcran(mainPlayer2, cam2, 2, gameOver, textGameOver2);
+                       
                        isGameOver2 = true;
                        if (mainPlayer1Live.IsFinished)
                        {
@@ -314,16 +329,22 @@ public class GestionnaireJeux : MonoBehaviour
                textVie2.text = $"HP: {mainPlayer2Live.Vie.ToString()}";
                textLaps2.text = $"{mainPlayer2Live.Tour}/3";
            }
-
+           
            
            if (mainPlayer1Live.Vie == 0 && mainPlayer2Live.Vie == 0)
            {
                StartCoroutine(FinirPartie());
                StopCoroutine(FinirPartie());
            }
+
+           if (mainPlayer1Live.IsFinished && mainPlayer2Live.IsFinished)
+           {
+               StartCoroutine(FinirPartie());
+               StopCoroutine(FinirPartie());
+           }
        }
 
-       if (mainPlayer1Live.Vie == 0 && !GameData.P2.IsMainPlayer )
+       if (isGameOver1 && !GameData.P2.IsMainPlayer )
        {
            SceneManager.LoadScene(5);
        }
@@ -366,8 +387,8 @@ public class GestionnaireJeux : MonoBehaviour
    }
    private IEnumerator FinirPartie()
    {
-       yield return new WaitForSeconds(2f);
-       SceneManager.LoadScene(5);
+       yield return new WaitForSeconds(1f);
+       SceneManager.LoadScene(4);
    }
    private void ChangerAffichageÉcran(GameObject player, Camera cam, int indice, string action, Text text)
    {

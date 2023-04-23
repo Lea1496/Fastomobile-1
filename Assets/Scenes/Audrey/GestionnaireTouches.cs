@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,7 +35,6 @@ public class GestionnaireTouches : BehaviourAuto
     private void Start()
     {
         
-        Debug.Log(gameObject.GetComponent<Player>().IsMainPlayer2);            
         if (gameObject.GetComponent<Player>().IsMainPlayer2)                   
         {                                                                      
             playerNb = 2;                                                      
@@ -42,6 +42,7 @@ public class GestionnaireTouches : BehaviourAuto
         
      
     }
+    
     private void Update()
     {
         if (Gamepad.all.Count > 0)
@@ -49,10 +50,18 @@ public class GestionnaireTouches : BehaviourAuto
             if (playerNb == 1)
             {
                 move = Gamepad.all[0].leftStick.ReadValue();
+                if (Gamepad.all[0].circleButton.wasPressedThisFrame)
+                {
+                    transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
+                }
             }
             else
             {
                 move = Gamepad.all[1].leftStick.ReadValue();
+                if (Gamepad.all[1].circleButton.wasPressedThisFrame)
+                {
+                    transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
+                }
             }
 
         }
@@ -72,6 +81,7 @@ public class GestionnaireTouches : BehaviourAuto
         HandleMotor(verticalInput);
         HandleSteering(horizontalInput);
         UpdateWheels();
+        //ApplyDownForce();
     }
 
     private void GetInput()
@@ -94,7 +104,7 @@ public class GestionnaireTouches : BehaviourAuto
         }
         horizontalInput = move.x;
         verticalInput = move.y;
-        Debug.Log(verticalInput);
+        
 
     }
     private void OnEnable()

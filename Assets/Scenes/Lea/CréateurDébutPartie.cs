@@ -89,22 +89,22 @@ public class CréateurDébutPartie: MonoBehaviour
                 
                 collisions.points = sommets;
 
-                if (compteurAutos - 1 == 0)
+                if (compteurAutos == 1)
                 {
                     mainPlayer1 = thisJoueur;
                     ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1 = leJoueur;
-                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1.IsMainPlayer = true;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1.IsMainPlayer = true; // Pas nécessaire?
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                     
                 }
 
-                if (compteurAutos - 1 == 1 && joueurs[1].IsMainPlayer)
+                if (compteurAutos == 2 && joueurs[1].IsMainPlayer)
                 {
                     mainPlayer2 = thisJoueur;
                     leJoueur.IsMainPlayer2 = true;
                     ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2 = leJoueur;
-                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2.IsMainPlayer = true;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2.IsMainPlayer = true; // Pas nécessaire ?
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                 }

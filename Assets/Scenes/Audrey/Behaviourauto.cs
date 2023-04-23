@@ -2,6 +2,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,20 +22,16 @@ public class BehaviourAuto : MonoBehaviour
     public int Puissance;
 
     private CharacterController controller;
-    public Vector3 Try = new Vector3(0, -0.9f, 0);
-    void Start()
-    {
-        controller = gameObject.GetComponent<CharacterController>();
-        rb = GetComponent<Rigidbody>();
-        //rb.centerOfMass = centerOfMass.transform.localPosition;
-        rb.centerOfMass = Try;
-    }
+    public Vector3 Try = new Vector3(1, -0.2f, 0);
+    
+    
 
     private float currentSteerAngle;
     private float currentbreakForce;
     private float currentAcceleration;
     public bool isBreaking;
     public bool isAccelerating;
+    private float downForceValue = 200f;
 
     [SerializeField] private float accelerationForce; // reste à déterminer
     [SerializeField] private float breakForce; 
@@ -45,15 +42,29 @@ public class BehaviourAuto : MonoBehaviour
     [SerializeField] WheelCollider rearLeftWheelCollider;
     [SerializeField] WheelCollider rearRightWheelCollider;
 
-    
+    private WheelCollider[] wheelColliders;
 
     [SerializeField] Transform frontLeftWheelTransform;
     [SerializeField] Transform frontRightWheelTransform;
     [SerializeField] Transform rearLeftWheelTransform;
     [SerializeField] Transform rearRightWheelTransform;
 
+    private bool estActif;
 
-    
+    void Start()
+    {
+        controller = gameObject.GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
+        //rb.centerOfMass = centerOfMass.transform.localPosition;
+        rb.centerOfMass += Try;
+        estActif = GetComponent<Player>().IsMainPlayer;
+        if (estActif)
+        {
+            wheelColliders = new WheelCollider[4]
+                { frontLeftWheelCollider, frontRightWheelCollider, rearLeftWheelCollider, rearRightWheelCollider };
+        }
+        
+    }
     public void HandleMotor(float verticalI)
     {
         frontLeftWheelCollider.motorTorque = verticalI * Puissance;
@@ -84,6 +95,11 @@ public class BehaviourAuto : MonoBehaviour
        
     }
 
+    /*public void ApplyDownForce()
+    {
+        rb.AddForce(-transform.up * downForceValue * - rb.velocity.magnitude);
+    }*/
+    
     public void HandleSteering(float horizontalI)
     {
         currentSteerAngle = maxSteerAngle * horizontalI;
@@ -93,6 +109,22 @@ public class BehaviourAuto : MonoBehaviour
        
     }
 
+    public void FlipOver()
+    {
+        if (estActif)
+        {
+            for (int i = 0; i < wheelColliders.Length; i++)
+        {
+            if (!wheelColliders[i].isGrounded)
+            {
+                Debug.Log("ROUE");
+                transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
+                break;
+            }
+        }
+        }
+        
+    }
     public void UpdateWheels()
     {
         

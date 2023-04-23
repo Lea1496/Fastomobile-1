@@ -16,33 +16,26 @@ public class AffichageArgentMenu : MonoBehaviour
     const string Chemin = "Assets/";
     [SerializeField] private TMP_Text coin;
 
+    private DataCoin dataC;
     private string text;
     private void Start()
     {
+        dataC = new DataCoin();
         AfficherCoin();
+        
     }
 
     public void AfficherCoin()
     {
         if (SceneManager.GetActiveScene().buildIndex == scenePlayer1)
         {
-            using (fluxLecture = new StreamReader(Chemin + "InfoPlayer1.txt"))
-            {
-                
-                text = $"{fluxLecture.ReadLine()}$";
-                coin.text = text;
-            }
+            coin.text = $"{dataC.AccederNbCoins("InfoPlayer1.txt")}$";
         }
         else
         {
             if (SceneManager.GetActiveScene().buildIndex == scenePlayer2)
             {
-                using (fluxLecture = new StreamReader(Chemin + "InfoPlayer2.txt"))
-                {
-                    text = $"{fluxLecture.ReadLine()}$";
-                    coin.text = text;
-
-                }
+                coin.text = $"{dataC.AccederNbCoins("InfoPlayer2.txt")}$";
             }
         }
 
