@@ -23,10 +23,10 @@ public class GestionBoutons : MonoBehaviour
 
     [SerializeField] private PlayerInputManager inputManager;
 
-    private bool avancéDéjàAcheté = false;
-    private bool expertDéjàAcheté = false;
-    private bool expertDéjàAcheté2 = false;
-    private bool avancéDéjàAcheté2 = false;
+    private bool avancéDéjàAcheté;
+    private bool expertDéjàAcheté;
+    private bool expertDéjàAcheté2;
+    private bool avancéDéjàAcheté2;
     public void Awake()
     {
         avancé.gameObject.SetActive(true);
@@ -39,6 +39,30 @@ public class GestionBoutons : MonoBehaviour
         expert2.gameObject.SetActive(true);
         expert2.enabled = true;
     }
+
+    // public void DefaultSettings(bool avancéDéjàAcheté, bool expertDéjàAcheté,
+    //     bool expertDéjàAcheté2, bool avancéDéjàAcheté2)
+    // {
+    //     avancéToggle.gameObject.SetActive(avancéDéjàAcheté);
+    //     avancé.enabled = !avancéDéjàAcheté;
+    //     avancéToggle.enabled = avancéDéjàAcheté;
+    //     avancé.gameObject.SetActive(!avancéDéjàAcheté);
+    //     
+    //     expertToggle.gameObject.SetActive(expertDéjàAcheté);
+    //     expert.enabled = !expertDéjàAcheté;
+    //     expertToggle.enabled = expertDéjàAcheté;
+    //     expert.gameObject.SetActive(!expertDéjàAcheté);
+    //     
+    //     avancéToggle2.gameObject.SetActive(avancéDéjàAcheté2);
+    //     avancé2.enabled = !avancéDéjàAcheté2;
+    //     avancéToggle2.enabled = avancéDéjàAcheté2;
+    //     avancé2.gameObject.SetActive(!avancéDéjàAcheté2);
+    //     
+    //     expertToggle2.gameObject.SetActive(expertDéjàAcheté2);
+    //     expert2.enabled = !expertDéjàAcheté2;
+    //     expertToggle2.enabled = expertDéjàAcheté2;
+    //     expert2.gameObject.SetActive(!expertDéjàAcheté);
+    // }
 
     public void DémarrerJeu()
     {
@@ -81,6 +105,8 @@ public class GestionBoutons : MonoBehaviour
         {
             Destroy(checkpoints[i]);
         }
+        SceneManager.LoadScene(1);
+        
         avancéToggle.gameObject.SetActive(avancéDéjàAcheté);
         avancé.enabled = !avancéDéjàAcheté;
         avancéToggle.enabled = avancéDéjàAcheté;
@@ -100,8 +126,6 @@ public class GestionBoutons : MonoBehaviour
         expert2.enabled = !expertDéjàAcheté2;
         expertToggle2.enabled = expertDéjàAcheté2;
         expert2.gameObject.SetActive(!expertDéjàAcheté);
-        
-        SceneManager.LoadScene(1);
         
     }
     public void ToggleUnJoueur(bool isUnJoueur)
