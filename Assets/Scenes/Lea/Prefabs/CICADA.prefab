@@ -1385,7 +1385,7 @@ MonoBehaviour:
   wheelL: {fileID: 6370229253552324828}
   wheelR: {fileID: 2475404683071148436}
   rg: {fileID: 4005492339459347072}
-  antiRoll: 5000
+  antiRoll: 6000
 --- !u!114 &6960825748903281247
 MonoBehaviour:
   m_ObjectHideFlags: 0

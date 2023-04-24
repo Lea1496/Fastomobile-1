@@ -135,7 +135,7 @@ public class GestionnaireJeux : MonoBehaviour
        
        créerRoute = GetComponent<ScriptSpline>();
        Refaire();
-       new CréateurTerrain(largeur, terrain);
+       
         créateur = GetComponent<CréateurDébutPartie>();
         chemin = new ScriptBézier(chemin).PointsSpline;
         créerRoute.FaireMesh(chemin);
@@ -191,8 +191,12 @@ public class GestionnaireJeux : MonoBehaviour
             colliders2 = mainPlayer2.GetComponentsInChildren<Collider>();
         }
    }
-    
-    
+
+    private void Start()
+    {
+        new CréateurTerrain(largeur, terrain);
+    }
+
     private void LateUpdate()
     {
         temps += Time.deltaTime;

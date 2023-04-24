@@ -13,44 +13,47 @@ public class RankingManager : MonoBehaviour
     private int compteur = 0;
     private void OnTriggerEnter(Collider collider)
     {
-        
-        joueur = collider.GetComponentInParent<Player>();
+        if (collider.gameObject.layer == 6 )
+        {
+            joueur = collider.GetComponentInParent<Player>();
       
-        if (joueur.Rang != compteur + 1)
-        {
-            nomAChanger = GameData.Ranks[compteur];
-            GameData.Ranks[compteur] = joueur.Nom;
-            GameData.Ranks[joueur.Rang - 1] = nomAChanger;
-            ChangerRangJoueur(nomAChanger, joueur.Rang);
-            joueur.Rang = compteur + 1;
-        }
-
-        ++compteur;
-        if (compteur == 12)
-        {
-            compteur = 0;
-        }
-        /*if (!ranks.Contains(joueur.Nom))
-        {
-            ranks.Add(joueur.Nom);
-        }
-        
-        
-        if (joueur.IsMainPlayer)
-        {
-            for (int i = 0; i < ranks.Count; i++)
+            if (joueur.Rang != compteur + 1)
             {
-                if (ranks[i] == joueur.Nom)
+                nomAChanger = GameData.Ranks[compteur];
+                GameData.Ranks[compteur] = joueur.Nom;
+                GameData.Ranks[joueur.Rang - 1] = nomAChanger;
+                ChangerRangJoueur(nomAChanger, joueur.Rang);
+                joueur.Rang = compteur + 1;
+            }
+
+            ++compteur;
+            if (compteur == 12)
+            {
+                compteur = 0;
+            }
+            /*if (!ranks.Contains(joueur.Nom))
+            {
+                ranks.Add(joueur.Nom);
+            }
+            
+            
+            if (joueur.IsMainPlayer)
+            {
+                for (int i = 0; i < ranks.Count; i++)
                 {
-                    joueur.Rang = i + 1;
+                    if (ranks[i] == joueur.Nom)
+                    {
+                        joueur.Rang = i + 1;
+                    }
                 }
             }
+            if (ranks.Count == 12)
+            {
+                ranks.Clear();
+            }*/
         }
-        if (ranks.Count == 12)
-        {
-            ranks.Clear();
-        }*/
-    }
+    }  
+        
 
     private void ChangerRangJoueur(string nom, int rang)
     {

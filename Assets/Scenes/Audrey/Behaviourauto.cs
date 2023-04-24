@@ -58,11 +58,11 @@ public class BehaviourAuto : MonoBehaviour
         //rb.centerOfMass = centerOfMass.transform.localPosition;
         rb.centerOfMass += Try;
         estActif = GetComponent<Player>().IsMainPlayer;
-        if (estActif)
+        /*if (estActif)
         {
             wheelColliders = new WheelCollider[4]
                 { frontLeftWheelCollider, frontRightWheelCollider, rearLeftWheelCollider, rearRightWheelCollider };
-        }
+        }*/
         
     }
     public void HandleMotor(float verticalI)
@@ -109,7 +109,7 @@ public class BehaviourAuto : MonoBehaviour
        
     }
 
-    public void FlipOver()
+   /* public void FlipOver()
     {
         if (estActif)
         {
@@ -124,7 +124,7 @@ public class BehaviourAuto : MonoBehaviour
         }
         }
         
-    }
+    }*/
     public void UpdateWheels()
     {
         

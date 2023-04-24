@@ -1659,6 +1659,9 @@ GameObject:
   - component: {fileID: 1828300579}
   - component: {fileID: 1828300580}
   - component: {fileID: 1828300581}
+  - component: {fileID: 1828300584}
+  - component: {fileID: 1828300583}
+  - component: {fileID: 1828300582}
   m_Layer: 3
   m_Name: test mesh piste
   m_TagString: Untagged
@@ -1861,6 +1864,60 @@ MonoBehaviour:
   police: {fileID: 3712510124542130609, guid: 75b35e4acf18c78499cf9bef1bfb55f8, type: 3}
   arc: {fileID: 1890588548742467344, guid: 63f7e3a5ea486a9438b4cd3142c7dc92, type: 3}
   ligne: {fileID: 3242020418959028930, guid: 1a5a1e0c71ac38c4ca19b5419a9140aa, type: 3}
+--- !u!114 &1828300582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828300567}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d037fb732983a7b4abfeb4e860766061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  palm: {fileID: 163980, guid: 2fb6f5d47657319408dbd4f3e8412b4c, type: 3}
+  tree: {fileID: 145430, guid: 82f6882977329724ca4b934e09af87fc, type: 3}
+  cactus1: {fileID: 143784, guid: 5d8a4c5c2390fc54e96a652c3eeaf313, type: 3}
+  cactus2: {fileID: 110776, guid: 63ff2386a1262d64f99de6e3e1183874, type: 3}
+  cactus3: {fileID: 178436, guid: 587331bb58ede6149bd7d31473a36202, type: 3}
+  rock: {fileID: 145164, guid: 8b8681c086a094348955216d4ef3cf0f, type: 3}
+  bone: {fileID: 175704, guid: fb9f189dcf5d2ad4aad003a8a44b136d, type: 3}
+  "coucheCollisionD\xE9sert": 12
+  "mat\xE9riauxD\xE9cor2": {fileID: 2100000, guid: 3b83b22133b5b2a4aa8e8a36cf977003, type: 2}
+--- !u!114 &1828300583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828300567}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8345b23cc8eab9545bacb919e6c04d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arbre1: {fileID: 1250690161900600, guid: e6f343cc46467004f811ce2ba3a3841b, type: 3}
+  arbre2: {fileID: 1377331622712542, guid: b9eb627f7bb4c1748829f3f01ce72b68, type: 3}
+  arbre3: {fileID: 1550140418629916, guid: 3e07483cd9aa6a141bb9c8e2d2c2bdad, type: 3}
+  arbre4: {fileID: 1656226002977108, guid: e191e21fcb275784a9f8b6d08dcd932c, type: 3}
+  arbre5: {fileID: 1335726306580732, guid: 23f312332b5cd5542ba196450880e89b, type: 3}
+  coucheCollisionArbre: 10
+  "mat\xE9riauxD\xE9cor": {fileID: 2100000, guid: 3220fdf7aa6000e4687513096561d3a0, type: 2}
+--- !u!114 &1828300584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828300567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf8f1884d5fc374f86f1b67c2c3a2fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain1: {fileID: 6021201859497948706, guid: 35346684f1a966c489e82a98012619ca, type: 3}
+  terrain2: {fileID: 6021201859497948706, guid: 37093d155de2fcc469da55698002a007, type: 3}
 --- !u!4 &1862824126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6099348359936996214, guid: b57b81134e7dc1d4884be0971474c7d8, type: 3}
