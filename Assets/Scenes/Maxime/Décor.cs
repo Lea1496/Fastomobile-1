@@ -23,7 +23,7 @@ public class Décor : MonoBehaviour
 
     private Vector3 position;
 
-    private int nbArbresMax = 50,
+    private int nbArbresMax = 70,
                 nbArbres = 0;
 
     private int posX = 0,
