@@ -76,7 +76,7 @@ public class GestionnaireJeux : MonoBehaviour
     private Rigidbody rg2;
     private string gameOver = "Game Over!";
     private string finish = "Finish!";
-
+    private int compteur = 0;
     private bool existsMainPlayer2 = false;
     private float temps = 0;
     
@@ -202,7 +202,7 @@ public class GestionnaireJeux : MonoBehaviour
         temps += Time.deltaTime;
         
         //Fait les deux premiers checkpoints
-        if (temps >= 20)
+        if (temps >= 20 && compteur < 1)
         {
             checkpointInst = Instantiate(checkpoint, Vector3.zero, 
                 checkpoint.transform.rotation);
@@ -210,6 +210,7 @@ public class GestionnaireJeux : MonoBehaviour
             checkpointInst = Instantiate(checkpoint, Vector3.zero, 
                 checkpoint.transform.rotation);
             checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(2, sommets);
+            compteur++;
         }
         
        //mainPlayer1Live = mainPlayer1.GetComponent<Player>(); //NÉCESSAIRE??

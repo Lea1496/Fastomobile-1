@@ -22,6 +22,7 @@ public class Décor2 : MonoBehaviour
 
     private Random gen = new Random();
 
+    private GameObject objets;
     private List<Vector3> points = new List<Vector3>();
 
     private Vector3 position;
@@ -39,6 +40,8 @@ public class Décor2 : MonoBehaviour
         while (nbObjet < nbObjetMax)
         {
             CréerDécor();
+            objets.transform.Translate(0,-1f,0);
+            
             nbObjet++;
         }
     }
@@ -57,7 +60,8 @@ public class Décor2 : MonoBehaviour
         points.Add(position);
 
         GameObject objet = ChoisirObjet();
-        Instantiate(objet, position, objet.transform.rotation);
+        
+        objets = Instantiate(objet, position, objet.transform.rotation);
 
     }
 
@@ -88,6 +92,8 @@ public class Décor2 : MonoBehaviour
             Debug.Log(other.gameObject.ToString());
             Destroy(other.gameObject);
             CréerDécor();
+            objets.transform.Translate(0,-1f,0);
+     
         }
     }
 }

@@ -16,6 +16,7 @@ public class Décor : MonoBehaviour
 
     [SerializeField] Material matériauxDécor;
 
+    private GameObject arbres;
     private Random gen = new Random();
 
     private List<Vector3> points = new List<Vector3>();
@@ -36,6 +37,8 @@ public class Décor : MonoBehaviour
         while (nbArbres < nbArbresMax)
         {
             CréerDécor();
+            arbres.transform.Translate(0,-1f,0);
+            arbres.transform.Translate(0,1f,0);
             nbArbres++;
         }
     }
@@ -54,8 +57,8 @@ public class Décor : MonoBehaviour
         points.Add(position);
 
         GameObject arbre = ChoisirArbre();
-        Instantiate(arbre, position, arbre.transform.rotation);
-
+        arbres = Instantiate(arbre, position, arbre.transform.rotation);
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,7 +67,10 @@ public class Décor : MonoBehaviour
         {
             Debug.Log(other.gameObject.ToString());
             Destroy(other.gameObject);
+            
             CréerDécor();
+            arbres.transform.Translate(0,-1f,0);
+            arbres.transform.Translate(0,1f,0);
         }
     }
 
