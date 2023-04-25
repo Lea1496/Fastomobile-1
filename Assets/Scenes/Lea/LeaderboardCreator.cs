@@ -10,7 +10,6 @@ public class LeaderboardCreator : MonoBehaviour
     private TextMeshProUGUI[] leaderboardTexts;
     //private GameObject[] checkpoints;
     private GameObject ligne;
-    private List<string> ranking;
     private GameObject[] joueurs;
     private int compteur;
     private Player joueur;
@@ -22,29 +21,8 @@ public class LeaderboardCreator : MonoBehaviour
     private void CreateLeaderbord()
     {
         leaderboardTexts = GetComponentsInChildren<TextMeshProUGUI>();
-        //checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
         joueurs = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log(leaderboardTexts.Length);
-       /* for (int i = 0; i < checkpoints.Length; i++)
-        {
-            if (checkpoints[i].layer == 12)
-            {
-                ligne = checkpoints[i];
-            }
-        }*/
-       List<Player> joueursEnTrop = new List<Player>();
-       
-       /*if (!joueurs[0].GetComponentInChildren<Player>().IsFinished)
-       {
-           joueurEnTrop = joueurs[0].GetComponentInChildren<Player>();
-       }
-       else
-       {
-           if ( (!joueurs[1].GetComponentInChildren<Player>().IsFinished && joueurs[1].GetComponentInChildren<Player>().IsMainPlayer2))
-           {
-               joueurEnTrop = joueurs[1].GetComponentInChildren<Player>();
-           }
-       }*/
+        List<Player> joueursEnTrop = new List<Player>();
 
        for (int i = 0; i < joueurs.Length; i++)
        {
@@ -54,22 +32,19 @@ public class LeaderboardCreator : MonoBehaviour
            }
        }
        
-       List<string> rang;
-       ranking = new List<string>();
-       //rang = checkpoints[0].GetComponentInChildren<RankingManager>().ranks;
-       rang = new List<string>(12);
+       List<string> classement = new List<string>(12);
+       
        for (int i = 0; i < 12; i++)
        {
-           rang.Add("a");
+           classement.Add("a");
        }
-        Debug.Log(joueurs.Length);
-       int compt = 1;
+       
        for (int i = 0; i < joueurs.Length; i++)
        {
            for (int j = 0; j < joueurs.Length; j++)
            {
                joueur = joueurs[i].GetComponentInChildren<Player>();
-               rang[joueur.Rang - 1] = joueur.Nom;
+               classement[joueur.Rang - 1] = joueur.Nom;
            }
            
        }
@@ -78,39 +53,15 @@ public class LeaderboardCreator : MonoBehaviour
        {
            for (int i = 0; i <  joueursEnTrop.Count; i++)
            {
-               rang.Remove(joueursEnTrop[i].Nom);
+               classement.Remove(joueursEnTrop[i].Nom);
+               classement.Add(joueursEnTrop[i].Nom + " (Mort) " );
            }
            
        }
-       Debug.Log(rang.Count);
-      /* for (int i = 0; i < rang.Count; i++)
-       {
-           ranking.Add(rang[i]);
-       }
        
-        
-        int compteur = 1;
-        
-        if (ranking.Count < 12)
+        for (int i = 0; i < classement.Count; i++)
         {
-            Debug.Log(ranking.Count);
-            while (ranking.Count < 2)
-            {
-                rang = checkpoints[checkpoints.Length - compteur++].GetComponentInChildren<RankingManager>().ranks;
-                for (int i = 0; i < rang.Count; i++)
-                {
-                    if (!ranking.Contains(rang[i]))
-                    {
-                        ranking.Add(rang[i]);
-                        Debug.Log(rang[i]);
-                    }
-                }
-            } 
-        }
-*/
-        for (int i = 0; i < rang.Count; i++)
-        {
-            leaderboardTexts[i].text = rang[i];
+            leaderboardTexts[i].text = classement[i];
         }
     }
 }

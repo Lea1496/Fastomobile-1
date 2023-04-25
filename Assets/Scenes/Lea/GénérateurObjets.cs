@@ -42,7 +42,7 @@ public class GénérateurObjets
         {
             do
             {
-                indice = gen.Next(3, sommets.Length - 3);
+                indice = gen.Next(3, sommets.Length - 6);
             } while (indices.Contains(indice));
 
             indices.Add(indice);
@@ -79,7 +79,7 @@ public class GénérateurObjets
         {
             do
             {
-                indice = gen.Next(3, sommets.Length -2);
+                indice = gen.Next(3, sommets.Length - 6);
             } while (indices.Contains(indice));
 
             indices.Add(indice);
@@ -124,7 +124,7 @@ public class GénérateurObjets
         {
             do
             {
-                indice = gen.Next(3, sommets.Length -3);
+                indice = gen.Next(3, sommets.Length - 6);
             } while (indices.Contains(indice) && indices.Count < sommets.Length);
 
             indices.Add(indice);

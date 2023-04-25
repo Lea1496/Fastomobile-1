@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CréateurDébutPartie: MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class CréateurDébutPartie: MonoBehaviour
     private GameObject mainPlayer2;
     [SerializeField] private GameObject auto;
     [SerializeField] private GameObject camion;
-    [SerializeField] private GameObject moto;
+    [SerializeField] private GameObject police;
     [SerializeField] private GameObject arc;
     [SerializeField] private GameObject ligne;
     private GameObject ligneArr;
@@ -40,13 +41,13 @@ public class CréateurDébutPartie: MonoBehaviour
         {
             if (indice == 2)
             {
-                chassis = moto;
+                chassis = police;
             }
         }
 
         return chassis;
     }
-    public void CréerDébutPartie(List<PlayerData> autos, List<Vector3> pts, Vector3[] som) //behavior auto pour le moment mais surement à changer
+    public void CréerDébutPartie(List<PlayerData> autos, List<Vector3> pts, Vector3[] som)
     {
         points = pts;
         posPremier =  new Vector3(335, 0, -50);
@@ -57,7 +58,7 @@ public class CréateurDébutPartie: MonoBehaviour
         {
             lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
         }
-        position = points[points.Count - 2];
+        position = points[points.Count - 1];
         Instantiate(arc, new Vector3(position.x , 0, position.z), arc.transform.rotation);
         ligneArr = Instantiate(ligne, new Vector3(position.x , 0, position.z), ligne.transform.rotation);
         InstancierAutos();
@@ -73,7 +74,7 @@ public class CréateurDébutPartie: MonoBehaviour
             for (int i = 0; i < lesAutos.Count / 3; i++)
             {
                 GameObject thisJoueur = Instantiate(lesAutos[compteurAutos],
-                    new Vector3(position.x - 35 * j - 4 * i -30, 5, (position.z - 37) + 32 * i - 6 * j),
+                    new Vector3(position.x - 35 * j - 4 * i -30, 5, (position.z - 37) + 32 * i - 6 * j -7),
                     lesAutos[compteurAutos].transform.rotation);
                 Player leJoueur = thisJoueur.GetComponent<Player>();
                 leJoueur.CréerPlayer(
@@ -82,27 +83,28 @@ public class CréateurDébutPartie: MonoBehaviour
                     joueurs[compteurAutos].Chassis, joueurs[compteurAutos].Puissance,
                     joueurs[compteurAutos].Poids, joueurs[compteurAutos++].IsMainPlayer, compteurAutos);
                 DontDestroyOnLoad(thisJoueur);
+                GameData.Ranks.Add(leJoueur.Nom);
+                GameData.LesJoueurs.Add(leJoueur);
                 GestionnaireCollision collisions = thisJoueur.GetComponent<GestionnaireCollision>();
-
+                
                 collisions.points = sommets;
 
-                if (compteurAutos - 1 == 0)
+                if (compteurAutos == 1)
                 {
                     mainPlayer1 = thisJoueur;
-                   // collisions.isMainPlayer1 = true;
                     ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1 = leJoueur;
-                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1.IsMainPlayer = true;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer1.IsMainPlayer = true; // Pas nécessaire?
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                     
                 }
 
-                if (compteurAutos - 1 == 1 && joueurs[1].IsMainPlayer)
+                if (compteurAutos == 2 && joueurs[1].IsMainPlayer)
                 {
                     mainPlayer2 = thisJoueur;
-                   // collisions.isMainPlayer2 = true;
+                    leJoueur.IsMainPlayer2 = true;
                     ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2 = leJoueur;
-                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2.IsMainPlayer = true;
+                    ligneArr.GetComponentInChildren<GestionnaireTrigger>().mainPlayer2.IsMainPlayer = true; // Pas nécessaire ?
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                 }

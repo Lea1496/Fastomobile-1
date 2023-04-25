@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using Random = System.Random;
 
-public class MarchePas : Exception { }
+
 public class CréateurChemin
 {
     int[] invalide = new int[4];
@@ -29,7 +29,7 @@ public class CréateurChemin
     private int[] tableau4;
 
     private List<Vector3> cheminComplet;
-    
+    private List<Vector3> listeTournants = new List<Vector3>();
     int pasU = 0, pasD = 0, pasL = 0, pasR = 0;
     int[] restrictions = new int[4];
     private List<int> tousPointsVisités = new List<int>();
@@ -38,6 +38,7 @@ public class CréateurChemin
     
     private List<int> verif;
 
+    
     public List<Vector3> ListePos
     {
         get => listePos;
@@ -56,7 +57,7 @@ public class CréateurChemin
         DéterminerChemin2dAléatoire(p1, p2);
         DéterminerChemin2dAléatoire(p2, p3);
         DéterminerChemin2dAléatoire(p3, p4);
-        DéterminerChemin2dAléatoire(p4, largeur * 4);
+        DéterminerChemin2dAléatoire(p4, largeur * 5);
         tousPointsVisités.Add(largeur * 4);
         tousPointsVisités.Add(largeur * 3);
         tousPointsVisités.Add(largeur * 2);
@@ -582,10 +583,26 @@ public class CréateurChemin
         CréerCheminComplet();
         verif = new List<int>();
         maxCotes = listePos.Count / 5;
+        DéterminerTournants();
         CréerCotes();
     }
 
 
+    private void DéterminerTournants()
+    {
+        for (int i = 1; i < listePos.Count - 1; i++)
+        {
+            if (listePos[i].x != listePos[i + 1].x && listePos[i].z != listePos[i + 1].z)
+            {
+                listeTournants.Add(listePos[i - 1]);
+                listeTournants.Add(listePos[i]);
+                listeTournants.Add(listePos[i + 1]);
+            }
+        }
+
+        RemoveDuplicates(listeTournants);
+        Debug.Log(listeTournants.Count);
+    }
     private void CréerCotes()
     {
 
@@ -598,7 +615,7 @@ public class CréateurChemin
             do
             {
                 pos = gen.Next(5, listePos.Count - 7);
-            } while (verif.Contains(pos) && verif.Count != listePos.Count);
+            } while (verif.Contains(pos) && verif.Count != listePos.Count && !listeTournants.Contains(listePos[pos]));
 
             verif.Add(pos - 1);
             verif.Add(pos);

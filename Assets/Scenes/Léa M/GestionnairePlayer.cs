@@ -27,11 +27,10 @@ public class GestionnairePlayer
             nbJoueurs = 2;
             GameData.P2.Nom = "Player2";
             joueurs.Add(GameData.P2);
+            joueurs[1].Puissance = AssignerPuissance(joueurs[1].IdMoteur);
+            joueurs[1].Poids = AssignerPoids(joueurs[1].IdVéhicule);
         }
-        /*auto = Auto;
-        moto = Moto;
-        camion = Camion;*/
-        //joueurs[0].Chassis = AssignerChassis(joueurs[0].IdVéhicule);
+    
         joueurs[0].Puissance = AssignerPuissance(joueurs[0].IdMoteur);
         joueurs[0].Poids = AssignerPoids(joueurs[0].IdVéhicule);
         
@@ -51,16 +50,16 @@ public class GestionnairePlayer
 
     private int AssignerPuissance(int indice)
     {
-        int puissance = 15000;
+        int puissance = 5000;
         if (indice == 1)
         {
-            puissance = 5000;
+            puissance = 3000;
         }
         else
         {
             if (indice == 2)
             {
-                puissance = 10000;
+                puissance = 4000;
             }
         }
 
@@ -68,16 +67,16 @@ public class GestionnairePlayer
     }
     private int AssignerPoids(int indice)
     {
-        int poids = 150;
+        int poids = 15;
         if (indice == 1)
         {
-            poids = 50;
+            poids = 5;
         }
         else
         {
             if (indice == 2)
             {
-                poids = 100;
+                poids = 10;
             }
         }
 

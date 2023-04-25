@@ -16,10 +16,12 @@ public class GestionnaireTrigger : MonoBehaviour
     private void Start()
     {
         nbJoueur = 1;
-        if (mainPlayer2 != null)
+        if (GameData.P2.IsMainPlayer)
         {
             nbJoueur = 2;
         }
+
+        data = new DataCoin();
     }
 
     private int compteurTourJoueur1;
@@ -29,16 +31,15 @@ public class GestionnaireTrigger : MonoBehaviour
 
     private float temps1 = 0;
     private float temps2 = 0;
-
-  //  public List<string> ranks = new List<string>();
+    
 
     private void Update()
     {
         temps1 += Time.deltaTime;
         temps2 += Time.deltaTime;
-            if (compteurTour == 4 || temps1 > 2)
+        if (compteurTour == 4 || temps1 > 10)
         {
-          // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
     
@@ -47,28 +48,12 @@ public class GestionnaireTrigger : MonoBehaviour
     {
         joueur = collider.gameObject.GetComponentInParent<Player>();
         
-        /*ranks.Add(joueur.Nom);
-        if (joueur.IsMainPlayer)
-        {
-            for (int i = 0; i < ranks.Count; i++)
-            {
-                if (ranks[i] == joueur.Nom)
-                {
-                    joueur.Rang = i + 1;
-                }
-            }
-        }
-        if (ranks.Count == 12)
-        {
-            ranks.Clear();
-        }*/
         
         if (collider.gameObject.layer == 6)
         {
 
             if (nbJoueur == 2)
             {
-                
                 if (joueur.Nom == mainPlayer1.Nom && (temps1 > 15 || compteurTourJoueur1 == 0))
                 {
                     joueur.Tour++;
@@ -100,7 +85,7 @@ public class GestionnaireTrigger : MonoBehaviour
                     compteurTour++;
                     compteurTourJoueur1 = 0;
                     compteurTourJoueur2 = 0;
-
+                    
                 }
 
                 if (compteurTour == 4)
@@ -116,7 +101,6 @@ public class GestionnaireTrigger : MonoBehaviour
                 {
                     joueur.Tour++;
                     compteurTour++;
-                    Debug.Log(compteurTour);
                     temps1 = 0;
                 }
                 

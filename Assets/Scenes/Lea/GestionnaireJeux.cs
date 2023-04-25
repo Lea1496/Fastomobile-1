@@ -6,11 +6,13 @@ using System.Net.Mime;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
+using UnityEngine.InputSystem;
 
 
 [RequireComponent(typeof(ScriptSpline))]
@@ -30,53 +32,55 @@ public class GestionnaireJeux : MonoBehaviour
     [SerializeField] private GameObject bonus;
     [SerializeField] private GameObject checkpoint;
     [SerializeField] private Text textCoin;
-    [SerializeField] private Text textCn;
     [SerializeField] private Text textRang;
     [SerializeField] private Text textRg;
     [SerializeField] private Text textVie;
-    [SerializeField] private Text textV;
     [SerializeField] private Text textCoin2;
-    [SerializeField] private Text textCn2;
     [SerializeField] private Text textRang2;
     [SerializeField] private Text textRg2;
     [SerializeField] private Text textVie2;
-    [SerializeField] private Text textV2;
     [SerializeField] private Text textLaps;
     [SerializeField] private Text textLaps2;
     [SerializeField] private Text textFinish;
     [SerializeField] private Text textFinish2;
     [SerializeField] private Text textGameOver;
     [SerializeField] private Text textGameOver2;
-    [SerializeField] private GameObject PlayerData2;
+    [SerializeField] private Speedometer speedometer;
+    [SerializeField] private Speedometer speedometer2;
+    [SerializeField] private Canvas speedometerCanv;
+    [SerializeField] private Canvas speedometerCanv2;
+    [SerializeField] private GameObject playerData2;
+
     private ScriptSpline créerRoute;
-    
     private List<Vector3> chemin;
     private GameObject mainPlayer1;
     private GameObject mainPlayer2;
     private List<PlayerData> autos;
+    private Vector3[] sommets;
     private CréateurDébutPartie créateur;
     private Vector3 desiredPos;
     private Vector3 desiredPos2;
     private GameObject ligne;
-    private int compteur = 0;
     private Transform target;
     private Transform target2;
     private Player mainPlayer1Live;
     private Player mainPlayer2Live;
-    private float wantedRotationAngle;
-    private float wantedHeight;
+    GameObject checkpointInst;
     private bool isGameOver1 = false;
     private bool isGameOver2 = false;
-    private float currentRotationAngle;
-    private float currentHeight;
-    private Quaternion currentRotation;
+    private MeshRenderer[] renderers;
+    private Collider[] colliders;
+    private MeshRenderer[] renderers2;
+    private Collider[] colliders2;
+    private Rigidbody rg1;
+    private Rigidbody rg2;
+    private string gameOver = "Game Over!";
+    private string finish = "Finish!";
+    private int compteur = 0;
+    private bool existsMainPlayer2 = false;
+    private float temps = 0;
     
-    private float wantedRotationAngle2;
-    private float wantedHeight2;
-
-    private float currentRotationAngle2;
-    private float currentHeight2;
-    private Quaternion currentRotation2;
+    
     public Player MainPlayer1
     {
         get => mainPlayer1.GetComponent<Player>();
@@ -128,183 +132,238 @@ public class GestionnaireJeux : MonoBehaviour
 
     void Awake()
    {
+       
        créerRoute = GetComponent<ScriptSpline>();
        Refaire();
-       new CréateurTerrain(largeur, terrain);
+       
         créateur = GetComponent<CréateurDébutPartie>();
         chemin = new ScriptBézier(chemin).PointsSpline;
         créerRoute.FaireMesh(chemin);
-        Vector3[] sommets = créerRoute.sommets;
-        GameObject checkpoint;
+        sommets = créerRoute.sommets;
+        
+        
         if (GameData.P2.IsMainPlayer)
         {
             cam2.gameObject.SetActive(true);
             cam1.rect = new Rect(0.5f, 0, 0.5f, 1);
-            PlayerData2.SetActive(true);
+            playerData2.SetActive(true);
         }
+        
         //Instancie les checkpoints
-        for (int i = 0; i < chemin.Count -2; i++)
+        for (int i = 2; i < chemin.Count -2; i++)
         {
-            checkpoint = Instantiate(this.checkpoint, new Vector3(0,0,0),
+            checkpointInst = Instantiate(this.checkpoint, Vector3.zero, 
                 this.checkpoint.transform.rotation);
-            checkpoint.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
+            checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
         }
+        
+        //Instancie ligne d'arrivée
+        gameObject.GetComponentInChildren<CréateurLigneArrivée>().FaireMesh(new Vector3(chemin[chemin.Count -1].x, 0, chemin[chemin.Count -1].z +70),new Vector3(chemin[chemin.Count -1].x, 0, chemin[chemin.Count -1].z -70));
         
         //Instancie les coins, obstacles et bonus
         new GénérateurObjets().GénérerObjets(obstalce1, obstacle2, coin, bonus, sommets);
+        
         //Crée la liste de joueurs
-        autos = new GestionnairePlayer().Joueurs; //à changer
+        autos = new GestionnairePlayer().Joueurs;
+        
         //Crée le début de la partie
         créateur.CréerDébutPartie(autos, chemin, sommets);
        
-        //TerrainData theTerrain = new Object2Terrain().CreateTerrain1(gameObject);
-        //GameObject terrainObject = Terrain.CreateTerrainGameObject(theTerrain);
-       // terrainObject.transform.SetLocalPositionAndRotation(new Vector3(-68,-1,-68), terrainObject.transform.rotation);
-      
+        /*TerrainData theTerrain = new Object2Terrain().CreateTerrain1(gameObject);
+        GameObject terrainObject = Terrain.CreateTerrainGameObject(theTerrain);
+        terrainObject.transform.SetLocalPositionAndRotation(new Vector3(-68,0,-68), terrainObject.transform.rotation);*/
+        
+        existsMainPlayer2 = GameData.P2.IsMainPlayer;
+
         mainPlayer1 = créateur.MainPlayer1;
         mainPlayer2 = créateur.MainPlayer2;
+        mainPlayer1Live = mainPlayer1.GetComponent<Player>();
+        rg1 = mainPlayer1.GetComponent<Rigidbody>();
+        renderers = mainPlayer1.GetComponentsInChildren<MeshRenderer>();
+        colliders = mainPlayer1.GetComponentsInChildren<Collider>();
+        
+
+        if (existsMainPlayer2)
+        {
+            mainPlayer2Live = mainPlayer2.GetComponent<Player>();
+            rg2 = mainPlayer2.GetComponent<Rigidbody>();
+            renderers2 = mainPlayer2.GetComponentsInChildren<MeshRenderer>();
+            colliders2 = mainPlayer2.GetComponentsInChildren<Collider>();
+        }
    }
 
-   private void LateUpdate()
-   {
-       mainPlayer1Live = mainPlayer1.GetComponent<Player>();
+    private void Start()
+    {
+        new CréateurTerrain(largeur, terrain);
+    }
 
-       if (mainPlayer1Live.IsFinished)
-       {
-           mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
-           textFinish.enabled = true;
-       }
-
-       if (mainPlayer1Live.Vie <= 0)
-       {
-           mainPlayer1.GetComponent<GestionnaireTouches>().enabled = false;
-          GameOver(cam1, 1);
-          isGameOver1 = true;
-       }
-       //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
+    private void LateUpdate()
+    {
+        temps += Time.deltaTime;
+        
+        //Fait les deux premiers checkpoints
+        if (temps >= 20 && compteur < 1)
+        {
+            checkpointInst = Instantiate(checkpoint, Vector3.zero, 
+                checkpoint.transform.rotation);
+            checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(0, sommets);
+            checkpointInst = Instantiate(checkpoint, Vector3.zero, 
+                checkpoint.transform.rotation);
+            checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(2, sommets);
+            compteur++;
+        }
+        
+       //mainPlayer1Live = mainPlayer1.GetComponent<Player>(); //NÉCESSAIRE??
        
-       // Calculate the current rotation angles
-       target = mainPlayer1.transform;
-       wantedRotationAngle = target.eulerAngles.y;
-       wantedHeight = target.position.y + 20;
-
-       currentRotationAngle = cam1.transform.eulerAngles.y;
-       currentHeight = cam1.transform.position.y;
-
-       // Damp the rotation around the y-axis
-       currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, 3f * Time.deltaTime);
-
-       // Damp the height
-       currentHeight = Mathf.Lerp(currentHeight, wantedHeight, 2f * Time.deltaTime);
-
-       // Convert the angle into a rotation
-       currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
-
-       // Set the position of the camera on the x-z plane to:
-       // distance meters behind the target
-       cam1.transform.position = target.position;
-       cam1.transform.position -= currentRotation * Vector3.forward * 30;
-
-       cam1.transform.rotation = Quaternion.Slerp(cam1.transform.rotation, currentRotation, 3f * Time.deltaTime);
-
-       // Set the height of the camera
-       cam1.transform.position = new Vector3(cam1.transform.position.x, currentHeight, cam1.transform.position.z);
-
-       // Always look at the target
-       cam1.transform.LookAt(target);
        
-       //Mon code
-       textCoin.text = mainPlayer1Live.Argent.ToString();
-       textRang.text = mainPlayer1Live.Rang.ToString();
-       textVie.text = mainPlayer1Live.Vie.ToString();
-       textLaps.text = $"{mainPlayer1Live.Tour}/3";
+        speedometer.speed = (int)Math.Floor(rg1.velocity.magnitude) * 3;
+        if (!isGameOver1)
+        {
+            if (mainPlayer1Live.IsFinished)
+            {
+                ChangerAffichageÉcran(mainPlayer1, cam1, 1, finish, textFinish);
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    colliders[i].enabled = false;
+                }
 
-       if (GameData.P2.IsMainPlayer) 
+                for (int i = 0; i < renderers.Length; i++)
+                {
+                    renderers[i].enabled = false;
+                }
+
+                rg1.useGravity = false;
+                
+                if (isGameOver2)
+                {
+                    StartCoroutine(FinirPartie());
+                    StopCoroutine(FinirPartie());
+                }
+            }
+            else
+            {
+                if (mainPlayer1Live.Vie <= 0)
+                {
+                    ChangerAffichageÉcran(mainPlayer1, cam1, 1, gameOver, textGameOver);
+                    for (int i = 0; i < colliders.Length; i++)
+                    {
+                        colliders[i].enabled = false;
+                    }
+
+                    for (int i = 0; i < renderers.Length; i++)
+                    {
+                        renderers[i].enabled = false;
+                    }
+
+                    rg1.useGravity = false;
+                    
+                    isGameOver1 = true;
+                    
+                }
+            }
+   
+            GérerCaméra(mainPlayer1Live, cam1);
+   
+            textCoin.text = $"Coin: {mainPlayer1Live.Argent.ToString()}";
+            textRang.text = mainPlayer1Live.Rang.ToString();
+            textVie.text = $"HP: {mainPlayer1Live.Vie.ToString()}";
+            textLaps.text = $"{mainPlayer1Live.Tour}/3";
+        }
+       
+       
+       
+
+       if (existsMainPlayer2) 
        {
-           mainPlayer2Live = mainPlayer2.GetComponent<Player>();
-           if (mainPlayer2Live.IsFinished)
+           //mainPlayer2Live = mainPlayer2.GetComponent<Player>(); //NÉCESSAIRE??
+           speedometer2.speed = (int)Math.Floor(rg2.velocity.magnitude) * 3;
+           if (!isGameOver2)
            {
-               mainPlayer2.GetComponent<GestionnaireTouches>().enabled = false;
-               textFinish2.enabled = true;
-               if (isGameOver1)
+               if (mainPlayer2Live.IsFinished)
                {
-                   StartCoroutine(FinirPartie());
-                   StopCoroutine(FinirPartie());
+                   ChangerAffichageÉcran(mainPlayer2, cam2, 2, finish, textFinish2);
+                   for (int i = 0; i < colliders.Length; i++)
+                   {
+                       colliders[i].enabled = false;
+                   }
+
+                   for (int i = 0; i < renderers.Length; i++)
+                   {
+                       renderers[i].enabled = false;
+                   }
+
+                   rg1.useGravity = false;
+                   
+                   if (isGameOver1)
+                   {
+                       StartCoroutine(FinirPartie());
+                       StopCoroutine(FinirPartie());
+                   }
                }
-           }
-           if (mainPlayer2Live.Vie <= 0)
-           {
-               mainPlayer2.GetComponent<GestionnaireTouches>().enabled = false;
-               GameOver(cam2, 2);
-               isGameOver2 = true;
-               if (mainPlayer1Live.IsFinished)
+               else
                {
-                   StartCoroutine(FinirPartie());
-                   StopCoroutine(FinirPartie());
+                   if (mainPlayer2Live.Vie <= 0)
+                   {
+                       ChangerAffichageÉcran(mainPlayer2, cam2, 2, gameOver, textGameOver2);
+                       for (int i = 0; i < colliders.Length; i++)
+                       {
+                           colliders[i].enabled = false;
+                       }
+
+                       for (int i = 0; i < renderers.Length; i++)
+                       {
+                           renderers[i].enabled = false;
+                       }
+
+                       rg1.useGravity = false;
+                       
+                       isGameOver2 = true;
+                       if (mainPlayer1Live.IsFinished)
+                       {
+                           StartCoroutine(FinirPartie());
+                           StopCoroutine(FinirPartie());
+                       }
+
+                   }   
                }
 
+               GérerCaméra(mainPlayer2Live, cam2);
+          
+               textCoin2.text = $"Coin: {mainPlayer2Live.Argent.ToString()}";
+               textRang2.text = mainPlayer2Live.Rang.ToString();
+               textVie2.text = $"HP: {mainPlayer2Live.Vie.ToString()}";
+               textLaps2.text = $"{mainPlayer2Live.Tour}/3";
            }
            
-           //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
-       
-           // Calculate the current rotation angles
-           target2 = mainPlayer2.transform;
-           wantedRotationAngle2 = target2.eulerAngles.y;
-           wantedHeight2 = target2.position.y + 20;
-
-           currentRotationAngle2 = cam2.transform.eulerAngles.y;
-           currentHeight2 = cam2.transform.position.y;
-
-           // Damp the rotation around the y-axis
-           currentRotationAngle2 = Mathf.LerpAngle(currentRotationAngle2, wantedRotationAngle2, 3f * Time.deltaTime);
-
-           // Damp the height
-           currentHeight2 = Mathf.Lerp(currentHeight2, wantedHeight2, 2f * Time.deltaTime);
-
-           // Convert the angle into a rotation
-           currentRotation2 = Quaternion.Euler(0, currentRotationAngle2, 0);
-
-           // Set the position of the camera on the x-z plane to:
-           // distance meters behind the target
-           cam2.transform.position = target2.position;
-           cam2.transform.position -= currentRotation2 * Vector3.forward * 30;
-
-           cam2.transform.rotation = Quaternion.Slerp(cam2.transform.rotation, currentRotation2, 3f * Time.deltaTime);
-
-           // Set the height of the camera
-           cam2.transform.position = new Vector3(cam2.transform.position.x, currentHeight2, cam2.transform.position.z);
-
-           // Always look at the target
-           cam2.transform.LookAt(target2);
-       
-           //Mon code
-           textCoin2.text = mainPlayer2Live.Argent.ToString();
-           textRang2.text = mainPlayer2Live.Rang.ToString();
-           textVie2.text = mainPlayer2Live.Vie.ToString();
-           textLaps2.text = $"{mainPlayer2Live.Tour}/3";
+           
            if (mainPlayer1Live.Vie == 0 && mainPlayer2Live.Vie == 0)
            {
-               SceneManager.LoadScene(5);
+               StartCoroutine(FinirPartie());
+               StopCoroutine(FinirPartie());
+           }
+
+           if (mainPlayer1Live.IsFinished && mainPlayer2Live.IsFinished)
+           {
+               StartCoroutine(FinirPartie());
+               StopCoroutine(FinirPartie());
            }
        }
 
-       if (mainPlayer1Live.Vie == 0 && !GameData.P2.IsMainPlayer )
+       if (isGameOver1 && !GameData.P2.IsMainPlayer )
        {
            SceneManager.LoadScene(5);
        }
+
        
    }
 
+   //Cette fonction vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
    private void GérerCaméra(Player mainPlayer, Camera cam)
    {
-       Player mainPlayerLive = mainPlayer.GetComponent<Player>();
-       
-       //Ce code vient de :https://github.com/bhavik66/Unity3D-Ranking-System/tree/master/Assets/RankingSystem/Scripts
-       
        // Calculate the current rotation angles
        Transform target = mainPlayer.transform;
        float wantedRotationAngle = target.eulerAngles.y;
-       float wantedHeight = target.position.y + 20;
+       float wantedHeight = target.position.y + 25;
 
        float  currentRotationAngle = cam.transform.eulerAngles.y;
        float currentHeight = cam.transform.position.y;
@@ -320,29 +379,35 @@ public class GestionnaireJeux : MonoBehaviour
 
        // Set the position of the camera on the x-z plane to:
        // distance meters behind the target
-       cam1.transform.position = target.position;
-       cam1.transform.position -= currentRotation * Vector3.forward * 30;
+       cam.transform.position = target.position;
+       cam.transform.position -= currentRotation * Vector3.forward * 40;
 
-       cam1.transform.rotation = Quaternion.Slerp(cam1.transform.rotation, currentRotation, 3f * Time.deltaTime);
+       cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, currentRotation, 3f * Time.deltaTime);
 
        // Set the height of the camera
-       cam1.transform.position = new Vector3(cam1.transform.position.x, currentHeight, cam1.transform.position.z);
+       cam.transform.position = new Vector3(cam.transform.position.x, currentHeight, cam.transform.position.z);
 
        // Always look at the target
-       cam1.transform.LookAt(target);
+       cam.transform.LookAt(target);
    }
    private IEnumerator FinirPartie()
    {
        yield return new WaitForSeconds(1f);
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+       SceneManager.LoadScene(4);
    }
-   private void GameOver(Camera cam, int indice)
+   private void ChangerAffichageÉcran(GameObject player, Camera cam, int indice, string action, Text text)
    {
-       cam.clearFlags = CameraClearFlags.SolidColor;
-       cam.cullingMask = 0;
        
+       cam.clearFlags = CameraClearFlags.SolidColor;
        DésactiverTextes(indice);
-   }
+       cam.cullingMask = 0;
+       text.text = action;
+       if (existsMainPlayer2)
+       {
+           text.alignment = TextAnchor.MiddleRight;
+       }
+       player.GetComponent<GestionnaireTouches>().enabled = false; //À CHANGER???
+    }
 
    private void DésactiverTextes(int indice)
    {
@@ -352,10 +417,8 @@ public class GestionnaireJeux : MonoBehaviour
            textRang.enabled = false;
            textVie.enabled = false;
            textLaps.enabled = false;
-           textCn.enabled = false;
            textRg.enabled = false;
-           textV.enabled = false;
-           textGameOver.enabled = true;
+           speedometerCanv.enabled = false;
        }
        else
        {
@@ -363,10 +426,8 @@ public class GestionnaireJeux : MonoBehaviour
            textRang2.enabled = false;
            textVie2.enabled = false;
            textLaps2.enabled = false;
-           textCn2.enabled = false;
            textRg2.enabled = false;
-           textV2.enabled = false;
-           textGameOver2.enabled = true;
+           speedometerCanv2.enabled = false;
        }
    }
    

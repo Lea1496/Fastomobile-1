@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Random = System.Random;
 
 [RequireComponent(typeof(Player))]
 
@@ -16,19 +18,22 @@ public class GestionnaireCollision : MonoBehaviour
 
     [SerializeField] GameObject coin;
     [SerializeField] GameObject bonus;
+    [SerializeField] private Text textBonusVie;
+    [SerializeField] private Text textBonusVitesse;
+    [SerializeField] private Text textBonusVie2;
+    [SerializeField] private Text textBonusVitesse2;
     public Vector3[] points;
-    
-    //public List<PlayerData> players;
+
+    private Random gen = new Random();
     private GénérateurObjets générateur;
     private Player joueur;
     private int compteurJoueursPassés;
-    private DataCoin data;
-   
+    private string bonusVie = "+ 10 HP!";
+    private string bonusVitesse = "Boost";
 
     private void Start()
     {
         générateur = new GénérateurObjets();
-        data = new DataCoin();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -37,7 +42,7 @@ public class GestionnaireCollision : MonoBehaviour
         
         if (point.otherCollider.gameObject.layer == coucheCollisionObstacle) //Obstacle
         {
-            point.thisCollider.GetComponentInParent<Player>().EnleverVie(50); //changer cbm de vie
+            point.thisCollider.GetComponentInParent<Player>().EnleverVie(10); //changer cbm de vie
         }
         
         
@@ -45,9 +50,11 @@ public class GestionnaireCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        int ind;
+        joueur = gameObject.GetComponent<Player>();
         if (other.gameObject.layer == coucheCollisionCoin)
         {
-            gameObject.GetComponent<Player>().AjouterArgent(1);
+            joueur.AjouterArgent(1);
             Destroy(other.gameObject);
             générateur.GénérerCoins(1, points, coin);
         }
@@ -55,7 +62,50 @@ public class GestionnaireCollision : MonoBehaviour
         {
             Destroy(other.gameObject);
             générateur.GénérerBonus(1, points, bonus);
+            ind = gen.Next(0, 2);
+            if (joueur.IsMainPlayer2)
+            {
+                if (ind == 0)
+                {
+                    joueur.AjouterVie(10);
+                    textBonusVie2.text = bonusVie;
+                    StartCoroutine(AfficherBonus(textBonusVie2));
+                    StopCoroutine(AfficherBonus(textBonusVie2));
+                }
+                else
+                {
+                    gameObject.GetComponent<GestionnaireTouches>().ApplyAcceleration(3f);
+                    textBonusVitesse2.text = bonusVitesse;
+                    StartCoroutine(AfficherBonus(textBonusVitesse2));
+                    StopCoroutine(AfficherBonus(textBonusVitesse2));
+                }
+            }
+            else
+            {
+                if (ind == 0)
+                {
+                    gameObject.GetComponent<Player>().AjouterVie(10);
+                    textBonusVie.text = bonusVie;
+                    StartCoroutine(AfficherBonus(textBonusVie));
+                    StopCoroutine(AfficherBonus(textBonusVie));
+                }
+                else
+                {
+                    gameObject.GetComponent<GestionnaireTouches>().ApplyAcceleration(3f);
+                    textBonusVitesse.text = bonusVitesse;
+                    StartCoroutine(AfficherBonus(textBonusVitesse));
+                    StopCoroutine(AfficherBonus(textBonusVitesse));
+                }
+            }
+            
+
+            
         }
 
+    }
+    private IEnumerator AfficherBonus(Text textB)
+    {
+        yield return new WaitForSeconds(1f);
+        textB.text = "";
     }
 }
