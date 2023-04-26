@@ -607,7 +607,6 @@ public class CréateurChemin
     
     private void CréerCotes()
     {
-
         int pos;
         int grandeur = 0;
         int bond = 0;
