@@ -14,6 +14,8 @@ public class PlayerData :  IPlayer
     public GameObject Chassis { get; set; }
     public int Puissance { get; set; }
     public int Poids { get; set; }
+    public bool DéjàAchetéAvancé { get; set; }
+    public bool DéjàAchetéExpert { get; set; }
     
     public bool IsMainPlayer { get; set; }
     public bool IsMainPlayer1 { get; set; }
