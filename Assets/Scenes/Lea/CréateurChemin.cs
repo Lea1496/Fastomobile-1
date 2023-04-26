@@ -65,7 +65,7 @@ public class CréateurChemin
         tousPointsVisités = RemoveDuplicates(tousPointsVisités);
         tousPointsVisités.Add(0);
         TransformerIntEnVector(tousPointsVisités);
-       
+
     }
   
 
@@ -592,7 +592,7 @@ public class CréateurChemin
     {
         for (int i = 1; i < listePos.Count - 1; i++)
         {
-            if (listePos[i].x != listePos[i + 1].x && listePos[i].z != listePos[i + 1].z)
+            if (listePos[i - 1].x != listePos[i + 1].x && listePos[i - 1].z != listePos[i + 1].z)
             {
                 listeTournants.Add(listePos[i - 1]);
                 listeTournants.Add(listePos[i]);
@@ -603,9 +603,10 @@ public class CréateurChemin
         RemoveDuplicates(listeTournants);
         Debug.Log(listeTournants.Count);
     }
+
+    
     private void CréerCotes()
     {
-
         int pos;
         int grandeur = 0;
         int bond = 0;
@@ -615,7 +616,7 @@ public class CréateurChemin
             do
             {
                 pos = gen.Next(5, listePos.Count - 7);
-            } while (verif.Contains(pos) && verif.Count != listePos.Count && !listeTournants.Contains(listePos[pos]));
+            } while (verif.Contains(pos) && verif.Count != listePos.Count && listeTournants.Contains(listePos[pos]));
 
             verif.Add(pos - 1);
             verif.Add(pos);

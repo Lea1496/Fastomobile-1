@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,29 +17,33 @@ public class GestionBoutons : MonoBehaviour
     public Button expert;
     public Toggle avancéToggle;
     public Toggle expertToggle;
-    public Button avancé2;
-    public Button expert2;
-    public Toggle avancéToggle2;
-    public Toggle expertToggle2;
+    // public Button avancé2;
+    // public Button expert2;
+    // public Toggle avancéToggle2;
+    // public Toggle expertToggle2;
 
     [SerializeField] private PlayerInputManager inputManager;
-
-    private bool avancéDéjàAcheté;
-    private bool expertDéjàAcheté;
-    private bool expertDéjàAcheté2;
-    private bool avancéDéjàAcheté2;
-    public void Awake()
-    {
-        avancé.gameObject.SetActive(true);
-        avancé.enabled = true;
-        expert.gameObject.SetActive(true);
-        expert.enabled = true;
-        
-        avancé.gameObject.SetActive(true);
-        avancé2.enabled = true;
-        expert2.gameObject.SetActive(true);
-        expert2.enabled = true;
-    }
+    
+    private bool avancéDéjàAcheté = GameData.P1.DéjàAchetéAvancé;
+    private bool expertDéjàAcheté = GameData.P1.DéjàAchetéExpert;
+    private bool avancéDéjàAcheté2 = GameData.P2.DéjàAchetéAvancé;
+    private bool expertDéjàAcheté2 = GameData.P2.DéjàAchetéExpert;
+    // public void Start()
+    // {
+    //     avancé = Instantiate(avancé);
+    //     avancé.enabled = true;
+    //     avancé.gameObject.SetActive(true);
+    //     expert = Instantiate(expert);
+    //     expert.enabled = true;
+    //     expert.gameObject.SetActive(true);
+    //
+    //     // avancé2 = Instantiate(avancé2);
+    //     // avancé2.enabled = true;
+    //     // avancé2.gameObject.SetActive(true);
+    //     // expert2 = Instantiate(expert2);
+    //     // expert2.enabled = true;
+    //     // expert2.gameObject.SetActive(true);
+    // }
 
     // public void DefaultSettings(bool avancéDéjàAcheté, bool expertDéjàAcheté,
     //     bool expertDéjàAcheté2, bool avancéDéjàAcheté2)
@@ -93,10 +98,23 @@ public class GestionBoutons : MonoBehaviour
         }
         data.EnleverCoin(CheminPlayer1, CheminPlayer2);
         SceneManager.LoadScene(0);
-        avancéDéjàAcheté = false;
-        avancéDéjàAcheté2 = false;
-        expertDéjàAcheté = false;
-        expertDéjàAcheté2 = false;
+        // avancéDéjàAcheté = false;
+        // expertDéjàAcheté = false;
+        // avancéDéjàAcheté2 = false;
+        // expertDéjàAcheté2 = false;
+        // avancéToggle.gameObject.SetActive(avancéDéjàAcheté);
+        // avancé.enabled = !avancéDéjàAcheté;
+        // avancéToggle.enabled = avancéDéjàAcheté;
+        // avancé.gameObject.SetActive(!avancéDéjàAcheté);
+        //
+        // expertToggle.gameObject.SetActive(expertDéjàAcheté);
+        // expert.enabled = !expertDéjàAcheté;
+        // expertToggle.enabled = expertDéjàAcheté;
+        // expert.gameObject.SetActive(!expertDéjàAcheté);
+        GameData.P1.DéjàAchetéAvancé = false;
+        GameData.P1.DéjàAchetéExpert = false;
+        GameData.P2.DéjàAchetéAvancé = false;
+        GameData.P2.DéjàAchetéExpert = false;
     }
     public void RecommencerJeux()
     {
@@ -107,26 +125,71 @@ public class GestionBoutons : MonoBehaviour
         }
         SceneManager.LoadScene(1);
         
-        avancéToggle.gameObject.SetActive(avancéDéjàAcheté);
-        avancé.enabled = !avancéDéjàAcheté;
-        avancéToggle.enabled = avancéDéjàAcheté;
-        avancé.gameObject.SetActive(!avancéDéjàAcheté);
+        // avancéDéjàAcheté = GameData.P1.DéjàAchetéAvancé;
+        // expertDéjàAcheté = GameData.P1.DéjàAchetéExpert;
+        // avancéDéjàAcheté2 = GameData.P2.DéjàAchetéAvancé;
+        // expertDéjàAcheté2 = GameData.P2.DéjàAchetéExpert;
         
-        expertToggle.gameObject.SetActive(expertDéjàAcheté);
-        expert.enabled = !expertDéjàAcheté;
-        expertToggle.enabled = expertDéjàAcheté;
-        expert.gameObject.SetActive(!expertDéjàAcheté);
+        // Debug.Log(avancéDéjàAcheté);
+        // Debug.Log(avancéDéjàAcheté2);
+        // Debug.Log(expertDéjàAcheté);
+        // Debug.Log(expertDéjàAcheté2);
+
+        //avancéToggle = Instantiate(original: avancéToggle);
+        // avancéToggle.gameObject.SetActive(avancéDéjàAcheté);
+        // avancé.enabled = !avancéDéjàAcheté;
+        // avancéToggle.enabled = avancéDéjàAcheté;
+        // avancé.gameObject.SetActive(!avancéDéjàAcheté);
+        //
+        // expertToggle.gameObject.SetActive(expertDéjàAcheté);
+        // expert.enabled = !expertDéjàAcheté;
+        // expertToggle.enabled = expertDéjàAcheté;
+        // expert.gameObject.SetActive(!expertDéjàAcheté);
         
-        avancéToggle2.gameObject.SetActive(avancéDéjàAcheté2);
-        avancé2.enabled = !avancéDéjàAcheté2;
-        avancéToggle2.enabled = avancéDéjàAcheté2;
-        avancé2.gameObject.SetActive(!avancéDéjàAcheté2);
         
-        expertToggle2.gameObject.SetActive(expertDéjàAcheté2);
-        expert2.enabled = !expertDéjàAcheté2;
-        expertToggle2.enabled = expertDéjàAcheté2;
-        expert2.gameObject.SetActive(!expertDéjàAcheté);
         
+        // avancéToggle2.gameObject.SetActive(avancéDéjàAcheté2);
+        // avancé2.enabled = !avancéDéjàAcheté2;
+        // avancéToggle2.enabled = avancéDéjàAcheté2;
+        // avancé2.gameObject.SetActive(!avancéDéjàAcheté2);
+        //
+        // expertToggle2.gameObject.SetActive(expertDéjàAcheté2);
+        // expert2.enabled = !expertDéjàAcheté2;
+        // expertToggle2.enabled = expertDéjàAcheté2;
+        // expert2.gameObject.SetActive(!expertDéjàAcheté);
+        
+    }
+
+    public void MenuMoteurProchainePartie()
+    {
+        
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            avancéToggle.gameObject.SetActive(avancéDéjàAcheté);
+            avancé.enabled = !avancéDéjàAcheté;
+            avancéToggle.enabled = avancéDéjàAcheté;
+            avancé.gameObject.SetActive(!avancéDéjàAcheté);
+
+            expertToggle.gameObject.SetActive(expertDéjàAcheté);
+            expert.enabled = !expertDéjàAcheté;
+            expertToggle.enabled = expertDéjàAcheté;
+            expert.gameObject.SetActive(!expertDéjàAcheté);
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            avancéToggle.gameObject.SetActive(avancéDéjàAcheté2);
+            avancé.enabled = !avancéDéjàAcheté2;
+            avancéToggle.enabled = avancéDéjàAcheté2;
+            avancé.gameObject.SetActive(!avancéDéjàAcheté2);
+
+            expertToggle.gameObject.SetActive(expertDéjàAcheté2);
+            expert.enabled = !expertDéjàAcheté2;
+            expertToggle.enabled = expertDéjàAcheté2;
+            expert.gameObject.SetActive(!expertDéjàAcheté2);
+            
+        }
+
     }
     public void ToggleUnJoueur(bool isUnJoueur)
     {
@@ -203,6 +266,7 @@ public class GestionBoutons : MonoBehaviour
         {
             data.AjouterCoin(player, -prix); 
             peutAcheter = true;
+            //Debug.Log(gameObject.name);
             GetComponentInChildren<AffichageArgentMenu>().AfficherCoin();
         }
 
@@ -223,17 +287,39 @@ public class GestionBoutons : MonoBehaviour
     public void UnlockAvancé()
     {
         int prix = 50;
-        bool peutAcheter = Acheter(prix,CheminPlayer1);
-        //avancé.interactable = false;
-        if (peutAcheter)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            //avancé.interactable = true;
-            avancéToggle.gameObject.SetActive(true);
-            avancéToggle.enabled = true;
-            avancé.gameObject.SetActive(false);
+            bool peutAcheter = Acheter(prix, CheminPlayer1);
+            //avancé.interactable = false;
+            if (peutAcheter)
+            {
+                //avancé.interactable = true;
+                avancéToggle.gameObject.SetActive(true);
+                avancéToggle.enabled = true;
+                EventSystem.current.SetSelectedGameObject(avancéToggle.gameObject);
+                avancé.gameObject.SetActive(false);
+                GameData.P1.DéjàAchetéAvancé = true;
+                
+            }
         }
 
-        avancéDéjàAcheté = true;
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            bool peutAcheter = Acheter(prix, CheminPlayer2);
+            //avancé.interactable = false;
+            if (peutAcheter)
+            {
+                //avancé.interactable = true;
+                avancéToggle.gameObject.SetActive(true);
+                avancéToggle.enabled = true;
+                EventSystem.current.SetSelectedGameObject(avancéToggle.gameObject);
+                avancé.gameObject.SetActive(false);
+                GameData.P2.DéjàAchetéAvancé = true;
+            }
+        }
+        
+        //avancéDéjàAcheté = true;
+        
         // if (avancé.isActiveAndEnabled)
         // {
         //     avancéToggle.enabled = peutAcheter; 
@@ -243,16 +329,34 @@ public class GestionBoutons : MonoBehaviour
     public void UnlockExpert()
     {
         int prix = 100;
-        bool peutAcheter = Acheter(prix,CheminPlayer1);
-        if (peutAcheter)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            //avancé.interactable = true;
-            expertToggle.gameObject.SetActive(true);
-            expertToggle.enabled = true;
-            expert.gameObject.SetActive(false);
+            bool peutAcheter = Acheter(prix,CheminPlayer1);
+            if (peutAcheter)
+            {
+                //avancé.interactable = true;
+                expertToggle.gameObject.SetActive(true);
+                expertToggle.enabled = true;
+                EventSystem.current.SetSelectedGameObject(expertToggle.gameObject);
+                expert.gameObject.SetActive(false);
+                GameData.P1.DéjàAchetéExpert = true;
+            }        
         }
-
-        expertDéjàAcheté = true;
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            bool peutAcheter = Acheter(prix,CheminPlayer2);
+            if (peutAcheter)
+            {
+                //avancé.interactable = true;
+                expertToggle.gameObject.SetActive(true);
+                expertToggle.enabled = true;
+                EventSystem.current.SetSelectedGameObject(expertToggle.gameObject);
+                expert.gameObject.SetActive(false);
+                GameData.P2.DéjàAchetéExpert = true;
+            }        
+        }
+        
+        //expertDéjàAcheté = true;
         // if (expert.isActiveAndEnabled)
         // {
         //     expertToggle.enabled = peutAcheter;
@@ -321,35 +425,35 @@ public class GestionBoutons : MonoBehaviour
     //
     //     return peutAcheter;
     // }
-    public void UnlockAvancé2()
-    {
-        int prix = 50;
-        bool peutAcheter = Acheter(prix,CheminPlayer2);
-        //expertToggle.enabled = true;
-        if (peutAcheter)
-        {
-            //avancé.interactable = true;
-            avancéToggle2.gameObject.SetActive(true);
-            avancéToggle2.enabled = true;
-            avancé2.gameObject.SetActive(false);
-        }
-
-        avancéDéjàAcheté2 = true;
-    }
-    public void UnlockExpert2()
-    {
-        int prix = 100;
-        bool peutAcheter = Acheter(prix,CheminPlayer2);
-        if (peutAcheter)
-        {
-            //avancé.interactable = true;
-            expertToggle2.gameObject.SetActive(true);
-            expertToggle2.enabled = true;
-            expert2.gameObject.SetActive(false);
-        }
-
-        expertDéjàAcheté2 = true;
-    }
+    // public void UnlockAvancé2()
+    // {
+    //     int prix = 50;
+    //     bool peutAcheter = Acheter(prix,CheminPlayer2);
+    //     //expertToggle.enabled = true;
+    //     if (peutAcheter)
+    //     {
+    //         //avancé.interactable = true;
+    //         avancéToggle2.gameObject.SetActive(true);
+    //         avancéToggle2.enabled = true;
+    //         avancé2.gameObject.SetActive(false);
+    //     }
+    //
+    //     avancéDéjàAcheté2 = true;
+    // }
+    // public void UnlockExpert2()
+    // {
+    //     int prix = 100;
+    //     bool peutAcheter = Acheter(prix,CheminPlayer2);
+    //     if (peutAcheter)
+    //     {
+    //         //avancé.interactable = true;
+    //         expertToggle2.gameObject.SetActive(true);
+    //         expertToggle2.enabled = true;
+    //         expert2.gameObject.SetActive(false);
+    //     }
+    //
+    //     expertDéjàAcheté2 = true;
+    // }
     
 }
 

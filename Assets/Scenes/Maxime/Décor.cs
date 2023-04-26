@@ -23,7 +23,7 @@ public class Décor : MonoBehaviour
 
     private Vector3 position;
 
-    private int nbArbresMax = 70,
+    private int nbArbresMax = 60,
                 nbArbres = 0;
 
     private int posX = 0,
@@ -65,7 +65,6 @@ public class Décor : MonoBehaviour
     {
         if (other.gameObject.layer == coucheCollisionArbre)
         {
-            Debug.Log(other.gameObject.ToString());
             Destroy(other.gameObject);
             
             CréerDécor();

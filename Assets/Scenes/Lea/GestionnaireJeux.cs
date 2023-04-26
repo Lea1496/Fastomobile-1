@@ -152,8 +152,8 @@ public class GestionnaireJeux : MonoBehaviour
         //Instancie les checkpoints
         for (int i = 2; i < chemin.Count -2; i++)
         {
-            checkpointInst = Instantiate(this.checkpoint, Vector3.zero, 
-                this.checkpoint.transform.rotation);
+            checkpointInst = Instantiate(checkpoint, Vector3.zero, 
+                checkpoint.transform.rotation);
             checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
         }
         
@@ -216,7 +216,7 @@ public class GestionnaireJeux : MonoBehaviour
        //mainPlayer1Live = mainPlayer1.GetComponent<Player>(); //NÉCESSAIRE??
        
        
-        speedometer.speed = (int)Math.Floor(rg1.velocity.magnitude) * 3;
+        speedometer.speed = (int)Math.Floor(rg1.velocity.magnitude);
         if (!isGameOver1)
         {
             if (mainPlayer1Live.IsFinished)
@@ -276,7 +276,7 @@ public class GestionnaireJeux : MonoBehaviour
        if (existsMainPlayer2) 
        {
            //mainPlayer2Live = mainPlayer2.GetComponent<Player>(); //NÉCESSAIRE??
-           speedometer2.speed = (int)Math.Floor(rg2.velocity.magnitude) * 3;
+           speedometer2.speed = (int)Math.Floor(rg2.velocity.magnitude) ;
            if (!isGameOver2)
            {
                if (mainPlayer2Live.IsFinished)

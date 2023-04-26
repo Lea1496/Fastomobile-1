@@ -25,7 +25,7 @@ public class Speedometer : MonoBehaviour
         speedLabelTemplateTransform.gameObject.SetActive(false);
 
         speed = 0f;
-        speedMax = 400f;
+        speedMax = 300f;
 
         CreateSpeedLabels();
     }
@@ -35,7 +35,7 @@ public class Speedometer : MonoBehaviour
         
 
         //speed += 30f * Time.deltaTime;
-        //if (speed > speedMax) speed = speedMax;
+        if (speed > speedMax) speed = speedMax;
 
         needleTranform.eulerAngles = new Vector3(0, 0, GetSpeedRotation());
     }

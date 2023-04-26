@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 1692975336161941265}
   - component: {fileID: 1692975336160646961}
   - component: {fileID: 1692975336159647217}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: left_front_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 1692975336161941269}
   - component: {fileID: 1692975336160646965}
   - component: {fileID: 1692975336159647221}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: right_front_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 1692975336161941271}
   - component: {fileID: 1692975336160646967}
   - component: {fileID: 1692975336159647223}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: left_rear_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 1692975336161941275}
   - component: {fileID: 1692975336160646971}
   - component: {fileID: 1692975336159647227}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: right_rear_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -759,7 +759,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8397775518857481607}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Wheel colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -958,7 +958,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6969102754267783360}
   - component: {fileID: 4771377729343608794}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: right_rear_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1020,7 +1020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1337641141387948730}
   - component: {fileID: 2475404683071148436}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: right_front_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,7 +1082,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8166318413265339416}
   - component: {fileID: 6370229253552324828}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: left_front_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1356,7 +1356,7 @@ MonoBehaviour:
   rb: {fileID: 4005492339459347072}
   Poids: 0
   Puissance: 0
-  Try: {x: 1, y: -0.2, z: 0}
+  Try: {x: 1, y: -1, z: 0}
   isBreaking: 0
   isAccelerating: 0
   accelerationForce: 500
@@ -1412,7 +1412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8620185912326918259}
   - component: {fileID: 9214742049835942439}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: left_rear_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1473,7 +1473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6084180079518820790}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Wheel transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,7 +1588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8636465768075747038}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}

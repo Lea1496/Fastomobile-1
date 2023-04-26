@@ -27,7 +27,7 @@ public class Décor2 : MonoBehaviour
 
     private Vector3 position;
 
-    private int nbObjetMax = 70,
+    private int nbObjetMax = 60,
                 nbObjet = 0;
 
     private int posX = 0,
@@ -89,7 +89,6 @@ public class Décor2 : MonoBehaviour
     {
         if (other.gameObject.layer == coucheCollisionDésert)
         {
-            Debug.Log(other.gameObject.ToString());
             Destroy(other.gameObject);
             CréerDécor();
             objets.transform.Translate(0,-1f,0);

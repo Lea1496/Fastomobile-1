@@ -37,34 +37,21 @@ public class BehaviourAuto : MonoBehaviour
     [SerializeField] private float breakForce; 
     [SerializeField] private float maxSteerAngle; 
 
-    [SerializeField] WheelCollider frontLeftWheelCollider;
-    [SerializeField] WheelCollider frontRightWheelCollider;
-    [SerializeField] WheelCollider rearLeftWheelCollider;
-    [SerializeField] WheelCollider rearRightWheelCollider;
+    [SerializeField] public WheelCollider frontLeftWheelCollider;
+    [SerializeField] public WheelCollider frontRightWheelCollider;
+    [SerializeField] public WheelCollider rearLeftWheelCollider;
+    [SerializeField] public WheelCollider rearRightWheelCollider;
 
     private WheelCollider[] wheelColliders;
 
-    [SerializeField] Transform frontLeftWheelTransform;
-    [SerializeField] Transform frontRightWheelTransform;
-    [SerializeField] Transform rearLeftWheelTransform;
-    [SerializeField] Transform rearRightWheelTransform;
+    [SerializeField]  Transform frontLeftWheelTransform;
+    [SerializeField]  Transform frontRightWheelTransform;
+    [SerializeField]  Transform rearLeftWheelTransform;
+    [SerializeField]  Transform rearRightWheelTransform;
 
     private bool estActif;
 
-    void Start()
-    {
-        controller = gameObject.GetComponent<CharacterController>();
-        rb = GetComponent<Rigidbody>();
-        //rb.centerOfMass = centerOfMass.transform.localPosition;
-        rb.centerOfMass += Try;
-        estActif = GetComponent<Player>().IsMainPlayer;
-        /*if (estActif)
-        {
-            wheelColliders = new WheelCollider[4]
-                { frontLeftWheelCollider, frontRightWheelCollider, rearLeftWheelCollider, rearRightWheelCollider };
-        }*/
-        
-    }
+    
     public void HandleMotor(float verticalI)
     {
         frontLeftWheelCollider.motorTorque = verticalI * Puissance;
@@ -114,14 +101,15 @@ public class BehaviourAuto : MonoBehaviour
         if (estActif)
         {
             for (int i = 0; i < wheelColliders.Length; i++)
-        {
-            if (!wheelColliders[i].isGrounded)
             {
-                Debug.Log("ROUE");
-                transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
-                break;
+                Debug.Log(wheelColliders[i].isGrounded);
+                if (!wheelColliders[i].isGrounded)
+                {
+                    Debug.Log("ROUE");
+                    transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
+                    break;
+                }
             }
-        }
         }
         
     }*/

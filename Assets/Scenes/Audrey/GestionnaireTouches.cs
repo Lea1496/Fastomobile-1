@@ -21,58 +21,90 @@ public class GestionnaireTouches : BehaviourAuto
     private Vector2 move;
     private CharacterController controller;
     private int playerNb = 1;
+    private Vector3 position;
+    private Quaternion rotation;
+
+    private float temps = 0;
+    private WheelCollider[] wheelColliders;
+    private bool estActif;
     private void Awake()
     {
         controls = new PlayerControls();
-        if (gameObject.GetComponent<Player>().IsMainPlayer2)
-        {
-            playerNb = 2;
-        }
-        
-        
     }
-
-    private void Start()
+    void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        //rb.centerOfMass = centerOfMass.transform.localPosition;
+        rb.centerOfMass += Try;
+        estActif = GetComponent<Player>().IsMainPlayer;
         if (gameObject.GetComponent<Player>().IsMainPlayer2)                   
         {                                                                      
             playerNb = 2;                                                      
         }                                                                      
+
+        Debug.Log(estActif);
+        if (estActif)
+        {
+            wheelColliders = new WheelCollider[4]
+                { frontLeftWheelCollider, frontRightWheelCollider, rearLeftWheelCollider, rearRightWheelCollider };
+        }
         
-     
+    }
+
+    public void FlipOver()
+    {
+        if (estActif)
+        {
+            for (int i = 0; i < wheelColliders.Length; i++)
+            {
+                
+                Debug.Log(wheelColliders[i].isGrounded);
+                if (!wheelColliders[i].isGrounded && wheelColliders[i].transform.localPosition.y > 0.14 && temps > 1.5f)
+                {
+                    Debug.Log("ROUE");
+                    transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
+                    temps = 0;
+                    break;
+                }
+            }
+        }
+        
     }
     
     private void Update()
     {
+        temps += Time.deltaTime;
+        //FlipOver();
         if (Gamepad.all.Count > 0)
         {
-            if (playerNb == 1)
+            /*if (playerNb == 1)
             {
                 move = Gamepad.all[0].leftStick.ReadValue();
                 if (Gamepad.all[0].circleButton.wasPressedThisFrame)
                 {
-                    transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
+                    position = transform.position;
+                    rotation = transform.rotation;
+                    transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
                 }
             }
             else
             {
-                move = Gamepad.all[1].leftStick.ReadValue();
-                if (Gamepad.all[1].circleButton.wasPressedThisFrame)
+                if (Gamepad.all.Count > 1)
                 {
-                    transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 10, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
+                    move = Gamepad.all[1].leftStick.ReadValue();
+                    if (Gamepad.all[1].circleButton.wasPressedThisFrame)
+                    {
+                        position = transform.position;
+                        rotation = transform.rotation;
+                        transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
+                    }
                 }
-            }
+
+                
+            }*/
 
         }
-        //move = controls.Gameplay.Move.ReadValue<Vector2>();
-
-        
-        
-         
-        
-
-        
+       
     }
 
     private void FixedUpdate()
@@ -86,6 +118,7 @@ public class GestionnaireTouches : BehaviourAuto
 
     private void GetInput()
     {
+        //FlipOver();
         if (Gamepad.all.Count > 0)
         {
             if (playerNb == 1)
@@ -96,9 +129,39 @@ public class GestionnaireTouches : BehaviourAuto
             }
             else
             {
-                isBreaking = Gamepad.all[1].rightTrigger.IsPressed();
+                if (Gamepad.all.Count > 1)
+                {
+                    isBreaking = Gamepad.all[1].rightTrigger.IsPressed();
 
-                isAccelerating = Gamepad.all[1].leftTrigger.IsPressed();
+                    isAccelerating = Gamepad.all[1].leftTrigger.IsPressed();
+                }
+                
+            }
+            
+            if (playerNb == 1)
+            {
+                move = Gamepad.all[0].leftStick.ReadValue();
+                if (Gamepad.all[0].circleButton.wasPressedThisFrame)
+                {
+                    position = transform.position;
+                    rotation = transform.rotation;
+                    transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
+                }
+            }
+            else
+            {
+                if (Gamepad.all.Count > 1)
+                {
+                    move = Gamepad.all[1].leftStick.ReadValue();
+                    if (Gamepad.all[1].circleButton.wasPressedThisFrame)
+                    {
+                        position = transform.position;
+                        rotation = transform.rotation;
+                        transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
+                    }
+                }
+
+                
             }
 
         }
