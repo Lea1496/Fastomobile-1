@@ -209,7 +209,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 538052922}
+      - m_Target: {fileID: 1297287707}
         m_TargetAssemblyTypeName: GestionBoutons, Assembly-CSharp
         m_MethodName: ToggleBase
         m_Mode: 0
@@ -238,10 +238,6 @@ MonoBehaviour:
   expert: {fileID: 0}
   "avanc\xE9Toggle": {fileID: 0}
   expertToggle: {fileID: 0}
-  "avanc\xE92": {fileID: 0}
-  expert2: {fileID: 0}
-  "avanc\xE9Toggle2": {fileID: 0}
-  expertToggle2: {fileID: 0}
   inputManager: {fileID: 0}
 --- !u!1 &34734609
 GameObject:
@@ -609,7 +605,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1684202400}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -896,7 +892,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1684202400}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1233,9 +1229,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1622766344}
-  - {fileID: 1721061955}
   m_Father: {fileID: 1684202400}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1289,7 +1284,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 538052922}
+      - m_Target: {fileID: 1297287707}
         m_TargetAssemblyTypeName: GestionBoutons, Assembly-CSharp
         m_MethodName: ToggleExpert
         m_Mode: 0
@@ -2012,7 +2007,6 @@ GameObject:
   m_Component:
   - component: {fileID: 538052920}
   - component: {fileID: 538052921}
-  - component: {fileID: 538052922}
   m_Layer: 5
   m_Name: MenuMoteurs
   m_TagString: Untagged
@@ -2062,27 +2056,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coin: {fileID: 1818224536}
---- !u!114 &538052922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 538052919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83fd6be7a6ef8c54ca5c58018a21edcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  "avanc\xE9": {fileID: 1710658311}
-  expert: {fileID: 1721061956}
-  "avanc\xE9Toggle": {fileID: 1640676862}
-  expertToggle: {fileID: 345499279}
-  "avanc\xE92": {fileID: 0}
-  expert2: {fileID: 0}
-  "avanc\xE9Toggle2": {fileID: 0}
-  expertToggle2: {fileID: 0}
-  inputManager: {fileID: 0}
 --- !u!1 &662137703
 GameObject:
   m_ObjectHideFlags: 0
@@ -3503,14 +3476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fd6be7a6ef8c54ca5c58018a21edcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "avanc\xE9": {fileID: 0}
-  expert: {fileID: 0}
-  "avanc\xE9Toggle": {fileID: 0}
-  expertToggle: {fileID: 0}
-  "avanc\xE92": {fileID: 0}
-  expert2: {fileID: 0}
-  "avanc\xE9Toggle2": {fileID: 0}
-  expertToggle2: {fileID: 0}
+  "avanc\xE9": {fileID: 1710658311}
+  expert: {fileID: 1721061956}
+  "avanc\xE9Toggle": {fileID: 1640676862}
+  expertToggle: {fileID: 345499279}
   inputManager: {fileID: 0}
 --- !u!1 &1329877924
 GameObject:
@@ -3884,7 +3853,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1684202400}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4409,9 +4378,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1255679323}
-  - {fileID: 1710658310}
   m_Father: {fileID: 1684202400}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4465,7 +4433,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 538052922}
+      - m_Target: {fileID: 1297287707}
         m_TargetAssemblyTypeName: GestionBoutons, Assembly-CSharp
         m_MethodName: "ToggleAvanc\xE9"
         m_Mode: 0
@@ -4508,7 +4476,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 21767813}
+  - {fileID: 1710658310}
   - {fileID: 1640676861}
+  - {fileID: 1721061955}
   - {fileID: 345499278}
   - {fileID: 227651708}
   - {fileID: 1566503137}
@@ -4692,16 +4662,16 @@ RectTransform:
   m_GameObject: {fileID: 1710658309}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 926737525}
-  m_Father: {fileID: 1640676861}
+  m_Father: {fileID: 1684202400}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: -167}
+  m_AnchoredPosition: {x: 1, y: -160}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710658311
@@ -4748,7 +4718,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 538052922}
+      - m_Target: {fileID: 1297287707}
         m_TargetAssemblyTypeName: GestionBoutons, Assembly-CSharp
         m_MethodName: "UnlockAvanc\xE9"
         m_Mode: 1
@@ -4826,12 +4796,12 @@ RectTransform:
   m_GameObject: {fileID: 1721061954}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 409833303}
-  m_Father: {fileID: 345499278}
-  m_RootOrder: 1
+  m_Father: {fileID: 1684202400}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4882,7 +4852,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 538052922}
+      - m_Target: {fileID: 1297287707}
         m_TargetAssemblyTypeName: GestionBoutons, Assembly-CSharp
         m_MethodName: UnlockExpert
         m_Mode: 1
@@ -5273,10 +5243,6 @@ MonoBehaviour:
   expert: {fileID: 0}
   "avanc\xE9Toggle": {fileID: 0}
   expertToggle: {fileID: 0}
-  "avanc\xE92": {fileID: 0}
-  expert2: {fileID: 0}
-  "avanc\xE9Toggle2": {fileID: 0}
-  expertToggle2: {fileID: 0}
   inputManager: {fileID: 0}
 --- !u!1 &1955910427
 GameObject:

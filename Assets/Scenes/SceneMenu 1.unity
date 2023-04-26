@@ -465,7 +465,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1297287707}
         m_TargetAssemblyTypeName: GestionBoutons, Assembly-CSharp
-        m_MethodName: ToggleMoto2
+        m_MethodName: TogglePolice2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1413,7 +1413,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1000 $
+  m_text: 100 $
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2055,10 +2055,6 @@ MonoBehaviour:
   expert: {fileID: 1721061956}
   "avanc\xE9Toggle": {fileID: 1640676862}
   expertToggle: {fileID: 345499279}
-  "avanc\xE92": {fileID: 1710658311}
-  expert2: {fileID: 1721061956}
-  "avanc\xE9Toggle2": {fileID: 1640676862}
-  expertToggle2: {fileID: 345499279}
   inputManager: {fileID: 0}
 --- !u!1 &662137703
 GameObject:
@@ -2716,7 +2712,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 500 $
+  m_text: 50 $
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3619,10 +3615,6 @@ MonoBehaviour:
   expert: {fileID: 0}
   "avanc\xE9Toggle": {fileID: 0}
   expertToggle: {fileID: 0}
-  "avanc\xE92": {fileID: 0}
-  expert2: {fileID: 0}
-  "avanc\xE9Toggle2": {fileID: 0}
-  expertToggle2: {fileID: 0}
   inputManager: {fileID: 0}
 --- !u!1 &1329877924
 GameObject:
@@ -4728,7 +4720,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 538052922}
         m_TargetAssemblyTypeName: GestionBoutons, Assembly-CSharp
-        m_MethodName: "UnlockAvanc\xE92"
+        m_MethodName: "UnlockAvanc\xE9"
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4862,7 +4854,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 538052922}
         m_TargetAssemblyTypeName: GestionBoutons, Assembly-CSharp
-        m_MethodName: UnlockExpert2
+        m_MethodName: UnlockExpert
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5116,10 +5108,6 @@ MonoBehaviour:
   expert: {fileID: 0}
   "avanc\xE9Toggle": {fileID: 0}
   expertToggle: {fileID: 0}
-  "avanc\xE92": {fileID: 0}
-  expert2: {fileID: 0}
-  "avanc\xE9Toggle2": {fileID: 0}
-  expertToggle2: {fileID: 0}
   inputManager: {fileID: 0}
 --- !u!1 &1955910427
 GameObject:
