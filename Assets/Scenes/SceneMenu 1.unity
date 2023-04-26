@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1879,7 +1879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: 140}
+  m_AnchoredPosition: {x: -14, y: 179}
   m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &520251013
@@ -2060,7 +2060,6 @@ MonoBehaviour:
   "avanc\xE9Toggle2": {fileID: 1640676862}
   expertToggle2: {fileID: 345499279}
   inputManager: {fileID: 0}
-  "d\xE9j\xE0Achet\xE9": 0
 --- !u!1 &662137703
 GameObject:
   m_ObjectHideFlags: 0
@@ -3625,7 +3624,6 @@ MonoBehaviour:
   "avanc\xE9Toggle2": {fileID: 0}
   expertToggle2: {fileID: 0}
   inputManager: {fileID: 0}
-  "d\xE9j\xE0Achet\xE9": 0
 --- !u!1 &1329877924
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,7 +3659,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 140}
+  m_AnchoredPosition: {x: 0, y: 191}
   m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1329877926
@@ -5123,7 +5121,6 @@ MonoBehaviour:
   "avanc\xE9Toggle2": {fileID: 0}
   expertToggle2: {fileID: 0}
   inputManager: {fileID: 0}
-  "d\xE9j\xE0Achet\xE9": 0
 --- !u!1 &1955910427
 GameObject:
   m_ObjectHideFlags: 0
