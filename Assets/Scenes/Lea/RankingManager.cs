@@ -13,14 +13,16 @@ public class RankingManager : MonoBehaviour
     private string nomAChanger;
     private int compteur = 0;
     private List<string> joueursPassés = new List<string>(12);
-    
+
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.layer == 6 )
+        if (collider.gameObject.layer == 6)
         {
+
+
             joueur = collider.GetComponentInParent<Player>();
-      
+            Debug.Log(joueur.Nom);
             if (joueur.Rang != compteur + 1 && joueursPassés.Contains(joueur.Nom))
             {
                 nomAChanger = GameData.Ranks[compteur];
@@ -31,7 +33,7 @@ public class RankingManager : MonoBehaviour
                 joueursPassés.Add(joueur.Nom);
                 ++compteur;
             }
-            
+
             if (compteur == 12)
             {
                 compteur = 0;
@@ -58,8 +60,8 @@ public class RankingManager : MonoBehaviour
                 ranks.Clear();
             }*/
         }
-    }  
-        
+    }
+
 
     private void ChangerRangJoueur(string nom, int rang)
     {
@@ -73,3 +75,5 @@ public class RankingManager : MonoBehaviour
     }
 
 }
+
+
