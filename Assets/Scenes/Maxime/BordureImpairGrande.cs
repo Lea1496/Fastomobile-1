@@ -13,7 +13,7 @@ public class BordureImpairGrande : MonoBehaviour
     private Vector3[] sommet;
 
     [SerializeField]
-    Material matériauxBordImp;
+    Material materiauxBordImp;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class BordureImpairGrande : MonoBehaviour
         maillage = AjouterBordure();
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
-        //GetComponent<MeshRenderer>().material = matériauxBordImp;
+        //GetComponent<MeshRenderer>().material = matï¿½riauxBordImp;
     }
 
     private Mesh AjouterBordure()

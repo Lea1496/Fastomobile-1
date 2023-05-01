@@ -13,7 +13,7 @@ public class BordurePair : MonoBehaviour
     private Vector3[] sommet;
 
     [SerializeField]
-    Material matériauxBord;
+    Material materiauxBord;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class BordurePair : MonoBehaviour
         maillage = AjouterBordure();
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
-        GetComponent<MeshRenderer>().material = matériauxBord;
+        GetComponent<MeshRenderer>().material = materiauxBord;
     }
 
     private Mesh AjouterBordure()
