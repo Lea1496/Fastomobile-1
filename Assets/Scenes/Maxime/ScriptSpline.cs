@@ -21,7 +21,7 @@ public class ScriptSpline : MonoBehaviour
     private Mesh maillage;
 
     [SerializeField]
-    Material matériaux;
+    Material materiaux;
 
     public void FaireMesh(List<Vector3> chemin)
     {
@@ -31,17 +31,17 @@ public class ScriptSpline : MonoBehaviour
         pointsSpline = chemin;
         
         
-        maillage = CréerMeshRoute(pointsSpline);
+        maillage = CreerMeshRoute(pointsSpline);
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
-        GetComponent<MeshRenderer>().material = matériaux;
+        GetComponent<MeshRenderer>().material = materiaux;
         
        
     }
 
-    private Mesh CréerMeshRoute(List<Vector3> pointsSpline)
+    private Mesh CreerMeshRoute(List<Vector3> pointsSpline)
     {
-        // le code CréerMeshRoute vient de https://www.youtube.com/watch?v=Q12sb-sOhdI
+        // le code Crï¿½erMeshRoute vient de https://www.youtube.com/watch?v=Q12sb-sOhdI
         
         sommets = new Vector3[pointsSpline.Count * 2];
         Vector2[] uvs = new Vector2[sommets.Length];
