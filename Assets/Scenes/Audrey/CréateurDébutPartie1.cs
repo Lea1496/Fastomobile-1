@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CréateurDébutPartie: MonoBehaviour
+public class CréateurDébutPartie1: MonoBehaviour
 {
     private List<GameObject> lesAutos;
     private List<PlayerData> joueurs;
@@ -71,12 +71,12 @@ public class CréateurDébutPartie: MonoBehaviour
     private void InstancierAutos()
     {
       
-        for (int j = 0; j < 1/*lesAutos.Count / 4*/; j++)
+        for (int j = 0; j < 1; j++)
         {
             //for (int i = 0; i < lesAutos.Count / 3; i++)
-            {
+            //{
                 GameObject thisJoueur = Instantiate(lesAutos[compteurAutos],
-                    new Vector3(position.x - 35 * j/* - 4 * i*/ -30, 5, (position.z - 37) /* + 32 * i*/ - 6 * j -7),
+                    new Vector3(position.x - 35 * j - 4 * 0/*i*/ -30, 5, (position.z - 37) + 32 * 0/*i*/ - 6 * j -7),
                     lesAutos[compteurAutos].transform.rotation);
                 Player leJoueur = thisJoueur.GetComponent<Player>();
                 leJoueur.CréerPlayer(
@@ -110,7 +110,7 @@ public class CréateurDébutPartie: MonoBehaviour
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                 }
-            }
+            //}
 
             
 
