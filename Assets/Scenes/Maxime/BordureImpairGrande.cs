@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
-[RequireComponent(typeof(MeshRenderer))]
+
 [RequireComponent(typeof(MeshCollider))]
 public class BordureImpairGrande : MonoBehaviour
 {
@@ -23,7 +23,7 @@ public class BordureImpairGrande : MonoBehaviour
         maillage = AjouterBordure();
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
-        GetComponent<MeshRenderer>().material = matériauxBordImp;
+        //GetComponent<MeshRenderer>().material = matériauxBordImp;
     }
 
     private Mesh AjouterBordure()

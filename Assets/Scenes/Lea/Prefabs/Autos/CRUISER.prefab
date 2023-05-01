@@ -1054,7 +1054,7 @@ MonoBehaviour:
   rb: {fileID: 8632984595205757071}
   Poids: 0
   Puissance: 0
-  Try: {x: 1, y: -3, z: 0}
+  Try: {x: 0, y: -3, z: 1}
   isBreaking: 0
   isAccelerating: 0
   accelerationForce: 500

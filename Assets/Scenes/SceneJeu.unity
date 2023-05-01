@@ -392,9 +392,10 @@ GameObject:
   - component: {fileID: 785475864}
   - component: {fileID: 785475863}
   - component: {fileID: 785475862}
-  m_Layer: 3
+  - component: {fileID: 785475866}
+  m_Layer: 14
   m_Name: BordurePaire
-  m_TagString: Untagged
+  m_TagString: Mur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,6 +492,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785475860}
   m_Mesh: {fileID: 0}
+--- !u!114 &785475866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785475860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21734fb81532b42459ab5a27e2e27886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &836306667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -771,7 +784,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7167
+    m_Bits: 8191
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -813,13 +826,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1175735470}
   - component: {fileID: 1175735474}
-  - component: {fileID: 1175735473}
   - component: {fileID: 1175735472}
   - component: {fileID: 1175735471}
   - component: {fileID: 1175735475}
-  m_Layer: 3
+  m_Layer: 14
   m_Name: BordurePaireGrande
-  m_TagString: Untagged
+  m_TagString: Mur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -866,48 +878,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!23 &1175735473
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1175735469}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 815fabd266d558a40a67d0da32898a9b, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1175735474
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -925,7 +895,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1175735469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05c4425357685454db2d1b34191efbcc, type: 3}
+  m_Script: {fileID: 11500000, guid: 21734fb81532b42459ab5a27e2e27886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1220469595 stripped
@@ -949,13 +919,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1226918251}
   - component: {fileID: 1226918255}
-  - component: {fileID: 1226918254}
   - component: {fileID: 1226918253}
   - component: {fileID: 1226918256}
   - component: {fileID: 1226918257}
-  m_Layer: 3
+  m_Layer: 14
   m_Name: BordureImpaireGrande
-  m_TagString: Untagged
+  m_TagString: Mur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -989,48 +958,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!23 &1226918254
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226918250}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 815fabd266d558a40a67d0da32898a9b, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1226918255
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1061,7 +988,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1226918250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05c4425357685454db2d1b34191efbcc, type: 3}
+  m_Script: {fileID: 11500000, guid: 21734fb81532b42459ab5a27e2e27886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1279341329
@@ -1402,9 +1329,10 @@ GameObject:
   - component: {fileID: 1564057484}
   - component: {fileID: 1564057483}
   - component: {fileID: 1564057482}
-  m_Layer: 3
+  - component: {fileID: 1564057486}
+  m_Layer: 14
   m_Name: BordureImpaire
-  m_TagString: Untagged
+  m_TagString: Mur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1501,6 +1429,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564057480}
   m_Mesh: {fileID: 0}
+--- !u!114 &1564057486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564057480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21734fb81532b42459ab5a27e2e27886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1629056586 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2805281499050891042, guid: b57b81134e7dc1d4884be0971474c7d8, type: 3}
@@ -1662,6 +1602,7 @@ GameObject:
   - component: {fileID: 1828300584}
   - component: {fileID: 1828300583}
   - component: {fileID: 1828300582}
+  - component: {fileID: 1828300585}
   m_Layer: 3
   m_Name: test mesh piste
   m_TagString: Untagged
@@ -1918,6 +1859,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain1: {fileID: 6021201859497948706, guid: 35346684f1a966c489e82a98012619ca, type: 3}
   terrain2: {fileID: 6021201859497948706, guid: 37093d155de2fcc469da55698002a007, type: 3}
+--- !u!114 &1828300585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828300567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df528a5c0d7f51c46a18098c19be1a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1862824126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6099348359936996214, guid: b57b81134e7dc1d4884be0971474c7d8, type: 3}

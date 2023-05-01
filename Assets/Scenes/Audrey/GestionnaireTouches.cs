@@ -42,7 +42,7 @@ public class GestionnaireTouches : BehaviourAuto
             playerNb = 2;                                                      
         }                                                                      
 
-        Debug.Log(estActif);
+        
         if (estActif)
         {
             wheelColliders = new WheelCollider[4]
@@ -55,16 +55,16 @@ public class GestionnaireTouches : BehaviourAuto
     {
         if (estActif)
         {
-            for (int i = 0; i < wheelColliders.Length; i++)
+            //for (int i = 0; i < wheelColliders.Length; i++)
             {
                 
-                Debug.Log(wheelColliders[i].isGrounded);
-                if (!wheelColliders[i].isGrounded && wheelColliders[i].transform.localPosition.y > 0.14 && temps > 1.5f)
+               // Debug.Log(wheelColliders[i].isGrounded);
+                //if (!wheelColliders[i].isGrounded && wheelColliders[i].transform.localPosition.y > 0.14 && temps > 1.5f)
                 {
                     Debug.Log("ROUE");
                     transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
                     temps = 0;
-                    break;
+                    //break;
                 }
             }
         }
@@ -119,6 +119,24 @@ public class GestionnaireTouches : BehaviourAuto
     private void GetInput()
     {
         //FlipOver();
+        if (Mathf.Abs(Vector3.Dot(transform.up, Vector3.down)) > 0)
+        {
+            //FlipOver();
+        }
+        else
+        {
+            if(Mathf.Abs(Vector3.Dot(transform.up, Vector3.down)) < 0.125f)
+            {
+                // Car is primarily neither up nor down, within 1/8 of a 90 degree rotation
+               // FlipOver();
+                // Therefore, check whether it's on either side. Otherwise, it's on front/back
+                if(Mathf.Abs(Vector3.Dot(transform.right, Vector3.down)) > 0.825f)
+                {
+                    // Car is within 1/8 of a 90 degree rotation of either side
+                }
+            }
+        }
+        
         if (Gamepad.all.Count > 0)
         {
             if (playerNb == 1)
@@ -126,6 +144,19 @@ public class GestionnaireTouches : BehaviourAuto
                 isBreaking = Gamepad.all[0].rightTrigger.IsPressed();
 
                 isAccelerating = Gamepad.all[0].leftTrigger.IsPressed();
+                
+                move = Gamepad.all[0].leftStick.ReadValue();
+                if (move.x == 0 && move.y == 0)
+                {
+                    ApplyBreaking();
+                }
+                if (Gamepad.all[0].circleButton.wasPressedThisFrame && temps > 5)
+                {
+                    position = transform.position;
+                    rotation = transform.rotation;
+                    transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
+                    temps = 0;
+                }
             }
             else
             {
@@ -134,31 +165,32 @@ public class GestionnaireTouches : BehaviourAuto
                     isBreaking = Gamepad.all[1].rightTrigger.IsPressed();
 
                     isAccelerating = Gamepad.all[1].leftTrigger.IsPressed();
+                    
+                    move = Gamepad.all[1].leftStick.ReadValue();
+                    if (move.x == 0 && move.y == 0)
+                    {
+                        ApplyBreaking();
+                    }
+                    if (Gamepad.all[1].circleButton.wasPressedThisFrame)
+                    {
+                        position = transform.position;
+                        rotation = transform.rotation;
+                        transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
+                        temps = 0;
+                    }
                 }
                 
             }
             
             if (playerNb == 1)
             {
-                move = Gamepad.all[0].leftStick.ReadValue();
-                if (Gamepad.all[0].circleButton.wasPressedThisFrame)
-                {
-                    position = transform.position;
-                    rotation = transform.rotation;
-                    transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
-                }
+               
             }
             else
             {
                 if (Gamepad.all.Count > 1)
                 {
-                    move = Gamepad.all[1].leftStick.ReadValue();
-                    if (Gamepad.all[1].circleButton.wasPressedThisFrame)
-                    {
-                        position = transform.position;
-                        rotation = transform.rotation;
-                        transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
-                    }
+                    
                 }
 
                 

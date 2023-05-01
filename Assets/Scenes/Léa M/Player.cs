@@ -70,6 +70,11 @@ public class Player : MonoBehaviour, IPlayer
             yield return new WaitForSeconds(3f);
             gameObject.GetComponent<GestionnaireTouches>().enabled = true;
         }
+        else
+        {
+            yield return new WaitForSeconds(3f);
+            gameObject.GetComponent<Car>().enabled = true;
+        }
         
         
     }

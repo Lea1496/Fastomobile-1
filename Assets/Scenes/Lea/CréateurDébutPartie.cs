@@ -17,6 +17,7 @@ public class CréateurDébutPartie: MonoBehaviour
     [SerializeField] private GameObject auto;
     [SerializeField] private GameObject camion;
     [SerializeField] private GameObject police;
+    [SerializeField] private GameObject bot;
     [SerializeField] private GameObject arc;
     [SerializeField] private GameObject ligne;
     private GameObject ligneArr;
@@ -56,7 +57,8 @@ public class CréateurDébutPartie: MonoBehaviour
         sommets = som;
         for (int i = 0; i < autos.Count; i++)
         {
-            lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
+            //lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
+            lesAutos.Add(bot);
         }
         position = points[points.Count - 1];
         Instantiate(arc, new Vector3(position.x , 0, position.z), arc.transform.rotation);

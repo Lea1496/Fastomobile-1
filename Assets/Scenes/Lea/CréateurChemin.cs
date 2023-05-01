@@ -601,7 +601,7 @@ public class CréateurChemin
         }
 
         RemoveDuplicates(listeTournants);
-        Debug.Log(listeTournants.Count);
+       
     }
 
     
@@ -616,7 +616,9 @@ public class CréateurChemin
             do
             {
                 pos = gen.Next(5, listePos.Count - 7);
-            } while (verif.Contains(pos) && verif.Count != listePos.Count && listeTournants.Contains(listePos[pos]));
+            } while (verif.Contains(pos) && verif.Count != listePos.Count && 
+                     (listeTournants.Contains(listePos[pos])|| listeTournants.Contains(listePos[pos -1])
+                                                            || listeTournants.Contains(listePos[pos + 1])));
 
             verif.Add(pos - 1);
             verif.Add(pos);
@@ -625,13 +627,13 @@ public class CréateurChemin
 
             if (grandeur == 0)
             {
-                bond = 10;
+                bond = 7;
             }
             else
             {
                 if (grandeur == 1)
                 {
-                    bond = 20;
+                    bond = 12;
                 }
             }
 

@@ -79,7 +79,8 @@ public class GestionnaireJeux : MonoBehaviour
     private int compteur = 0;
     private bool existsMainPlayer2 = false;
     private float temps = 0;
-    
+    private GestionnaireTouches gestion1;
+    private GestionnaireTouches gestion2;
     
     public Player MainPlayer1
     {
@@ -181,7 +182,7 @@ public class GestionnaireJeux : MonoBehaviour
         rg1 = mainPlayer1.GetComponent<Rigidbody>();
         renderers = mainPlayer1.GetComponentsInChildren<MeshRenderer>();
         colliders = mainPlayer1.GetComponentsInChildren<Collider>();
-        
+        gestion1 = mainPlayer1.GetComponent<GestionnaireTouches>();
 
         if (existsMainPlayer2)
         {
@@ -189,6 +190,7 @@ public class GestionnaireJeux : MonoBehaviour
             rg2 = mainPlayer2.GetComponent<Rigidbody>();
             renderers2 = mainPlayer2.GetComponentsInChildren<MeshRenderer>();
             colliders2 = mainPlayer2.GetComponentsInChildren<Collider>();
+            gestion2 = mainPlayer2.GetComponent<GestionnaireTouches>();
         }
    }
 
@@ -222,6 +224,7 @@ public class GestionnaireJeux : MonoBehaviour
             if (mainPlayer1Live.IsFinished)
             {
                 ChangerAffichageÉcran(mainPlayer1, cam1, 1, finish, textFinish);
+                gestion1.enabled = false;
                 for (int i = 0; i < colliders.Length; i++)
                 {
                     colliders[i].enabled = false;
@@ -245,6 +248,7 @@ public class GestionnaireJeux : MonoBehaviour
                 if (mainPlayer1Live.Vie <= 0)
                 {
                     ChangerAffichageÉcran(mainPlayer1, cam1, 1, gameOver, textGameOver);
+                    gestion1.enabled = false;
                     for (int i = 0; i < colliders.Length; i++)
                     {
                         colliders[i].enabled = false;
@@ -276,12 +280,13 @@ public class GestionnaireJeux : MonoBehaviour
        if (existsMainPlayer2) 
        {
            //mainPlayer2Live = mainPlayer2.GetComponent<Player>(); //NÉCESSAIRE??
-           speedometer2.speed = (int)Math.Floor(rg2.velocity.magnitude) ;
+           speedometer2.speed = (int)Math.Floor(rg2.velocity.magnitude);
            if (!isGameOver2)
            {
                if (mainPlayer2Live.IsFinished)
                {
                    ChangerAffichageÉcran(mainPlayer2, cam2, 2, finish, textFinish2);
+                   gestion2.enabled = false;
                    for (int i = 0; i < colliders.Length; i++)
                    {
                        colliders[i].enabled = false;
@@ -305,6 +310,7 @@ public class GestionnaireJeux : MonoBehaviour
                    if (mainPlayer2Live.Vie <= 0)
                    {
                        ChangerAffichageÉcran(mainPlayer2, cam2, 2, gameOver, textGameOver2);
+                       gestion2.enabled = false;
                        for (int i = 0; i < colliders.Length; i++)
                        {
                            colliders[i].enabled = false;
@@ -363,7 +369,7 @@ public class GestionnaireJeux : MonoBehaviour
        // Calculate the current rotation angles
        Transform target = mainPlayer.transform;
        float wantedRotationAngle = target.eulerAngles.y;
-       float wantedHeight = target.position.y + 25;
+       float wantedHeight = target.position.y + 20;
 
        float  currentRotationAngle = cam.transform.eulerAngles.y;
        float currentHeight = cam.transform.position.y;
@@ -380,7 +386,7 @@ public class GestionnaireJeux : MonoBehaviour
        // Set the position of the camera on the x-z plane to:
        // distance meters behind the target
        cam.transform.position = target.position;
-       cam.transform.position -= currentRotation * Vector3.forward * 40;
+       cam.transform.position -= currentRotation * Vector3.forward * 50;
 
        cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, currentRotation, 3f * Time.deltaTime);
 
@@ -406,7 +412,7 @@ public class GestionnaireJeux : MonoBehaviour
        {
            text.alignment = TextAnchor.MiddleRight;
        }
-       player.GetComponent<GestionnaireTouches>().enabled = false; //À CHANGER???
+       
     }
 
    private void DésactiverTextes(int indice)

@@ -38,7 +38,7 @@ public class Décor : MonoBehaviour
         {
             CréerDécor();
             arbres.transform.Translate(0,-1f,0);
-            arbres.transform.Translate(0,1f,0);
+            
             nbArbres++;
         }
     }
@@ -69,7 +69,7 @@ public class Décor : MonoBehaviour
             
             CréerDécor();
             arbres.transform.Translate(0,-1f,0);
-            arbres.transform.Translate(0,1f,0);
+            
         }
     }
 

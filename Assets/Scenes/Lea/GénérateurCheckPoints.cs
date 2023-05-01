@@ -11,7 +11,6 @@ using UnityEngine.Rendering;
 using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 [RequireComponent(typeof(MeshFilter))]
-[RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(MeshCollider))]
 public class GénérateurCheckPoints : MonoBehaviour
 {
