@@ -22,9 +22,10 @@ public class RankingManager : MonoBehaviour
 
 
             joueur = collider.GetComponentInParent<Player>();
-            Debug.Log(joueur.Nom);
-            if (joueur.Rang != compteur + 1 && joueursPassés.Contains(joueur.Nom))
+            
+            if (joueur.Rang != compteur + 1 && !joueursPassés.Contains(joueur.Nom))
             {
+                Debug.Log(joueur.Nom);
                 nomAChanger = GameData.Ranks[compteur];
                 GameData.Ranks[compteur] = joueur.Nom;
                 GameData.Ranks[joueur.Rang - 1] = nomAChanger;

@@ -22,6 +22,7 @@ public class GestionnairePlayer
         
         GameData.P1.Nom = "Player1";
         joueurs.Add(GameData.P1);
+        nbJoueurs = 1;
         if (GameData.P2.IsMainPlayer)
         {
             nbJoueurs = 2;
@@ -31,6 +32,7 @@ public class GestionnairePlayer
             joueurs[1].Poids = AssignerPoids(joueurs[1].IdVéhicule);
         }
     
+        
         joueurs[0].Puissance = AssignerPuissance(joueurs[0].IdMoteur);
         joueurs[0].Poids = AssignerPoids(joueurs[0].IdVéhicule);
         
@@ -46,6 +48,8 @@ public class GestionnairePlayer
             joueurs[i].Poids = AssignerPoids(indiceChassis);
            
         }
+        
+        Debug.Log(joueurs.Count);
     }
 
     private int AssignerPuissance(int indice)

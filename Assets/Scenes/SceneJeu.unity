@@ -784,7 +784,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8191
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1597,7 +1597,6 @@ GameObject:
   - component: {fileID: 1828300574}
   - component: {fileID: 1828300575}
   - component: {fileID: 1828300579}
-  - component: {fileID: 1828300580}
   - component: {fileID: 1828300581}
   - component: {fileID: 1828300584}
   - component: {fileID: 1828300583}
@@ -1776,18 +1775,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4279a693f9f8dc4b887799ea7ff57dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1828300580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828300567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e10105f8c91a77c47ad6a7058c477e9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1828300581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1803,6 +1790,7 @@ MonoBehaviour:
   auto: {fileID: 6102769514498293530, guid: 585ceda54c2307f42b63f8b1511d8527, type: 3}
   camion: {fileID: 2816254769309527770, guid: c5603bd9196f36e4e97ef48d486f93fe, type: 3}
   police: {fileID: 3712510124542130609, guid: 75b35e4acf18c78499cf9bef1bfb55f8, type: 3}
+  bot: {fileID: 6102769514498293530, guid: bfa5e571c17cf5e42a9b4ca4d0f70d2e, type: 3}
   arc: {fileID: 1890588548742467344, guid: 63f7e3a5ea486a9438b4cd3142c7dc92, type: 3}
   ligne: {fileID: 3242020418959028930, guid: 1a5a1e0c71ac38c4ca19b5419a9140aa, type: 3}
 --- !u!114 &1828300582
@@ -1868,7 +1856,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1828300567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df528a5c0d7f51c46a18098c19be1a38, type: 3}
+  m_Script: {fileID: 11500000, guid: fa6514a256d79b04bb03e0a0dad9da01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1862824126 stripped
@@ -1950,7 +1938,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7167
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

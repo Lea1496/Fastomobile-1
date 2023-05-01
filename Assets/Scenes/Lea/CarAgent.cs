@@ -43,7 +43,6 @@ public class CarAgent : Agent
         if (e.carTransform == transform)
         {
             AddReward(+1f);
-            Debug.Log("Right");
         }
     }
 
