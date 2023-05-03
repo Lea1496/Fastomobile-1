@@ -1,10 +1,10 @@
-
+using System.Collections;
 using System.Collections.Generic;
-
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-
-public class CréateurDébutPartie: MonoBehaviour
+public class CréateurDébutPartie1: MonoBehaviour
 {
     private List<GameObject> lesAutos;
     private List<PlayerData> joueurs;
@@ -55,9 +55,7 @@ public class CréateurDébutPartie: MonoBehaviour
         lesAutos = new List<GameObject>();
         joueurs = autos;
         sommets = som;
-        lesAutos.Add(AssignerChassis(autos[0].IdVéhicule));
-        //lesAutos.Add(AssignerChassis(autos[1].IdVéhicule));
-        for (int i = 0; i < autos.Count -1; i++)
+        for (int i = 0; i < autos.Count; i++)
         {
             //lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
             lesAutos.Add(bot);
@@ -73,12 +71,12 @@ public class CréateurDébutPartie: MonoBehaviour
     private void InstancierAutos()
     {
       
-        for (int j = 0; j < 1/*lesAutos.Count / 4*/; j++)
+        for (int j = 0; j < 1; j++)
         {
             //for (int i = 0; i < lesAutos.Count / 3; i++)
-            {
+            //{
                 GameObject thisJoueur = Instantiate(lesAutos[compteurAutos],
-                    new Vector3(position.x - 35 * j/* - 4 * i*/ -30, 5, (position.z - 37) /* + 32 * i*/ - 6 * j -7),
+                    new Vector3(position.x - 35 * j - 4 * 0/*i*/ -30, 5, (position.z - 37) + 32 * 0/*i*/ - 6 * j -7),
                     lesAutos[compteurAutos].transform.rotation);
                 Player leJoueur = thisJoueur.GetComponent<Player>();
                 leJoueur.CréerPlayer(
@@ -90,6 +88,7 @@ public class CréateurDébutPartie: MonoBehaviour
                 GameData.Ranks.Add(leJoueur.Nom);
                 GameData.LesJoueurs.Add(leJoueur);
                 GestionnaireCollision collisions = thisJoueur.GetComponent<GestionnaireCollision>();
+                
                 collisions.points = sommets;
 
                 if (compteurAutos == 1)
@@ -111,7 +110,7 @@ public class CréateurDébutPartie: MonoBehaviour
                     thisJoueur.GetComponent<GestionnaireTouches>().Poids = joueurs[compteurAutos - 1].Poids;
                     thisJoueur.GetComponent<GestionnaireTouches>().Puissance = joueurs[compteurAutos - 1].Puissance;
                 }
-            }
+            //}
 
             
 
