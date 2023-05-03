@@ -1,10 +1,8 @@
 
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 /// Source:https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=587s&ab_channel=GameDevChef
 
@@ -21,7 +19,7 @@ public class BehaviourAuto : MonoBehaviour
     public int Poids;
     public int Puissance;
 
-    private CharacterController controller;
+    //private CharacterController controller;
     public Vector3 Try = new Vector3(1, -0.2f, 0);
     
     
@@ -31,7 +29,7 @@ public class BehaviourAuto : MonoBehaviour
     private float currentAcceleration;
     public bool isBreaking;
     public bool isAccelerating;
-    private float downForceValue = 200f;
+    //private float downForceValue = 200f;
 
     [SerializeField] private float accelerationForce; // reste à déterminer
     [SerializeField] private float breakForce; 
@@ -42,14 +40,14 @@ public class BehaviourAuto : MonoBehaviour
     [SerializeField] public WheelCollider rearLeftWheelCollider;
     [SerializeField] public WheelCollider rearRightWheelCollider;
 
-    private WheelCollider[] wheelColliders;
+   // private WheelCollider[] wheelColliders;
 
     [SerializeField]  Transform frontLeftWheelTransform;
     [SerializeField]  Transform frontRightWheelTransform;
     [SerializeField]  Transform rearLeftWheelTransform;
     [SerializeField]  Transform rearRightWheelTransform;
 
-    private bool estActif;
+    //private bool estActif;
 
     
     public void HandleMotor(float verticalI)

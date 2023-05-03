@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class RankingManager : MonoBehaviour
@@ -25,7 +23,6 @@ public class RankingManager : MonoBehaviour
             
             if (joueur.Rang != compteur + 1 && !joueursPassés.Contains(joueur.Nom))
             {
-                Debug.Log(joueur.Nom);
                 nomAChanger = GameData.Ranks[compteur];
                 GameData.Ranks[compteur] = joueur.Nom;
                 GameData.Ranks[joueur.Rang - 1] = nomAChanger;

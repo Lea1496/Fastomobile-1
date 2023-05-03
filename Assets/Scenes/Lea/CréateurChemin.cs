@@ -1,11 +1,9 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Threading;
+
 using Random = System.Random;
 
 
@@ -584,7 +582,7 @@ public class CréateurChemin
         verif = new List<int>();
         maxCotes = listePos.Count / 5;
         DéterminerTournants();
-        CréerCotes();
+        //CréerCotes();
     }
 
 

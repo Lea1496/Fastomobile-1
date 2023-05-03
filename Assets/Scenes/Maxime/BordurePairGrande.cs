@@ -1,7 +1,4 @@
 // Maxime Fortier
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
@@ -40,7 +37,7 @@ public class BordurePairGrande : MonoBehaviour
             if (EstPair(i))
             {
                 pointsBordurePair[i] = new Vector3(sommet[i].x, 0, sommet[i].z);
-                pointsBordurePair[i + 1] = new Vector3(sommet[i].x, sommet[i].y + 30f, sommet[i].z);
+                pointsBordurePair[i + 1] = new Vector3(sommet[i].x, sommet[i].y + 70f, sommet[i].z);
 
                 float completePercent = i / (float)(sommet.Length - 1);
                 uvsBordurePair[indexSomPair] = new Vector2(0, completePercent);

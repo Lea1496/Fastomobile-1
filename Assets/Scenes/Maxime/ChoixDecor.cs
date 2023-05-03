@@ -1,9 +1,5 @@
 // Maxime Fortier
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
 

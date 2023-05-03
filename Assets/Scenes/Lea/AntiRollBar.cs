@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 //Ce code provient de : http://projects.edy.es/trac/edy_vehicle-physics/wiki/TheStabilizerBars
@@ -10,10 +9,7 @@ public class AntiRollBar : MonoBehaviour
     [SerializeField] private Rigidbody rg;
     [SerializeField] private float antiRoll = 50000f;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
 
     // Update is called once per frame
     void FixedUpdate()

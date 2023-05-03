@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -214,7 +211,7 @@ public class GestionBoutons : MonoBehaviour
         
         if (isVoiture)
         {
-            Debug.Log("ICI");
+            //Debug.Log("ICI");
             GameData.P1.IdVéhicule = 0;
             GameData.P1.Vie = 100;
         }
@@ -375,7 +372,7 @@ public class GestionBoutons : MonoBehaviour
     {
         if (isCamion)
         {
-            Debug.Log("camion");
+            //Debug.Log("camion");
             GameData.P2.IdVéhicule = 1;
             GameData.P2.Vie = 200;
         }
@@ -384,7 +381,7 @@ public class GestionBoutons : MonoBehaviour
     {
         if (isPolice)
         {
-            Debug.Log("ICI");
+            //Debug.Log("ICI");
             GameData.P2.IdVéhicule = 2;
             GameData.P2.Vie = 50;
         }

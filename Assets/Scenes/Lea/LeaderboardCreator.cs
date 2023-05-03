@@ -1,8 +1,7 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
+
 using UnityEngine;
 
 public class LeaderboardCreator : MonoBehaviour
@@ -36,7 +35,7 @@ public class LeaderboardCreator : MonoBehaviour
        
        for (int i = 0; i < 12; i++)
        {
-           classement.Add("a");
+           classement.Add("");
        }
        
        for (int i = 0; i < joueurs.Length; i++)
