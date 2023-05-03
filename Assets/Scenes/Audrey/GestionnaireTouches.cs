@@ -1,14 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using TreeEditor;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.DualShock;
-using UnityEngine.InputSystem.Layouts;
-using UnityEngine.InputSystem.Users;
-using UnityEngine.XR;
-using InputDevice = UnityEngine.XR.InputDevice;
+
 
 /// Source:https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=587s&ab_channel=GameDevChef
 
@@ -61,7 +54,7 @@ public class GestionnaireTouches : BehaviourAuto
                // Debug.Log(wheelColliders[i].isGrounded);
                 //if (!wheelColliders[i].isGrounded && wheelColliders[i].transform.localPosition.y > 0.14 && temps > 1.5f)
                 {
-                    Debug.Log("ROUE");
+                   // Debug.Log("ROUE");
                     transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
                     temps = 0;
                     //break;
@@ -137,15 +130,22 @@ public class GestionnaireTouches : BehaviourAuto
             }
         }
         
-        if (Gamepad.all.Count > 0)
+        //if (Gamepad.all.Count > 0)
         {
             if (playerNb == 1)
             {
-                isBreaking = Gamepad.all[0].rightTrigger.IsPressed();
+                /*isBreaking = Gamepad.all[0].rightTrigger.IsPressed();
 
                 isAccelerating = Gamepad.all[0].leftTrigger.IsPressed();
+                if (rb.velocity.magnitude > 75)
+                {
+                    move = Vector2.zero;
+                }
+                else
+                {
+                    move = Gamepad.all[0].leftStick.ReadValue();
+                }
                 
-                move = Gamepad.all[0].leftStick.ReadValue();
                 if (move.x == 0 && move.y == 0)
                 {
                     ApplyBreaking();
@@ -156,11 +156,21 @@ public class GestionnaireTouches : BehaviourAuto
                     rotation = transform.rotation;
                     transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
                     temps = 0;
+                }*/
+                Bouger(0);
+                if (move.x == 0 && move.y == 0)
+                {
+                    ApplyBreaking();
                 }
             }
             else
             {
-                if (Gamepad.all.Count > 1)
+                Bouger(1);
+                if (move.x == 0 && move.y == 0)
+                {
+                    ApplyBreaking();
+                }
+                /*if (Gamepad.all.Count > 1)
                 {
                     isBreaking = Gamepad.all[1].rightTrigger.IsPressed();
 
@@ -178,29 +188,37 @@ public class GestionnaireTouches : BehaviourAuto
                         transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
                         temps = 0;
                     }
-                }
+                }*/
                 
             }
             
-            if (playerNb == 1)
-            {
-               
-            }
-            else
-            {
-                if (Gamepad.all.Count > 1)
-                {
-                    
-                }
-
-                
-            }
+            
 
         }
         horizontalInput = move.x;
         verticalInput = move.y;
         
 
+    }
+
+    private void Bouger(int ind)
+    {
+        if (Gamepad.all.Count > ind)
+        {
+            isBreaking = Gamepad.all[ind].rightTrigger.IsPressed();
+
+            isAccelerating = Gamepad.all[ind].leftTrigger.IsPressed();
+                    
+            move = Gamepad.all[ind].leftStick.ReadValue();
+            
+            if (Gamepad.all[ind].circleButton.wasPressedThisFrame)
+            {
+                position = transform.position;
+                rotation = transform.rotation;
+                transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
+                temps = 0;
+            }
+        }
     }
     private void OnEnable()
     {

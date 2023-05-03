@@ -1,18 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net.Mime;
+
 using System.Threading;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Serialization;
-using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
-using UnityEngine.InputSystem;
+
 
 
 [RequireComponent(typeof(ScriptSpline))]
@@ -125,7 +120,7 @@ public class GestionnaireJeux : MonoBehaviour
         if (!thread.Join(new TimeSpan(0, 0, 1)) && chemin == null)
         {
             thread.Abort();
-            Debug.Log("Ça a pas marché");
+            
             Refaire();
             
         }
@@ -218,7 +213,7 @@ public class GestionnaireJeux : MonoBehaviour
        //mainPlayer1Live = mainPlayer1.GetComponent<Player>(); //NÉCESSAIRE??
        
        
-        speedometer.speed = (int)Math.Floor(rg1.velocity.magnitude);
+        speedometer.speed = (int)Math.Floor(rg1.velocity.magnitude) *2;
         if (!isGameOver1)
         {
             if (mainPlayer1Live.IsFinished)
@@ -280,7 +275,7 @@ public class GestionnaireJeux : MonoBehaviour
        if (existsMainPlayer2) 
        {
            //mainPlayer2Live = mainPlayer2.GetComponent<Player>(); //NÉCESSAIRE??
-           speedometer2.speed = (int)Math.Floor(rg2.velocity.magnitude);
+           speedometer2.speed = (int)Math.Floor(rg2.velocity.magnitude) *2;
            if (!isGameOver2)
            {
                if (mainPlayer2Live.IsFinished)

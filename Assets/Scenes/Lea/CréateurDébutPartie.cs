@@ -1,8 +1,8 @@
-using System.Collections;
+
 using System.Collections.Generic;
-using System.Linq;
+
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 public class CréateurDébutPartie: MonoBehaviour
 {
@@ -55,7 +55,9 @@ public class CréateurDébutPartie: MonoBehaviour
         lesAutos = new List<GameObject>();
         joueurs = autos;
         sommets = som;
-        for (int i = 0; i < autos.Count; i++)
+        lesAutos.Add(AssignerChassis(autos[0].IdVéhicule));
+        //lesAutos.Add(AssignerChassis(autos[1].IdVéhicule));
+        for (int i = 0; i < autos.Count -1; i++)
         {
             //lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
             lesAutos.Add(bot);
@@ -88,7 +90,6 @@ public class CréateurDébutPartie: MonoBehaviour
                 GameData.Ranks.Add(leJoueur.Nom);
                 GameData.LesJoueurs.Add(leJoueur);
                 GestionnaireCollision collisions = thisJoueur.GetComponent<GestionnaireCollision>();
-                
                 collisions.points = sommets;
 
                 if (compteurAutos == 1)

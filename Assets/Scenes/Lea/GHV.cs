@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class GHV : MonoBehaviour
@@ -59,7 +56,7 @@ public class GHV : MonoBehaviour
         gameObject.transform.position = new Vector3(pos.x, Terrain.activeTerrain.SampleHeight(pos) + 1f, pos.z);
         if (Terrain.activeTerrain.SampleHeight(frontLeft.position) > 5f)
         {
-            Debug.Log(Terrain.activeTerrain.SampleHeight(frontLeft.position));
+            //Debug.Log(Terrain.activeTerrain.SampleHeight(frontLeft.position));
             frontLeft.SetPositionAndRotation(
                 new Vector3(frontLeft.position.x, Terrain.activeTerrain.SampleHeight(frontLeft.position) + 1,
                     frontLeft.position.z), frontLeft.transform.rotation);
@@ -67,7 +64,7 @@ public class GHV : MonoBehaviour
 
         if (Terrain.activeTerrain.SampleHeight(backLeft.position) > 5f)
         {
-            Debug.Log(Terrain.activeTerrain.SampleHeight(backLeft.position));
+           // Debug.Log(Terrain.activeTerrain.SampleHeight(backLeft.position));
             backLeft.SetPositionAndRotation(
                 new Vector3(backLeft.position.x, Terrain.activeTerrain.SampleHeight(backLeft.position) + 1,
                     backLeft.position.z), backLeft.transform.rotation);
@@ -75,7 +72,7 @@ public class GHV : MonoBehaviour
 
         if (Terrain.activeTerrain.SampleHeight(frontRight.position) > 5f)
         {
-            Debug.Log(frontRight.position.y - Terrain.activeTerrain.SampleHeight(frontRight.position));
+            //Debug.Log(frontRight.position.y - Terrain.activeTerrain.SampleHeight(frontRight.position));
             frontRight.SetPositionAndRotation(
                 new Vector3(frontRight.position.x, Terrain.activeTerrain.SampleHeight(frontRight.position) + 1,
                     frontRight.position.z), frontRight.transform.rotation);
@@ -83,7 +80,7 @@ public class GHV : MonoBehaviour
 
         if (Terrain.activeTerrain.SampleHeight(backRight.position) > 5f)
         {
-            Debug.Log(backRight.position.y - Terrain.activeTerrain.SampleHeight(backRight.position));
+            //Debug.Log(backRight.position.y - Terrain.activeTerrain.SampleHeight(backRight.position));
             backRight.SetPositionAndRotation(
                 new Vector3(backRight.position.x, Terrain.activeTerrain.SampleHeight(backRight.position) + 1,
                     backRight.position.z), backRight.transform.rotation);

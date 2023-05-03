@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -18,8 +17,7 @@ public class CarAgent : Agent
 
     private void Start()
     {
-        trackCheckpoints = GameObject.FindObjectOfType <TrackCheckpoints>();
-        //Debug.Log(trackCheckpoints);
+        trackCheckpoints = FindObjectOfType <TrackCheckpoints>();
 
         trackCheckpoints.OnCarCorrectCheckpoint += TrackCheckpoints_OnCarCorrectCheckpoint;
         trackCheckpoints.OnCarWrongCheckpoint += TrackCheckpoints_OnCarWrongCheckpoint;
@@ -34,7 +32,6 @@ public class CarAgent : Agent
         if (e.carTransform == transform)
         {
             AddReward(-1f);
-            Debug.Log("Wrong");
         }
     }
 

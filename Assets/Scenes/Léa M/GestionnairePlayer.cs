@@ -1,7 +1,7 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 using Random = System.Random;
 
 public class GestionnairePlayer
@@ -49,7 +49,6 @@ public class GestionnairePlayer
            
         }
         
-        Debug.Log(joueurs.Count);
     }
 
     private int AssignerPuissance(int indice)
@@ -57,13 +56,13 @@ public class GestionnairePlayer
         int puissance = 5000;
         if (indice == 1)
         {
-            puissance = 3000;
+            puissance = 5500;
         }
         else
         {
             if (indice == 2)
             {
-                puissance = 4000;
+                puissance = 6000;
             }
         }
 
