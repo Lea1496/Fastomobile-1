@@ -55,17 +55,18 @@ public class CréateurDébutPartie: MonoBehaviour
         lesAutos = new List<GameObject>();
         joueurs = autos;
         sommets = som;
-        lesAutos.Add(AssignerChassis(autos[0].IdVéhicule));
+        //lesAutos.Add(AssignerChassis(autos[0].IdVéhicule));
         //lesAutos.Add(AssignerChassis(autos[1].IdVéhicule));
         for (int i = 0; i < autos.Count  ; i++)
         {
-            //lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
-            lesAutos.Add(bot);
+            
+            lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
+           // lesAutos.Add(bot);
         }
         position = points[points.Count - 1];
         Instantiate(arc, new Vector3(position.x , 0, position.z), arc.transform.rotation);
         ligneArr = Instantiate(ligne, new Vector3(position.x , 0, position.z), ligne.transform.rotation);
-        ligneArr.GetComponentInChildren<GestionnaireTrigger>().indiceDernierCheckpoint = points.Count - 1;
+        ligneArr.GetComponentInChildren<GestionnaireTrigger>().indiceDernierCheckpoint = points.Count - 3;
         ligneArr.GetComponentInChildren<RankingManager>().indiceCheckpoint = points.Count;
         InstancierAutos();
         

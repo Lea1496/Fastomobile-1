@@ -45,9 +45,9 @@ GameObject:
   - component: {fileID: 5166461754330337346}
   - component: {fileID: 7991431198317033249}
   - component: {fileID: 8731605518886825628}
-  m_Layer: 12
+  m_Layer: 3
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPlayer1: {fileID: 0}
   mainPlayer2: {fileID: 0}
+  indiceDernierCheckpoint: 0
 --- !u!114 &8731605518886825628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,3 +115,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3013cbc790c81cd4b85e8b3fc562c811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indiceCheckpoint: 0

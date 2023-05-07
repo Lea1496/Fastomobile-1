@@ -75,7 +75,7 @@ public class Player : MonoBehaviour, IPlayer
         else
         {
             yield return new WaitForSeconds(3f);
-            gameObject.GetComponent<Car>().enabled = true;
+//            gameObject.GetComponent<Car>().enabled = true;
         }
         
         

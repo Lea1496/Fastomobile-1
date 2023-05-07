@@ -16,11 +16,11 @@ public class RankingManager : MonoBehaviour
     private int compteur = 0;
     private List<string> joueursPassés = new List<string>(12);
     public int indiceCheckpoint;
-    
+    public int indiceMax;
     private Text textSens;
     private int noText = 0;
     private bool aDeuxJoueurs;
-    private bool joueurDéjàPassé;
+    private bool estDéjàPassé;
     private void Start()
     {
         aDeuxJoueurs = GameData.P2.IsMainPlayer;
@@ -54,28 +54,49 @@ public class RankingManager : MonoBehaviour
             joueur = collider.GetComponentInParent<Player>();
 
             noText = DéterminerIndice(joueur, aDeuxJoueurs);
-            joueurDéjàPassé = joueursPassés.Contains(joueur.Nom);
-            if (joueurDéjàPassé && joueur.IsMainPlayer && joueur.DernierCheckpointVisité > indiceCheckpoint)
+            estDéjàPassé = joueursPassés.Contains(joueur.Nom);
+            if (joueur.IsMainPlayer)
+            {
+                //Debug.Log(joueurDéjàPassé);
+                //Debug.Log(joueur.DernierCheckpointVisité >= indiceCheckpoint);
+                //Debug.Log(joueur.DernierCheckpointVisité != indiceMax);
+               // Debug.Log("F");
+
+            }
+            
+            if (estDéjàPassé && joueur.IsMainPlayer && joueur.DernierCheckpointVisité > indiceCheckpoint
+                && joueur.DernierCheckpointVisité != indiceMax)
             {
                 textSens = collider.GetComponent<TextesData>().lesTextes[noText];
 
                 textSens.text = "Mauvais Sens!";
                 StartCoroutine(AfficherMessage());
                 StopCoroutine(AfficherMessage());
+                
             }
-            if (joueur.Rang != compteur + 1 && !joueurDéjàPassé)
+            
+            
+            if (joueur.Rang != compteur + 1 && !estDéjàPassé && (joueur.DernierCheckpointVisité < indiceCheckpoint
+                                            || joueur.DernierCheckpointVisité == indiceMax))
             {
+                
                 nomAChanger = GameData.Ranks[compteur];
                 GameData.Ranks[compteur] = joueur.Nom;
                 GameData.Ranks[joueur.Rang - 1] = nomAChanger;
                 ChangerRangJoueur(nomAChanger, joueur.Rang);
                 joueur.Rang = compteur + 1;
                 joueursPassés.Add(joueur.Nom);
-                joueur.DernierCheckpointVisité = indiceCheckpoint;
+                
                 ++compteur;
                 
             }
-            
+
+            if (joueur.Rang == compteur + 1 && !estDéjàPassé)
+            {
+                ++compteur;
+                joueursPassés.Add(joueur.Nom); 
+            }
+            joueur.DernierCheckpointVisité = indiceCheckpoint;
 
             
             if (compteur == 12)
@@ -119,7 +140,7 @@ public class RankingManager : MonoBehaviour
     }
     private IEnumerator AfficherMessage()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3);
         textSens.text = "";
 
 

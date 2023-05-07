@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 596, y: -163}
+  m_AnchoredPosition: {x: 637, y: -163}
   m_SizeDelta: {x: 1792.2, y: 595}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &921130785026222759
@@ -414,7 +414,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560493650538389366}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 1.6
+  m_Radius: 1.7
   m_SuspensionSpring:
     spring: 90000
     damper: 9000
@@ -430,11 +430,11 @@ WheelCollider:
     m_AsymptoteValue: 0.5
     m_Stiffness: 0.7
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.1
+    m_ExtremumSlip: 0.5
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 0.82
+    m_Stiffness: 1
   m_Enabled: 1
 --- !u!1 &1676739827980277887
 GameObject:
@@ -476,7 +476,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676739827980277887}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 1.6
+  m_Radius: 1.7
   m_SuspensionSpring:
     spring: 90000
     damper: 9000
@@ -492,11 +492,11 @@ WheelCollider:
     m_AsymptoteValue: 0.5
     m_Stiffness: 0.7
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.1
+    m_ExtremumSlip: 0.5
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 0.82
+    m_Stiffness: 1
   m_Enabled: 1
 --- !u!1 &2142474826487756674
 GameObject:
@@ -866,11 +866,11 @@ MonoBehaviour:
   rb: {fileID: 2640811334641025032}
   Poids: 0
   Puissance: 0
-  Try: {x: 0, y: -1, z: 1}
+  Try: {x: 1, y: -3, z: 0}
   isBreaking: 0
   isAccelerating: 0
   accelerationForce: 500
-  breakForce: 300000
+  breakForce: 300000000
   maxSteerAngle: 30
   frontLeftWheelCollider: {fileID: 6283740702500637844}
   frontRightWheelCollider: {fileID: 3100799535836360912}
@@ -1026,7 +1026,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4442274752770533389}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 1.6
+  m_Radius: 1.7
   m_SuspensionSpring:
     spring: 90000
     damper: 9000
@@ -1042,7 +1042,7 @@ WheelCollider:
     m_AsymptoteValue: 0.5
     m_Stiffness: 0.7
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.1
+    m_ExtremumSlip: 0.5
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
@@ -1083,7 +1083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.9995117, y: 198}
+  m_AnchoredPosition: {x: 4.9995117, y: 263}
   m_SizeDelta: {x: 1792.2, y: 595}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5683685810936035032
@@ -1248,7 +1248,7 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5466973980462738506}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 1.6
+  m_Radius: 1.7
   m_SuspensionSpring:
     spring: 90000
     damper: 9000
@@ -1264,7 +1264,7 @@ WheelCollider:
     m_AsymptoteValue: 0.5
     m_Stiffness: 0.7
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.1
+    m_ExtremumSlip: 0.5
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
@@ -1379,7 +1379,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6067938707086780850}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00003814698}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.40087998, y: 0.40087998, z: 0.40087998}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1388,7 +1388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 588.9995, y: 198}
+  m_AnchoredPosition: {x: 564, y: 263}
   m_SizeDelta: {x: 1792.2, y: 595}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2931694732154329549
@@ -1655,7 +1655,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -337.0006, y: 198}
+  m_AnchoredPosition: {x: -408, y: 263}
   m_SizeDelta: {x: 1792.2, y: 595}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8380034385864961041

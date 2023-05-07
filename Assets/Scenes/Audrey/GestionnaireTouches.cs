@@ -85,10 +85,7 @@ public class GestionnaireTouches : BehaviourAuto
         }
         else
         {
-            if (tempsDepuisDébut > 2 && tempsDepuisDébut < 2.2f)
-            {
-                ApplyAccelerationCustom(0);//Necessaire???
-            }
+           
             if (horizontalInput == 0 && verticalInput == 0 )
             {
                 ApplyBreakingCustom(3000);
@@ -99,11 +96,16 @@ public class GestionnaireTouches : BehaviourAuto
                 HandleMotor(verticalInput);
                 HandleSteering(horizontalInput);
             }
+
+            if (rb.velocity.magnitude * 2.237 > 175)
+            {
+                ApplyBreakingCustom(300000);
+            }
         }
 
         
         
-        
+        ApplyDownForce();
         UpdateWheels();
         //ApplyDownForce();
     }

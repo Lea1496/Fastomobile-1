@@ -153,7 +153,8 @@ public class GestionnaireJeux : MonoBehaviour
                 checkpoint.transform.rotation);
             checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
             checkpointInst.GetComponentInChildren<RankingManager>().indiceCheckpoint = chemin.Count -1 -i;
-           // DontDestroyOnLoad(checkpointInst);
+            checkpointInst.GetComponentInChildren<RankingManager>().indiceMax = chemin.Count;
+            // DontDestroyOnLoad(checkpointInst);
         }
         
         //Instancie ligne d'arrivée
@@ -206,16 +207,18 @@ public class GestionnaireJeux : MonoBehaviour
         temps += Time.deltaTime;
         
         //Fait les deux premiers checkpoints
-        /*if (temps >= 20 && compteur < 1)
+       /* if (temps >= 20 && compteur < 1)
         {
             checkpointInst = Instantiate(checkpoint, Vector3.zero, 
                 checkpoint.transform.rotation);
             checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(0, sommets);
             checkpointInst.GetComponentInChildren<RankingManager>().indiceCheckpoint = chemin.Count - 1;
+            checkpointInst.GetComponentInChildren<RankingManager>().indiceMax = chemin.Count;
             checkpointInst = Instantiate(checkpoint, Vector3.zero, 
                 checkpoint.transform.rotation);
             checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(2, sommets);
             checkpointInst.GetComponentInChildren<RankingManager>().indiceCheckpoint = chemin.Count - 2;
+            checkpointInst.GetComponentInChildren<RankingManager>().indiceMax = chemin.Count;
             compteur++;
         }*/
         
