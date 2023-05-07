@@ -23,7 +23,7 @@ public class Décor : MonoBehaviour
 
     private Vector3 position;
 
-    private int nbArbresMax = 60,
+    private int nbArbresMax = 55,
                 nbArbres = 0;
 
     private int posX = 0,
@@ -68,7 +68,7 @@ public class Décor : MonoBehaviour
             Destroy(other.gameObject);
             
             CréerDécor();
-            arbres.transform.Translate(0,-1f,0);
+           arbres.transform.Translate(0,-1f,0);
             
         }
     }

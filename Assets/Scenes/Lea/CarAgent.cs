@@ -79,7 +79,7 @@ public class CarAgent : Agent
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent<Mur>(out Mur mur))
+        if(collision.gameObject.layer == 14)
         {
             AddReward(-0.5f);
         }
@@ -87,7 +87,7 @@ public class CarAgent : Agent
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent<Mur>(out Mur mur))
+        if (collision.gameObject.layer == 14)
         {
             AddReward(-0.1f);
         }

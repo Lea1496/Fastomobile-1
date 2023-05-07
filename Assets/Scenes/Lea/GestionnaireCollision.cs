@@ -11,9 +11,12 @@ using Random = System.Random;
 
 public class GestionnaireCollision : MonoBehaviour
 {
-    [SerializeField] private int coucheCollisionObstacle;
-    [SerializeField] private int coucheCollisionCoin;
-    [SerializeField] private int coucheCollisionBonus;
+    private const int CoucheCollisionObstacle = 9;
+    private const int CoucheCollisionCoin = 7;
+    private const int CoucheCollisionBonus = 11;
+    private const int CoucheCollisionMur = 14;
+    
+    
 
     [SerializeField] GameObject coin;
     [SerializeField] GameObject bonus;
@@ -22,7 +25,7 @@ public class GestionnaireCollision : MonoBehaviour
     [SerializeField] private Text textBonusVie2;
     [SerializeField] private Text textBonusVitesse2;
     public Vector3[] points;
-
+    private Vector3 reculer = new Vector3(0, 0, -10);
     private Random gen = new Random();
     private GénérateurObjets générateur;
     private Player joueur;
@@ -39,9 +42,20 @@ public class GestionnaireCollision : MonoBehaviour
     {
         ContactPoint point = collision.GetContact(0);
         
-        if (point.otherCollider.gameObject.layer == coucheCollisionObstacle) //Obstacle
+        if (point.otherCollider.gameObject.layer == CoucheCollisionObstacle) //Obstacle
         {
-            point.thisCollider.GetComponentInParent<Player>().EnleverVie(10); //changer cbm de vie
+            joueur = point.thisCollider.GetComponentInParent<Player>();
+            joueur.EnleverVie(100);
+            if (joueur.Vie <= 0)
+            {
+                GameData.ListeJoueursMorts.Add(joueur.Nom);
+            }
+            //Empêche que le joueur reste pris dans un mur/obstacle
+           // gameObject.transform.Translate(reculer, Space.Self);
+        }
+        else if (point.otherCollider.gameObject.layer == 14)
+        {
+           // gameObject.transform.Translate(reculer, Space.Self);
         }
         
         
@@ -51,13 +65,13 @@ public class GestionnaireCollision : MonoBehaviour
     {
         int ind;
         joueur = gameObject.GetComponent<Player>();
-        if (other.gameObject.layer == coucheCollisionCoin)
+        if (other.gameObject.layer == CoucheCollisionCoin)
         {
             joueur.AjouterArgent(1);
             Destroy(other.gameObject);
             générateur.GénérerCoins(1, points, coin);
         }
-        if (other.gameObject.layer == coucheCollisionBonus) //Bonus
+        if (other.gameObject.layer == CoucheCollisionBonus) //Bonus
         {
             Destroy(other.gameObject);
             générateur.GénérerBonus(1, points, bonus);
@@ -73,24 +87,24 @@ public class GestionnaireCollision : MonoBehaviour
                 }
                 else
                 {
-                    gameObject.GetComponent<GestionnaireTouches>().ApplyAcceleration(3f);
+                    gameObject.GetComponent<GestionnaireTouches>().ApplyAccelerationCustom(8f);
                     textBonusVitesse2.text = bonusVitesse;
                     StartCoroutine(AfficherBonus(textBonusVitesse2));
                     StopCoroutine(AfficherBonus(textBonusVitesse2));
                 }
             }
-            else
+            else if(joueur.IsMainPlayer)
             {
                 if (ind == 0)
                 {
-                    gameObject.GetComponent<Player>().AjouterVie(10);
+                    joueur.AjouterVie(10);
                     textBonusVie.text = bonusVie;
                     StartCoroutine(AfficherBonus(textBonusVie));
                     StopCoroutine(AfficherBonus(textBonusVie));
                 }
                 else
                 {
-                    gameObject.GetComponent<GestionnaireTouches>().ApplyAcceleration(3f);
+                    gameObject.GetComponent<GestionnaireTouches>().ApplyAccelerationCustom(8f);
                     textBonusVitesse.text = bonusVitesse;
                     StartCoroutine(AfficherBonus(textBonusVitesse));
                     StopCoroutine(AfficherBonus(textBonusVitesse));

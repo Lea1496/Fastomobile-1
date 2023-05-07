@@ -4,9 +4,9 @@ using UnityEngine;
 using Random = System.Random;
 public class GénérateurObjets
 {
-    private int maxCoins = 15;
-    private int maxBonus = 10;
-    private int maxObstacles = 15;
+    private const int MaxCoins = 15;
+    private const int MaxBonus = 10;
+    private const int MaxObstacles = 10;
     private Random gen = new Random();
 
     private GameObject coin;
@@ -26,9 +26,9 @@ public class GénérateurObjets
         coin = c;
         bonus = b;
         indices = new List<int>();
-        GénérerCoins(maxCoins, sommets, coin);
+        GénérerCoins(MaxCoins, sommets, coin);
         GénérerObstacles();
-        GénérerBonus(maxBonus, sommets, bonus);
+        GénérerBonus(MaxBonus, sommets, bonus);
     }
     public void GénérerCoins(int nbCoins, Vector3[] sommets, GameObject coin)
     {
@@ -75,7 +75,7 @@ public class GénérateurObjets
         Vector3 pointA;
         Vector3 pointB;
         Vector3 instanciatePosition;
-        for (int i = 0; i < maxObstacles; i++)
+        for (int i = 0; i < MaxObstacles; i++)
         {
             do
             {

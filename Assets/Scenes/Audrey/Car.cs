@@ -39,6 +39,22 @@ public class Car : CarController
         UpdateWheels();
     }
 
+    public void ApplyAccelerationCustom(float verticalI)
+    {
+        
+        frontRightWheelCollider.motorTorque = verticalI * 5000 * 500; 
+        frontLeftWheelCollider.motorTorque = verticalI * 5000 * 500;
+        rearLeftWheelCollider.motorTorque = verticalI * 5000 * 500;
+        rearRightWheelCollider.motorTorque = verticalI * 5000 * 500;
+    }
+    public void ApplyBreakingCustom(int breakForce)
+    {
+        
+        frontRightWheelCollider.brakeTorque = breakForce;
+        frontLeftWheelCollider.brakeTorque = breakForce;
+        rearLeftWheelCollider.brakeTorque = breakForce;
+        rearRightWheelCollider.brakeTorque = breakForce;
+    }
     public void StopCompletely()
     {
         SetInputs(0f, 0f);
