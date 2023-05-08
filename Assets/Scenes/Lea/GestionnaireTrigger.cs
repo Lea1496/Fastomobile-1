@@ -54,7 +54,7 @@ public class GestionnaireTrigger : MonoBehaviour
 
             if (nbJoueur == 2)
             {
-                if (joueur.Nom == mainPlayer1.Nom && (joueur.DernierCheckpointVisité == indiceDernierCheckpoint || compteurTourJoueur1 == 0))
+                if (joueur.Nom == mainPlayer1.Nom && (joueur.DernierCheckpointVisité == indiceDernierCheckpoint || compteurTourJoueur1 == 0) && (temps1 > 15 || compteurTourJoueur1 == 0))
                 {
                     joueur.Tour++;
                     compteurTourJoueur1++;
@@ -67,7 +67,7 @@ public class GestionnaireTrigger : MonoBehaviour
                 }
                 else
                 {
-                    if (joueur.Nom == mainPlayer2.Nom && (joueur.DernierCheckpointVisité == indiceDernierCheckpoint || compteurTourJoueur2 == 0))
+                    if (joueur.Nom == mainPlayer2.Nom && (joueur.DernierCheckpointVisité == indiceDernierCheckpoint || compteurTourJoueur2 == 0) && (temps2 > 15 || compteurTourJoueur2 == 0))
                     {
                         joueur.Tour++;
                         temps2 = 0;

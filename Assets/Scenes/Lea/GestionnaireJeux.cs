@@ -71,7 +71,7 @@ public class GestionnaireJeux : MonoBehaviour
     private Rigidbody rg1;
     private Rigidbody rg2;
     private string gameOver = "Game Over!";
-    private string finish = "Finish!";
+    private string finish = "Terminé!";
     private int compteur = 0;
     private bool existsMainPlayer2 = false;
     private float temps = 0;
