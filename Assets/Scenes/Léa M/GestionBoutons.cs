@@ -19,7 +19,7 @@ public class GestionBoutons : MonoBehaviour
     // public Toggle avancéToggle2;
     // public Toggle expertToggle2;
 
-    [SerializeField] private PlayerInputManager inputManager;
+  
     
     private bool avancéDéjàAcheté = GameData.P1.DéjàAchetéAvancé;
     private bool expertDéjàAcheté = GameData.P1.DéjàAchetéExpert;
@@ -88,10 +88,10 @@ public class GestionBoutons : MonoBehaviour
 
     public void NouvellePartie()
     {
-        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < checkpoints.Length; i++)
+        //GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        //for (int i = 0; i < players.Length; i++)
         {
-            Destroy(checkpoints[i]);
+            //Destroy(players[i]);
         }
         data.EnleverCoin(CheminPlayer1, CheminPlayer2);
         SceneManager.LoadScene(0);
@@ -221,7 +221,7 @@ public class GestionBoutons : MonoBehaviour
         if (isCamion)
         {
             GameData.P1.IdVéhicule = 1;
-            GameData.P1.Vie = 200;
+            GameData.P1.Vie = 125;
         }
     }
     public void TogglePolice(bool isPolice)
@@ -229,7 +229,7 @@ public class GestionBoutons : MonoBehaviour
         if (isPolice)
         {
             GameData.P1.IdVéhicule = 2;
-            GameData.P1.Vie = 50;
+            GameData.P1.Vie = 75;
         }
     }
 

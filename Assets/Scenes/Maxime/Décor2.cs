@@ -27,7 +27,7 @@ public class Décor2 : MonoBehaviour
 
     private Vector3 position;
 
-    private int nbObjetMax = 60,
+    private int nbObjetMax = 55,
                 nbObjet = 0;
 
     private int posX = 0,

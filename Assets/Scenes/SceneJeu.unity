@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -392,7 +392,6 @@ GameObject:
   - component: {fileID: 785475864}
   - component: {fileID: 785475863}
   - component: {fileID: 785475862}
-  - component: {fileID: 785475866}
   m_Layer: 14
   m_Name: BordurePaire
   m_TagString: Mur
@@ -427,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc488db723bfdae41a6206d5efebec4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materiauxBord: {fileID: 2100000, guid: 3b83b22133b5b2a4aa8e8a36cf977003, type: 2}
+  materiauxBord: {fileID: 2100000, guid: 74200188e5b476441ab05cb320af696d, type: 2}
 --- !u!64 &785475863
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -435,7 +434,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785475860}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 21f61423a6b41cb46a3e0281fbe607aa, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -492,18 +491,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785475860}
   m_Mesh: {fileID: 0}
---- !u!114 &785475866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785475860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21734fb81532b42459ab5a27e2e27886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &836306667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -828,7 +815,6 @@ GameObject:
   - component: {fileID: 1175735474}
   - component: {fileID: 1175735472}
   - component: {fileID: 1175735471}
-  - component: {fileID: 1175735475}
   m_Layer: 14
   m_Name: BordurePaireGrande
   m_TagString: Mur
@@ -871,7 +857,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175735469}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 21f61423a6b41cb46a3e0281fbe607aa, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -886,18 +872,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175735469}
   m_Mesh: {fileID: 0}
---- !u!114 &1175735475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1175735469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21734fb81532b42459ab5a27e2e27886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1220469595 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3234696370070856478, guid: 39280b5b8e07e2d4eaa6ef6e94818e7d, type: 3}
@@ -921,7 +895,6 @@ GameObject:
   - component: {fileID: 1226918255}
   - component: {fileID: 1226918253}
   - component: {fileID: 1226918256}
-  - component: {fileID: 1226918257}
   m_Layer: 14
   m_Name: BordureImpaireGrande
   m_TagString: Mur
@@ -951,7 +924,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226918250}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 21f61423a6b41cb46a3e0281fbe607aa, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -979,18 +952,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materiauxBordImp: {fileID: 0}
---- !u!114 &1226918257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226918250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21734fb81532b42459ab5a27e2e27886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1279341329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1329,7 +1290,6 @@ GameObject:
   - component: {fileID: 1564057484}
   - component: {fileID: 1564057483}
   - component: {fileID: 1564057482}
-  - component: {fileID: 1564057486}
   m_Layer: 14
   m_Name: BordureImpaire
   m_TagString: Mur
@@ -1364,7 +1324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f4a19b6dbef0774ea5aa19d8cc17bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materiauxBordImp: {fileID: 2100000, guid: 3b83b22133b5b2a4aa8e8a36cf977003, type: 2}
+  materiauxBordImp: {fileID: 2100000, guid: 74200188e5b476441ab05cb320af696d, type: 2}
 --- !u!64 &1564057483
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1372,7 +1332,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564057480}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 21f61423a6b41cb46a3e0281fbe607aa, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -1429,18 +1389,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564057480}
   m_Mesh: {fileID: 0}
---- !u!114 &1564057486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1564057480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21734fb81532b42459ab5a27e2e27886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1629056586 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2805281499050891042, guid: b57b81134e7dc1d4884be0971474c7d8, type: 3}
@@ -1787,7 +1735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8983cf888edc0c043bcd81e81edd82e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  auto: {fileID: 6102769514498293530, guid: 585ceda54c2307f42b63f8b1511d8527, type: 3}
+  auto: {fileID: 6102769514498293530, guid: 1bc6cd7198c9c2d45b970845d85fbe43, type: 3}
   camion: {fileID: 2816254769309527770, guid: c5603bd9196f36e4e97ef48d486f93fe, type: 3}
   police: {fileID: 3712510124542130609, guid: 75b35e4acf18c78499cf9bef1bfb55f8, type: 3}
   bot: {fileID: 6102769514498293530, guid: bfa5e571c17cf5e42a9b4ca4d0f70d2e, type: 3}
@@ -1982,4 +1930,52 @@ Transform:
   - {fileID: 1974713175}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2064566711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2064566713}
+  - component: {fileID: 2064566712}
+  m_Layer: 0
+  m_Name: Boutons
+  m_TagString: Bouton
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2064566712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064566711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83fd6be7a6ef8c54ca5c58018a21edcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "avanc\xE9": {fileID: 0}
+  expert: {fileID: 0}
+  "avanc\xE9Toggle": {fileID: 0}
+  expertToggle: {fileID: 0}
+--- !u!4 &2064566713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064566711}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 399.66528, y: 5.171075, z: 67.27165}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

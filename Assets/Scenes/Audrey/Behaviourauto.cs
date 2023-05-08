@@ -73,6 +73,8 @@ public class BehaviourAuto : MonoBehaviour
         
     }
 
+    
+
     public void ApplyAcceleration(float verticalI)
     {
         frontRightWheelCollider.motorTorque = verticalI * Puissance * currentAcceleration; 
@@ -80,10 +82,11 @@ public class BehaviourAuto : MonoBehaviour
        
     }
 
-    /*public void ApplyDownForce()
+    
+    public void ApplyDownForce()
     {
-        rb.AddForce(-transform.up * downForceValue * - rb.velocity.magnitude);
-    }*/
+        rb.AddForce(-transform.up * 9.8f * - rb.velocity.magnitude);
+    }
     
     public void HandleSteering(float horizontalI)
     {

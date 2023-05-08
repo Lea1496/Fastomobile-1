@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Checkpoint
   - Mur
+  - Bouton
+  - MauvaisSens
+  - MauvaisSens2
+  - MauvaisSens3
+  - MauvaisSensMessage
   layers:
   - Default
   - TransparentFX
@@ -22,7 +27,7 @@ TagManager:
   - "D\xE9sert"
   - Checkpoint
   - Mur
-  - 
+  - Devant auto
   - 
   - 
   - 

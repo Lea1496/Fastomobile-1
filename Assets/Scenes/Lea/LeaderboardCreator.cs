@@ -9,7 +9,7 @@ public class LeaderboardCreator : MonoBehaviour
     private TextMeshProUGUI[] leaderboardTexts;
     //private GameObject[] checkpoints;
     private GameObject ligne;
-    private GameObject[] joueurs;
+    private List<Player> joueurs;
     private int compteur;
     private Player joueur;
     private void Start()
@@ -20,16 +20,18 @@ public class LeaderboardCreator : MonoBehaviour
     private void CreateLeaderbord()
     {
         leaderboardTexts = GetComponentsInChildren<TextMeshProUGUI>();
-        joueurs = GameObject.FindGameObjectsWithTag("Player");
-        List<Player> joueursEnTrop = new List<Player>();
+        joueurs = GameData.LesJoueurs;
+        Debug.Log(joueurs.Count);
+        List<string> joueursEnTrop = GameData.ListeJoueursMorts;
 
-       for (int i = 0; i < joueurs.Length; i++)
+        
+       /*for (int i = 0; i < joueurs.Length; i++)
        {
            if (joueurs[i].GetComponentInChildren<Player>().Vie <= 0)
            {
                joueursEnTrop.Add(joueurs[i].GetComponentInChildren<Player>());
            }
-       }
+       }*/
        
        List<string> classement = new List<string>(12);
        
@@ -38,26 +40,22 @@ public class LeaderboardCreator : MonoBehaviour
            classement.Add("");
        }
        
-       for (int i = 0; i < joueurs.Length; i++)
+       for (int i = 0; i < joueurs.Count; i++)
        {
-           for (int j = 0; j < joueurs.Length; j++)
-           {
-               joueur = joueurs[i].GetComponentInChildren<Player>();
-               classement[joueur.Rang - 1] = joueur.Nom;
-           }
            
+           classement[joueurs[i].Rang - 1] = joueurs[i].Nom;
        }
 
        if (joueursEnTrop.Count != 0)
        {
            for (int i = 0; i <  joueursEnTrop.Count; i++)
            {
-               classement.Remove(joueursEnTrop[i].Nom);
-               classement.Add(joueursEnTrop[i].Nom + " (Mort) " );
+               classement.Remove(joueursEnTrop[i]);
+               classement.Add(joueursEnTrop[i]+ " (Mort) " );
            }
            
        }
-       
+       Debug.Log(classement.Count);
         for (int i = 0; i < classement.Count; i++)
         {
             leaderboardTexts[i].text = classement[i];

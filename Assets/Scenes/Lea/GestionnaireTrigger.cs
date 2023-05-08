@@ -9,8 +9,8 @@ public class GestionnaireTrigger : MonoBehaviour
     private int nbJoueur = 0;
     private Player joueur;
     public Player mainPlayer1;
-
     public Player mainPlayer2;
+    public int indiceDernierCheckpoint;
     private const string CheminPlayer1 = "InfoPlayer1.txt";
     private const string CheminPlayer2 = "InfoPlayer2.txt";
     private void Start()
@@ -54,7 +54,7 @@ public class GestionnaireTrigger : MonoBehaviour
 
             if (nbJoueur == 2)
             {
-                if (joueur.Nom == mainPlayer1.Nom && (temps1 > 15 || compteurTourJoueur1 == 0))
+                if (joueur.Nom == mainPlayer1.Nom && (joueur.DernierCheckpointVisité == indiceDernierCheckpoint || compteurTourJoueur1 == 0))
                 {
                     joueur.Tour++;
                     compteurTourJoueur1++;
@@ -67,7 +67,7 @@ public class GestionnaireTrigger : MonoBehaviour
                 }
                 else
                 {
-                    if (joueur.Nom == mainPlayer2.Nom && (temps2 > 15 || compteurTourJoueur2 == 0))
+                    if (joueur.Nom == mainPlayer2.Nom && (joueur.DernierCheckpointVisité == indiceDernierCheckpoint || compteurTourJoueur2 == 0))
                     {
                         joueur.Tour++;
                         temps2 = 0;
@@ -97,7 +97,7 @@ public class GestionnaireTrigger : MonoBehaviour
             else
             {
             
-                if ((joueur.IsMainPlayer && temps1 > 15) || ((joueur.IsMainPlayer && compteurTour == 0))) //à changer
+                if ((joueur.IsMainPlayer && joueur.DernierCheckpointVisité == indiceDernierCheckpoint ) || ((joueur.IsMainPlayer && compteurTour == 0))) //à changer
                 {
                     joueur.Tour++;
                     compteurTour++;

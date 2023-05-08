@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -151,6 +152,9 @@ public class GestionnaireJeux : MonoBehaviour
             checkpointInst = Instantiate(checkpoint, Vector3.zero, 
                 checkpoint.transform.rotation);
             checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(i* 2, sommets);
+            checkpointInst.GetComponentInChildren<RankingManager>().indiceCheckpoint = chemin.Count -1 -i;
+            checkpointInst.GetComponentInChildren<RankingManager>().indiceMax = chemin.Count;
+            // DontDestroyOnLoad(checkpointInst);
         }
         
         //Instancie ligne d'arrivée
@@ -203,24 +207,32 @@ public class GestionnaireJeux : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Keyboard.current.rKey.IsPressed())
+        {
+            GameObject.FindGameObjectWithTag("Bouton").GetComponent<GestionBoutons>().NouvellePartie();
+        }
         temps += Time.deltaTime;
         
         //Fait les deux premiers checkpoints
-        if (temps >= 20 && compteur < 1)
+       /* if (temps >= 20 && compteur < 1)
         {
             checkpointInst = Instantiate(checkpoint, Vector3.zero, 
                 checkpoint.transform.rotation);
             checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(0, sommets);
+            checkpointInst.GetComponentInChildren<RankingManager>().indiceCheckpoint = chemin.Count - 1;
+            checkpointInst.GetComponentInChildren<RankingManager>().indiceMax = chemin.Count;
             checkpointInst = Instantiate(checkpoint, Vector3.zero, 
                 checkpoint.transform.rotation);
             checkpointInst.GetComponentInChildren<GénérateurCheckPoints>().FaireMesh(2, sommets);
+            checkpointInst.GetComponentInChildren<RankingManager>().indiceCheckpoint = chemin.Count - 2;
+            checkpointInst.GetComponentInChildren<RankingManager>().indiceMax = chemin.Count;
             compteur++;
-        }
+        }*/
         
        //mainPlayer1Live = mainPlayer1.GetComponent<Player>(); //NÉCESSAIRE??
        
        
-        speedometer.speed = (int)Math.Floor(rg1.velocity.magnitude) *2;
+        speedometer.speed = (int)Math.Floor(rg1.velocity.magnitude) * 2.237f;
         if (!isGameOver1)
         {
             if (mainPlayer1Live.IsFinished)
@@ -282,7 +294,7 @@ public class GestionnaireJeux : MonoBehaviour
        if (existsMainPlayer2) 
        {
            //mainPlayer2Live = mainPlayer2.GetComponent<Player>(); //NÉCESSAIRE??
-           speedometer2.speed = (int)Math.Floor(rg2.velocity.magnitude) *2;
+           speedometer2.speed = (int)Math.Floor(rg2.velocity.magnitude) * 2.237f;
            if (!isGameOver2)
            {
                if (mainPlayer2Live.IsFinished)
@@ -315,15 +327,15 @@ public class GestionnaireJeux : MonoBehaviour
                        gestion2.enabled = false;
                        for (int i = 0; i < colliders.Length; i++)
                        {
-                           colliders[i].enabled = false;
+                           colliders2[i].enabled = false;
                        }
 
                        for (int i = 0; i < renderers.Length; i++)
                        {
-                           renderers[i].enabled = false;
+                           renderers2[i].enabled = false;
                        }
 
-                       rg1.useGravity = false;
+                       rg2.useGravity = false;
                        
                        isGameOver2 = true;
                        if (mainPlayer1Live.IsFinished)

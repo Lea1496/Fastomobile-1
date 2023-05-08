@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,7 +19,13 @@ public class GestionnaireTouches : BehaviourAuto
     private Vector3 position;
     private Quaternion rotation;
 
+    private int nbPlayer;
+    private List<Gamepad> gamepads;
+    private List<bool> isGamepadConnected;
+    
     private float temps = 0;
+    private float tempsDepuisDébut;
+    
     private WheelCollider[] wheelColliders;
     private bool estActif;
     private void Awake()
@@ -26,6 +34,14 @@ public class GestionnaireTouches : BehaviourAuto
     }
     void Start()
     {
+        nbPlayer = Gamepad.all.Count;
+        gamepads = new List<Gamepad>(nbPlayer);
+        isGamepadConnected = new List<bool>(nbPlayer);
+        for (int i = 0; i < Gamepad.all.Count; i++)
+        {
+            gamepads.Add(Gamepad.all[i]);
+            isGamepadConnected.Add(true);
+        }
         rb = GetComponent<Rigidbody>();
         //rb.centerOfMass = centerOfMass.transform.localPosition;
         rb.centerOfMass += Try;
@@ -44,71 +60,71 @@ public class GestionnaireTouches : BehaviourAuto
         
     }
 
-    public void FlipOver()
-    {
-        if (estActif)
-        {
-            //for (int i = 0; i < wheelColliders.Length; i++)
-            {
-                
-               // Debug.Log(wheelColliders[i].isGrounded);
-                //if (!wheelColliders[i].isGrounded && wheelColliders[i].transform.localPosition.y > 0.14 && temps > 1.5f)
-                {
-                   // Debug.Log("ROUE");
-                    transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w));
-                    temps = 0;
-                    //break;
-                }
-            }
-        }
-        
-    }
     
     private void Update()
     {
         temps += Time.deltaTime;
-        //FlipOver();
-        if (Gamepad.all.Count > 0)
-        {
-            /*if (playerNb == 1)
-            {
-                move = Gamepad.all[0].leftStick.ReadValue();
-                if (Gamepad.all[0].circleButton.wasPressedThisFrame)
-                {
-                    position = transform.position;
-                    rotation = transform.rotation;
-                    transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
-                }
-            }
-            else
-            {
-                if (Gamepad.all.Count > 1)
-                {
-                    move = Gamepad.all[1].leftStick.ReadValue();
-                    if (Gamepad.all[1].circleButton.wasPressedThisFrame)
-                    {
-                        position = transform.position;
-                        rotation = transform.rotation;
-                        transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
-                    }
-                }
-
-                
-            }*/
-
-        }
+        tempsDepuisDébut += Time.deltaTime;
+        
        
     }
 
     private void FixedUpdate()
     {
+        //Vérifie que les gamepads ne "switch" pas si on les déconnecte
+        if (Gamepad.all.Count != nbPlayer)
+        {
+            VérifierGamepads();
+        }
         GetInput();
-        HandleMotor(verticalInput);
-        HandleSteering(horizontalInput);
+        if (tempsDepuisDébut < 2 && verticalInput != 0)
+        {
+            ApplyAccelerationCustom(4f);
+            HandleSteering(horizontalInput);
+            //HandleMotor();
+        }
+        else
+        {
+           
+            if (horizontalInput == 0 && verticalInput == 0 )
+            {
+                ApplyBreakingCustom(3000);
+                HandleSteering(horizontalInput);
+            }
+            else
+            {
+                HandleMotor(verticalInput);
+                HandleSteering(horizontalInput);
+            }
+
+            if (rb.velocity.magnitude * 2.237 > 175)
+            {
+                ApplyBreakingCustom(300000);
+            }
+        }
+
+        
+        
+        ApplyDownForce();
         UpdateWheels();
         //ApplyDownForce();
     }
-
+    public void ApplyAccelerationCustom(float verticalI)
+    {
+        
+        frontRightWheelCollider.motorTorque = verticalI * Puissance * 500; 
+        frontLeftWheelCollider.motorTorque = verticalI * Puissance * 500;
+        rearLeftWheelCollider.motorTorque = verticalI * Puissance * 500;
+        rearRightWheelCollider.motorTorque = verticalI * Puissance * 500;
+    }
+    public void ApplyBreakingCustom(int breakForce)
+    {
+        
+        frontRightWheelCollider.brakeTorque = breakForce;
+        frontLeftWheelCollider.brakeTorque = breakForce;
+        rearLeftWheelCollider.brakeTorque = breakForce;
+        rearRightWheelCollider.brakeTorque = breakForce;
+    }
     private void GetInput()
     {
         //FlipOver();
@@ -130,70 +146,15 @@ public class GestionnaireTouches : BehaviourAuto
             }
         }
         
-        //if (Gamepad.all.Count > 0)
+       
+        if (playerNb == 1)
         {
-            if (playerNb == 1)
-            {
-                /*isBreaking = Gamepad.all[0].rightTrigger.IsPressed();
-
-                isAccelerating = Gamepad.all[0].leftTrigger.IsPressed();
-                if (rb.velocity.magnitude > 75)
-                {
-                    move = Vector2.zero;
-                }
-                else
-                {
-                    move = Gamepad.all[0].leftStick.ReadValue();
-                }
-                
-                if (move.x == 0 && move.y == 0)
-                {
-                    ApplyBreaking();
-                }
-                if (Gamepad.all[0].circleButton.wasPressedThisFrame && temps > 5)
-                {
-                    position = transform.position;
-                    rotation = transform.rotation;
-                    transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
-                    temps = 0;
-                }*/
-                Bouger(0);
-                if (move.x == 0 && move.y == 0)
-                {
-                    ApplyBreaking();
-                }
-            }
-            else
-            {
-                Bouger(1);
-                if (move.x == 0 && move.y == 0)
-                {
-                    ApplyBreaking();
-                }
-                /*if (Gamepad.all.Count > 1)
-                {
-                    isBreaking = Gamepad.all[1].rightTrigger.IsPressed();
-
-                    isAccelerating = Gamepad.all[1].leftTrigger.IsPressed();
-                    
-                    move = Gamepad.all[1].leftStick.ReadValue();
-                    if (move.x == 0 && move.y == 0)
-                    {
-                        ApplyBreaking();
-                    }
-                    if (Gamepad.all[1].circleButton.wasPressedThisFrame)
-                    {
-                        position = transform.position;
-                        rotation = transform.rotation;
-                        transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
-                        temps = 0;
-                    }
-                }*/
-                
-            }
+            Bouger(0);
             
-            
-
+        }
+        else
+        {
+            Bouger(1);
         }
         horizontalInput = move.x;
         verticalInput = move.y;
@@ -203,22 +164,115 @@ public class GestionnaireTouches : BehaviourAuto
 
     private void Bouger(int ind)
     {
-        if (Gamepad.all.Count > ind)
+        if (gamepads.Count > ind )
         {
-            isBreaking = Gamepad.all[ind].rightTrigger.IsPressed();
-
-            isAccelerating = Gamepad.all[ind].leftTrigger.IsPressed();
-                    
-            move = Gamepad.all[ind].leftStick.ReadValue();
-            
-            if (Gamepad.all[ind].circleButton.wasPressedThisFrame)
+            if (isGamepadConnected[ind]) 
             {
-                position = transform.position;
-                rotation = transform.rotation;
-                transform.SetPositionAndRotation(new Vector3(position.x, position.y + 10, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
-                temps = 0;
+                isAccelerating = gamepads[ind].rightTrigger.IsPressed();
+
+                isBreaking = gamepads[ind].leftTrigger.IsPressed();
+                    
+                move = gamepads[ind].leftStick.ReadValue();
+
+                /*if (isBreaking)
+                {
+                    move = Vector2.zero;
+                }*/
+                if (gamepads[ind].circleButton.wasPressedThisFrame && temps > 5)
+                {
+                    FlipOver();
+                }
             }
         }
+    }
+    public void FlipOver()
+    {
+        position = transform.position;
+        rotation = transform.rotation;
+        transform.SetPositionAndRotation(new Vector3(position.x, position.y + 5, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
+        temps = 0;
+    }
+
+    private void VérifierGamepads()
+    {
+        if (GameData.P2.IsMainPlayer && gamepads.Count == 1 && Gamepad.all.Count == 2 && isGamepadConnected[0])
+        {
+            Debug.Log("co2");
+            gamepads.Add(Gamepad.all[1]);
+            isGamepadConnected.Add(true);
+            nbPlayer = 2;
+        }
+        else
+        {
+            if (nbPlayer == 0 && gamepads.Count == 0)
+            {
+                for (int i = 0; i < Gamepad.all.Count; i++)
+                {
+                    Debug.Log("coTout");
+                    gamepads.Add(Gamepad.all[i]);
+                    isGamepadConnected.Add(true);
+                }
+                nbPlayer = Gamepad.all.Count;
+            }
+            else 
+            {
+
+                if (Gamepad.all.Count < gamepads.Count)
+                {
+                    if (nbPlayer == 2)
+                    {
+                        if (gamepads[1] == Gamepad.all[0])
+                        {
+                            Debug.Log("deco1");
+                            isGamepadConnected[0] = false;
+                            
+                        }
+                        else
+                        {
+                            Debug.Log("deco2");
+                            isGamepadConnected[1] = false;
+                        }
+
+                        
+                    }
+                    else if (Gamepad.all.Count == 0)
+                    {
+                        for (int i = 0; i < isGamepadConnected.Count; i++)
+                        {
+                            Debug.Log("decoTOut");
+                            isGamepadConnected[i] = false;
+                        }
+                    }
+                    
+                    nbPlayer = Gamepad.all.Count;
+                }
+                else
+                {
+                    if (gamepads[0] == Gamepad.all[0] && !isGamepadConnected[0])
+                    {
+                        Debug.Log("co1");
+                        isGamepadConnected[0] = true;
+                    }
+                    else if (gamepads.Count == 2)
+                    {
+                        if ((gamepads[1] == Gamepad.all[1] ||(!isGamepadConnected[0] && gamepads[1] == Gamepad.all[0])) && !isGamepadConnected[1])
+                        {
+                            Debug.Log("co22");
+                            isGamepadConnected[1] = true;
+                        }
+                        else if (gamepads[0] == Gamepad.all[1] && !isGamepadConnected[0])
+                        {
+                            Debug.Log("co12");
+                            isGamepadConnected[0] = true;
+                        }
+                    }
+                
+                    nbPlayer = Gamepad.all.Count;
+                }
+            }
+            
+        }
+        
     }
     private void OnEnable()
     {

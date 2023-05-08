@@ -55,16 +55,19 @@ public class CréateurDébutPartie: MonoBehaviour
         lesAutos = new List<GameObject>();
         joueurs = autos;
         sommets = som;
-        lesAutos.Add(AssignerChassis(autos[0].IdVéhicule));
+        //lesAutos.Add(AssignerChassis(autos[0].IdVéhicule));
         //lesAutos.Add(AssignerChassis(autos[1].IdVéhicule));
-        for (int i = 0; i < autos.Count -1; i++)
+        for (int i = 0; i < autos.Count  ; i++)
         {
-            //lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
-            lesAutos.Add(bot);
+            
+            lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
+           // lesAutos.Add(bot);
         }
         position = points[points.Count - 1];
         Instantiate(arc, new Vector3(position.x , 0, position.z), arc.transform.rotation);
         ligneArr = Instantiate(ligne, new Vector3(position.x , 0, position.z), ligne.transform.rotation);
+        ligneArr.GetComponentInChildren<GestionnaireTrigger>().indiceDernierCheckpoint = points.Count - 3;
+        ligneArr.GetComponentInChildren<RankingManager>().indiceCheckpoint = points.Count;
         InstancierAutos();
         
         
@@ -73,20 +76,22 @@ public class CréateurDébutPartie: MonoBehaviour
     private void InstancierAutos()
     {
       
-        for (int j = 0; j < 1/*lesAutos.Count / 4*/; j++)
+        for (int j = 0; j < lesAutos.Count / 4; j++)
         {
-            //for (int i = 0; i < lesAutos.Count / 3; i++)
+            for (int i = 0; i < lesAutos.Count / 3; i++)
             {
                 GameObject thisJoueur = Instantiate(lesAutos[compteurAutos],
-                    new Vector3(position.x - 35 * j/* - 4 * i*/ -30, 5, (position.z - 37) /* + 32 * i*/ - 6 * j -7),
+                    new Vector3(position.x - 35 * j - 4 * i - 30, 5, position.z - 44  + 32 * i - 6 * j),
                     lesAutos[compteurAutos].transform.rotation);
+                
                 Player leJoueur = thisJoueur.GetComponent<Player>();
+                
                 leJoueur.CréerPlayer(
                     joueurs[compteurAutos].Vie, joueurs[compteurAutos].Nom,
                     joueurs[compteurAutos].IdVéhicule, joueurs[compteurAutos].IdMoteur,
                     joueurs[compteurAutos].Chassis, joueurs[compteurAutos].Puissance,
                     joueurs[compteurAutos].Poids, joueurs[compteurAutos++].IsMainPlayer, compteurAutos);
-                DontDestroyOnLoad(thisJoueur);
+                //DontDestroyOnLoad(thisJoueur);
                 GameData.Ranks.Add(leJoueur.Nom);
                 GameData.LesJoueurs.Add(leJoueur);
                 GestionnaireCollision collisions = thisJoueur.GetComponent<GestionnaireCollision>();

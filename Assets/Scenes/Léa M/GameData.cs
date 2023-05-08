@@ -8,6 +8,8 @@ public static class GameData
 
     public static List<string> Ranks = new List<string>(12);
 
+    public static List<string> ListeJoueursMorts = new List<string>(12);
+    
     public static List<Player> LesJoueurs = new List<Player>(12);
 
     

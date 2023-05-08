@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 
 using UnityEngine;
@@ -11,9 +12,12 @@ using Random = System.Random;
 
 public class GestionnaireCollision : MonoBehaviour
 {
-    [SerializeField] private int coucheCollisionObstacle;
-    [SerializeField] private int coucheCollisionCoin;
-    [SerializeField] private int coucheCollisionBonus;
+    private const int CoucheCollisionObstacle = 9;
+    private const int CoucheCollisionCoin = 7;
+    private const int CoucheCollisionBonus = 11;
+    private const int CoucheCollisionMur = 14;
+    
+    
 
     [SerializeField] GameObject coin;
     [SerializeField] GameObject bonus;
@@ -22,13 +26,19 @@ public class GestionnaireCollision : MonoBehaviour
     [SerializeField] private Text textBonusVie2;
     [SerializeField] private Text textBonusVitesse2;
     public Vector3[] points;
-
+    private Vector3 reculer = new Vector3(0, 0, -10);
     private Random gen = new Random();
     private GénérateurObjets générateur;
     private Player joueur;
     private int compteurJoueursPassés;
-    private string bonusVie = "+ 10 HP!";
+    private string bonusVie = "Bonus HP!";
     private string bonusVitesse = "Boost";
+    private float temps;
+
+    private void Update()
+    {
+        temps += Time.deltaTime;
+    }
 
     private void Start()
     {
@@ -39,9 +49,20 @@ public class GestionnaireCollision : MonoBehaviour
     {
         ContactPoint point = collision.GetContact(0);
         
-        if (point.otherCollider.gameObject.layer == coucheCollisionObstacle) //Obstacle
+        if (point.otherCollider.gameObject.layer == CoucheCollisionObstacle) //Obstacle
         {
-            point.thisCollider.GetComponentInParent<Player>().EnleverVie(10); //changer cbm de vie
+            joueur = point.thisCollider.GetComponentInParent<Player>();
+            joueur.EnleverVie(10);
+            if (joueur.Vie <= 0)
+            {
+                GameData.ListeJoueursMorts.Add(joueur.Nom);
+            }
+            //Empêche que le joueur reste pris dans un mur/obstacle
+           // gameObject.transform.Translate(reculer, Space.Self);
+        }
+        else if (point.otherCollider.gameObject.layer == 14)
+        {
+           // gameObject.transform.Translate(reculer, Space.Self);
         }
         
         
@@ -51,55 +72,63 @@ public class GestionnaireCollision : MonoBehaviour
     {
         int ind;
         joueur = gameObject.GetComponent<Player>();
-        if (other.gameObject.layer == coucheCollisionCoin)
+        if (temps > 0.5f)
         {
-            joueur.AjouterArgent(1);
-            Destroy(other.gameObject);
-            générateur.GénérerCoins(1, points, coin);
-        }
-        if (other.gameObject.layer == coucheCollisionBonus) //Bonus
-        {
-            Destroy(other.gameObject);
-            générateur.GénérerBonus(1, points, bonus);
-            ind = gen.Next(0, 2);
-            if (joueur.IsMainPlayer2)
+            if (other.gameObject.layer == CoucheCollisionCoin)
             {
-                if (ind == 0)
-                {
-                    joueur.AjouterVie(10);
-                    textBonusVie2.text = bonusVie;
-                    StartCoroutine(AfficherBonus(textBonusVie2));
-                    StopCoroutine(AfficherBonus(textBonusVie2));
-                }
-                else
-                {
-                    gameObject.GetComponent<GestionnaireTouches>().ApplyAcceleration(3f);
-                    textBonusVitesse2.text = bonusVitesse;
-                    StartCoroutine(AfficherBonus(textBonusVitesse2));
-                    StopCoroutine(AfficherBonus(textBonusVitesse2));
-                }
+                joueur.AjouterArgent(1);
+                Destroy(other.gameObject);
+                générateur.GénérerCoins(1, points, coin);
+                temps = 0;
             }
-            else
+            else if (other.gameObject.layer == CoucheCollisionBonus) //Bonus
             {
-                if (ind == 0)
+                temps = 0;
+                Destroy(other.gameObject);
+                générateur.GénérerBonus(1, points, bonus);
+                ind = gen.Next(0, 2);
+                if (joueur.IsMainPlayer2)
                 {
-                    gameObject.GetComponent<Player>().AjouterVie(10);
-                    textBonusVie.text = bonusVie;
-                    StartCoroutine(AfficherBonus(textBonusVie));
-                    StopCoroutine(AfficherBonus(textBonusVie));
+                    if (ind == 0)
+                    {
+                        joueur.AjouterVie(5);
+                        textBonusVie2.text = bonusVie;
+                        StartCoroutine(AfficherBonus(textBonusVie2));
+                        StopCoroutine(AfficherBonus(textBonusVie2));
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<GestionnaireTouches>().ApplyAccelerationCustom(8f);
+                        textBonusVitesse2.text = bonusVitesse;
+                        StartCoroutine(AfficherBonus(textBonusVitesse2));
+                        StopCoroutine(AfficherBonus(textBonusVitesse2));
+                    }
                 }
-                else
+                else if(joueur.IsMainPlayer)
                 {
-                    gameObject.GetComponent<GestionnaireTouches>().ApplyAcceleration(3f);
-                    textBonusVitesse.text = bonusVitesse;
-                    StartCoroutine(AfficherBonus(textBonusVitesse));
-                    StopCoroutine(AfficherBonus(textBonusVitesse));
+                    if (ind == 0)
+                    {
+                        joueur.AjouterVie(15);
+                        textBonusVie.text = bonusVie;
+                        StartCoroutine(AfficherBonus(textBonusVie));
+                        StopCoroutine(AfficherBonus(textBonusVie));
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<GestionnaireTouches>().ApplyAccelerationCustom(8f);
+                        textBonusVitesse.text = bonusVitesse;
+                        StartCoroutine(AfficherBonus(textBonusVitesse));
+                        StopCoroutine(AfficherBonus(textBonusVitesse));
+                    }
                 }
+                
+    
+                
             }
-            
 
             
         }
+        
 
     }
     private IEnumerator AfficherBonus(Text textB)
