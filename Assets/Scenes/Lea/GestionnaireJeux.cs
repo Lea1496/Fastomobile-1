@@ -186,7 +186,14 @@ public class GestionnaireJeux : MonoBehaviour
             renderers2 = mainPlayer2.GetComponentsInChildren<MeshRenderer>();
             colliders2 = mainPlayer2.GetComponentsInChildren<Collider>();
             gestion2 = mainPlayer2.GetComponent<GestionnaireTouches>();
+            //instancier son background
         }
+        else
+        {
+            //instancier sons 
+            //cam1.AudioListener
+        }
+        
    }
 
     private void Start()
