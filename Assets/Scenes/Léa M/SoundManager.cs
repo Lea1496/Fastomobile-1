@@ -25,16 +25,16 @@ public static class SoundManager
     	soundTimerDictionary[Sound.Acceleration] = 0f;
     }
     
-    public static void PlaySound(Sound sound)
-    {
-    	if(CanPlaySound(sound))
-    	{
-    		GameObject soundGameObject = new GameObject("Sound");
-    		AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
-    		audioSource.PlayOneShot(GetAudioClip(sound));
-    	}
-    
-    }
+    // public static void PlaySound(Sound sound)
+    // {
+    // 	if(CanPlaySound(sound))
+    // 	{
+    // 		GameObject soundGameObject = new GameObject("Sound");
+    // 		AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
+    // 		audioSource.PlayOneShot(GetAudioClip(sound));
+    // 	}
+    //
+    // }
     
     private static bool CanPlaySound(Sound sound)
     {
@@ -87,14 +87,14 @@ public static class SoundManager
     	}
     }
     
-    private static AudioClip GetAudioClip(Sound sound)
-    {
-    	foreach(GameAssets.SoundAudioClip soundAudioClip in GameAssets.i.soundAudioClipArray)
-    	{
-    		if (soundAudioClip.sound == sound) 
-	            return soundAudioClip.audioClip;
-    	}
-
-        return null;
-    }
+    // private static AudioClip GetAudioClip(Sound sound)
+    // {
+    // 	foreach(GameAssets.SoundAudioClip soundAudioClip in GameAssets.i.soundAudioClipArray)
+    // 	{
+    // 		if (soundAudioClip.sound == sound) 
+	   //          return soundAudioClip.audioClip;
+    // 	}
+    //
+    //     return null;
+    // }
 }
