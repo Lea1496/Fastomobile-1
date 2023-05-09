@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -8,23 +9,63 @@ using UnityEngine.UI;
 public class GestionBoutons : MonoBehaviour
 {
     private DataCoin data = new DataCoin();
+    private MenusData menusData = new MenusData();
     private const string CheminPlayer1 = "InfoPlayer1.txt";
     private const string CheminPlayer2 = "InfoPlayer2.txt";
+    private const string CheminAvancé1 = "InfoAchetéAvancé1.txt";
+    private const string CheminAvancé2 = "InfoAchetéAvancé2.txt";
+    private const string CheminExpert1 = "InfoAchetéExpert1.txt";
+    private const string CheminExpert2 = "InfoAchetéExpert2.txt";
     public Button avancé;
     public Button expert;
     public Toggle avancéToggle;
     public Toggle expertToggle;
+
+   // public Canvas quitter;
     // public Button avancé2;
     // public Button expert2;
     // public Toggle avancéToggle2;
     // public Toggle expertToggle2;
 
-  
+    public void FermerPartie()
+    {
+        Application.Quit();
+    }
+    private bool ChangerCharEnBool(char c)
+    {
+        bool rep = false;
+        if (c == 't')
+        {
+            rep = true;
+        }
+        else
+        {
+            if (c == 'f')
+            {
+                rep = false;
+            }
+        }
+
+        return rep;
+    }
+    private bool avancéDéjàAcheté;
+    private bool expertDéjàAcheté;
+    private bool avancéDéjàAcheté2;
+    private bool expertDéjàAcheté2;
+    private void Awake()
+    {
+         avancéDéjàAcheté = ChangerCharEnBool(menusData.AfficherInfo(CheminAvancé1));
+        expertDéjàAcheté = ChangerCharEnBool(menusData.AfficherInfo(CheminExpert1));
+        avancéDéjàAcheté2 = ChangerCharEnBool(menusData.AfficherInfo(CheminAvancé2));
+        expertDéjàAcheté2 = ChangerCharEnBool(menusData.AfficherInfo(CheminExpert2));
+        //DontDestroyOnLoad(quitter);
+    }
+
     
-    private bool avancéDéjàAcheté = GameData.P1.DéjàAchetéAvancé;
-    private bool expertDéjàAcheté = GameData.P1.DéjàAchetéExpert;
-    private bool avancéDéjàAcheté2 = GameData.P2.DéjàAchetéAvancé;
-    private bool expertDéjàAcheté2 = GameData.P2.DéjàAchetéExpert;
+        
+    
+
+    
     // public void Start()
     // {
     //     avancé = Instantiate(avancé);
@@ -108,17 +149,20 @@ public class GestionBoutons : MonoBehaviour
         // expert.enabled = !expertDéjàAcheté;
         // expertToggle.enabled = expertDéjàAcheté;
         // expert.gameObject.SetActive(!expertDéjàAcheté);
-        GameData.P1.DéjàAchetéAvancé = false;
-        GameData.P1.DéjàAchetéExpert = false;
+         menusData.ChangerInfo(CheminAvancé1, 'f');
+         menusData.ChangerInfo(CheminAvancé2, 'f');
+         menusData.ChangerInfo(CheminExpert1, 'f');
+         menusData.ChangerInfo(CheminExpert2, 'f');
+        /*GameData.P1.DéjàAchetéExpert = false;
         GameData.P2.DéjàAchetéAvancé = false;
-        GameData.P2.DéjàAchetéExpert = false;
+        GameData.P2.DéjàAchetéExpert = false;*/
     }
     public void RecommencerJeux()
     {
-        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < checkpoints.Length; i++)
+       // GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Player");
+        //for (int i = 0; i < checkpoints.Length; i++)
         {
-            Destroy(checkpoints[i]);
+            //Destroy(checkpoints[i]);
         }
         SceneManager.LoadScene(1);
         
@@ -295,7 +339,8 @@ public class GestionBoutons : MonoBehaviour
                 avancéToggle.enabled = true;
                 EventSystem.current.SetSelectedGameObject(avancéToggle.gameObject);
                 avancé.gameObject.SetActive(false);
-                GameData.P1.DéjàAchetéAvancé = true;
+                menusData.ChangerInfo(CheminAvancé1, 't');
+               // GameData.P1.DéjàAchetéAvancé = true;
                 
             }
         }
@@ -311,7 +356,8 @@ public class GestionBoutons : MonoBehaviour
                 avancéToggle.enabled = true;
                 EventSystem.current.SetSelectedGameObject(avancéToggle.gameObject);
                 avancé.gameObject.SetActive(false);
-                GameData.P2.DéjàAchetéAvancé = true;
+                menusData.ChangerInfo(CheminAvancé2, 't');
+                //GameData.P2.DéjàAchetéAvancé = true;
             }
         }
         
@@ -336,7 +382,9 @@ public class GestionBoutons : MonoBehaviour
                 expertToggle.enabled = true;
                 EventSystem.current.SetSelectedGameObject(expertToggle.gameObject);
                 expert.gameObject.SetActive(false);
-                GameData.P1.DéjàAchetéExpert = true;
+                //GameData.P1.DéjàAchetéExpert = true;
+                menusData.ChangerInfo(CheminExpert1, 't');
+                
             }        
         }
         if (SceneManager.GetActiveScene().buildIndex == 2)
@@ -349,7 +397,8 @@ public class GestionBoutons : MonoBehaviour
                 expertToggle.enabled = true;
                 EventSystem.current.SetSelectedGameObject(expertToggle.gameObject);
                 expert.gameObject.SetActive(false);
-                GameData.P2.DéjàAchetéExpert = true;
+                //GameData.P2.DéjàAchetéExpert = true;
+                menusData.ChangerInfo(CheminExpert2, 't');
             }        
         }
         

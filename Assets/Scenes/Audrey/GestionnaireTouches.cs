@@ -88,7 +88,7 @@ public class GestionnaireTouches : BehaviourAuto
            
             if (horizontalInput == 0 && verticalInput == 0 )
             {
-                ApplyBreakingCustom(3000);
+                ApplyBreakingCustom(30000);
                 HandleSteering(horizontalInput);
             }
             else
@@ -99,7 +99,7 @@ public class GestionnaireTouches : BehaviourAuto
 
             if (rb.velocity.magnitude * 2.237 > 175)
             {
-                ApplyBreakingCustom(300000);
+                ApplyBreakingCustom(3000000);
             }
         }
 
