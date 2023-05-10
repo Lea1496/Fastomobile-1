@@ -284,7 +284,7 @@ public class GestionnaireJeux : MonoBehaviour
    
             textCoin.text = $"Coin: {mainPlayer1Live.Argent.ToString()}";
             textRang.text = mainPlayer1Live.Rang.ToString();
-            textVie.text = $"HP: {mainPlayer1Live.Vie.ToString()}";
+            textVie.text = $"Vie: {mainPlayer1Live.Vie.ToString()}";
             textLaps.text = $"{mainPlayer1Live.Tour}/3";
         }
        
@@ -351,7 +351,7 @@ public class GestionnaireJeux : MonoBehaviour
           
                textCoin2.text = $"Coin: {mainPlayer2Live.Argent.ToString()}";
                textRang2.text = mainPlayer2Live.Rang.ToString();
-               textVie2.text = $"HP: {mainPlayer2Live.Vie.ToString()}";
+               textVie2.text = $"Vie: {mainPlayer2Live.Vie.ToString()}";
                textLaps2.text = $"{mainPlayer2Live.Tour}/3";
            }
            

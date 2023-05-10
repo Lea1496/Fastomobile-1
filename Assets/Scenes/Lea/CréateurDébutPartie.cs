@@ -23,6 +23,10 @@ public class CréateurDébutPartie: MonoBehaviour
     private GameObject ligneArr;
     private List<Vector3> points;
     private Vector3[] sommets;
+
+    private int nbJoueurs = 1;
+    
+    
     public GameObject MainPlayer1
     {
         get => mainPlayer1;
@@ -55,14 +59,22 @@ public class CréateurDébutPartie: MonoBehaviour
         lesAutos = new List<GameObject>();
         joueurs = autos;
         sommets = som;
-        //lesAutos.Add(AssignerChassis(autos[0].IdVéhicule));
+        if (GameData.P2.IsMainPlayer)
+        {
+            nbJoueurs = 2;
+        }
+        lesAutos.Add(AssignerChassis(autos[0].IdVéhicule));
+        if (GameData.P2.IsMainPlayer)
+        {
+            lesAutos.Add(AssignerChassis(autos[1].IdVéhicule));
+        }
         //lesAutos.Add(AssignerChassis(autos[1].IdVéhicule));
-        for (int i = 0; i < autos.Count  ; i++)
+        /*for (int i = 0; i < autos.Count  ; i++)
         {
             
             lesAutos.Add(AssignerChassis(autos[i].IdVéhicule));
            // lesAutos.Add(bot);
-        }
+        }*/
         position = points[points.Count - 1];
         Instantiate(arc, new Vector3(position.x , 0, position.z), arc.transform.rotation);
         ligneArr = Instantiate(ligne, new Vector3(position.x , 0, position.z), ligne.transform.rotation);
@@ -76,9 +88,9 @@ public class CréateurDébutPartie: MonoBehaviour
     private void InstancierAutos()
     {
       
-        for (int j = 0; j < lesAutos.Count / 4; j++)
+        for (int j = 0; j < 1 /*lesAutos.Count / 4*/; j++)
         {
-            for (int i = 0; i < lesAutos.Count / 3; i++)
+            for (int i = 0; i < nbJoueurs/*lesAutos.Count/ 3*/; i++)
             {
                 GameObject thisJoueur = Instantiate(lesAutos[compteurAutos],
                     new Vector3(position.x - 35 * j - 4 * i - 30, 5, position.z - 44  + 32 * i - 6 * j),

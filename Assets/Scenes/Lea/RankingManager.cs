@@ -99,7 +99,7 @@ public class RankingManager : MonoBehaviour
             joueur.DernierCheckpointVisité = indiceCheckpoint;
 
             
-            if (compteur == 12)
+            if (compteur == 2)
             {
                 compteur = 0;
                 joueursPassés.Clear();

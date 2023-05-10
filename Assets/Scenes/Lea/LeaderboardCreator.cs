@@ -35,7 +35,7 @@ public class LeaderboardCreator : MonoBehaviour
        
        List<string> classement = new List<string>(12);
        
-       for (int i = 0; i < 12; i++)
+       for (int i = 0; i < 2; i++)
        {
            classement.Add("");
        }
@@ -55,7 +55,7 @@ public class LeaderboardCreator : MonoBehaviour
            }
            
        }
-       Debug.Log(classement.Count);
+       //Debug.Log(classement.Count);
         for (int i = 0; i < classement.Count; i++)
         {
             leaderboardTexts[i].text = classement[i];

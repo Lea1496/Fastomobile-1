@@ -12,7 +12,7 @@ public class ChoixDecor : MonoBehaviour
     private int decor;
     private void Awake()
     {
-        decor = gen.Next(1, 4);
+        decor = gen.Next(1, 3);
         if (decor == 1)
         {
             GetComponent<GestionnaireJeux>().terrain = terrain1;
