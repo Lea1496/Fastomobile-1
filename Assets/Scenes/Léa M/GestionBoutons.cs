@@ -423,7 +423,7 @@ public class GestionBoutons : MonoBehaviour
         {
             //Debug.Log("camion");
             GameData.P2.IdVéhicule = 1;
-            GameData.P2.Vie = 200;
+            GameData.P2.Vie = 125;
         }
     }
     public void TogglePolice2(bool isPolice)
@@ -432,7 +432,7 @@ public class GestionBoutons : MonoBehaviour
         {
             //Debug.Log("ICI");
             GameData.P2.IdVéhicule = 2;
-            GameData.P2.Vie = 50;
+            GameData.P2.Vie = 75;
         }
     }
 

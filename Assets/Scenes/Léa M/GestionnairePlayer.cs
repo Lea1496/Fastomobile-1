@@ -53,16 +53,16 @@ public class GestionnairePlayer
 
     private int AssignerPuissance(int indice)
     {
-        int puissance = 1500;
+        int puissance = 3000;
         if (indice == 1)
         {
-            puissance = 2000;
+            puissance = 4000;
         }
         else
         {
             if (indice == 2)
             {
-                puissance = 2500;
+                puissance = 5000;
             }
         }
 

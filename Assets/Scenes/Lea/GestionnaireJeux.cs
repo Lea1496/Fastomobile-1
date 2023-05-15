@@ -301,17 +301,17 @@ public class GestionnaireJeux : MonoBehaviour
                {
                    ChangerAffichageÉcran(mainPlayer2, cam2, 2, finish, textFinish2);
                    gestion2.enabled = false;
-                   for (int i = 0; i < colliders.Length; i++)
+                   for (int i = 0; i < colliders2.Length; i++)
                    {
-                       colliders[i].enabled = false;
+                       colliders2[i].enabled = false;
                    }
 
-                   for (int i = 0; i < renderers.Length; i++)
+                   for (int i = 0; i < renderers2.Length; i++)
                    {
-                       renderers[i].enabled = false;
+                       renderers2[i].enabled = false;
                    }
 
-                   rg1.useGravity = false;
+                   rg2.useGravity = false;
                    
                    if (isGameOver1)
                    {
@@ -325,12 +325,12 @@ public class GestionnaireJeux : MonoBehaviour
                    {
                        ChangerAffichageÉcran(mainPlayer2, cam2, 2, gameOver, textGameOver2);
                        gestion2.enabled = false;
-                       for (int i = 0; i < colliders.Length; i++)
+                       for (int i = 0; i < colliders2.Length; i++)
                        {
                            colliders2[i].enabled = false;
                        }
 
-                       for (int i = 0; i < renderers.Length; i++)
+                       for (int i = 0; i < renderers2.Length; i++)
                        {
                            renderers2[i].enabled = false;
                        }
@@ -354,7 +354,14 @@ public class GestionnaireJeux : MonoBehaviour
                textVie2.text = $"Vie: {mainPlayer2Live.Vie.ToString()}";
                textLaps2.text = $"{mainPlayer2Live.Tour}/3";
            }
-           
+           else
+           {
+               if (mainPlayer1Live.IsFinished)
+               {
+                   StartCoroutine(FinirPartie());
+                   StopCoroutine(FinirPartie());
+               }
+           }
            
            if (mainPlayer1Live.Vie == 0 && mainPlayer2Live.Vie == 0)
            {

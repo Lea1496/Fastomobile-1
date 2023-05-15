@@ -59,7 +59,7 @@ public class GestionnaireTrigger : MonoBehaviour
                     joueur.Tour++;
                     compteurTourJoueur1++;
                     temps1 = 0;
-                    if (compteurTourJoueur1 == 4)
+                    if (compteurTourJoueur1 > 3)
                     {
                         data.AjouterCoin(CheminPlayer1, joueur.Argent);
                         joueur.IsFinished = true;
@@ -72,7 +72,7 @@ public class GestionnaireTrigger : MonoBehaviour
                         joueur.Tour++;
                         temps2 = 0;
                         compteurTourJoueur2++;
-                        if (compteurTourJoueur2 == 4)
+                        if (compteurTourJoueur2 > 3)
                         {
                             data.AjouterCoin(CheminPlayer2, joueur.Argent);
                             joueur.IsFinished = true;
@@ -83,12 +83,10 @@ public class GestionnaireTrigger : MonoBehaviour
                 if (compteurTourJoueur1 > compteurTour && compteurTourJoueur2 > compteurTour)
                 {
                     compteurTour++;
-                    compteurTourJoueur1 = 0;
-                    compteurTourJoueur2 = 0;
-                    
+                   
                 }
 
-                if (compteurTour == 4)
+                if (compteurTour > 3)
                 {
                     StartCoroutine(FinirPartie());
                     StopCoroutine(FinirPartie());
@@ -104,8 +102,9 @@ public class GestionnaireTrigger : MonoBehaviour
                     temps1 = 0;
                 }
                 
-                if (compteurTour == 4)
+                if (compteurTour > 3)
                 {
+                    data.AjouterCoin(CheminPlayer1, joueur.Argent);
                     joueur.IsFinished = true;
                     StartCoroutine(FinirPartie());
                     StopCoroutine(FinirPartie());
