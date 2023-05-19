@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+<<<<<<< HEAD
 
  
+=======
+>>>>>>> 93409e3d8ac6d2242ed68be446454fa2fa44f47f
     private float currentSteerAngle;
     private float currentbreakForce;
     public bool isBreaking;
@@ -33,8 +36,11 @@ public class CarController : MonoBehaviour
         rb.centerOfMass = centerOfMass.transform.localPosition;
     }
 
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> 93409e3d8ac6d2242ed68be446454fa2fa44f47f
     public void HandleMotor(float verticalInput)
     {
         frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
