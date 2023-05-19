@@ -1,4 +1,4 @@
-
+///Ce code contient le constructeur du joueur 
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,9 +17,12 @@ public class GestionnairePlayer
     {
         get => joueurs;
     }
-    public GestionnairePlayer(/*GameObject Auto, GameObject Moto, GameObject Camion*/)
+    /// <summary>
+    /// Ce constructeur par défaut permet de définir les paramètres de 1 ou 2 joueurs
+    /// selon le choix du nombre de joueurs.
+    /// </summary>
+    public GestionnairePlayer()
     {
-        
         GameData.P1.Nom = "Player1";
         joueurs.Add(GameData.P1);
         nbJoueurs = 1;
@@ -32,7 +35,6 @@ public class GestionnairePlayer
             joueurs[1].Poids = AssignerPoids(joueurs[1].IdVéhicule);
         }
     
-        
         joueurs[0].Puissance = AssignerPuissance(joueurs[0].IdMoteur);
         joueurs[0].Poids = AssignerPoids(joueurs[0].IdVéhicule);
         
@@ -50,7 +52,11 @@ public class GestionnairePlayer
         }
         
     }
-
+/// <summary>
+/// Ce code assigne la puissance du véhicule du joueur selon le moteur que ce dernier aura choisi.
+/// </summary>
+/// <param name="indice"></param>
+/// <returns>puissance</returns>
     private int AssignerPuissance(int indice)
     {
         int puissance = 3000;
@@ -68,6 +74,11 @@ public class GestionnairePlayer
 
         return puissance;
     }
+/// <summary>
+/// Ce code permet d'assigner le poids de la voiture au joueur selon le véhicule choisi
+/// </summary>
+/// <param name="indice"></param>
+/// <returns>poids</returns>
     private int AssignerPoids(int indice)
     {
         int poids = 15;
@@ -85,23 +96,7 @@ public class GestionnairePlayer
 
         return poids;
     }
-    /*private GameObject AssignerChassis(int indice)
-    {
-        GameObject chassis = auto;
-        if (indice == 1)
-        {
-            chassis = camion;
-        }
-        else
-        {
-            if (indice == 2)
-            {
-                chassis = moto;
-            }
-        }
 
-        return chassis;
-    }*/
 
 
 
