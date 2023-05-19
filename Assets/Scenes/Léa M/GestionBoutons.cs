@@ -1,4 +1,5 @@
-
+///Ce code contient toutes les fonctions nécessaires pour les boutons et toggles se trouvant
+/// sur les différentes scènes de notre projet.
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -20,17 +21,20 @@ public class GestionBoutons : MonoBehaviour
     public Button expert;
     public Toggle avancéToggle;
     public Toggle expertToggle;
-
-   // public Canvas quitter;
-    // public Button avancé2;
-    // public Button expert2;
-    // public Toggle avancéToggle2;
-    // public Toggle expertToggle2;
-
+    
+    /// <summary>
+    /// Cette fonction a été créée afin que nous puissions quitter le build pour la présentation finale
+    /// </summary>
     public void FermerPartie()
     {
         Application.Quit();
     }
+    /// <summary>
+    /// Ce code permet de transformer un char en bool afin qu'il soit compatible
+    /// avec notre système de conservation de l'information.
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
     private bool ChangerCharEnBool(char c)
     {
         bool rep = false;
@@ -58,55 +62,12 @@ public class GestionBoutons : MonoBehaviour
         expertDéjàAcheté = ChangerCharEnBool(menusData.AfficherInfo(CheminExpert1));
         avancéDéjàAcheté2 = ChangerCharEnBool(menusData.AfficherInfo(CheminAvancé2));
         expertDéjàAcheté2 = ChangerCharEnBool(menusData.AfficherInfo(CheminExpert2));
-        //DontDestroyOnLoad(quitter);
     }
 
-    
-        
-    
-
-    
-    // public void Start()
-    // {
-    //     avancé = Instantiate(avancé);
-    //     avancé.enabled = true;
-    //     avancé.gameObject.SetActive(true);
-    //     expert = Instantiate(expert);
-    //     expert.enabled = true;
-    //     expert.gameObject.SetActive(true);
-    //
-    //     // avancé2 = Instantiate(avancé2);
-    //     // avancé2.enabled = true;
-    //     // avancé2.gameObject.SetActive(true);
-    //     // expert2 = Instantiate(expert2);
-    //     // expert2.enabled = true;
-    //     // expert2.gameObject.SetActive(true);
-    // }
-
-    // public void DefaultSettings(bool avancéDéjàAcheté, bool expertDéjàAcheté,
-    //     bool expertDéjàAcheté2, bool avancéDéjàAcheté2)
-    // {
-    //     avancéToggle.gameObject.SetActive(avancéDéjàAcheté);
-    //     avancé.enabled = !avancéDéjàAcheté;
-    //     avancéToggle.enabled = avancéDéjàAcheté;
-    //     avancé.gameObject.SetActive(!avancéDéjàAcheté);
-    //     
-    //     expertToggle.gameObject.SetActive(expertDéjàAcheté);
-    //     expert.enabled = !expertDéjàAcheté;
-    //     expertToggle.enabled = expertDéjàAcheté;
-    //     expert.gameObject.SetActive(!expertDéjàAcheté);
-    //     
-    //     avancéToggle2.gameObject.SetActive(avancéDéjàAcheté2);
-    //     avancé2.enabled = !avancéDéjàAcheté2;
-    //     avancéToggle2.enabled = avancéDéjàAcheté2;
-    //     avancé2.gameObject.SetActive(!avancéDéjàAcheté2);
-    //     
-    //     expertToggle2.gameObject.SetActive(expertDéjàAcheté2);
-    //     expert2.enabled = !expertDéjàAcheté2;
-    //     expertToggle2.enabled = expertDéjàAcheté2;
-    //     expert2.gameObject.SetActive(!expertDéjàAcheté);
-    // }
-
+    /// <summary>
+    /// Ce code permet de passer d'une scène à l'autre afin d'afficher les menus requis
+    /// selon le nombre de joueurs choisi.
+    /// </summary>
     public void DémarrerJeu()
     {
         
@@ -127,80 +88,32 @@ public class GestionBoutons : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Ce code permet de créer une nouvelle partie avec les paramètres de base.
+    /// </summary>
     public void NouvellePartie()
     {
-        //GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        //for (int i = 0; i < players.Length; i++)
-        {
-            //Destroy(players[i]);
-        }
         data.EnleverCoin(CheminPlayer1, CheminPlayer2);
         SceneManager.LoadScene(0);
-        // avancéDéjàAcheté = false;
-        // expertDéjàAcheté = false;
-        // avancéDéjàAcheté2 = false;
-        // expertDéjàAcheté2 = false;
-        // avancéToggle.gameObject.SetActive(avancéDéjàAcheté);
-        // avancé.enabled = !avancéDéjàAcheté;
-        // avancéToggle.enabled = avancéDéjàAcheté;
-        // avancé.gameObject.SetActive(!avancéDéjàAcheté);
-        //
-        // expertToggle.gameObject.SetActive(expertDéjàAcheté);
-        // expert.enabled = !expertDéjàAcheté;
-        // expertToggle.enabled = expertDéjàAcheté;
-        // expert.gameObject.SetActive(!expertDéjàAcheté);
+        
          menusData.ChangerInfo(CheminAvancé1, 'f');
          menusData.ChangerInfo(CheminAvancé2, 'f');
          menusData.ChangerInfo(CheminExpert1, 'f');
          menusData.ChangerInfo(CheminExpert2, 'f');
-        /*GameData.P1.DéjàAchetéExpert = false;
-        GameData.P2.DéjàAchetéAvancé = false;
-        GameData.P2.DéjàAchetéExpert = false;*/
+        
     }
+    /// <summary>
+    /// Ce code permet de retourner au choix des véhicules sans passer par le menu de démarrage.
+    /// </summary>
     public void RecommencerJeux()
     {
-       // GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Player");
-        //for (int i = 0; i < checkpoints.Length; i++)
-        {
-            //Destroy(checkpoints[i]);
-        }
         SceneManager.LoadScene(1);
-        
-        // avancéDéjàAcheté = GameData.P1.DéjàAchetéAvancé;
-        // expertDéjàAcheté = GameData.P1.DéjàAchetéExpert;
-        // avancéDéjàAcheté2 = GameData.P2.DéjàAchetéAvancé;
-        // expertDéjàAcheté2 = GameData.P2.DéjàAchetéExpert;
-        
-        // Debug.Log(avancéDéjàAcheté);
-        // Debug.Log(avancéDéjàAcheté2);
-        // Debug.Log(expertDéjàAcheté);
-        // Debug.Log(expertDéjàAcheté2);
-
-        //avancéToggle = Instantiate(original: avancéToggle);
-        // avancéToggle.gameObject.SetActive(avancéDéjàAcheté);
-        // avancé.enabled = !avancéDéjàAcheté;
-        // avancéToggle.enabled = avancéDéjàAcheté;
-        // avancé.gameObject.SetActive(!avancéDéjàAcheté);
-        //
-        // expertToggle.gameObject.SetActive(expertDéjàAcheté);
-        // expert.enabled = !expertDéjàAcheté;
-        // expertToggle.enabled = expertDéjàAcheté;
-        // expert.gameObject.SetActive(!expertDéjàAcheté);
-        
-        
-        
-        // avancéToggle2.gameObject.SetActive(avancéDéjàAcheté2);
-        // avancé2.enabled = !avancéDéjàAcheté2;
-        // avancéToggle2.enabled = avancéDéjàAcheté2;
-        // avancé2.gameObject.SetActive(!avancéDéjàAcheté2);
-        //
-        // expertToggle2.gameObject.SetActive(expertDéjàAcheté2);
-        // expert2.enabled = !expertDéjàAcheté2;
-        // expertToggle2.enabled = expertDéjàAcheté2;
-        // expert2.gameObject.SetActive(!expertDéjàAcheté);
-        
     }
 
+    /// <summary>
+    /// Cette fonction permet de conserver les moteurs déverrouillés par le ou les joueurs et leur argent
+    /// accumulé pendant les parties précédentes 
+    /// </summary>
     public void MenuMoteurProchainePartie()
     {
         
@@ -230,8 +143,13 @@ public class GestionBoutons : MonoBehaviour
             expert.gameObject.SetActive(!expertDéjàAcheté2);
             
         }
-
     }
+    
+    /// <summary>
+    /// Ces codes sont associés aux toggles du menu de démarrage. Ils permettent de choisir
+    /// si le jeu sera joué seul ou en écran partagé.
+    /// </summary>
+    /// <param name="isUnJoueur"></param>
     public void ToggleUnJoueur(bool isUnJoueur)
     {
         if (isUnJoueur)
@@ -248,6 +166,12 @@ public class GestionBoutons : MonoBehaviour
             GameData.P2.IsMainPlayer = true;
         }
     }
+    
+    /// <summary>
+    /// Les codes suivants sont associés aux toggles du menu de choix de véhicules pour le joueur 1.
+    /// Le véhicule par défaut est la voiture.
+    /// </summary>
+    /// <param name="isVoiture"></param>
     
     //Choix voiture
     public void ToggleVoiture(bool isVoiture)
@@ -276,7 +200,12 @@ public class GestionBoutons : MonoBehaviour
             GameData.P1.Vie = 75;
         }
     }
-
+    
+    /// <summary>
+    /// Les codes ci-dessous sont associés aux toggles du menu de choix de moteurs du joueur 1.
+    /// Le moteur sélectionné par défaut est le moteur de base.
+    /// </summary>
+    /// <param name="isBase"></param>
     //Choix Moteur
     public void ToggleBase(bool isBase)
     {
@@ -300,6 +229,14 @@ public class GestionBoutons : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Cette fonction permet de valider si le joueur possède assez d'argent pour
+    /// acheter un moteur. Après validation, la fonction enlèvera le montant au joueur puis affichera
+    /// le nouveau nombre d'argent que le joueur possède après achat.
+    /// </summary>
+    /// <param name="prix"></param>
+    /// <param name="player"></param>
+    /// <returns>peutAcheter</returns>
     public bool Acheter(int prix,string player)
     {
         bool peutAcheter = false;
@@ -307,68 +244,50 @@ public class GestionBoutons : MonoBehaviour
         {
             data.AjouterCoin(player, -prix); 
             peutAcheter = true;
-            //Debug.Log(gameObject.name);
+           
             GetComponentInChildren<AffichageArgentMenu>().AfficherCoin();
         }
 
         return peutAcheter;
     }
-    // public bool Acheter(int prix)
-    // {
-    //     bool peutAcheter = false;
-    //     if (data.AccederNbCoins("InfoPlayer1.txt") >= prix)
-    //     {
-    //         data.AjouterCoin("InfoPlayer1.txt", -prix); 
-    //         peutAcheter = true;
-    //         GetComponentInChildren<AffichageArgentMenu>().AfficherCoin();
-    //     }
-    //
-    //     return peutAcheter;
-    // }
+
+    /// <summary>
+    /// Cette fonction est lié au bouton du prix avancé. Elle permet au 2 joueurs d'acheter un moteur avancé.
+    /// </summary>
     public void UnlockAvancé()
     {
         int prix = 50;
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             bool peutAcheter = Acheter(prix, CheminPlayer1);
-            //avancé.interactable = false;
+            
             if (peutAcheter)
             {
-                //avancé.interactable = true;
                 avancéToggle.gameObject.SetActive(true);
                 avancéToggle.enabled = true;
                 EventSystem.current.SetSelectedGameObject(avancéToggle.gameObject);
                 avancé.gameObject.SetActive(false);
                 menusData.ChangerInfo(CheminAvancé1, 't');
-               // GameData.P1.DéjàAchetéAvancé = true;
-                
             }
         }
 
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             bool peutAcheter = Acheter(prix, CheminPlayer2);
-            //avancé.interactable = false;
             if (peutAcheter)
             {
-                //avancé.interactable = true;
                 avancéToggle.gameObject.SetActive(true);
                 avancéToggle.enabled = true;
                 EventSystem.current.SetSelectedGameObject(avancéToggle.gameObject);
                 avancé.gameObject.SetActive(false);
                 menusData.ChangerInfo(CheminAvancé2, 't');
-                //GameData.P2.DéjàAchetéAvancé = true;
             }
         }
-        
-        //avancéDéjàAcheté = true;
-        
-        // if (avancé.isActiveAndEnabled)
-        // {
-        //     avancéToggle.enabled = peutAcheter; 
-        //     avancé.gameObject.SetActive(!peutAcheter);
-        // }
     }
+    
+    /// <summary>
+    /// Cette fonction est lié au bouton du prix expert. Elle permet au 2 joueurs d'acheter un moteur expert.
+    /// </summary>
     public void UnlockExpert()
     {
         int prix = 100;
@@ -377,12 +296,11 @@ public class GestionBoutons : MonoBehaviour
             bool peutAcheter = Acheter(prix,CheminPlayer1);
             if (peutAcheter)
             {
-                //avancé.interactable = true;
                 expertToggle.gameObject.SetActive(true);
                 expertToggle.enabled = true;
                 EventSystem.current.SetSelectedGameObject(expertToggle.gameObject);
                 expert.gameObject.SetActive(false);
-                //GameData.P1.DéjàAchetéExpert = true;
+               
                 menusData.ChangerInfo(CheminExpert1, 't');
                 
             }        
@@ -392,23 +310,22 @@ public class GestionBoutons : MonoBehaviour
             bool peutAcheter = Acheter(prix,CheminPlayer2);
             if (peutAcheter)
             {
-                //avancé.interactable = true;
                 expertToggle.gameObject.SetActive(true);
                 expertToggle.enabled = true;
                 EventSystem.current.SetSelectedGameObject(expertToggle.gameObject);
                 expert.gameObject.SetActive(false);
-                //GameData.P2.DéjàAchetéExpert = true;
+                
                 menusData.ChangerInfo(CheminExpert2, 't');
             }        
         }
-        
-        //expertDéjàAcheté = true;
-        // if (expert.isActiveAndEnabled)
-        // {
-        //     expertToggle.enabled = peutAcheter;
-        //     expert.gameObject.SetActive(!peutAcheter);            
-        // }
     }
+    
+    /// <summary>
+    /// Les codes suivants sont associés aux toggles du menu de choix de véhicules pour le joueur 2.
+    /// Le véhicule par défaut est la voiture.
+    /// </summary>
+    /// <param name="isVoiture"></param>
+    //choix voiture
     public void ToggleVoiture2(bool isVoiture)
     {
         if (isVoiture)
@@ -421,7 +338,6 @@ public class GestionBoutons : MonoBehaviour
     {
         if (isCamion)
         {
-            //Debug.Log("camion");
             GameData.P2.IdVéhicule = 1;
             GameData.P2.Vie = 125;
         }
@@ -430,12 +346,16 @@ public class GestionBoutons : MonoBehaviour
     {
         if (isPolice)
         {
-            //Debug.Log("ICI");
             GameData.P2.IdVéhicule = 2;
             GameData.P2.Vie = 75;
         }
     }
 
+    /// <summary>
+    /// Les codes ci-dessous sont associés aux toggles du menu de choix de moteurs du joueur 2.
+    /// Le moteur sélectionné par défaut est le moteur de base.
+    /// </summary>
+    /// <param name="isBase"></param>
     //Choix Moteur
     public void ToggleBase2(bool isBase)
     {
@@ -458,48 +378,5 @@ public class GestionBoutons : MonoBehaviour
             GameData.P2.IdMoteur = 2;
         }
     }
-
-    // public bool Acheter2(int prix)
-    // {
-    //     bool peutAcheter = false;
-    //     if (data.AccederNbCoins("InfoPlayer2.txt") >= prix)
-    //     {
-    //         data.AjouterCoin("InfoPlayer2.txt", -prix); 
-    //         peutAcheter = true;
-    //         GetComponentInChildren<AffichageArgentMenu>().AfficherCoin();
-    //     }
-    //
-    //     return peutAcheter;
-    // }
-    // public void UnlockAvancé2()
-    // {
-    //     int prix = 50;
-    //     bool peutAcheter = Acheter(prix,CheminPlayer2);
-    //     //expertToggle.enabled = true;
-    //     if (peutAcheter)
-    //     {
-    //         //avancé.interactable = true;
-    //         avancéToggle2.gameObject.SetActive(true);
-    //         avancéToggle2.enabled = true;
-    //         avancé2.gameObject.SetActive(false);
-    //     }
-    //
-    //     avancéDéjàAcheté2 = true;
-    // }
-    // public void UnlockExpert2()
-    // {
-    //     int prix = 100;
-    //     bool peutAcheter = Acheter(prix,CheminPlayer2);
-    //     if (peutAcheter)
-    //     {
-    //         //avancé.interactable = true;
-    //         expertToggle2.gameObject.SetActive(true);
-    //         expertToggle2.enabled = true;
-    //         expert2.gameObject.SetActive(false);
-    //     }
-    //
-    //     expertDéjàAcheté2 = true;
-    // }
-    
 }
 

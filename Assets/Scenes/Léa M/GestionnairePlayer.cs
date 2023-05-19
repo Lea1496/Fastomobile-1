@@ -18,8 +18,8 @@ public class GestionnairePlayer
         get => joueurs;
     }
     /// <summary>
-    /// Ce constructeur par défaut permet de définir les paramètres de 1 ou 2 joueurs
-    /// selon le choix du nombre de joueurs.
+    /// Ce constructeur par défaut permet de définir les paramètres de 1 ou 2 joueurs principales
+    /// selon le choix du nombre de joueurs. Il assigne ensuite de façon aléatoire les paramètres des bots.
     /// </summary>
     public GestionnairePlayer()
     {
@@ -81,10 +81,10 @@ public class GestionnairePlayer
 /// <returns>poids</returns>
     private int AssignerPoids(int indice)
     {
-        int poids = 15;
+        int poids = 5;
         if (indice == 1)
         {
-            poids = 5;
+            poids = 15;
         }
         else
         {
