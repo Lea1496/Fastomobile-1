@@ -59,7 +59,7 @@ public class GestionnaireTrigger : MonoBehaviour
                     joueur.Tour++;
                     compteurTourJoueur1++;
                     temps1 = 0;
-                    if (compteurTourJoueur1 > 3)
+                    if (compteurTourJoueur1 > 1)
                     {
                         data.AjouterCoin(CheminPlayer1, joueur.Argent);
                         joueur.IsFinished = true;
@@ -72,7 +72,7 @@ public class GestionnaireTrigger : MonoBehaviour
                         joueur.Tour++;
                         temps2 = 0;
                         compteurTourJoueur2++;
-                        if (compteurTourJoueur2 > 3)
+                        if (compteurTourJoueur2 > 1)
                         {
                             data.AjouterCoin(CheminPlayer2, joueur.Argent);
                             joueur.IsFinished = true;

@@ -52,7 +52,7 @@ public class GestionnaireCollision : MonoBehaviour
         if (point.otherCollider.gameObject.layer == CoucheCollisionObstacle) //Obstacle
         {
             joueur = point.thisCollider.GetComponentInParent<Player>();
-            joueur.EnleverVie(10);
+            joueur.EnleverVie(100);
             if (joueur.Vie <= 0)
             {
                 GameData.ListeJoueursMorts.Add(joueur.Nom);

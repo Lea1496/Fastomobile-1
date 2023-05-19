@@ -10,14 +10,7 @@ public class AfficherManettes : MonoBehaviour
     [SerializeField] private TextMeshProUGUI manette1;
 
     [SerializeField] private TextMeshProUGUI manette2;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Gamepad.all.Count > 0)

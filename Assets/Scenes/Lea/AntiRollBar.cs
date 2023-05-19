@@ -8,10 +8,7 @@ public class AntiRollBar : MonoBehaviour
     [SerializeField] private WheelCollider wheelR;
     [SerializeField] private Rigidbody rg;
     [SerializeField] private float antiRoll = 50000f;
-    // Start is called before the first frame update
-   
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         WheelHit hit;
