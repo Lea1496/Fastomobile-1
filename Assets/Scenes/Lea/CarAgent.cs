@@ -14,6 +14,7 @@ public class CarAgent : Agent
     Vector3 spawnForward;
 
     private Car car;
+    private Rigidbody rb;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class CarAgent : Agent
         trackCheckpoints.OnCarCorrectCheckpoint += TrackCheckpoints_OnCarCorrectCheckpoint;
         trackCheckpoints.OnCarWrongCheckpoint += TrackCheckpoints_OnCarWrongCheckpoint;
 
+        rb = GetComponent<Rigidbody>();
         car = GetComponent<Car>();
         spawnPosition = gameObject.transform.position;
         spawnForward = gameObject.transform.forward;
@@ -46,8 +48,9 @@ public class CarAgent : Agent
     public override void OnEpisodeBegin()
     {
         car.StopCompletely();
-        transform.position = spawnPosition /*+ new Vector3(Random.Range(-0.5f, +0.5f), 0f, Random.Range(-0.5f, +0.5f))*/;
+        transform.position = spawnPosition;
         transform.forward = spawnForward;
+        rb.AddForce(Vector3.right * 30000, ForceMode.Impulse);
         trackCheckpoints.ResetCheckpoints(transform);
     }
 
@@ -72,9 +75,6 @@ public class CarAgent : Agent
 
         continuousActions[0] = Input.GetAxisRaw("Horizontal");
         continuousActions[1] = Input.GetAxisRaw("Vertical");
-
-        //Debug.Log(actionsOut.ContinuousActions[0]);
-        //Debug.Log(actionsOut.ContinuousActions[1]);
     }
 
     private void OnCollisionEnter(Collision collision)

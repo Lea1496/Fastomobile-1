@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-
-    //private float horizontalInput;
-    //private float verticalInput;
     private float currentSteerAngle;
     private float currentbreakForce;
     public bool isBreaking;
@@ -33,23 +30,6 @@ public class CarController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass.transform.localPosition;
     }
-
-    //private void FixedUpdate()
-    //{
-    //    GetInput();
-    //    HandleMotor();
-    //    HandleSteering();
-    //    UpdateWheels();
-    //}
-
-
-    //private void GetInput()
-    //{
-    //    horizontalInput = Input.GetAxis("Horizontal");
-    //    verticalInput = Input.GetAxis("Vertical");
-    //    //isBreaking = Input.GetKey(KeyCode.Space);
-    //    isBreaking = Input.GetKey(KeyCode.Joystick1Button7);
-    //}
 
     public void HandleMotor(float verticalInput)
     {

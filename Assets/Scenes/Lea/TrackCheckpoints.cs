@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// Source:https://www.youtube.com/watch?v=IOYNg6v9sfc
+/// Source:https://github.com/rNuv/Self-Driving-Car-Unity
 
 public class TrackCheckpoints : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class TrackCheckpoints : MonoBehaviour
 
     private List<int> nextCheckpointIndexList;
     private List<CheckpointSingle> checkpointSingleList;
-    int count;
+ 
 
     public class CarCheckpointEventArgs : EventArgs
     {
@@ -23,7 +24,6 @@ public class TrackCheckpoints : MonoBehaviour
     private void Start()
     {
         GameObject[] checkpointsGameobjects = GameObject.FindGameObjectsWithTag("Checkpoint");
-        //Debug.Log(checkpointsGameobjects.Length);
         checkpointSingleList = new List<CheckpointSingle>();
         List<Transform> checkpointsTransform = new List<Transform>();
 
@@ -32,8 +32,6 @@ public class TrackCheckpoints : MonoBehaviour
             checkpointsTransform.Add(checkpointsGameobjects[i].transform);
         }
         checkpointsTransform.Reverse();
-        //Debug.Log(checkpointsTransform.Count);
-        count = checkpointsTransform.Count;
 
         for (int i = 0; i < checkpointsTransform.Count; i++)
         {
@@ -44,7 +42,6 @@ public class TrackCheckpoints : MonoBehaviour
 
         GameObject[] carsGameobjects = GameObject.FindGameObjectsWithTag("Player");
         carTransformList = new List<Transform>();
-        //Debug.Log(carsGameobjects.Length);
         for (int i = 0; i < carsGameobjects.Length; i++)
         {
             carTransformList.Add(carsGameobjects[i].transform);
@@ -55,12 +52,10 @@ public class TrackCheckpoints : MonoBehaviour
         {
             nextCheckpointIndexList.Add(0);
         }
-        //Debug.Log(nextCheckpointIndexList.Count);
     }
 
     public void CarThroughCheckpoint(CheckpointSingle checkpointSingle, Transform carTransform)
     {
-        //Debug.Log(checkpointSingleList.IndexOf(checkpointSingle));
         int nextCheckpointIndex = nextCheckpointIndexList[carTransformList.IndexOf(carTransform)];
         if (checkpointSingleList.IndexOf(checkpointSingle) == nextCheckpointIndex)
         {
