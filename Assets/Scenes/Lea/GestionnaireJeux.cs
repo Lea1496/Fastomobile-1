@@ -363,10 +363,9 @@ public class GestionnaireJeux : MonoBehaviour
                }
            }
            
-           if (mainPlayer1Live.Vie == 0 && mainPlayer2Live.Vie == 0)
+           if (mainPlayer1Live.Vie <= 0 && mainPlayer2Live.Vie <= 0)
            {
-               StartCoroutine(FinirPartie());
-               StopCoroutine(FinirPartie());
+               SceneManager.LoadScene(5);
            }
 
            if (mainPlayer1Live.IsFinished && mainPlayer2Live.IsFinished)
