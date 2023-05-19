@@ -1,6 +1,8 @@
 
 using UnityEngine;
-
+/// <summary>
+/// interface représentant le joueur 
+/// </summary>
 interface IPlayer
 {
   int Vie { get; }
