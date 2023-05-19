@@ -1,91 +1,77 @@
 
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-/// Source:https://www.youtube.com/watch?v=Z4HA8zJhGEk&t=587s&ab_channel=GameDevChef
+///<summary>
+/// Cette classe permet d'utiliser deux manettes pour controler les joueurs
+///
+/// Cette fonction est sur l'objet du joueur
+/// </summary>
 
 public class GestionnaireTouches : BehaviourAuto
 {
     private float horizontalInput;
     private float verticalInput;
-
-    private PlayerControls controls;
+    
     private Vector2 move;
     private CharacterController controller;
     private int playerNb = 1;
     private Vector3 position;
     private Quaternion rotation;
 
-    private int nbPlayer;
-    private List<Gamepad> gamepads;
-    private List<bool> isGamepadConnected;
     
+    private List<Gamepad> gamepads;
+
     private float temps = 0;
     private float tempsDepuisDébut;
     
-    private WheelCollider[] wheelColliders;
-    private bool estActif;
-    private void Awake()
-    {
-        controls = new PlayerControls();
-    }
+    
     void Start()
     {
-        nbPlayer = Gamepad.all.Count;
-        gamepads = new List<Gamepad>(nbPlayer);
-        isGamepadConnected = new List<bool>(nbPlayer);
+
+        gamepads = new List<Gamepad>();
+        //Crée une liste de gamepads avec tous les gamepads connectés
         for (int i = 0; i < Gamepad.all.Count; i++)
         {
             gamepads.Add(Gamepad.all[i]);
-            isGamepadConnected.Add(true);
         }
+           
+        //Met le centre de gravité de l'auto à la bonne place
         rb = GetComponent<Rigidbody>();
-        //rb.centerOfMass = centerOfMass.transform.localPosition;
-        rb.centerOfMass += Try;
-        estActif = GetComponent<Player>().IsMainPlayer;
+        rb.centerOfMass += posCentreGrav;
+    
+        //Si l'objet sur lequel ce code est est le joueur 2 
         if (gameObject.GetComponent<Player>().IsMainPlayer2)                   
         {                                                                      
             playerNb = 2;                                                      
         }                                                                      
-
-        
-        if (estActif)
-        {
-            wheelColliders = new WheelCollider[4]
-                { frontLeftWheelCollider, frontRightWheelCollider, rearLeftWheelCollider, rearRightWheelCollider };
-        }
-        
-    }
+   }
 
     
     private void Update()
     {
         temps += Time.deltaTime;
         tempsDepuisDébut += Time.deltaTime;
-        
-       
     }
 
     private void FixedUpdate()
     {
-        //Vérifie que les gamepads ne "switch" pas si on les déconnecte
-        if (Gamepad.all.Count != nbPlayer)
-        {
-            VérifierGamepads();
-        }
+        
         GetInput();
+        
+        //Quand la partie commence, j'applique automatiquement un boost aux joueurs, parce que le début 
+        //pouvait être lent des fois
         if (tempsDepuisDébut < 2 && verticalInput != 0)
         {
             ApplyAccelerationCustom(4f);
             HandleSteering(horizontalInput);
-            //HandleMotor();
         }
         else
         {
-           
+           //Si le joueur ne touche pas à sa manette je le fait ralentir parce que des fois il accélérait à l'infini
+           // ce qui rendait la conduite difficile
             if (horizontalInput == 0 && verticalInput == 0 )
             {
                 ApplyBreakingCustom(60000);
@@ -93,30 +79,32 @@ public class GestionnaireTouches : BehaviourAuto
             }
             else
             {
+                //Appelle les fonctions du code de Audrey qui gèrent les Wheel colliders pour faire avancer l'auto
                 HandleMotor(verticalInput);
                 HandleSteering(horizontalInput);
             }
 
+            //Va ralentir l'auto si elle commence à aller trop vite, car après une certaine vitesse elle devient
+            // très difficile à controler
             if (rb.velocity.magnitude * 2.237 > 200)
             {
                 ApplyBreakingCustom(3000000);
             }
         }
-
-        
-        
         ApplyDownForce();
         UpdateWheels();
-        //ApplyDownForce();
     }
+    
+    //Cette fonction permet d'appliquer une accélération avec un "verticalInput" de notre choix (ainsi on peut faire une plus grande accélération)
     public void ApplyAccelerationCustom(float verticalI)
     {
-        
         frontRightWheelCollider.motorTorque = verticalI * Puissance * 500; 
         frontLeftWheelCollider.motorTorque = verticalI * Puissance * 500;
         rearLeftWheelCollider.motorTorque = verticalI * Puissance * 500;
         rearRightWheelCollider.motorTorque = verticalI * Puissance * 500;
     }
+    
+    //Cette fonction permet de freiner avec une force de notre choix
     public void ApplyBreakingCustom(int breakForce)
     {
         
@@ -125,66 +113,45 @@ public class GestionnaireTouches : BehaviourAuto
         rearLeftWheelCollider.brakeTorque = breakForce;
         rearRightWheelCollider.brakeTorque = breakForce;
     }
+    //Va appeler la fonction qui fait bouger les autos dépendemment du joueur sur qui ce code est
     private void GetInput()
     {
-        //FlipOver();
-        if (Mathf.Abs(Vector3.Dot(transform.up, Vector3.down)) > 0)
-        {
-            //FlipOver();
-        }
-        else
-        {
-            if(Mathf.Abs(Vector3.Dot(transform.up, Vector3.down)) < 0.125f)
-            {
-                // Car is primarily neither up nor down, within 1/8 of a 90 degree rotation
-               // FlipOver();
-                // Therefore, check whether it's on either side. Otherwise, it's on front/back
-                if(Mathf.Abs(Vector3.Dot(transform.right, Vector3.down)) > 0.825f)
-                {
-                    // Car is within 1/8 of a 90 degree rotation of either side
-                }
-            }
-        }
-        
-       
         if (playerNb == 1)
         {
             Bouger(0);
-            
         }
         else
         {
             Bouger(1);
         }
+        
+        //Attribue les valeurs du joystick
         horizontalInput = move.x;
         verticalInput = move.y;
-        
-
     }
 
+    //Cette fonction va prendre les inputs que le joueur va lui donner pour faire bouger l'auto
     private void Bouger(int ind)
     {
         if (gamepads.Count > ind )
         {
-            if (isGamepadConnected[ind]) 
+            
+            isAccelerating = gamepads[ind].rightTrigger.IsPressed();
+
+            isBreaking = gamepads[ind].leftTrigger.IsPressed();
+                
+            move = gamepads[ind].leftStick.ReadValue();
+            
+            //la limite de temps s'assure que le joueur ne puisse pas commencer à voler en pesant le bouton à répétition
+            if (gamepads[ind].circleButton.wasPressedThisFrame && temps > 5)
             {
-                isAccelerating = gamepads[ind].rightTrigger.IsPressed();
-
-                isBreaking = gamepads[ind].leftTrigger.IsPressed();
-                    
-                move = gamepads[ind].leftStick.ReadValue();
-
-                /*if (isBreaking)
-                {
-                    move = Vector2.zero;
-                }*/
-                if (gamepads[ind].circleButton.wasPressedThisFrame && temps > 5)
-                {
-                    FlipOver();
-                }
+                FlipOver();
             }
+            
         }
     }
+    
+    //Permet de retourner l'auto dans le bon sens, si elle tombe sur le côté
     public void FlipOver()
     {
         position = transform.position;
@@ -192,8 +159,10 @@ public class GestionnaireTouches : BehaviourAuto
         transform.SetPositionAndRotation(new Vector3(position.x, position.y + 5, position.z), new Quaternion(0, rotation.y, 0, rotation.w));
         temps = 0;
     }
-
-    private void VérifierGamepads()
+    
+}
+/*
+ private void VérifierGamepads()
     {
         if (GameData.P2.IsMainPlayer && gamepads.Count == 1 && Gamepad.all.Count == 2 && isGamepadConnected[0])
         {
@@ -274,14 +243,4 @@ public class GestionnaireTouches : BehaviourAuto
         }
         
     }
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
-}
+    */

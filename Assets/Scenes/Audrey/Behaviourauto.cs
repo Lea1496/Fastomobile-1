@@ -20,7 +20,7 @@ public class BehaviourAuto : MonoBehaviour
     public int Puissance;
 
     //private CharacterController controller;
-    public Vector3 Try = new Vector3(1, -0.2f, 0);
+    public Vector3 posCentreGrav = new Vector3(1, -1f, 0);
     
     
 

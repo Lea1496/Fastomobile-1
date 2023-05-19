@@ -19,7 +19,7 @@ public class BordurePairGrande : MonoBehaviour
         maillage = AjouterBordure();
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
-//        GetComponent<MeshRenderer>().material = mat�riauxBord;
+
     }
 
     private Mesh AjouterBordure()

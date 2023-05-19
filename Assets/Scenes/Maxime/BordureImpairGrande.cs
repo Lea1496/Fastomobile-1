@@ -21,7 +21,7 @@ public class BordureImpairGrande : MonoBehaviour
         maillage = AjouterBordure();
         GetComponent<MeshFilter>().mesh = maillage;
         meshc.sharedMesh = maillage;
-        //GetComponent<MeshRenderer>().material = mat�riauxBordImp;
+       
     }
 
     private Mesh AjouterBordure()
