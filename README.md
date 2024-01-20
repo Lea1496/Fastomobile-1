@@ -18,16 +18,12 @@ Jeu de course de style rétro programmé en c# dans Unity sur une durée de quat
 - UI avec des boutons, un magasin et plusieurs menus
 
 
-## Authors
-
-
-
 ## Screenshots
-![Page d'accueil](https://ibb.co/3cf4bRp)
-![Choix du véhicule](https://ibb.co/Fmq1Gyp)
-![En jeu](https://ibb.co/nj5HSCB)
-![Piste](https://ibb.co/93vPP4W)
-![Piste](https://ibb.co/tCJwSNV)
+[Page d'accueil](https://ibb.co/3cf4bRp)
+[Choix du véhicule](https://ibb.co/Fmq1Gyp)
+[En jeu](https://ibb.co/nj5HSCB)
+[Piste](https://ibb.co/93vPP4W)
+[Piste](https://ibb.co/tCJwSNV)
 
 
 
