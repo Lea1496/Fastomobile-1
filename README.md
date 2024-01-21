@@ -1,7 +1,7 @@
 
 # Fastomobile
 
-Jeu de course de style rétro programmé en c# dans Unity sur une durée de quatre mois en équipe de quatre.
+Jeu de course de style rétro programmé en C# dans Unity sur une durée de quatre mois en équipe de quatre.
 
 
 ## Features
